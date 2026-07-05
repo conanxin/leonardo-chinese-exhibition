@@ -1,19 +1,20 @@
-# 达·芬奇的纸上宇宙
+# 达·芬奇的纸上宇宙：被拆散的手稿与重新连接的思想
 
-**v1.3 OpenAI-style exhibition redesign**
+基于 Leonardo//thek@ 平台的中文数字展览项目。
 
-本项目已重构为完整的中文图文展览页面，采用极简 editorial 风格。
+## Live Demo
+https://conanxin.github.io/leonardo-chinese-exhibition/
 
-## 本地预览
+## 当前版本
+v1.5 live release
+
+## 本地预览命令
 ```bash
 python3 -m http.server 8787 -d site
 ```
 
-## 视觉风格
-- 暖白背景 + 米色卡片
-- 大留白 + 细线
-- 黑白灰 + 墨褐强调
-- OpenAI 式克制高级感
-
 ## 发布目录
 site/
+
+## 项目状态
+已完成 OpenAI-style 极简 editorial 重构，8 个展区正文完整，SVG 图解齐全，移动端适配良好，可公开发布。
