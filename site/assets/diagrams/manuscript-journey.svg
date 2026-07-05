@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <text x="400" y="30" text-anchor="middle" font-size="20">达·芬奇手稿流散与重连路径</text>
+  <rect x="50" y="80" width="120" height="60" fill="#e3f2fd"/><text x="110" y="115" text-anchor="middle">梅尔齐继承</text>
+  <rect x="250" y="80" width="120" height="60" fill="#ffebee"/><text x="310" y="115" text-anchor="middle">莱奥尼拆散</text>
+  <rect x="450" y="80" width="120" height="60" fill="#e8f5e9"/><text x="510" y="115" text-anchor="middle">《大西洋手稿》</text>
+  <rect x="650" y="80" width="120" height="60" fill="#fff3e0"/><text x="710" y="115" text-anchor="middle">温莎手稿</text>
+  <line x1="170" y1="110" x2="250" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="110" x2="450" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="200" text-anchor="middle" font-size="16">Leonardo//thek@ 平台复原</text>
+</svg>
