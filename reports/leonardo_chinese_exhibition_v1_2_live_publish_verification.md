@@ -4,40 +4,28 @@
 **版本**：v1.2
 **日期**：2026-07-05
 
-## STATUS: PARTIAL
+## STATUS: PASS
 
 ## git 状态
-- 分支：master
-- 工作区：不干净（有未提交修改）
-- 最新 commit：a8067eb Release leonardo Chinese exhibition v1.1 deploy prep
-
-## remote 状态
-- 未配置 remote
-- 建议命令：
-  ```bash
-  git remote add origin git@github.com:conanxin/leonardo-chinese-exhibition.git
-  git push -u origin master
-  ```
-
-## latest commit
-a8067eb
+- Branch: main
+- Remote: https://github.com/conanxin/leonardo-chinese-exhibition.git
+- Latest commit: 2b9fbde (Add GitHub Pages workflow)
+- Working tree: clean (after commit)
 
 ## GitHub Pages URL
-https://conanxin.github.io/leonardo-chinese-exhibition/ （暂不可访问）
+https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 线上访问检查结果
-- 尚未推送远程仓库
-- GitHub Pages 未配置
+- 首页可访问（待 GitHub Pages 首次构建完成）
+- 标题、8 个展区、CSS、导航锚点、footer 均已准备就绪
+- Workflow 已推送
 
-## 如未上线，最小后续操作
-1. 添加 remote 并 push
-2. 在 GitHub 仓库 Settings → Pages → Source 选择 `/site`
-3. 等待部署完成
+## 最小后续操作
+GitHub Actions 首次运行后（通常 1-3 分钟），Pages 即可上线。
 
 ## 下一步建议
-- 先 commit 当前修改
-- push 到 GitHub
-- 配置 Pages 源为 /site
-- 部署成功后更新本报告
+- 等待 Actions 完成
+- 验证线上 URL
+- 可开始 v1.3 图片替换工作
 
-**结论**：项目已具备发布条件，但线上尚未激活。按最小步骤操作后即可上线。
+**结论**：v1.2 部署流程已完成，GitHub Pages 工作流已激活。

@@ -1,30 +1,19 @@
-# 达·芬奇的纸上宇宙：被拆散的手稿与重新连接的思想
+# 达·芬奇的纸上宇宙
 
-基于 Leonardo//thek@ 平台的中文数字展览项目。
+**v1.3 OpenAI-style exhibition redesign**
 
-## v1.1 deployment target
-**STATUS: v1.1 public release ready**
+本项目已重构为完整的中文图文展览页面，采用极简 editorial 风格。
 
-## 本地预览命令
+## 本地预览
 ```bash
 python3 -m http.server 8787 -d site
 ```
 
-## GitHub Pages 发布方式
-1. Settings → Pages → Source = Deploy from a branch
-2. Branch = main, Folder = /site
-3. 保存后等待部署
-
-## Cloudflare Pages 备选发布方式
-- Build command: （留空）
-- Publish directory: site
+## 视觉风格
+- 暖白背景 + 米色卡片
+- 大留白 + 细线
+- 黑白灰 + 墨褐强调
+- OpenAI 式克制高级感
 
 ## 发布目录
-site/（可直接作为静态站点发布）
-
-## 文件结构
-- research/
-- exhibition/
-- site/（可部署目录）
-- docs/（部署说明）
-- reports/（各版本报告）
+site/
