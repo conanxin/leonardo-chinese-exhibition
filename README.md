@@ -2,38 +2,29 @@
 
 基于 Leonardo//thek@ 平台的中文数字展览项目。
 
-## 项目简介
+## v1.1 deployment target
+**STATUS: v1.1 public release ready**
 
-本项目为中文读者设计，聚焦达·芬奇手稿拆散与复原、平台研究工具、纸张证据与比较研究，而非传统生平介绍。
-
-## 本地预览
-
+## 本地预览命令
 ```bash
-cd /home/conanxin/.hermes/workspace/projects/leonardo-chinese-exhibition
 python3 -m http.server 8787 -d site
 ```
 
-然后访问 `http://localhost:8787`
+## GitHub Pages 发布方式
+1. Settings → Pages → Source = Deploy from a branch
+2. Branch = main, Folder = /site
+3. 保存后等待部署
 
-## 发布方式
+## Cloudflare Pages 备选发布方式
+- Build command: （留空）
+- Publish directory: site
 
-- **GitHub Pages**：直接将 `site/` 目录设为 Pages 源
-- **Cloudflare Pages**：直接上传 `site/` 目录或连接 Git 仓库
+## 发布目录
+site/（可直接作为静态站点发布）
 
 ## 文件结构
-
-- `research/`：平台功能、手稿背景、图片候选
-- `exhibition/`：策划案、策展前言、展陈文本、导览稿
-- `site/`：可独立部署的静态展览网页
-- `reports/`：各版本验收与发布报告
-
-## 版本记录
-
-- **v0.1**：初始内容框架与研究资料整理
-- **v0.2**：网页升级（figure 结构 + 深色手稿风格 + 图片分类）
-- **v0.3**：发布准备（meta/OG/导航/部署文档）
-
-## 后续路线
-
-- **v0.4**：公众号/小红书/X 长帖版本
-- **v1.0**：完整公开展览站（真实图片 + 互动元素）
+- research/
+- exhibition/
+- site/（可部署目录）
+- docs/（部署说明）
+- reports/（各版本报告）
