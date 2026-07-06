@@ -1,28 +1,20 @@
-# 达·芬奇的纸上宇宙：被拆散的手稿与重新连接的思想
+# 达·芬奇的纸上宇宙
 
-基于 Leonardo//thek@ 平台的中文数字展览项目。
+中文数字展览：基于 Leonardo//thek@、Codex Atlanticus 与英国皇家收藏材料，重新讲述达·芬奇手稿从散页、分藏到数字重连的旅程。
 
-## Live Demo
-https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Live Exhibition**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Stable Release**: <https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.6-content-stable>
+- **Stable Tag**: `v2.6-content-stable`（target `01cdaa2d`）
+- **Status**: Content Stable
+- **Current stable line**: v2.4 → v2.5-real → v2.6 → **v2.6-content-stable**
 
 ## 当前版本
 
-- **Latest stable tag**: `v2.0-public-portfolio-case`（v2.0 portfolio 稳定版）
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
-- **Live URL**:
+- **Latest legacy tag**: `v2.0-public-portfolio-case`（v2.0 portfolio 稳定版，作为历史 portfolio case 保留）
+- **Live URL**: https://conanxin.github.io/leonardo-chinese-exhibition/
 
-> https://conanxin.github.io/leonardo-chinese-exhibition/
-
-## Stable release
-
-Current active stable release:
-
-- **v2.6-content-stable**（v2.6 Content Stable）
-- Tag target: `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce`
-- Live: https://conanxin.github.io/leonardo-chinese-exhibition/
-- GitHub Release: <https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.6-content-stable>
-
-**说明**：当前稳定版是修正历史误报后形成的真实版本线，包含 v2.5-real guided accessibility recovery 与 v2.6 content copy polish。详见 [`docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md`](docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md) 与 [`release-assets/v2.6-content-stable-manifest.md`](release-assets/v2.6-content-stable-manifest.md)。
+详见 [`docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md`](docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md) 与 [`release-assets/v2.6-content-stable-manifest.md`](release-assets/v2.6-content-stable-manifest.md)。后续维护与路线见 [`docs/POST_RELEASE_MAINTENANCE.md`](docs/POST_RELEASE_MAINTENANCE.md) 与 [`docs/ROADMAP_AFTER_v2.6.md`](docs/ROADMAP_AFTER_v2.6.md)。
 
 ## v2.5 real guided accessibility（从真实 v2.4 状态出发的导览 + 无障碍恢复）
 
