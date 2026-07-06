@@ -119,6 +119,28 @@ v2.6 是在 v2.7 (commit `31e5126`) 与 v2.5-real (commit `c512dbd`) 之上的**
 
 **v2.6 报告**：`reports/leonardo_chinese_exhibition_v2_6_content_copy_polish_report.md`
 
+## v2.6 Content Stable
+
+v2.6 content stable 是当前**真实稳定封版**。
+
+- **Stable commit**: `d71b0e8`
+- **Stable tag**: `v2.6-content-stable`（本轮新增）
+- **Live URL**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Live byte size**: 82,787 B
+- **Live Playwright 验证**: 14/14 PASS
+
+本轮在 v2.6 content copy polish 之上完成：
+
+- 真实版本链整理：v2.4 → v2.5-real → v2.6 → **v2.6 stable**
+- 清理了上一轮残留的 stale `v2.7-content-copy-polish` marker
+- 新增 `v2.6-content-stable` marker（三层：meta / HTML 注释 / footer）
+- 撰写 `docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md` 与 `reports/leonardo_chinese_exhibition_v2_6_content_stable_audit_report.md`
+- section-nav 口径统一为 **11**（早前报告 "9+ / 10 generated / 9+ in DOM" 三种说法已澄清）
+- no-touch 严格遵守：v2.0 tag / 旧 GitHub Release / `posts/` / `case-study/` / `release-assets/` / Hermes 生产配置 **均未触碰**
+
+**Release notes**: [`docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md`](docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md)
+**Audit report**: [`reports/leonardo_chinese_exhibition_v2_6_content_stable_audit_report.md`](reports/leonardo_chinese_exhibition_v2_6_content_stable_audit_report.md)
+
 ## v2.7 content copy polish
 
 v2.7 是 v2.0 freeze 后的内容打磨轮。不动展览结构、不动交互逻辑，只做：
