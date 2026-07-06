@@ -4,14 +4,21 @@
 
 本路线描述的是**未来可能的方向**，不是承诺。所有项目应在 GitHub Issue 中先讨论，再以独立分支实施，并以新 tag 收口。
 
-## v2.7 Bilingual Edition
+## 2026-07-06 状态更新
 
-**目标**：
+- **v2.7 Bilingual Edition 暂缓**。当前 v2.7 已改为 **Chinese Exhibition Polish**：专注中文展览体验精修（typo / 重复 / 3 分钟摘要 / 中文观展手册 / 观众动作提示）。详见 [GitHub Issue #1](https://github.com/conanxin/leonardo-chinese-exhibition/issues/1)。
+- Bilingual Edition 后移到 v2.7+ 的未来版本。在 bilingual 之前先把中文体验打磨到位。
+
+## v2.7 Bilingual Edition（暂缓）
+
+**目标**（保留，未来版本实施）：
 
 - 中英双语切换
 - 保留中文主站
 - 不破坏现有导览与 lightbox
 - 中英文案同步审校
+
+**当前状态**：Postponed。Issue #1 已评论说明。中文体验先在 `v2.7 zh exhibition polish` 中打磨。
 
 **关键风险**：
 

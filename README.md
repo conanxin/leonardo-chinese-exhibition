@@ -16,6 +16,19 @@
 
 详见 [`docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md`](docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md) 与 [`release-assets/v2.6-content-stable-manifest.md`](release-assets/v2.6-content-stable-manifest.md)。后续维护与路线见 [`docs/POST_RELEASE_MAINTENANCE.md`](docs/POST_RELEASE_MAINTENANCE.md) 与 [`docs/ROADMAP_AFTER_v2.6.md`](docs/ROADMAP_AFTER_v2.6.md)。
 
+## v2.7 中文展览体验精修
+
+v2.7 是在 v2.6-content-stable 之上的**中文展览体验精修**轮。**本轮不做 bilingual**（双语计划暂缓），专注中文展览体验：
+
+- **中文 typo 与重复表达清理**：section 7 工具模块 / section 8 思考方法 / postscript 关系网重复已收敛
+- **新增 3 分钟导览摘要**：首页 Hero 之后、展品索引之前的 `如果你只有 3 分钟` 5 点摘要
+- **新增 4 个「如何观看」动作提示**：放在 section 2 / 3 / 4 / 6 关键展区的 takeaway 之后
+- **新增中文观展手册**：[`docs/VISITOR_GUIDE_ZH.md`](docs/VISITOR_GUIDE_ZH.md) — 3 / 15 / 60 分钟三档路线 + 5 件最重要展品 + 10 个必知术语
+- **保持 v2.6 stable 交互能力不回退**：guided mode / lightbox / runtime section-nav / tour progress 全部保留
+- **v2.7 marker 已上线**（meta / HTML 注释 / footer 三层）
+
+详见 [`reports/leonardo_chinese_exhibition_v2_7_zh_exhibition_polish_report.md`](reports/leonardo_chinese_exhibition_v2_7_zh_exhibition_polish_report.md)。
+
 ## v2.5 real guided accessibility（从真实 v2.4 状态出发的导览 + 无障碍恢复）
 
 **重要诚实声明**：此前被报告为"已完成并上线"的 v2.5 guided tour mode 与 v2.6 interaction accessibility polish，**实际上从未进入 git 仓库**（`git reflog` 确认无对应 commit，且 live 一度仍为 v2.4）。v2.7 content copy polish（commit `31e5126`）是直接在 v2.4 之上做的，跳过了 v2.5 / v2.6。

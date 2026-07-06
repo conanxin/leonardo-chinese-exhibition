@@ -264,6 +264,48 @@ footer {
   max-width: 68ch;
 }
 
+/* v2.7 — 中文 3 分钟导览摘要 */
+.quick-guide-zh {
+  margin: 0 auto 3rem;
+  max-width: 68ch;
+  padding: 1.5rem 1.75rem;
+  background: var(--surface, #faf8f3);
+  border-radius: 8px;
+  border: 1px solid var(--border, #e6dfd1);
+}
+.quick-guide-zh h2 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  color: var(--accent, #5a4a36);
+  letter-spacing: 0.02em;
+}
+.quick-guide-zh ol {
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.7;
+  color: #2a2a2a;
+  font-size: 0.98rem;
+}
+.quick-guide-zh ol li {
+  margin-bottom: 0.55rem;
+}
+.quick-guide-zh ol li:last-child {
+  margin-bottom: 0;
+}
+.quick-guide-zh p.quick-guide-cta {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary, #6b6354);
+}
+@media (max-width: 480px) {
+  .quick-guide-zh {
+    padding: 1.1rem 1.1rem;
+  }
+  .quick-guide-zh ol {
+    font-size: 0.94rem;
+  }
+}
+
 /* exhibit index grid */
 .exhibit-index {
   margin: 4rem 0 2rem;
