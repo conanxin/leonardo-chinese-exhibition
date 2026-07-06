@@ -6,13 +6,29 @@
 https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 当前版本
-v1.7 exhibit image upgrade（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack 之上，把展览从"文字型说明页"升级为"图文革新型数字展览"）
+v1.8 real image integration（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack + v1.7 exhibit image upgrade 之上，集成 6 张 Wikimedia Commons 公共域真实手稿图像）
+
+## v1.8 真实手稿图像集成（real image integration）
+
+v1.8 解决了 v1.7 仍然只用原创 SVG 图解、缺乏真实手稿像素的问题。本版本：
+
+- 从 Wikimedia Commons 公共域下载 6 张真实手稿图像：4 张温莎皇家收藏（RCIN 912310 / 912660 / 919003 / 912363）+ 2 张《大西洋手稿》（f.719 / f.21）
+- 展品索引 4 张卡片（马 / 水 / 肩臂 / 猫龙）升级为 image-card，直接展示 RCIN 真实手稿像素
+- 展区 2 增 2 张 Codex Atlanticus 代表页
+- 展区 3 画廊完全真实化（4 张温莎手稿）
+- section-5 / 6 / 7 各加 1 张 `.image-placeholder-pro` 截图候选卡（v1.9 待补）
+- 修正 v1.7 报告中 SVG 数字计数不一致
+- 修正 v1.7 报告里 3 个不准确的 RCIN 编号（912695→912310，919023→919003，912377→912363）
+- 临时占位文案（"实际使用时请替换为真实手稿影像"）已彻底删除
+
+完整 v1.8 报告：`reports/leonardo_chinese_exhibition_v1_8_real_image_integration_report.md`
+图像资产说明：`site/assets/images/README.md`
 
 ## v1.7 展览图像升级（exhibit image upgrade）
 
 v1.7 解决了"页面底部原来写着图片使用占位"的问题。本版本：
 
-- 增加 5 个原创 SVG 图解（manuscript-journey / collection-split / watermark-evidence-chain / recomposition-triptych / platform-tool-wall）以及 1 个升级版（thinking-map）
+- 增加 4 个全新原创 SVG（collection-split / watermark-evidence-chain / recomposition-triptych / platform-tool-wall）+ 1 个升级版（manuscript-journey，从 ~1 KB 升级到 4 KB 的 editorial 风格）+ 2 个继承自 v0.3 的（thinking-map / platform-structure）。平台内容承担在 v1.7 之后由 `platform-tool-wall` 接替，page 不再引用 `platform-structure`。
 - 增加"本展展品索引"section，8 张展品卡（A-H），进入页面即有"展览感"
 - 8 个展区都升级为展品模块：每节必有 `figure` / `gallery` / 展品柜
 - 温莎绘图以"展品卡 + RCIN 编号 + 外链"形式陈列，不直接嵌入第三方像素

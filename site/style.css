@@ -498,8 +498,138 @@ footer {
   letter-spacing: 0.4px;
 }
 
-/* Responsive (mobile) */
+/* ====== v1.8 real image integration ====== */
+
+/* image card (artifact card with leading figure) */
+.artifact-card.image-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.45rem;
+}
+.artifact-card.image-card .artifact-image {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  margin: 0.4rem 0 0.5rem;
+}
+.artifact-card.image-card .exhibit-no {
+  grid-row: 1 / span 6;
+}
+.artifact-card.image-card .credit-line {
+  grid-column: 2 / 3;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--warm-line);
+  padding-top: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.artifact-image {
+  margin: 0;
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  border-radius: 4px;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.artifact-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1.25;       /* manuscript-sheet-friendly ratio */
+  object-fit: contain;
+  background: var(--paper-strong);
+  border-radius: 2px;
+}
+
+/* image-grid container (gallery / cabinet) */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+/* credit line class (used on its own, e.g. inside a card) */
+.credit-line {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* image placeholder pro (screenshot-needed card) */
+.image-placeholder-pro {
+  display: block;
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  background: var(--paper-soft);
+  border: 1px dashed var(--gold);
+  border-radius: 6px;
+}
+.image-placeholder-pro h4 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.image-placeholder-pro p {
+  margin: 0.4rem 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.image-placeholder-pro p code {
+  background: var(--paper-strong);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  border: 1px solid var(--warm-line);
+  font-size: 0.86rem;
+}
+.placeholder-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* collection-label minor */
+.collection-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.4px;
+}
+
+/* source-link small caption */
+.source-link {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive (mobile) — image cards */
 @media (max-width: 720px) {
+  .artifact-card.image-card {
+    grid-template-columns: 1fr;
+  }
+  .artifact-card.image-card .exhibit-no {
+    grid-row: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--warm-line);
+    padding: 0 0 0.5rem 0;
+    text-align: left;
+  }
+  .artifact-card.image-card .artifact-image,
+  .artifact-card.image-card .credit-line {
+    grid-column: 1 / 2;
+  }
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
   body {
     padding: 0 1rem;
   }

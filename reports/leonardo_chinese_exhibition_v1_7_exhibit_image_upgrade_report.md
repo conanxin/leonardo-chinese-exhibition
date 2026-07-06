@@ -20,7 +20,7 @@ live_url: https://conanxin.github.io/leonardo-chinese-exhibition/
 **STATUS: PASS**
 
 本版本在不重写项目结构的前提下，把页面从 13KB 的"文字说明"升级为 33KB 的"图文革新型展览"：
-- 6 个原创/升级 SVG 图解（v1.7 之前有 3 个 → 现在 6 个）
+- 7 个图解型 SVG（v1.7 之前为 3 个：manuscript-journey / thinking-map / platform-structure；v1.7 净增 4 个：collection-split / watermark-evidence-chain / recomposition-triptych / platform-tool-wall；manuscript-journey 内容大幅升级；platform-structure 被 platform-tool-wall 内容接替）
 - 14 张展品卡（8 张展品索引 + 4 张温莎画廊 + 2 张大西洋展柜）
 - 9 个 figure 块（每个都有 caption + source-note）
 - 9 模块工具墙（watermark / recompositions 双重点）
@@ -75,7 +75,10 @@ live_url: https://conanxin.github.io/leonardo-chinese-exhibition/
 | `watermark-evidence-chain.svg` | 3 557 | 4 路证据 → 同向节点 → 复原判断 | 展区 5 |
 | `recomposition-triptych.svg` | 3 681 | 原始 → 破坏 → 反向复原 三联图 | 展区 6 |
 | `platform-tool-wall.svg` | 4 556 | 3×3 网格，Watermarks / Recompositions 双重点 | 展区 7 |
-| `thinking-map.svg` | 2 507 | 视觉思考循环（保留） | 展区 4 / 8 |
+| `thinking-map.svg` | 2 507 | 视觉思考循环（保留自 v0.3） | 展区 4 / 8 |
+| `platform-structure.svg` | 2 353 | v1.7 之前的平台示意图（保留 · v1.7 后由 platform-tool-wall 接替使用） | — |
+
+> **说明**：v1.7 commit 后 site/assets/diagrams/ 实际有 7 个 SVG —— 4 个 v1.7 全新（collection-split / watermark-evidence-chain / recomposition-triptych / platform-tool-wall）+ 1 个 v1.7 升级版（manuscript-journey · 内容被大幅替换）+ 2 个继承自 v0.3（thinking-map / platform-structure）。平台部分的内容承担在 v1.7 之后由 `platform-tool-wall` 接替；`platform-structure.svg` 在仓库中保留，但 page 不再引用，作为可恢复资产存放。
 
 风格约束（共同）：
 - 暖白底 `#fbfaf6` / 深灰文字 `#2a2a2a` / 古金 `#9a7b3b` / 深绿 `#1f3a2e` 强调
@@ -276,4 +279,4 @@ git push origin main
 
 ## 13. 一句话总结
 
-**v1.7 PASS。** 把"文字说明页"升级为"图文革新型展览"：6 个原创/升级 SVG + 14 张展品卡 + 9 个 figure + 平台 9 工具墙 + 移动端单列布局，全部一次 commit + push 落地。v1.5b 双层 marker 完整保留，posts/ 传播包未触动，Hermes 生产配置未触动。
+**v1.7 PASS。** 把"文字说明页"升级为"图文革新型展览"：7 个图解型 SVG（4 v1.7 全新 + 1 升级 + 2 继承自 v0.3）+ 14 张展品卡 + 9 个 figure + 平台 9 工具墙 + 移动端单列布局，全部一次 commit + push 落地。v1.5b 双层 marker 完整保留，posts/ 传播包未触动，Hermes 生产配置未触动。
