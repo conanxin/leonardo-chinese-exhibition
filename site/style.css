@@ -1144,3 +1144,139 @@ body.lb-open {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ============================================================
+   v2.3 — Platform Screenshot Cards
+   Replacement for .image-placeholder-pro · genuine screenshots
+   of teche.museogalileo.it/leonardo/* rendered into the page
+   with proper figcaption + source-note + credit-line + lightbox.
+   ============================================================ */
+.platform-screenshot-card {
+  margin: 1.75rem 0;
+  padding: 1.2rem 1.25rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.platform-screenshot-card .platform-screenshot-tag {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  border: 1px solid rgba(139,69,19,0.35);
+  border-radius: 999px;
+  padding: 0.18rem 0.65rem;
+  margin: 0;
+}
+.platform-screenshot-card .platform-screenshot-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+.platform-screenshot-card .platform-screenshot-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.55;
+}
+.platform-screenshot-frame {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #efe9dc;
+  border: 1px solid rgba(139,69,19,0.15);
+  display: block;
+}
+.platform-screenshot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  cursor: zoom-in;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.platform-screenshot-frame img:hover {
+  transform: scale(1.005);
+  box-shadow: 0 8px 24px -12px rgba(0,0,0,0.18);
+}
+.platform-screenshot-frame .figcaption {
+  padding: 0.7rem 0.25rem 0.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  background: var(--card);
+}
+.platform-screenshot-frame .figcaption .figure-title {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.platform-screenshot-frame .figcaption .source-note {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+.platform-screenshot-frame .figcaption .credit-line {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* Tight stack on mobile — keep image full-width but smaller padding */
+@media (max-width: 720px) {
+  .platform-screenshot-card {
+    padding: 1rem 0.9rem 0.85rem;
+    margin: 1.25rem 0;
+  }
+  .platform-screenshot-card .platform-screenshot-title {
+    font-size: 0.98rem;
+  }
+  .platform-screenshot-card .platform-screenshot-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* Once a placeholder card is fully replaced, the empty legacy state
+   (`.image-placeholder-pro`) shouldn't be rendered. We keep it in the
+   CSS file but make any leftover match a research entry card fallback
+   (zero `.image-placeholder-pro` card should remain in v2.3+). */
+.source-entry-card {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+}
+.source-entry-card .source-entry-kind {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+.source-entry-card .source-entry-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin: 0.35rem 0 0.2rem;
+  line-height: 1.6;
+}
+.source-entry-card .source-entry-link {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  word-break: break-all;
+}

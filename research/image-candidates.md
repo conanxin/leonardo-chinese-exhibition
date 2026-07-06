@@ -141,85 +141,88 @@
 
 > v1.7 / v1.8 阶段不下载平台截图，改由原创 SVG 工具墙承担视觉。每个平台模块都给出最终页面栏目（CV-1..CV-7），便于日后直接补图。
 
-### B1
+### B1（v2.3 · downloaded）
 
 - id: `B1`
 - name: home（首页）
 - 中文: Leonardo//thek@ 首页 9 功能入口
 - source_url: `https://teche.museogalileo.it/leonardo/home/index_en.html`
-- type: screenshot-candidate
-- final_use: section-7
-- asset_path: `site/assets/images/platform/leadk-home-screenshot.jpg`（待补）
-- source_page: https://teche.museogalileo.it/leonardo/
-- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- type: screenshot-candidate（now integrated）
+- final_use: section-7（替换原 placeholder）
+- asset_path: `site/assets/images/platform/platform-home-leonardotheka.jpg` ✓
+- source_page: https://teche.museogalileo.it/leonardo/home/
+- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@ · © Museo Galileo 2025"
+- download_status: downloaded-v2.3（headless Chrome-for-Testing 1440×900 · 2026-07-06）
+- integration_status: integrated（v2.3）
+- lightbox: yes（data-lightbox · data-title · data-subtitle · data-credit · data-viewing）
 
 ### B2
 
 - id: `B2`
 - name: Foliations
 - final_use: section-7
-- asset_path: `site/assets/images/platform/leadk-foliations-screenshot.jpg`
+- asset_path: unused（v2.3 暂不下载，平台首页截图已覆盖工具墙整体形象）
 - source_page: https://teche.museogalileo.it/leonardo/
 - credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- download_status: not-needed-v2.3（后续需要再补）
+- integration_status: not-used-v2.3
 
 ### B3
 
 - id: `B3`
 - name: Subject Indexes
 - final_use: section-7
-- asset_path: `site/assets/images/platform/leadk-subject-indexes-screenshot.jpg`
+- asset_path: unused（v2.3 暂不下载）
 - source_page: https://teche.museogalileo.it/leonardo/
 - credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- download_status: not-needed-v2.3
+- integration_status: not-used-v2.3
 
-### B4
+### B4（v2.3 · downloaded）
 
 - id: `B4`
 - name: Watermarks（关键）
-- final_use: section-5
-- asset_path: `site/assets/images/platform/leadk-watermarks-screenshot.jpg`
-- source_page: https://teche.museogalileo.it/leonardo/
-- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- final_use: section-5（替换原 placeholder）
+- asset_path: `site/assets/images/platform/platform-watermarks.jpg` ✓
+- source_page: https://teche.museogalileo.it/leonardo/filigrane/?lang=en
+- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@ · © Museo Galileo 2025"
+- download_status: downloaded-v2.3（headless Chrome-for-Testing 1440×full-page · 2026-07-06）
+- integration_status: integrated（v2.3）
+- lightbox: yes
 
-### B5
+### B5（v2.3 · downloaded）
 
 - id: `B5`
 - name: Recompositions（关键）
-- final_use: section-6
-- asset_path: `site/assets/images/platform/leadk-recompositions-screenshot.jpg`
-- source_page: https://teche.museogalileo.it/leonardo/
-- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- final_use: section-6（替换原 placeholder）
+- asset_path: `site/assets/images/platform/platform-recompositions.jpg` ✓
+- source_page: https://teche.museogalileo.it/leonardo/ricostruzioni/?lang=en
+- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@ · © Museo Galileo 2025"
+- download_status: downloaded-v2.3（headless Chrome-for-Testing 1440×full-page · 2026-07-06）
+- integration_status: integrated（v2.3）
+- lightbox: yes
 
-### B6
+### B6（v2.3 · downloaded · supplementary）
 
 - id: `B6`
 - name: Comparative Study
-- final_use: section-7
-- asset_path: `site/assets/images/platform/leadk-comparative-study-screenshot.jpg`
-- source_page: https://teche.museogalileo.it/leonardo/
-- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- final_use: 备用（v2.3 已下载但暂不入 page · 留作未来 comparative-study section 引用）
+- asset_path: `site/assets/images/platform/platform-comparative-study.jpg` ✓
+- source_page: https://teche.museogalileo.it/leonardo/ricostruttore/?lang=en
+- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@ · © Museo Galileo 2025"
+- download_status: downloaded-v2.3
+- integration_status: not-used-v2.3（research-asset）
 
-### B7
+### B7（v2.3 · downloaded · supplementary）
 
 - id: `B7`
 - name: Advanced Search
-- final_use: section-7
-- asset_path: `site/assets/images/platform/leadk-advanced-search-screenshot.jpg`
-- source_page: https://teche.museogalileo.it/leonardo/
-- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@"
-- download_status: screenshot-needed
-- integration_status: planned
+- final_use: 备用（v2.3 已下载但暂不入 page · 留作未来 advanced-search section 引用）
+- asset_path: `site/assets/images/platform/platform-advanced-search.jpg` ✓
+- source_page: https://teche.museogalileo.it/leonardo/ricerca/?lang=en
+- credit_line: "Screenshot courtesy of Museo Galileo / Leonardo//thek@ · © Museo Galileo 2025"
+- download_status: downloaded-v2.3
+- integration_status: not-used-v2.3（research-asset）
 
 ---
 
@@ -324,9 +327,20 @@
 | 展区 7 平台工具墙 | B1-B3 / B6 / B7 待补 + platform-tool-wall.svg | 0 待补 |
 | **本地图像总数** |  | **6** |
 
-## v1.9 待补
+## v2.3 集成清单
 
-- A5-A8（4 张温莎外链候选 → 进一步下载为本地 JPG，可附在展区 4 "同一页艺术与科学"画廊）
-- B1-B7（7 个平台截图候选 → 平台或人工截图）
-- C3-C5（3 张 Codex Atlanticus 候选页）
-- 增加 motion-study、water-flow 等达·芬奇机械 / 工程主题页面
+|| 集成位置 | 真实图像 | 数量 |
+||---|---|---|
+|| 展区 5 · Watermarks | `B4` 平台截图（v2.3 下载） | 1 |
+|| 展区 6 · Recompositions | `B5` 平台截图（v2.3 下载） | 1 |
+|| 展区 7 · Platform 首页 | `B1` 平台截图（v2.3 下载） | 1 |
+|| 备用 · Comparative Study | `B6` 平台截图（v2.3 下载 · research-asset） | 1 |
+|| 备用 · Advanced Search | `B7` 平台截图（v2.3 下载 · research-asset） | 1 |
+|| **v2.3 新增本地图像总数** |  | **5** |
+|| **占位卡片数（target 0）** | placeholder-pro 在 site/index.html 中 | **0** |
+
+## v2.3 placeholder 替换
+
+- 3 个 v1.8 / v1.9 占位卡片（Watermarks · Recompositions · 首页）已全部替换为真实平台截图卡片（`.platform-screenshot-card`）。
+- 截图由 headless Chrome-for-Testing 1440 截屏工具链在 2026-07-06 一次性完成。所有截图已压缩为 JPEG（quality 88），平均 ~110 KB（home 147 KB · watermarks 439 KB full-page · recompositions 633 KB full-page · comparative-study 59 KB · advanced-search 122 KB full-page）。
+- 所有平台截图均含完整 lightbox 数据（data-lightbox · data-title · data-subtitle · data-credit · data-viewing）与 figcaption（figure-title · source-note · credit-line）。
