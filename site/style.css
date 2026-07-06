@@ -220,3 +220,319 @@ footer {
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
+
+/* ====== v1.7 exhibit image upgrade ====== */
+
+:root {
+  --paper: #fbfaf6;
+  --warm-line: #cfc8b8;
+  --gold: #9a7b3b;
+  --green: #1f3a2e;
+  --paper-strong: #fffefb;
+  --paper-soft: #f3efe6;
+}
+
+/* hero with figure */
+.exhibit-hero {
+  margin: 0;
+  background: var(--paper);
+  border: 1px solid var(--warm-line);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+.exhibit-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* section lead */
+.section-lead {
+  max-width: 68ch;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* hero quote 朴实 */
+.hero-quote {
+  border-left: 4px solid var(--gold);
+  font-size: 1.3rem;
+  color: #2a2a2a;
+  margin: 1.5rem 0 4rem;
+  padding-left: 1.5rem;
+  max-width: 68ch;
+}
+
+/* exhibit index grid */
+.exhibit-index {
+  margin: 4rem 0 2rem;
+}
+.exhibit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* artifact card */
+.artifact-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.45rem;
+  padding: 1.4rem 1.5rem;
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.artifact-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.artifact-card[href]:hover {
+  border-color: var(--gold);
+}
+
+.exhibit-no {
+  grid-row: 1 / span 4;
+  align-self: start;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  border-right: 1px solid var(--warm-line);
+  padding-right: 0.85rem;
+  min-width: 1.4rem;
+  text-align: center;
+}
+.exhibit-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.exhibit-kind {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+.exhibit-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  align-items: baseline;
+}
+.exhibit-meta .label {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.exhibit-meta .value {
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+
+/* gallery + cabinet containers */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.exhibit-cabinet {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+/* large figure (different from .figure-block) */
+.figure-large {
+  margin: 2.5rem 0;
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+.figure-large img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.figure-large figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1rem;
+  text-align: left;
+  padding-top: 1rem;
+  border-top: 1px solid var(--warm-line);
+}
+.figure-title {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+.source-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* viewing guide */
+.viewing-guide {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--paper-soft);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+}
+.viewing-guide h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+.viewing-guide ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.4rem;
+}
+
+/* comparison strip */
+.comparison-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  counter-reset: strip;
+}
+.strip-cell {
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+.strip-cell .strip-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--gold);
+}
+.strip-cell p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* tool wall 9-grid */
+.tool-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.tool-cell {
+  padding: 1.25rem 1.5rem;
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  border-radius: 6px;
+}
+.tool-cell h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+.tool-cell p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+.tool-cell--accent {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--paper);
+}
+.tool-cell--accent h4 {
+  color: var(--paper);
+}
+.tool-cell--accent p {
+  color: var(--gold);
+}
+
+/* triptych figure emphasis */
+.triptych-figure {
+  border-color: var(--warm-line);
+}
+
+/* method cards */
+.method-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.method-card {
+  padding: 1.5rem;
+  background: var(--paper-strong);
+  border: 1px solid var(--warm-line);
+  border-radius: 6px;
+}
+.method-card h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: var(--gold);
+}
+.method-card p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+/* version footer */
+.version-footer {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.4px;
+}
+
+/* Responsive (mobile) */
+@media (max-width: 720px) {
+  body {
+    padding: 0 1rem;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3rem 0;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+  .exhibition-section h2 {
+    font-size: 1.6rem;
+  }
+  .gallery,
+  .exhibit-grid,
+  .tool-wall,
+  .exhibit-cabinet,
+  .method-cards,
+  .comparison-strip {
+    grid-template-columns: 1fr;
+  }
+  .artifact-card {
+    grid-template-columns: 1fr;
+  }
+  .exhibit-no {
+    grid-row: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--warm-line);
+    padding: 0 0 0.5rem 0;
+    text-align: left;
+  }
+  img {
+    max-width: 100%;
+  }
+}

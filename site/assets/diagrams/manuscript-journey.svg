@@ -1,10 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
-  <text x="400" y="30" text-anchor="middle" font-size="20">达·芬奇手稿流散与重连路径</text>
-  <rect x="50" y="80" width="120" height="60" fill="#e3f2fd"/><text x="110" y="115" text-anchor="middle">梅尔齐继承</text>
-  <rect x="250" y="80" width="120" height="60" fill="#ffebee"/><text x="310" y="115" text-anchor="middle">莱奥尼拆散</text>
-  <rect x="450" y="80" width="120" height="60" fill="#e8f5e9"/><text x="510" y="115" text-anchor="middle">《大西洋手稿》</text>
-  <rect x="650" y="80" width="120" height="60" fill="#fff3e0"/><text x="710" y="115" text-anchor="middle">温莎手稿</text>
-  <line x1="170" y1="110" x2="250" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="370" y1="110" x2="450" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="400" y="200" text-anchor="middle" font-size="16">Leonardo//thek@ 平台复原</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-labelledby="mj-title mj-desc">
+  <title id="mj-title">达·芬奇手稿流散与重连路径图</title>
+  <desc id="mj-desc">从梅尔齐继承、莱奥尼破坏性装订、米兰与温莎分藏，到 Leonardo//thek@ 反向修复的五段路径。</desc>
+
+  <!-- background -->
+  <rect width="880" height="360" fill="#fbfaf6"/>
+
+  <!-- baseline axis -->
+  <line x1="80" y1="200" x2="800" y2="200" stroke="#cfc8b8" stroke-width="1" stroke-dasharray="2 4"/>
+
+  <!-- nodes -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="13" fill="#2a2a2a">
+    <!-- 1 梅尔齐继承 -->
+    <g>
+      <circle cx="100" cy="200" r="22" fill="#f3efe6" stroke="#2a2a2a" stroke-width="1.4"/>
+      <text x="100" y="204" text-anchor="middle" font-size="11" fill="#2a2a2a">1</text>
+      <text x="100" y="158" text-anchor="middle" font-weight="600">梅尔齐继承</text>
+      <text x="100" y="244" text-anchor="middle" font-size="11" fill="#5b5b5b">约 1519</text>
+      <text x="100" y="262" text-anchor="middle" font-size="11" fill="#5b5b5b">笔记本·约四十册</text>
+    </g>
+
+    <!-- 2 莱奥尼破坏性装订 -->
+    <g>
+      <circle cx="280" cy="200" r="22" fill="#f3efe6" stroke="#2a2a2a" stroke-width="1.4"/>
+      <text x="280" y="204" text-anchor="middle" font-size="11" fill="#2a2a2a">2</text>
+      <text x="280" y="158" text-anchor="middle" font-weight="600">破坏性装订</text>
+      <text x="280" y="244" text-anchor="middle" font-size="11" fill="#5b5b5b">约 1580 年代</text>
+      <text x="280" y="262" text-anchor="middle" font-size="11" fill="#5b5b5b">剪裁·混装·订成两册</text>
+    </g>
+
+    <!-- 3 米兰 (大西洋手稿) -->
+    <g>
+      <circle cx="460" cy="200" r="22" fill="#f3efe6" stroke="#9a7b3b" stroke-width="1.6"/>
+      <text x="460" y="204" text-anchor="middle" font-size="11" fill="#2a2a2a">3a</text>
+      <text x="460" y="158" text-anchor="middle" font-weight="600">米兰·《大西洋手稿》</text>
+      <text x="460" y="244" text-anchor="middle" font-size="11" fill="#5b5b5b">安布罗西安图书馆</text>
+      <text x="460" y="262" text-anchor="middle" font-size="11" fill="#5b5b5b">1119 张纸页</text>
+    </g>
+
+    <!-- 3b 温莎 -->
+    <g>
+      <circle cx="540" cy="260" r="22" fill="#f3efe6" stroke="#9a7b3b" stroke-width="1.6"/>
+      <text x="540" y="264" text-anchor="middle" font-size="11" fill="#2a2a2a">3b</text>
+      <text x="540" y="298" text-anchor="middle" font-weight="600">温莎·皇家收藏</text>
+      <text x="540" y="318" text-anchor="middle" font-size="11" fill="#5b5b5b">Royal Collection</text>
+      <text x="540" y="334" text-anchor="middle" font-size="11" fill="#5b5b5b">约 600 张绘图</text>
+    </g>
+
+    <!-- 4 莱奥尼装订下分叉线 -->
+    <g>
+      <line x1="220" y1="200" x2="260" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+      <line x1="302" y1="200" x2="438" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+      <line x1="302" y1="200" x2="518" y2="260" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+
+    <!-- 5 数字复原 -->
+    <g>
+      <circle cx="780" cy="200" r="22" fill="#1f3a2e" stroke="#1f3a2e" stroke-width="1.6"/>
+      <text x="780" y="204" text-anchor="middle" font-size="11" fill="#fbfaf6">4</text>
+      <text x="780" y="158" text-anchor="middle" font-weight="600">数字复原</text>
+      <text x="780" y="244" text-anchor="middle" font-size="11" fill="#5b5b5b">Leonardo//thek@</text>
+      <text x="780" y="262" text-anchor="middle" font-size="11" fill="#5b5b5b">反向复原笔记本</text>
+      <line x1="562" y1="200" x2="756" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- title -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <text x="80" y="48" font-size="18" font-weight="600" fill="#1a1a1a">手稿流散与重连路径</text>
+    <text x="80" y="72" font-size="12" fill="#5b5b5b">从私人笔记本到博物馆收藏，再到数字反向复原</text>
+  </g>
+
+  <!-- caption / source -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="10" fill="#7a7a7a">
+    <text x="80" y="346">作者示意图 · 达·芬奇的纸上宇宙 v1.7 · 基于公开学术来源</text>
+  </g>
 </svg>

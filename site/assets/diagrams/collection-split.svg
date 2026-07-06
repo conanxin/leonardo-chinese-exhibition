@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-labelledby="cs-title cs-desc">
+  <title id="cs-title">《大西洋手稿》与温莎皇家收藏分藏关系图</title>
+  <desc id="cs-desc">一张图说清莱奥尼拆分后两册手稿的归属、规模与主要内容。</desc>
+
+  <rect width="880" height="360" fill="#fbfaf6"/>
+
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <text x="60" y="48" font-size="18" font-weight="600" fill="#1a1a1a">《大西洋手稿》与温莎绘图的分藏</text>
+    <text x="60" y="72" font-size="12" fill="#5b5b5b">莱奥尼一剪，今天看到的两个"主体"</text>
+  </g>
+
+  <!-- splitter central node -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <rect x="60" y="100" width="760" height="46" fill="#e9e3d2" stroke="#9a7b3b" stroke-width="1"/>
+    <text x="440" y="129" text-anchor="middle" font-size="13" fill="#2a2a2a">庞佩奥·莱奥尼的破坏性装订 · 约 1580 年代</text>
+  </g>
+
+  <!-- left: Codex Atlanticus -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" fill="#2a2a2a">
+    <rect x="60" y="166" width="356" height="148" fill="#fffefb" stroke="#cfc8b8" stroke-width="1"/>
+    <text x="80" y="194" font-size="15" font-weight="600">《大西洋手稿》Codex Atlanticus</text>
+    <text x="80" y="214" font-size="12" fill="#5b5b5b">藏地：米兰 · Veneranda Biblioteca Ambrosiana</text>
+    <line x1="80" y1="226" x2="396" y2="226" stroke="#e6e1d2" stroke-width="1"/>
+    <text x="80" y="248" font-size="12" font-weight="600">11 19 张纸页 · 40 余册大小</text>
+    <text x="80" y="266" font-size="12">· 尺寸源于"地图册大小"，不是大西洋</text>
+    <text x="80" y="284" font-size="12">· 主题：工程 / 机械 / 飞行 / 水力 / 解剖 / 几何 / 笔记</text>
+    <text x="80" y="302" font-size="12" fill="#1f3a2e">· 异质混杂 = 达·芬奇本来思考的方式</text>
+  </g>
+
+  <!-- right: Windsor / Royal Collection -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" fill="#2a2a2a">
+    <rect x="464" y="166" width="356" height="148" fill="#fffefb" stroke="#cfc8b8" stroke-width="1"/>
+    <text x="484" y="194" font-size="15" font-weight="600">温莎皇家收藏 Royal Collection</text>
+    <text x="484" y="214" font-size="12" fill="#5b5b5b">藏地：英国 · Windsor · Royal Collection Trust</text>
+    <line x1="484" y1="226" x2="800" y2="226" stroke="#e6e1d2" stroke-width="1"/>
+    <text x="484" y="248" font-size="12" font-weight="600">约 6 00 张绘图</text>
+    <text x="484" y="266" font-size="12">· 以解剖图、系统研究为主</text>
+    <text x="484" y="284" font-size="12">· 视觉化的研究方法</text>
+    <text x="484" y="302" font-size="12" fill="#1f3a2e">· 是研究方法，不是"艺术品陈列"</text>
+  </g>
+
+  <!-- splitter arrows down to the two -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <line x1="240" y1="146" x2="240" y2="164" stroke="#9a7b3b" stroke-width="1"/>
+    <line x1="640" y1="146" x2="640" y2="164" stroke="#9a7b3b" stroke-width="1"/>
+    <text x="240" y="160" text-anchor="middle" font-size="10" fill="#7a7a7a">↳ 一册</text>
+    <text x="640" y="160" text-anchor="middle" font-size="10" fill="#7a7a7a">↳ 另一册</text>
+  </g>
+
+  <!-- footer note -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="10" fill="#7a7a7a">
+    <text x="60" y="342">示意图 · 内容参考 Veneranda Biblioteca Ambrosiana 与 Royal Collection Trust 公开资料 · v1.7</text>
+  </g>
+</svg>

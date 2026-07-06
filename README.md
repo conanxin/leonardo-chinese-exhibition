@@ -6,7 +6,20 @@
 https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 当前版本
-v1.6 distribution pack（在 v1.5b live hotfix + v1.5c repo hygiene 之上叠加传播材料包）
+v1.7 exhibit image upgrade（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack 之上，把展览从"文字型说明页"升级为"图文革新型数字展览"）
+
+## v1.7 展览图像升级（exhibit image upgrade）
+
+v1.7 解决了"页面底部原来写着图片使用占位"的问题。本版本：
+
+- 增加 5 个原创 SVG 图解（manuscript-journey / collection-split / watermark-evidence-chain / recomposition-triptych / platform-tool-wall）以及 1 个升级版（thinking-map）
+- 增加"本展展品索引"section，8 张展品卡（A-H），进入页面即有"展览感"
+- 8 个展区都升级为展品模块：每节必有 `figure` / `gallery` / 展品柜
+- 温莎绘图以"展品卡 + RCIN 编号 + 外链"形式陈列，不直接嵌入第三方像素
+- 平台 9 功能以"原创工具墙 + HTML 9 宫格"双层呈现
+- 配色更克制：暖白 + 黑灰 + 古金 + 深绿；不再用黑底金字的视觉惯式
+
+完整 v1.7 提交报告：`reports/leonardo_chinese_exhibition_v1_7_exhibit_image_upgrade_report.md`
 
 ## v1.6 传播包（distribution pack）
 
@@ -33,15 +46,17 @@ v1.6 distribution pack（在 v1.5b live hotfix + v1.5c repo hygiene 之上叠加
 
 ```
 .
-├── site/                  # GitHub Pages 部署根（仅这一层被部署）
-│   ├── index.html         # 中文展览主页（v1.5b-live-hotfix marker）
+├── site/                   # GitHub Pages 部署根（仅这一层被部署）
+│   ├── index.html          # 中文展览主页（v1.5b-live-hotfix + v1.7-exhibit-image-upgrade marker）
 │   ├── style.css
-│   └── assets/            # SVG 结构图 + favicon
-├── posts/                 # v1.6 传播材料（公众号 / X / 小红书 / 视频 / 作品集 / 标题）
-├── reports/               # 版本报告（v0.2 → v1.5c → v1.6）
-├── docs/                  # DEPLOYMENT / GITHUB_PAGES / CLOUDFLARE / RELEASE_NOTES
-├── exhibition/            # 策展脚本与计划
-├── research/              # 学术背景资料
+│   └── assets/
+│       ├── diagrams/       # 6 个原创 SVG 图解（v1.7 升级与新增）
+│       └── favicon.svg · og-cover.svg
+├── posts/                  # v1.6 传播材料（公众号 / X / 小红书 / 视频 / 作品集 / 标题）
+├── research/               # 学术背景资料 + image-candidates.md（v1.7 候选清单）
+├── reports/                # 版本报告（v0.2 → v1.5c → v1.6 → v1.7）
+├── docs/                   # DEPLOYMENT / GITHUB_PAGES / CLOUDFLARE / RELEASE_NOTES
+├── exhibition/             # 策展脚本与计划
 ├── README.md
 └── .github/workflows/pages.yml
 ```
@@ -55,8 +70,7 @@ python3 -m http.server 8787 -d site
 site/
 
 ## 项目状态
-已完成 OpenAI-style 极简 editorial 重构，8 个展区正文完整，SVG 图解齐全，移动端适配良好，可公开发布。
+v1.7 把页面从"文字型说明页"升级为"图文革新型数字展览"——8 个展区都有 figure / gallery / 图注 / source note / 展品卡。已不再用占位图的临时提示，外部展品用展品卡 + 外链的形式给出。移动端已专门适配（单列布局）。
 
-v1.5b live hotfix 已上线（含 `<meta name="version">` + footer 版本文字）。
-v1.5c repo hygiene 审计已闭合（30 个文件权限 0600 → 0644，workflow 通过）。
-v1.6 distribution pack 已生成 6 个传播材料 + 36 条标题。
+v1.5b live hotfix marker 保留（meta + comment 两层）。
+v1.6 distribution pack 6 个传播材料 + 36 标题保留。

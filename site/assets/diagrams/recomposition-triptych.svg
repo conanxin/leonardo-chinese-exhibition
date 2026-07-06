@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-labelledby="rt-title rt-desc">
+  <title id="rt-title">复原拼合三联图</title>
+  <desc id="rt-desc">原始散页、莱奥尼拆分与装订、数字复原的三联对照。</desc>
+
+  <rect width="880" height="360" fill="#fbfaf6"/>
+
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <text x="60" y="48" font-size="18" font-weight="600" fill="#1a1a1a">复原三联图</text>
+    <text x="60" y="72" font-size="12" fill="#5b5b5b">原始关系 → 破坏性装订 → 数字反向复原</text>
+  </g>
+
+  <!-- Panel 1 -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <rect x="60" y="110" width="240" height="200" fill="#fffefb" stroke="#cfc8b8" stroke-width="1"/>
+    <text x="80" y="134" font-size="13" font-weight="600">1 / 原始</text>
+    <text x="80" y="150" font-size="11" fill="#5b5b5b">达·芬奇的笔记本</text>
+    <!-- notebook sketch -->
+    <rect x="100" y="172" width="160" height="100" fill="#f3efe6" stroke="#9a7b3b" stroke-width="1"/>
+    <line x1="120" y1="190" x2="240" y2="190" stroke="#cfc8b8" stroke-width="1"/>
+    <line x1="120" y1="208" x2="240" y2="208" stroke="#cfc8b8" stroke-width="1"/>
+    <line x1="120" y1="226" x2="240" y2="226" stroke="#cfc8b8" stroke-width="1"/>
+    <line x1="120" y1="244" x2="240" y2="244" stroke="#cfc8b8" stroke-width="1"/>
+    <text x="180" y="296" text-anchor="middle" font-size="11" fill="#2a2a2a">四十册 · 原始脉络</text>
+  </g>
+
+  <!-- arrow 1 -->
+  <line x1="304" y1="210" x2="334" y2="210" stroke="#2a2a2a" stroke-width="1.2"/>
+
+  <!-- Panel 2 -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <rect x="334" y="110" width="240" height="200" fill="#fffefb" stroke="#cfb8b8" stroke-width="1"/>
+    <text x="354" y="134" font-size="13" font-weight="600">2 / 破坏性装订</text>
+    <text x="354" y="150" font-size="11" fill="#5b5b5b">莱奥尼剪刀</text>
+    <!-- two册 stacked -->
+    <rect x="378" y="172" width="68" height="100" fill="#f3efe6" stroke="#9a7b3b" stroke-width="1"/>
+    <rect x="464" y="172" width="68" height="100" fill="#f3efe6" stroke="#9a7b3b" stroke-width="1"/>
+    <text x="412" y="288" text-anchor="middle" font-size="10" fill="#2a2a2a">《大西洋手稿》</text>
+    <text x="498" y="288" text-anchor="middle" font-size="10" fill="#2a2a2a">温莎皇家收藏</text>
+    <text x="454" y="304" text-anchor="middle" font-size="11" fill="#2a2a2a">两册·脉络切断</text>
+  </g>
+
+  <!-- arrow 2 -->
+  <line x1="578" y1="210" x2="608" y2="210" stroke="#2a2a2a" stroke-width="1.2"/>
+
+  <!-- Panel 3 -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif">
+    <rect x="608" y="110" width="212" height="200" fill="#fffefb" stroke="#1f3a2e" stroke-width="1"/>
+    <text x="628" y="134" font-size="13" font-weight="600">3 / 数字复原</text>
+    <text x="628" y="150" font-size="11" fill="#5b5b5b">Leonardo//thek@</text>
+    <rect x="640" y="172" width="148" height="100" fill="#1f3a2e" stroke="#1f3a2e" stroke-width="1"/>
+    <line x1="660" y1="190" x2="768" y2="190" stroke="#e9e3d2" stroke-width="1"/>
+    <line x1="660" y1="208" x2="768" y2="208" stroke="#e9e3d2" stroke-width="1"/>
+    <line x1="660" y1="226" x2="768" y2="226" stroke="#e9e3d2" stroke-width="1"/>
+    <line x1="660" y1="244" x2="768" y2="244" stroke="#e9e3d2" stroke-width="1"/>
+    <text x="714" y="296" text-anchor="middle" font-size="11" fill="#1f3a2e">虚拟笔记本</text>
+  </g>
+
+  <!-- footer -->
+  <g font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="10" fill="#7a7a7a">
+    <text x="60" y="346">示意图 · v1.7 · 从破坏到复原</text>
+  </g>
+</svg>
