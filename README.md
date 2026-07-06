@@ -19,6 +19,25 @@
 - **GitHub Releases**: v2.0 / v2.6 两份
 - **Note**: v2.8 / v2.9 / v3.x 的规划**暂缓**，直到从 verified state 重建。下一推荐 round 为 v2.7-real-stable-freeze（见 roadmap）。
 
+## v2.7 Zh Exhibition Polish (verified live baseline, 2026-07-07 freeze)
+
+v2.7 是中文展览体验精修版，不是 bilingual / 教育版 / 模板化。在 v2.6 Content Stable 之上专注中文观展体验：
+
+- **Live**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Tag**: `v2.7-zh-exhibition-polish`（freeze round 新增）
+- **Verified live byte size**: 85,564 B
+- **Content commit**: `71c7403` — *Polish Chinese exhibition experience*
+- **Status**: verified live baseline（v2.8 / v2.9 / v3.x 推迟到从 verified state 重建之后）
+
+主要内容：
+- 新增「如果你只有 3 分钟」中文导览摘要（live `quick-guide-zh` 命中 1 次）
+- 新增 [`docs/VISITOR_GUIDE_ZH.md`](docs/VISITOR_GUIDE_ZH.md) — 中文观展手册
+- 新增 4 个「如何观看」viewer-action（live 命中 4 次）
+- 清理 4 处重复表达
+- 保留 v2.5-real guided accessibility 与 v2.6 stable 交互能力
+
+详见 [`docs/RELEASE_NOTES_v2.7_ZH_EXHIBITION_POLISH.md`](docs/RELEASE_NOTES_v2.7_ZH_EXHIBITION_POLISH.md) 与 [`release-assets/v2.7-zh-exhibition-polish-manifest.md`](release-assets/v2.7-zh-exhibition-polish-manifest.md)，报告见 [`reports/leonardo_chinese_exhibition_v2_7_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v2_7_real_stable_freeze_report.md)。Phantom 历史说明见 [`docs/REALITY_CHECK_AFTER_PHANTOM_V3.md`](docs/REALITY_CHECK_AFTER_PHANTOM_V3.md)。
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
