@@ -9,11 +9,14 @@
 |------|---|
 | **工作分支** | main |
 | **基线 commit** | c3c3e0b (Add artifact annotation and glossary layer · v2.4) |
-| **新 commit** | _pending_（commit 后回填）|
-| **push 状态** | _pending_ |
-| **部署状态** | _pending_ |
+| **新 commit** | 31e5126 · Polish exhibition copy and terminology (v2.7 主交付 · 4 files · +408/-47 lines) |
+| **push 状态** | ✅ origin/main 已推送 (c3c3e0b → 31e5126) |
+| **部署状态** | ✅ GitHub Pages 已部署 |
 | **本地 node --check site/script.js** | ✅ 通过 |
 | **本地 HTTP** | ✅ 4/4 endpoints 200 |
+| **线上 HTTP 200** | ✅ https://conanxin.github.io/leonardo-chinese-exhibition/ |
+| **线上 v2.7 marker** | ✅ 1 处命中 (meta) |
+| **线上 decoding="async"** | 23 处命中 |
 
 ---
 
