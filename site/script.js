@@ -50,7 +50,7 @@
           <p class="lb-subtitle"></p>
           <p class="lb-section-label">版权与来源</p>
           <p class="lb-credit"></p>
-          <p class="lb-section-label">如何观看</p>
+          <p class="lightbox-viewing-label">观看提示</p>
           <p class="lb-viewing"></p>
           <p class="lb-hint">提示：按 <strong>ESC</strong>、点空白处、或点 × 关闭。</p>
         </div>

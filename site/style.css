@@ -1280,3 +1280,298 @@ body.lb-open {
   margin: 0;
   word-break: break-all;
 }
+
+/* ============================================================
+   v2.4 — Artifact Annotation Upgrade
+   - .viewing-primer (4-step guide before exhibits)
+   - .primer-card (4 cards)
+   - .annotation-panel (close-reading annotation block)
+   - .annotation-list (3 bullets)
+   - .interface-note (platform screenshot explanation)
+   - .glossary + .glossary-grid + .glossary-item
+   - .lightbox-viewing-label
+   ============================================================ */
+
+/* --- Viewing primer (导览) ------------------------------- */
+.viewing-primer {
+  margin: 2.5rem 0;
+  padding: 2.25rem 2rem 2rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.viewing-primer .primer-lede {
+  margin: 0.25rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.primer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  counter-reset: primer;
+}
+.primer-card {
+  position: relative;
+  padding: 1.3rem 1.1rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  counter-increment: primer;
+}
+.primer-card::before {
+  content: counter(primer) " · ";
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.primer-card .primer-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+.primer-card .primer-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.55;
+}
+.primer-card .primer-meta {
+  font-size: 0.78rem;
+  color: var(--accent);
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+}
+
+/* --- Annotation panel (展品细读) -------------------------- */
+.annotation-panel {
+  margin: 1.4rem 0 0;
+  padding: 1.05rem 1.2rem 1.1rem;
+  background: rgba(248,244,235,0.7);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.annotation-panel .annotation-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+.annotation-panel .annotation-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.45;
+}
+.annotation-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.annotation-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.annotation-list li::before {
+  content: "◦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.annotation-list li strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.annotation-list li .annotation-paren {
+  color: var(--text-secondary);
+}
+.annotation-panel .annotation-so-what {
+  font-size: 0.86rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.55rem;
+  margin: 0.15rem 0 0;
+  line-height: 1.55;
+}
+.annotation-panel .annotation-so-what::before {
+  content: "这说明什么：";
+  font-style: normal;
+  font-weight: 600;
+  color: var(--accent);
+  margin-right: 0.2rem;
+}
+
+/* --- Interface note (平台截图解读) ----------------------- */
+.interface-note {
+  margin: 1.4rem 0 0;
+  padding: 1.05rem 1.2rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.interface-note .interface-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+.interface-note .interface-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.45;
+}
+.interface-note .interface-rows {
+  display: grid;
+  grid-template-columns: minmax(120px, max-content) 1fr;
+  gap: 0.35rem 0.9rem;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.interface-note .interface-rows dt {
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+.interface-note .interface-rows dd {
+  color: var(--text);
+  margin: 0;
+}
+
+/* --- Glossary (术语表) ------------------------------------ */
+.glossary {
+  margin: 2.5rem 0;
+  padding: 2.25rem 2rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.glossary .glossary-lede {
+  margin: 0.25rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.25rem;
+}
+.glossary-item {
+  display: grid;
+  grid-template-columns: minmax(140px, max-content) 1fr;
+  gap: 0.6rem 1rem;
+  padding: 0.85rem 1rem 0.8rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  align-items: start;
+}
+.glossary-item .glossary-term {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+}
+.glossary-item .glossary-term .glossary-term-en {
+  display: block;
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  margin-top: 0.1rem;
+}
+.glossary-item .glossary-def {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* --- Lightbox viewing-label (mirror of HTML structure) --- */
+.lightbox-meta .lightbox-viewing-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0.6rem 0 0.2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   v2.4 — mobile additions
+   ============================================================ */
+@media (max-width: 720px) {
+  .primer-grid {
+    grid-template-columns: 1fr;
+  }
+  .glossary-grid {
+    grid-template-columns: 1fr;
+  }
+  .glossary-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .viewing-primer,
+  .glossary {
+    padding: 1.4rem 1.2rem;
+  }
+  .annotation-panel,
+  .interface-note {
+    padding: 0.95rem 1rem;
+  }
+  .interface-note .interface-rows {
+    grid-template-columns: 1fr;
+    gap: 0.15rem 0;
+  }
+  .interface-note .interface-rows dt {
+    margin-top: 0.3rem;
+  }
+}
+
+/* Tablet: primer 2x2 */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .primer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
