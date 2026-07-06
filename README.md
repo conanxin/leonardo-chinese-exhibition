@@ -6,7 +6,24 @@
 https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 当前版本
-v1.8 real image integration（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack + v1.7 exhibit image upgrade 之上，集成 6 张 Wikimedia Commons 公共域真实手稿图像）
+v1.9 final exhibition polish（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack + v1.7 exhibit image upgrade + v1.8 real image integration 之上做最终 polish 与资产审计）
+
+## v1.9 最终展览 polish 与资产审计（final exhibition polish & asset reference audit）
+
+v1.9 是真实图像集成后的收口版本。本版本聚焦"小修小补"，不重写任何内容。
+
+完成的核心工作：
+
+- 资产引用审计：6 张 JPG + 7 张 SVG + 2 张 favicon/og-cover 全部确认已在页面正确路径使用（除一张 `platform-structure.svg` 为 v0.3 保留资产，未被引用）；
+- 补齐 `<link rel="icon">` 与 `og:image` 元数据，让 `assets/favicon.svg` 与 `assets/og-cover.svg` 这两个之前未挂载的资源上线；
+- 修复 4 个温莎索引卡片的 `credit-line` 格式（从 `公共域 · Wikimedia Commons` 升级为 `公共域 · Wikimedia Commons · Leonardo da Vinci, Royal Collection Trust`），与展区 3 画廊卡片一致；
+- 全 19/19 `<img>` 标签都有 alt text（0 missing）；
+- 全 10/10 真实图像有统一格式的 credit-line（公共域 + 来源 + 馆藏）；
+- 9 张 SVG figure 全部有 figcaption + source-note；
+- 移动端 image-grid 单列布局已就绪；
+- v1.5b / v1.7 / v1.8 三层 marker 完整保留。
+
+完整 v1.9 报告：`reports/leonardo_chinese_exhibition_v1_9_final_exhibition_polish_report.md`
 
 ## v1.8 真实手稿图像集成（real image integration）
 
