@@ -20,7 +20,7 @@ Current active stable release:
 - **v2.6-content-stable**（v2.6 Content Stable）
 - Tag target: `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce`
 - Live: https://conanxin.github.io/leonardo-chinese-exhibition/
-- GitHub Release: *(回填于 Step 9 — 见下方 "GitHub Release" 小节)*
+- GitHub Release: <https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.6-content-stable>
 
 **说明**：当前稳定版是修正历史误报后形成的真实版本线，包含 v2.5-real guided accessibility recovery 与 v2.6 content copy polish。详见 [`docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md`](docs/RELEASE_NOTES_v2.6_CONTENT_STABLE.md) 与 [`release-assets/v2.6-content-stable-manifest.md`](release-assets/v2.6-content-stable-manifest.md)。
 
