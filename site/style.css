@@ -666,3 +666,481 @@ footer {
     max-width: 100%;
   }
 }
+
+/* ============================================================
+   v2.2 — Exhibition Experience Upgrade
+   - visit-routes / route-card
+   - timeline / timeline-item
+   - reading-cards / reading-card
+   - research-scenarios / scenario-card
+   - postscript
+   - lightbox / lightbox-panel / close-lightbox
+   ============================================================ */
+
+/* --- Visit routes (参观路线) ------------------------------- */
+.visit-routes {
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  margin: 2.5rem 0;
+}
+.visit-routes .route-lede {
+  margin: 0.25rem 0 1.75rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.route-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem 1.25rem 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.route-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -10px rgba(17,17,17,0.18);
+  border-color: rgba(139,69,19,0.35);
+}
+.route-card .route-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+.route-card .route-time {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  border: 1px solid rgba(139,69,19,0.35);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+.route-card .route-for {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.route-card .route-stops {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0.5rem;
+  line-height: 1.55;
+}
+.route-card .route-stops code {
+  font-size: 0.78rem;
+  color: var(--text);
+  background: rgba(139,69,19,0.07);
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+}
+.route-card .route-cta {
+  margin-top: auto;
+  font-size: 0.92rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-top: 1px solid var(--border);
+  padding-top: 0.7rem;
+}
+.route-card .route-cta::after {
+  content: " →";
+  font-weight: 400;
+}
+.route-card .route-cta:hover {
+  text-decoration: underline;
+}
+
+/* --- Timeline (一张纸页的五百年旅程) ------------------------ */
+.timeline {
+  position: relative;
+  margin: 2.5rem 0;
+  padding: 1rem 0;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 1.4rem;
+  bottom: 1.4rem;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(139,69,19,0.18), rgba(139,69,19,0.55), rgba(139,69,19,0.18));
+}
+.timeline-item {
+  position: relative;
+  padding: 0.5rem 0 1rem 2.5rem;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--accent);
+}
+.timeline-item .t-year {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 0.15rem;
+}
+.timeline-item .t-text {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0;
+}
+.timeline-item .t-text strong {
+  font-weight: 600;
+}
+
+/* --- Reading module (展品细读) ------------------------------ */
+.reading-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 1.75rem 0 0;
+}
+.reading-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.reading-card .reading-image {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #efe9dc;
+}
+.reading-card .reading-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 280px;
+  cursor: zoom-in;
+  transition: transform 0.18s ease;
+}
+.reading-card .reading-image img:hover {
+  transform: scale(1.01);
+}
+.reading-card .reading-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+}
+.reading-card .reading-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.reading-card ol.reading-steps {
+  margin: 0.3rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--text);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+.reading-card ol.reading-steps li {
+  margin: 0.15rem 0;
+}
+.reading-card ol.reading-steps li strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+.reading-card .reading-method {
+  margin-top: 0.4rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* --- Research scenarios (强化展区 7) ------------------------ */
+.research-scenarios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+}
+.scenario-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.scenario-card .scenario-q {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+.scenario-card .scenario-q::before {
+  content: "问：";
+  color: var(--accent);
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+.scenario-card .scenario-tool {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+}
+.scenario-card .scenario-tool strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.scenario-card .scenario-out,
+.scenario-card .scenario-why {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.scenario-card .scenario-out::before {
+  content: "得到：";
+  color: var(--accent);
+  font-weight: 600;
+}
+.scenario-card .scenario-why::before {
+  content: "为什么：";
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* --- Postscript (展后总结) --------------------------------- */
+.postscript {
+  background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 2rem 2.25rem;
+  margin: 2.5rem 0;
+}
+.postscript h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.6rem;
+  letter-spacing: -0.005em;
+}
+.postscript .postscript-lede {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0 0 1rem;
+  line-height: 1.75;
+}
+.postscript ul.postscript-points {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  font-size: 0.98rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+.postscript ul.postscript-points li {
+  margin: 0.25rem 0;
+}
+.postscript ul.postscript-points li strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* --- Lightbox (lightweight, native JS) --------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(17,17,17,0.78);
+  z-index: 9999;
+  animation: lb-fade 0.18s ease;
+}
+.lightbox[aria-hidden="false"] {
+  display: flex;
+}
+@keyframes lb-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.lightbox-panel {
+  position: relative;
+  background: var(--bg);
+  border-radius: 12px;
+  max-width: min(1100px, 96vw);
+  max-height: 92vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
+}
+.lightbox-image {
+  background: #efe9dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lightbox-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+  display: block;
+}
+.lightbox-meta {
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+  background: var(--card);
+}
+.lightbox-meta .lb-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+.lightbox-meta .lb-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+}
+.lightbox-meta .lb-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+.lightbox-meta .lb-section-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin: 0.65rem 0 0.15rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.7rem;
+}
+.lightbox-meta .lb-credit,
+.lightbox-meta .lb-viewing {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.lightbox-meta .lb-hint {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+.close-lightbox {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  z-index: 2;
+}
+.close-lightbox:hover {
+  background: rgba(139,69,19,0.1);
+  transform: scale(1.06);
+}
+body.lb-open {
+  overflow: hidden;
+}
+
+/* Lightbox-enabled images get a subtle zoom-in cursor */
+.artifact-image img,
+.reading-image img {
+  cursor: zoom-in;
+}
+.artifact-image img[role="button"]:focus-visible,
+.reading-image img[role="button"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   v2.2 — mobile additions (under existing @media block)
+   ============================================================ */
+@media (max-width: 720px) {
+  .route-grid {
+    grid-template-columns: 1fr;
+  }
+  .reading-cards,
+  .research-scenarios {
+    grid-template-columns: 1fr;
+  }
+  .timeline::before {
+    left: 0.3rem;
+  }
+  .timeline-item {
+    padding-left: 1.9rem;
+  }
+  .timeline-item::before {
+    width: 1rem;
+    height: 1rem;
+  }
+  .postscript {
+    padding: 1.4rem 1.25rem;
+  }
+  /* Stack lightbox vertically on mobile */
+  .lightbox-panel {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 60vh) minmax(0, 1fr);
+    max-height: 96vh;
+  }
+  .lightbox-image img {
+    max-height: 60vh;
+  }
+  .lightbox-meta {
+    padding: 1.2rem 1.1rem;
+  }
+}
+
+/* Tablet breakpoint for routes (2-col on tablet) */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .route-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
