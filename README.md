@@ -6,7 +6,34 @@
 https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 当前版本
-v2.0 public portfolio case（在 v1.5b / v1.5c / v1.6 / v1.7 / v1.8 / v1.9 之上，把项目整理成 7 件作品集案例文档）
+v2.0 stable release · tag `v2.0-public-portfolio-case`（在 v1.5b / v1.5c / v1.6 / v1.7 / v1.8 / v1.9 + v2.0 public portfolio 之上冻结）
+
+**Latest stable tag**: `v2.0-public-portfolio-case`
+
+**Live URL**:
+
+> https://conanxin.github.io/leonardo-chinese-exhibition/
+
+## v2.0 stable release
+
+本仓库的 v2.0 是稳定冻结版本。
+
+- 展览本体 `site/` 在 v1.8 / v1.9 已成熟，v2.0 不再修改
+- 7 件作品化文档全部在 `case-study/` 下发布
+- Git tag `v2.0-public-portfolio-case` 已创建，可通过 `git checkout v2.0-public-portfolio-case` 切到稳定快照
+
+**Release notes**: [`docs/RELEASE_NOTES_v2.0.md`](docs/RELEASE_NOTES_v2.0.md)
+**v2.0 freeze 报告**: `reports/leonardo_chinese_exhibition_v2_0_release_freeze_report.md`
+
+### 关键里程碑
+
+- v1.5b（`d69f516`）· live hotfix · marker 上线
+- v1.5c（`53c4032`）· repo hygiene
+- v1.6（`75fd9f9`）· distribution pack
+- v1.7（`af07b15`）· exhibit image upgrade
+- v1.8（`4f6d126`）· real image integration
+- v1.9（`97f1670`）· final polish
+- **v2.0（`ae946b3`）· public portfolio case → tag `v2.0-public-portfolio-case`**
 
 ## v2.0 作品化（public portfolio case）
 
