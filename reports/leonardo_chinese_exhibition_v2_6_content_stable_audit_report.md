@@ -2,18 +2,20 @@
 
 ## STATUS
 
-**PASS ✓** — 稳定封版完成，真实版本链已建立，tag 已创建。
+**PASS ✓** — 稳定封版完成，真实版本链已建立，tag 已创建并推送，live 15/15 PASS。
 
 ## 基线
 
 | 项 | 值 |
 | --- | --- |
-| **HEAD** | `d71b0e8a245f040d7b44358e6cdaa8b079dc0d13` |
-| **origin/main** | `d71b0e8a245f040d7b44358e6cdaa8b079dc0d13` |
+| **HEAD** | `d05600aeb6a17628b9d7bf4f6a141b8bc021db4b`（deploy retry 2）|
+| **origin/main** | `d05600aeb6a17628b9d7bf4f6a141b8bc021db4b` |
+| **Freeze commit** | `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce` |
+| **v2.6-content-stable tag** | 指向 freeze commit `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce` |
 | **v2.0 tag** | `9e6233ab2b2c5aa3e1243565583f8f66c7df34b4`（未触碰）|
 | **Live URL** | https://conanxin.github.io/leonardo-chinese-exhibition/ |
-| **Live byte size** | 82,787 B |
-| **Local HTML byte size** | 82,797 B（差 10 字节为 Pages 部署归一化） |
+| **Live byte size** | **82,803 B**（local = 82,803 B — 完全一致）|
+| **GitHub Actions run** | `28779517594` — **success** |
 
 ## Markers 检查
 
@@ -47,11 +49,12 @@ HTTP/2 200
 
 ## Mobile / Playwright 验证摘要
 
-- 桌面端 Playwright 14/14 PASS
-- 移动端 390px viewport 无溢出
-- Lightbox 打开 / ESC 关闭 / focus 返回正常
+- 桌面端 **15/15 PASS**（local + live 一致）
+- 移动端 390px viewport 无溢出（0 px）
+- Lightbox 打开 / ESC 关闭 / aria-hidden 切换正常
 - Guided mode 开启 / 退出正常
 - console errors = 0
+- pageerrors = 0
 
 ## No-touch 确认
 
@@ -69,10 +72,12 @@ HTTP/2 200
 
 | 操作 | 结果 |
 | --- | --- |
-| `git tag -a v2.6-content-stable -m "v2.6 content stable release"` | 创建成功 |
-| `git push origin v2.6-content-stable` | 推送成功 |
-| Tag 指向 commit | freeze commit（本轮 freeze commit） |
-| v2.0 tag | 保持原位（`9e6233ab...`），**未移动** |
+| `git tag -a v2.6-content-stable 01cdaa2 -m "v2.6 content stable release"` | 创建成功（指向 freeze commit） |
+| `git push origin v2.6-content-stable` | 推送成功（`[new tag]`） |
+| Tag 对象 | `033b65e28096d04935205867e6d8dcaac0d6cf94` |
+| Tag 指向 commit | `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce`（freeze commit） |
+| v2.0 tag | 保持原位 `9e6233ab2b2c5aa3e1243565583f8f66c7df34b4`，**未移动** |
+| 远端 tags 列表 | `v2.0-public-portfolio-case` + `v2.6-content-stable` |
 
 ## 修改文件清单
 
@@ -87,8 +92,10 @@ HTTP/2 200
 
 | 操作 | commit | 状态 |
 | --- | --- | --- |
-| freeze commit | (待记录) | 待 push |
-| tag `v2.6-content-stable` | 指向 freeze commit | 已 push |
+| freeze commit | `01cdaa2` | **pushed** |
+| deploy retry 1 | `6c68671`（空 commit）| pushed, run 28779484547 failure |
+| deploy retry 2 | `d05600a`（空 commit）| pushed, run 28779517594 **success** |
+| tag `v2.6-content-stable` | 指向 freeze commit `01cdaa2` | **pushed** |
 
 ## 下一步建议
 

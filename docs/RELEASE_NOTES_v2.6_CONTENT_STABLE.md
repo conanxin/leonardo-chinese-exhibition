@@ -46,7 +46,7 @@
 
 | 项 | 值 |
 | --- | --- |
-| **Live Playwright** | **14/14 PASS** |
+| **Live Playwright** | **15/15 PASS** |
 | **section-nav (runtime DOM)** | **11** |
 | **section-takeaway** | 9 |
 | **glossary** | 14 |
