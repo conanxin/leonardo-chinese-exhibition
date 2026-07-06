@@ -65,6 +65,60 @@ v2.0 tag = v2.0-public-portfolio-case @ 9e6233a (未触碰)
 - mobile 390 无横向溢出 ✓
 - 0 console errors ✓
 
+**section-nav 实际数量（已统一口径）**：
+- v2.5-real 报告里曾用 "9+" / "10 generated" / "9+ in DOM" 三种说法（不准确）
+- v2.6 通过 Playwright `document.querySelectorAll('.section-nav').length` 实地确认
+- **真实数量 = 11**：#intro + #exhibit-index + #section1-#section8 + #visit-routes
+- 这 11 个 section 每个都通过 `getTourSections()` 自动获得 nav，无重复
+- 11 比 v2.5-real 报告的 "9+" 多 2 个：exhibit-index 与 visit-routes 之前被算到边界外
+
+## v2.6 content copy polish（第三轮内容打磨）
+
+v2.6 是在 v2.7 (commit `31e5126`) 与 v2.5-real (commit `c512dbd`) 之上的**第三轮内容打磨**。本轮**只改文案、不改功能**，目标是让页面读起来更像正式博物馆数字展览。
+
+**主要修改**：
+
+| 项 | 调整 |
+|---|---|
+| **v2.6 marker** | meta / HTML 注释 / footer 三层 |
+| **Hero 导语** | 把"借助 Leonardo//thek@ 平台" / "反向连接" 改为更展览入口式的语气（"沿着手稿的命运走一遍——看清它如何被拆散，又如何被数字工具重新组织为可读的研究对象"） |
+| **策展前言** | 同上语气；减少"反向连接"与"重新连接"的重复，让策展主旨更突出 |
+| **《大西洋手稿》展区** | 修"与内容是否与大西洋无关"为"与内容是否涉及大西洋无关"（消除歧义） |
+| **展品 B-01** | 修 typo "1 1 19 张纸页 · 40 余册大小" → "1119 张纸页 · 装订为多册"（未引用未确认的具体册数） |
+| **CONTENT_STYLE_GUIDE** | 移除文末 emoji（"🔮"违反"不出现 emoji 装饰"规则）；更新到 v2.6 修订 |
+| **section-nav 口径** | 用 Playwright 实地确认 = **11**（非 "9+"），v2.5-real 报告"9+ / 10 generated / 9+ in DOM"三种说法不统一，本轮统一 |
+| **image loading/decoding 口径** | 静态 HTML = 24 imgs / 23 lazy / 23 decoding async；live DOM 因 lightbox `<img>` 注入多 1，= 25 / 24 / 24 |
+
+**没有修改**：
+- 任何 JS 逻辑（脚本只动了 aria / label 文案，不动行为）
+- 任何 image 文件
+- 任何 posts/ / case-study/ / release-assets/ 文件
+- v2.0 tag
+- 旧 8 个 markers 全部保留
+- section-nav 数量 = 11（runtime 真实值）
+- glossary 14 项
+- annotation panels 4 个
+- platform interface notes 5 个
+- section-takeaway 9 个
+- image-placeholder-pro 0
+- lightbox a11y、guided mode、tour progress 行为
+
+**Playwright 验证（25/25 PASS）**：
+- section-nav == 11 ✓
+- section-takeaway == 9 ✓
+- image-placeholder-pro == 0 ✓
+- glossary == 14 ✓
+- annotation panels ≥ 4 ✓
+- platform interface notes ≥ 5 ✓
+- v2.6 marker 存在 + 7 个旧 marker 保留 ✓
+- 8 个 v2.6 footer 项全部显示 ✓
+- Lightbox role=dialog + aria-modal=true + close aria-label="关闭展品大图" + ESC ✓
+- Guided mode aria-pressed + body.guided-mode + exit ✓
+- mobile 390 无横向溢出 + section-nav 仍 11 ✓
+- 0 console errors ✓
+
+**v2.6 报告**：`reports/leonardo_chinese_exhibition_v2_6_content_copy_polish_report.md`
+
 ## v2.7 content copy polish
 
 v2.7 是 v2.0 freeze 后的内容打磨轮。不动展览结构、不动交互逻辑，只做：
