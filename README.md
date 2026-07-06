@@ -14,6 +14,57 @@ v2.0 stable release · tag `v2.0-public-portfolio-case`（在 v1.5b / v1.5c / v1
 
 > https://conanxin.github.io/leonardo-chinese-exhibition/
 
+## v2.5 real guided accessibility（从真实 v2.4 状态出发的导览 + 无障碍恢复）
+
+**重要诚实声明**：此前被报告为"已完成并上线"的 v2.5 guided tour mode 与 v2.6 interaction accessibility polish，**实际上从未进入 git 仓库**（`git reflog` 确认无对应 commit，且 live 一度仍为 v2.4）。v2.7 content copy polish（commit `31e5126`）是直接在 v2.4 之上做的，跳过了 v2.5 / v2.6。
+
+本轮 v2.5-real **从真实 v2.4 / v2.7 当前状态** 重新实现并真实部署导览模式、运行时展区导航、Lightbox 无障碍、引导模式、图像延迟加载、prefers-reduced-motion 与 focus-visible。每一项都通过 Playwright 在本地 server 跑通。
+
+| 新增模块 | 实现方式 |
+|---|---|
+| **运行时展区导览 section-nav** | `site/script.js` 的 `getTourSections()` / `createSectionNav()`，不手工插入；JS 启动时按页面 DOM 自动收集 `#intro` / `#section1`-`#section8` / `#exhibit-index` / `#visit-routes`，按位置给每个 section 追加 上一站 / 返回展览地图 / 下一站 三组链接 |
+| **导览进度条 tour-progress** | 页面顶部 sticky bar，按 IntersectionObserver 实时更新当前展区 label + 短横条百分比 + jump-list；jump-link 当前项 `aria-current="true"`；进度条本身 `aria-hidden="true"`（纯视觉） |
+| **9 个 section-takeaway 摘要卡** | 每个主要 section 顶部插入 `<aside class="section-takeaway">`："本区带走" + 1–2 句话 |
+| **5 分钟导览模式** | 参观路线模块新加按钮；body 加 `guided-mode` class；4 个核心展区（exhibit-index / section3 温莎 / section4 艺术与科学 / section7 平台）打 `guided-highlight`；其余降级并显示"可跳过"标签；banner 用 `role="status" aria-live="polite"`；退出按钮在 banner 内 |
+| **Lightbox 无障碍硬化** | `role="dialog" aria-modal="true"`、close button `aria-label="关闭展品大图"`、Tab 键焦点 trap、ESC / backdrop / × 关闭、关闭后焦点回到原触发元素 |
+| **图像延迟加载 belt-and-suspenders** | 23 张非首屏 `<img>` 加 `loading="lazy" decoding="async"`；hero 图刻意不加（首屏不延迟） |
+| **`@media (prefers-reduced-motion: reduce)`** | 全站动画与过渡降到 0.01ms，`scroll-behavior: auto` |
+| **`:focus-visible`** | 全局焦点环（2px brand-color，2px offset） |
+| **Mobile 390px** | tour progress / section-nav / section-takeaway / guided-mode-banner 在窄屏下不溢出 |
+
+**真实基线（commit `0d58fdc`，v2.7 backfill）**：
+
+```
+HEAD = origin/main = 0d58fdc (v2.7)
+live = 77,474 字节, v2.7 markers (含 v2.5-real 之前的全部 v2.4 + v2.7)
+v2.0 tag = v2.0-public-portfolio-case @ 9e6233a (未触碰)
+```
+
+**实现**：
+- 修改 `site/index.html` (77,474 → 82,611 字节 · +6.6%)
+- 修改 `site/style.css` (33,517 → 39,518 字节 · +17.9%)
+- 重写 `site/script.js` (6,670 → 14,594 字节 · +118.8% · 加 7 个新函数：getTourSections / getSectionLabel / createSectionNav / buildTourProgress / applyGuidedMode / wireGuidedMode / ensureLazyImages)
+- 显式 add（无 `git add .`）
+
+**v2.5-real 报告**：`reports/leonardo_chinese_exhibition_v2_5_real_guided_accessibility_report.md`
+
+**Playwright 验证（36/36 PASS）**：
+- section-nav ≥ 9 ✓
+- section-takeaway == 9 ✓
+- image-placeholder-pro == 0 ✓
+- glossary items ≥ 12 ✓
+- annotation panels ≥ 4 ✓
+- platform interface notes ≥ 5 ✓
+- tour progress 存在 + 9 jump links ✓
+- 5-min 按钮 + aria-pressed 切换 ✓
+- guided-mode body class + banner role=status + aria-live=polite ✓
+- 4 guided-highlight + guided-skip-note ✓
+- Lightbox role=dialog + ESC + focus trap ✓
+- 23 imgs loading=lazy + 23 imgs decoding=async ✓
+- 8 个旧 markers 全部保留 + v2.5-real 新 marker ✓
+- mobile 390 无横向溢出 ✓
+- 0 console errors ✓
+
 ## v2.7 content copy polish
 
 v2.7 是 v2.0 freeze 后的内容打磨轮。不动展览结构、不动交互逻辑，只做：

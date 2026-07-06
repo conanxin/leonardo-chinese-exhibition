@@ -1575,3 +1575,236 @@ body.lb-open {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ============================================================
+   v2.5-real — Guided Tour + Interaction Accessibility
+   ============================================================ */
+
+/* ---------- Tour progress (sticky, lightweight) ---------- */
+.tour-progress {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(248, 244, 235, 0.96);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  margin: 0 -2rem 1.5rem;
+  padding: 0.6rem 2rem;
+}
+.tour-progress-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.tour-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.tour-current:hover { background: var(--card); }
+.tour-current[aria-expanded="true"] { background: var(--card); }
+.tour-current-meta { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.tour-progress-bar {
+  flex: 1 1 auto;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tour-progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 240ms ease-out;
+}
+.tour-jump-list {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0.5rem 0 0;
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  border-top: 1px solid var(--border);
+}
+.tour-jump-list[data-open="true"] { display: flex; }
+.tour-jump-list li a {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.tour-jump-list li a:hover { background: var(--card); }
+.tour-jump-list li a[aria-current="true"] {
+  background: var(--card);
+  border-color: var(--accent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- Section takeaway ---------- */
+.section-takeaway {
+  margin: 1.5rem 0 0;
+  padding: 1.1rem 1.4rem;
+  border-left: 3px solid var(--accent);
+  background: var(--card);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.section-takeaway-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- Section nav (runtime-generated) ---------- */
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--border);
+}
+.section-nav-link {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-decoration: none;
+  background: transparent;
+}
+.section-nav-link:hover { background: var(--card); border-color: var(--accent); }
+.section-nav-link.is-map { color: var(--text-secondary); }
+
+/* ---------- Guided mode ---------- */
+.guided-mode-launcher {
+  margin: 1rem 0 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.guided-mode-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+body.guided-mode .guided-highlight {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.6rem;
+  margin: 0.4rem 0;
+}
+body.guided-mode .guided-skip-note {
+  position: relative;
+  opacity: 0.55;
+}
+body.guided-mode .guided-skip-note::after {
+  content: "可跳过";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--card);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  pointer-events: none;
+}
+.guided-mode-banner {
+  position: fixed;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.guided-mode-banner button {
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.guided-mode-banner button:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ---------- Lightbox a11y ---------- */
+.lightbox[aria-hidden="true"] { display: none !important; }
+.lightbox[role="dialog"]:focus { outline: none; }
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Focus-visible (global) ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ---------- prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Mobile 390px ---------- */
+@media (max-width: 480px) {
+  .tour-progress {
+    margin: 0 -1rem 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .tour-progress-inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tour-progress-bar { flex-basis: 100%; order: 3; }
+  .tour-jump-list { gap: 0.3rem; }
+  .tour-jump-list li a { font-size: 0.72rem; padding: 0.2rem 0.45rem; }
+  .section-nav { gap: 0.4rem; }
+  .section-nav-link { font-size: 0.78rem; padding: 0.3rem 0.65rem; flex: 1 1 calc(50% - 0.5rem); text-align: center; }
+  .section-takeaway { padding: 0.9rem 1rem; font-size: 0.9rem; }
+  .guided-mode-banner { font-size: 0.75rem; padding: 0.4rem 0.7rem; left: 0.5rem; right: 0.5rem; transform: none; flex-wrap: wrap; justify-content: center; }
+  body { padding: 0 1rem; }
+}
