@@ -8,6 +8,17 @@
 - **Status**: Content Stable
 - **Current stable line**: v2.4 → v2.5-real → v2.6 → **v2.6-content-stable**
 
+## Verified current state (2026-07-07)
+
+> 本节为对账标记，与上文「当前版本」并存。完整背景见 [`docs/REALITY_CHECK_AFTER_PHANTOM_V3.md`](docs/REALITY_CHECK_AFTER_PHANTOM_V3.md)。
+
+- **Live URL**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Current verified live version**: v2.7 zh exhibition polish（commit `71c7403`，HEAD）
+- **Live byte size**: 85,564 B（含 `v2.7-zh-exhibition-polish` footer marker，placeholder = 0，`script.js` HTTP 200）
+- **Existing tags**: `v2.0-public-portfolio-case` (9e6233a), `v2.6-content-stable` (01cdaa2)
+- **GitHub Releases**: v2.0 / v2.6 两份
+- **Note**: v2.8 / v2.9 / v3.x 的规划**暂缓**，直到从 verified state 重建。下一推荐 round 为 v2.7-real-stable-freeze（见 roadmap）。
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

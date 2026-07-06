@@ -83,4 +83,25 @@
 
 ---
 
+## Verified reality reset (2026-07-07)
+
+> 本节为对账 + 恢复标记，不删除上文任何历史。
+
+- **真实 live 当前版本**：v2.7 zh exhibition polish（commit `71c7403` · HEAD）。Live byte size 85,564 B，HTML 含 `v2.7-zh-exhibition-polish` footer marker，无 placeholder，`script.js` HTTP 200。
+- **真实 tag 集合**：`v2.0-public-portfolio-case` (9e6233a), `v2.6-content-stable` (01cdaa2)。**仅此两个**。
+- **v2.7 的真实状态**：内容已上线，commit 链存在（`31e5126` / `c3c3e0b` / `988ebb9` / `e1ca01f` / `71c7403` 等），但**尚未 freeze** —— 没有 v2.7 tag / release / release notes / release-assets manifest。
+- **v2.8 / v2.9 / v3.0 / v3.1 / v3.2 / v3.3**：当前**不可视为已完成**。具体 phantom 内容见 [`docs/REALITY_CHECK_AFTER_PHANTOM_V3.md`](REALITY_CHECK_AFTER_PHANTOM_V3.md)。
+
+### 后续推荐顺序（基于真实状态）
+
+1. **v2.7-real-stable-freeze**：把已上线的 v2.7 内容独立 tag + release。这是「把真实状态记录成可验证状态」，无破坏性。Issue #1（v2.7 Bilingual Edition）目前仍 OPEN，但实际做的不是 bilingual —— 在 freeze round 里需要重新审视 issue 标题。
+2. **v2.8 + v2.9**：在 v2.7 freeze 之后，按原有 roadmap（deep content → source rights audit）逐步推进。每一步都基于前一步真实 freeze，不允许 phantom 跳跃。
+3. **v3.x template**：必须先真实创建 `_template/site/` 骨架（在 `_template/` 下独立子目录），与 live `site/` 物理隔离。完成 v3.0 template extraction audit 之后才有 v3.1 / v3.2 / v3.3 讨论基础。
+
+### 历史保留
+
+上文「v2.7 Bilingual Edition（暂缓）/ v2.8 Education / Teacher Guide / v2.9 More Manuscript Images / v3.0 Reusable Digital Exhibition Template / Backlog」段落**全部保留**，作为「方向记录」存在；本节是「真实状态校正」，两者并存。
+
+---
+
 *Roadmap 是**方向**，不是时间表。任何项目进入实施前，应在 GitHub Issue 中先讨论，并通过 `v2.6-content-stable` tag 派生新分支。*
