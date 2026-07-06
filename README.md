@@ -14,6 +14,19 @@ v2.0 stable release · tag `v2.0-public-portfolio-case`（在 v1.5b / v1.5c / v1
 
 > https://conanxin.github.io/leonardo-chinese-exhibition/
 
+## v2.7 content copy polish
+
+v2.7 是 v2.0 freeze 后的内容打磨轮。不动展览结构、不动交互逻辑，只做：
+
+- **内容审校**与中文文案打磨（Hero、策展前言、8 个展区、9 段总结、图注、source note、credit-line、annotation panel、glossary、postscript、footer）
+- **术语统一**：达·芬奇 / 《大西洋手稿》 / Royal Collection / 安布罗西安图书馆 / 弗朗切斯科·梅尔齐 / 庞佩奥·莱奥尼 / 11 个平台模块中英文
+- **图注与 source note 格式统一**（图名 / 年代 / 馆藏 + 它展示了什么 + 为什么重要）
+- **glossary 14 个术语** 打磨为 1–2 句简明解释
+- **decoding="async" 补充**：对非首屏 19 张真实图片补充，不改首屏装饰图
+- **事实边界**保持：1519 年达·芬奇去世 / 《大西洋手稿》1119 页 / 温莎约 600 张 / 名称与装订尺寸有关
+
+详见 [`reports/leonardo_chinese_exhibition_v2_7_content_copy_polish_report.md`](reports/leonardo_chinese_exhibition_v2_7_content_copy_polish_report.md) 与 [`docs/CONTENT_STYLE_GUIDE.md`](docs/CONTENT_STYLE_GUIDE.md)。
+
 ## v2.0 stable release
 
 本仓库的 v2.0 是稳定冻结版本。
