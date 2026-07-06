@@ -25,6 +25,37 @@ v2.0 stable release · tag `v2.0-public-portfolio-case`（在 v1.5b / v1.5c / v1
 **Release notes**: [`docs/RELEASE_NOTES_v2.0.md`](docs/RELEASE_NOTES_v2.0.md)
 **v2.0 freeze 报告**: `reports/leonardo_chinese_exhibition_v2_0_release_freeze_report.md`
 
+## GitHub Release
+
+**v2.0 已在 GitHub Releases 发布**：<https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.0-public-portfolio-case>
+
+附带了 6 张 Playwright 真实截图 + 1 份 asset manifest，全部为已上传状态。
+
+**Release body 文件**：[`docs/GITHUB_RELEASE_v2.0.md`](docs/GITHUB_RELEASE_v2.0.md)（可作为 GitHub Release 页面文案复用）
+
+## v2.1 release publishing kit
+
+v2.1 是「发布收口」版本：在不改动展览本体和 case-study/ 的前提下，把 v2.0 整理成可在 GitHub Release / X / 作品集 / 个人站点直接复用的发布材料。
+
+| 资产 | 用途 |
+|---|---|
+| `release-assets/screenshots/desktop-hero.png` | 1440×900 hero 主图，可作 GitHub Release top 缩图 + README 顶图 |
+| `release-assets/screenshots/desktop-exhibit-index.png` | 1440×900 展品索引页截图 |
+| `release-assets/screenshots/desktop-real-image-gallery.png` | 1440×900 真实手稿图像展区 |
+| `release-assets/screenshots/desktop-platform-tools.png` | 1440×900 平台工具页截图 |
+| `release-assets/screenshots/mobile-hero.png` | 390×844 mobile hero |
+| `release-assets/screenshots/mobile-section.png` | 390×844 mobile section 截图 |
+| `release-assets/manifest.md` | 全部截图用途 + 复用建议（README / Release / X / 作品集） |
+
+**截图规格**：
+
+- 全部 6 张由 Playwright + Chrome-for-Testing 149 通过 `headless=true` 从 live URL 抓取
+- 桌面 1440×900 / 移动 390×844，与 README 设计网格一致
+- 全部锚定到 `#hash` (`/`, `/` `#exhibit-index`, `/` `#section2`, `/` `#section7`) 确保取到正确 section
+- 重新生成方法：`/tmp/pwtool/capture6.py`（约 30 秒）
+
+**完整发布报告**：`reports/leonardo_chinese_exhibition_v2_1_release_publishing_kit_report.md`
+
 ### 关键里程碑
 
 - v1.5b（`d69f516`）· live hotfix · marker 上线
@@ -34,6 +65,7 @@ v2.0 stable release · tag `v2.0-public-portfolio-case`（在 v1.5b / v1.5c / v1
 - v1.8（`4f6d126`）· real image integration
 - v1.9（`97f1670`）· final polish
 - **v2.0（`ae946b3`）· public portfolio case → tag `v2.0-public-portfolio-case`**
+- **v2.1（`9e6233a`-based）· release publishing kit + GitHub Release + 6 截图**
 
 ## v2.0 作品化（public portfolio case）
 
