@@ -6,7 +6,37 @@
 https://conanxin.github.io/leonardo-chinese-exhibition/
 
 ## 当前版本
-v1.9 final exhibition polish（在 v1.5b live hotfix + v1.5c repo hygiene + v1.6 distribution pack + v1.7 exhibit image upgrade + v1.8 real image integration 之上做最终 polish 与资产审计）
+v2.0 public portfolio case（在 v1.5b / v1.5c / v1.6 / v1.7 / v1.8 / v1.9 之上，把项目整理成 7 件作品集案例文档）
+
+## v2.0 作品化（public portfolio case）
+
+v2.0 是一个收口版本：把整个 v1.5 → v1.9 的工作流整理成可直接复用到个人作品集、个人主页、求职简历的 7 件文档。
+
+| 文档 | 用途 |
+|---|---|
+| `case-study/portfolio-case-study.md` | 中文长篇案例（14 节 · 含背景 / 问题 / 方法 / IA / 视觉 / 图像系统 / 技术 / 版本演进 / 复用经验 / 后续路线） |
+| `case-study/project-onepager.md` | 一页式项目说明（项目类型 / 关键词 / 解决问题 / 产出 / 技术栈 / 链接 / 亮点 5 条） |
+| `case-study/portfolio-case-en.md` | 英文版短案例（适合国际作品集） |
+| `case-study/readme-showcase-section.md` | README 顶部展示段（可直接拷贝） |
+| `case-study/launch-x-post.md` | X 14 条中文长帖（发布用） |
+| `case-study/project-retrospective.md` | 项目复盘（做对了什么 / 踩的坑 / v1.7-1.8 解决路径 / 对未来的启发） |
+| `case-study/README.md` | case-study 目录导览 |
+
+完整 v2.0 报告：`reports/leonardo_chinese_exhibition_v2_0_public_portfolio_case_report.md`
+
+## 推荐阅读路径
+
+如果你只有 5 秒：`case-study/project-onepager.md`
+
+如果你只有 30 秒：`case-study/portfolio-case-en.md`（英文）或`case-study/readme-showcase-section.md`（中文 top-level）
+
+如果你有 5 分钟：`case-study/portfolio-case-study.md`
+
+如果你想看项目内幕：`case-study/project-retrospective.md`
+
+## case-study/ 目录说明
+
+`case-study/` 目录下所有文件均为**作品集展示**类内容，独立于展览本体（site/）。每份文档都自含目标读者、用途、可以如何引用。**与 posts/ 不同**：posts/ 是给读者的传播材料，case-study/ 是给雇主 / 合作方 / 学术同行 的展示材料。
 
 ## v1.9 最终展览 polish 与资产审计（final exhibition polish & asset reference audit）
 
