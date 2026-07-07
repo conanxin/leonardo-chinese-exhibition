@@ -53,7 +53,7 @@
 | `_template/site/index.template.html` | new | 9,365 B |
 | `_template/site/style.template.css` | new | 8,967 B |
 | `_template/site/script.template.js` | new | 6,711 B |
-| **共 18 个文件** | | |
+| **共 17 个文件**（v3.0 freeze round 实测 `find _template -type f | wc -l`；此前 round brief 中误写 18，本报告以 freeze round 实测为准） | | |
 
 ## JSON validation
 

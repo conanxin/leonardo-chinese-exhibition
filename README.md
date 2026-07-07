@@ -153,15 +153,17 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 
 ## v3.0 Real Template Extraction Audit
 
+- Live: https://conanxin.github.io/leonardo-chinese-exhibition/
+- Tag: `v3.0-real-template-extraction-audit`
+- 状态：v3.0 real template extraction audit 已 stable freeze（**PASS**）
 - 起点：`v2.9-real-source-rights-audit` @ `a1e667e`
-- 状态：v3.0 本 round 进行中（**In progress**）
-- 交付物：`_template/` 真实创建（18 个文件）
+- 实测 live byte size：92,976 B（v3.0 round + freeze round live site 均未修改）
+- 交付物：`_template/` 真实创建（17 个文件；实测 `find _template -type f | wc -l`）
 - 范围：模板骨架 + 数据示例 + 站点骨架 + 文档模板 + 提取审计 + 可复用组件表 + 路线图
 - 不做的事：
   - 不修改 live `site/index.html` / `style.css` / `script.js`
-  - 不创建 `_pilots/`
-  - 不部署 `_template/site/`
-  - 不创建 tag / Release（stable freeze 下一 round 单独处理）
+  - 不创建 `_pilots/`（v3.1 才会创建第一个 pilot）
+  - 不部署 `_template/site/`（与 live 物理隔离）
   - 不接受任何 phantom v3.x 历史作为基线
 - 模板默认示例主题：示例展览：一件作品的旅程（通用占位，与 Leonardo 无关）
 - 模板默认示例数据：4 个 section + 4 张自制 SVG 资产 + 6 个通用术语
@@ -173,7 +175,9 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - [`docs/TEMPLATE_EXTRACTION_AUDIT.md`](docs/TEMPLATE_EXTRACTION_AUDIT.md) — 提取审计
 - [`docs/REUSABLE_EXHIBITION_COMPONENTS.md`](docs/REUSABLE_EXHIBITION_COMPONENTS.md) — 组件分级表
 - [`docs/V3_TEMPLATE_ROADMAP.md`](docs/V3_TEMPLATE_ROADMAP.md) — v3 路线图
-- 报告（待本 round 提交后落地）：`reports/leonardo_chinese_exhibition_v3_0_real_template_extraction_audit_report.md`
+- [`docs/RELEASE_NOTES_v3.0_REAL_TEMPLATE_EXTRACTION_AUDIT.md`](docs/RELEASE_NOTES_v3.0_REAL_TEMPLATE_EXTRACTION_AUDIT.md) — release notes
+- [`release-assets/v3.0-real-template-extraction-audit-manifest.md`](release-assets/v3.0-real-template-extraction-audit-manifest.md) — release manifest
+- 报告：[`reports/leonardo_chinese_exhibition_v3_0_real_template_extraction_audit_report.md`](reports/leonardo_chinese_exhibition_v3_0_real_template_extraction_audit_report.md)、[`reports/leonardo_chinese_exhibition_v3_0_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_0_real_stable_freeze_report.md)
 
 ## 当前版本
 
