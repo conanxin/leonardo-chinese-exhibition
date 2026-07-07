@@ -16,7 +16,7 @@ Extraction commit:
 `9aea3aed5d79a11f18f8715f51cfca6d350e3e04`（v3.0 extraction round HEAD）
 
 Freeze commit:
-`fac3cea088ebbf8b9880e1f90911613300b8d0c1`
+`beb2d7b132948fb98ffb0019105ca633ecb980fa`
 
 ---
 

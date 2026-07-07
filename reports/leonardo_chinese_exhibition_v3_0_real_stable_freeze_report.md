@@ -14,7 +14,7 @@
 | Source tag | `v2.9-real-source-rights-audit` @ `a1e667e302d0d8106a9d0e4961159ae5c14aae4a` |
 | Tag target SHA | `a1e667e302d0d8106a9d0e4961159ae5c14aae4a` |
 | Tag object SHA | `13814d345bcd47860b778323c9915460ef72fb28` |
-| Freeze commit | `fac3cea088ebbf8b9880e1f90911613300b8d0c1` |
+| Freeze commit | `beb2d7b132948fb98ffb0019105ca633ecb980fa` |
 
 ## Baseline
 
