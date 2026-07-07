@@ -344,3 +344,56 @@
 - 3 个 v1.8 / v1.9 占位卡片（Watermarks · Recompositions · 首页）已全部替换为真实平台截图卡片（`.platform-screenshot-card`）。
 - 截图由 headless Chrome-for-Testing 1440 截屏工具链在 2026-07-06 一次性完成。所有截图已压缩为 JPEG（quality 88），平均 ~110 KB（home 147 KB · watermarks 439 KB full-page · recompositions 633 KB full-page · comparative-study 59 KB · advanced-search 122 KB full-page）。
 - 所有平台截图均含完整 lightbox 数据（data-lightbox · data-title · data-subtitle · data-credit · data-viewing）与 figcaption（figure-title · source-note · credit-line）。
+
+---
+
+## v2.9 Real Source & Rights Audit
+
+> 2026-07-07 · 基于真实 `v2.8-real-deep-content` tag 的来源与权利审计 round
+>
+> 详细清单见 [`docs/SOURCE_AUDIT_MANIFEST.md`](../docs/SOURCE_AUDIT_MANIFEST.md)；rights 综述见 [`docs/RIGHTS_AND_SOURCES.md`](../docs/RIGHTS_AND_SOURCES.md)。
+
+### Audit baseline
+
+- **Source tag**: `v2.8-real-deep-content` @ `65b4fbc`
+- **Audit baseline live byte size**: 92,507 B
+- **Audit version**: `v2.9-real-source-rights-audit`
+
+### Final usage status（本轮 audit 后）
+
+| ID | asset_path | integration_status (audit) | confidence | notes |
+|---|---|---|---|---|
+| A1 | royal-horse-studies-rcin-912310.jpg | integrated | high | RCIN 912310 对得上 Wikimedia 文件名嵌入编号 |
+| A2 | royal-water-studies-rcin-912660.jpg | integrated | high | RCIN 912660 对得上 |
+| A3 | royal-shoulder-arm-rcin-919003.jpg | integrated | high | RCIN 919003 对得上 |
+| A4 | royal-cats-lions-dragon-rcin-912363.jpg | integrated | high | RCIN 912363 对得上 |
+| A5–A8 | （仅外链候选） | not-used | — | 未来轮若引入需重新审计 |
+| C1 | codex-atlanticus-f719-recto.jpg | integrated | high | folio f.719 recto 对得上 |
+| C2 | codex-atlanticus-f21-recto.jpg | integrated | high | folio f.21 recto 对得上 |
+| B1 | platform-home-leonardotheka.jpg | integrated | high | 评论性使用，未取得 Museo Galileo 书面 reuse |
+| B2 | platform-watermarks.jpg | integrated | high | 同上 |
+| B3 | platform-recompositions.jpg | integrated | high | 同上 |
+| B4 | platform-comparative-study.jpg | **unused**（已下载但未引用） | medium | 后续轮决定 delete 或 reuse |
+| B5 | platform-advanced-search.jpg | **unused**（已下载但未引用） | medium | 同上 |
+| X1–X7 | `site/assets/diagrams/*.svg` | integrated（按用途） | high | 项目自绘，未设 LICENSE |
+
+### Source audit status
+
+- **馆藏图**：6 张全部为 Wikimedia Commons 公共域授权，source-page URL 与 file name 一致；每个 lightbox 有 `data-credit`
+- **平台截图**：4 张引用图均含 source-note（截图日期 2026-07-06 + 作者本地存档）+ credit-line（`© Museo Galileo 2025 · Screenshot courtesy of Museo Galileo / Leonardo//thek@`）
+- **自绘 SVG**：7 个 SVG 全部在 figcaption 中标注「示意图 · 作者绘制」+ 依据（如「基于公开学术资料」「基于安布罗西安图书馆与 Royal Collection Trust 公开资料」）
+
+### Rights note status
+
+- 6 张馆藏图：footer 与 RIGHTS_AND_SOURCES 已说明 Wikimedia Commons 授权路径，外部复用者应回到文件页自行确认
+- 4 张平台截图：仅 fair use / 评论性使用；无书面 reuse 许可（follow-up 项）
+- 7 张项目自绘 SVG：仓库根无 LICENSE；目前隐含「保留所有权利」；footer 已说明「具体授权边界请以 Wikimedia Commons 文件页与馆藏页面为准」
+- 站点 footer wording 已收紧：原文「高清图像为公共域授权使用」→ v2.9「以公共域授权经 Wikimedia Commons 引用...具体授权边界请以 Wikimedia Commons 文件页与馆藏页面为准」
+
+### Follow-up items (移交下一轮)
+
+1. 联系 Museo Galileo 取得平台截图书面 reuse 答复
+2. 决定 `platform-advanced-search.jpg` / `platform-comparative-study.jpg` 去留
+3. v3.0 之前为项目自绘 SVG 决定显式 LICENSE
+4. 馆藏机构级 reuse 政策的正式比对（RCT Take Down Policy、Ambrosiana 等）
+5. 任何未来新增图像 / 截图 / 自绘 SVG 必须重新走 audit round

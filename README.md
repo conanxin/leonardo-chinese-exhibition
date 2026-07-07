@@ -89,6 +89,45 @@ v2.8 Real Deep Content 在 [content commit `18b551b`](https://github.com/conanxi
 
 详见 [`docs/RELEASE_NOTES_v2.8_REAL_DEEP_CONTENT.md`](docs/RELEASE_NOTES_v2.8_REAL_DEEP_CONTENT.md) 与 [`release-assets/v2.8-real-deep-content-manifest.md`](release-assets/v2.8-real-deep-content-manifest.md)，报告见 [`reports/leonardo_chinese_exhibition_v2_8_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v2_8_real_stable_freeze_report.md)。
 
+## v2.9 Real Source & Rights Audit (基于真实 v2.8 tag)
+
+v2.9 是 **从真实 `v2.8-real-deep-content` tag 重建**的来源与权利审计 round。**不**引用之前被记录为 phantom / unverified 的 v2.9 历史，不新增展览内容、不新增图片、不做双语、不做教育版、不做模板化。
+
+- **基于**: verified `v2.8-real-deep-content` tag @ `65b4fbc`
+- **Source tag**: `v2.8-real-deep-content`
+- **Audit baseline live byte size**: 92,507 B
+- **Status**: audit 内容完成，stable freeze 留给下一轮
+- **不做**: bilingual / education / template / 新增图片 / 替换图片 / tag / release
+
+### 本轮新增
+
+- **新增强清单**：[`docs/SOURCE_AUDIT_MANIFEST.md`](docs/SOURCE_AUDIT_MANIFEST.md) — 19 个本地资产 + 8 个 Wikimedia 文件级 URL + 2 个机构级 URL + 1 个平台 URL 的逐项审计
+- **新增 rights 综述**：[`docs/RIGHTS_AND_SOURCES.md`](docs/RIGHTS_AND_SOURCES.md) — 4 类 source（A 馆藏图 / B 平台截图 / C 自绘 SVG / D 元数据）+ 三层 credit 标注（page / lightbox / docs）+ reuse caution + 已知限制
+- **更新 research 候选清单**：[`research/image-candidates.md`](research/image-candidates.md) 追加 v2.9 audit 状态、confidence、follow-up items
+- **站点 footer wording 收紧**：原文「高清图像为公共域授权使用」→ v2.9「以公共域授权经 Wikimedia Commons 引用...具体授权边界请以 Wikimedia Commons 文件页与馆藏页面为准」
+- **三层 marker 已加**（meta + comment + footer），旧 marker 全部保留
+
+### 审计要点
+
+- **6 张馆藏图**（温莎 4 + Codex Atlanticus 2）：全部为 Wikimedia Commons 公共域授权，RCIN 编号与 Wikimedia 文件名嵌入编号一致
+- **4 张平台截图**（首页 / Watermarks / Recompositions + 2 张已下载未引用）：source-note 写明截图日期 + 作者本地存档；credit-line 注明 Museo Galileo / Leonardo//thek@；目前**无书面 reuse 许可存档**（follow-up 项）
+- **2 张已下载未引用**（`platform-advanced-search.jpg` / `platform-comparative-study.jpg`）：标记 unused / 后续轮决定
+- **7 个自绘 SVG**：figcaption 全部以「示意图 · 作者绘制」+ 依据标注，**不**伪装为原始资料
+- **外链 curl 抽查**：live / GitHub / Ambrosiana / Museo Galileo / 6 张 Wikimedia 文件页全部 200；`rct.uk/collection/` 对 curl 返回 403（机构级反 bot，浏览器访问正常）
+
+### 标记 / 不动原则
+
+- v2.9 三层 marker 已加（meta + comment + footer），旧 marker 全部保留
+- v2.0 / v2.6 / v2.7 / v2.8 tags 全程未动
+- 旧 GitHub Releases 未触碰
+- `site/style.css` 未修改
+- `site/script.js` 未修改
+- `_template/` / `_pilots/` 未创建
+- posts / case-study / release-assets 既有文件未触碰
+- 未新增 / 替换图片
+
+详见 [`reports/leonardo_chinese_exhibition_v2_9_real_source_rights_audit_report.md`](reports/leonardo_chinese_exhibition_v2_9_real_source_rights_audit_report.md)。
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

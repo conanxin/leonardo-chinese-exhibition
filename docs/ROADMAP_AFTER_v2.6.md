@@ -117,4 +117,19 @@
 
 ---
 
+## v2.9 real rebuild (2026-07-07)
+
+> 本节记录从真实 `v2.8-real-deep-content` tag 重建 v2.9 source & rights audit 的方向。
+
+- **起点**: `v2.8-real-deep-content` (tag) @ `65b4fbc` (commit)
+- **不是**: 旧 phantom v2.9 / v3.x 的延续
+- **是**: real source & rights audit round，仅审计来源、权利、图注、source note、credit line、外链与复用边界，不引入新内容 / 新图片 / bilingual / education / template
+- **本轮交付**: 6 张馆藏图审计 + 4 张平台截图审计 + 7 个自绘 SVG 审计 + 外链 curl 抽查 + 站点 footer wording 收紧 + 三层 v2.9 marker
+- **新增强**: [`docs/SOURCE_AUDIT_MANIFEST.md`](../docs/SOURCE_AUDIT_MANIFEST.md)、[`docs/RIGHTS_AND_SOURCES.md`](../docs/RIGHTS_AND_SOURCES.md)
+- **更新候选清单**: [`research/image-candidates.md`](../research/image-candidates.md) 追加 v2.9 audit 状态
+- **本轮不做**: tag / release / `_template/` / `_pilots/` / 新增图片 / 替换图片
+- **下一轮**: v2.9-real-stable-freeze（独立 freeze tag + GitHub Release），然后再做 v3.0 之前的 LICENSE 与 follow-up 项处理
+
+---
+
 *Roadmap 是**方向**，不是时间表。任何项目进入实施前，应在 GitHub Issue 中先讨论，并通过 `v2.6-content-stable` tag 派生新分支。*
