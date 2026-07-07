@@ -1821,6 +1821,62 @@ body.guided-mode .guided-skip-note::after {
   border-radius: 3px;
 }
 
+/* ---------- v2.8 real deep content ---------- */
+.deep-reading-block,
+.material-evidence-block,
+.visual-thinking-block,
+.research-model-block {
+  max-width: 880px;
+  margin: 2rem auto;
+  padding: 1.6rem 1.8rem;
+  background: var(--bg-card, rgba(255, 255, 255, 0.02));
+  border-left: 3px solid var(--accent, #c9a85a);
+  border-radius: 6px;
+}
+.deep-reading-block h3,
+.material-evidence-block h3,
+.visual-thinking-block h3,
+.research-model-block h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.25rem;
+  color: var(--text-primary, #1a1a1a);
+}
+.deep-reading-block p,
+.material-evidence-block p,
+.visual-thinking-block p,
+.research-model-block p {
+  margin: 0.6rem 0;
+  line-height: 1.7;
+  color: var(--text-secondary, #444);
+}
+.deep-reading-block strong,
+.material-evidence-block strong,
+.visual-thinking-block strong,
+.research-model-block strong {
+  color: var(--text-primary, #1a1a1a);
+}
+.evidence-chips,
+.thought-cards,
+.method-rows {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.evidence-chip,
+.thought-card,
+.method-row {
+  padding: 0.7rem 0.9rem;
+  background: rgba(201, 168, 90, 0.06);
+  border-radius: 4px;
+  border-left: 2px solid rgba(201, 168, 90, 0.3);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 /* ---------- prefers-reduced-motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1849,4 +1905,17 @@ body.guided-mode .guided-skip-note::after {
   .section-takeaway { padding: 0.9rem 1rem; font-size: 0.9rem; }
   .guided-mode-banner { font-size: 0.75rem; padding: 0.4rem 0.7rem; left: 0.5rem; right: 0.5rem; transform: none; flex-wrap: wrap; justify-content: center; }
   body { padding: 0 1rem; }
+
+  /* v2.8 deep blocks — mobile 390px */
+  .deep-reading-block,
+  .material-evidence-block,
+  .visual-thinking-block,
+  .research-model-block { padding: 1rem 0.9rem; margin: 1.2rem auto; }
+  .deep-reading-block h3,
+  .material-evidence-block h3,
+  .visual-thinking-block h3,
+  .research-model-block h3 { font-size: 1.1rem; }
+  .evidence-chip,
+  .thought-card,
+  .method-row { font-size: 0.88rem; padding: 0.55rem 0.7rem; }
 }

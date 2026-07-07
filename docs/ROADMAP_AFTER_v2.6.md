@@ -104,4 +104,17 @@
 
 ---
 
+## v2.8 real rebuild (2026-07-07)
+
+> 本节记录从真实 `v2.7-zh-exhibition-polish` tag 重建 v2.8 deep content 的方向。
+
+- **起点**: `v2.7-zh-exhibition-polish` (tag) @ `f58f6b4` (commit)
+- **不是**: 旧 phantom v2.8 / v2.9 / v3.x 的延续
+- **是**: real deep content round，专注中文展览内容深化，不引入 source rights audit / template / bilingual / education
+- **本轮交付**: 4 个深度模块（`deep-reading-block` / `material-evidence-block` / `visual-thinking-block` / `research-model-block`）+ 深化 postscript + 中文策展长文（[`docs/CURATORIAL_ESSAY_ZH.md`](../docs/CURATORIAL_ESSAY_ZH.md)）+ 研究深化笔记（[`docs/DEEP_RESEARCH_NOTES_ZH.md`](../docs/DEEP_RESEARCH_NOTES_ZH.md)）+ 3 层 v2.8 marker
+- **本轮不做**: tag / release / `_template/` / `_pilots/`
+- **下一轮**: v2.8-real-stable-freeze（独立 freeze tag + GitHub Release），然后再做 v2.9 source rights audit
+
+---
+
 *Roadmap 是**方向**，不是时间表。任何项目进入实施前，应在 GitHub Issue 中先讨论，并通过 `v2.6-content-stable` tag 派生新分支。*
