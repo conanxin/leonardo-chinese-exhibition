@@ -170,19 +170,19 @@ node --check site/script.js  # PASS
 
 | 项 | 期望 | 实测 |
 |---|---|---|
-| Live byte size | ~92,500 B | 待回填 |
-| v2.7 marker | 1 | 待回填 |
-| v2.8 marker | 1 | 待回填 |
-| v2.9 marker | 0 | 待回填 |
-| placeholder | 0 | 待回填 |
-| 4 deep blocks | 各 1 | 待回填 |
-| script.js HTTP 200 | yes | 待回填 |
-| site diff (HEAD~1..HEAD) | 仅 index.html / style.css | 待回填 |
-| posts/case-study diff | empty | 待回填 |
-| v2.0 tag unmoved | 9e6233a | 待回填 |
-| v2.6 tag unmoved | 033b65e / 01cdaa2 | 待回填 |
-| v2.7 tag unmoved | a0fee10 → f58f6b4 | 待回填 |
-| GitHub Actions | success | 待回填 |
+| Live byte size | ~92,500 B | **92,507 B** ✓ |
+| v2.7 marker | 1 | **1** ✓ |
+| v2.8 marker | 1 | **1** ✓ |
+| v2.9 marker | 0 | **0** ✓ |
+| placeholder | 0 | **0** ✓ |
+| 4 deep blocks | 各 1 | **1 / 1 / 1 / 1** ✓ |
+| script.js HTTP 200 | yes | **200** ✓ |
+| site diff (HEAD~1..HEAD) | 仅 index.html / style.css | **仅 index.html + style.css** ✓ |
+| posts/case-study diff | empty | **empty** ✓ |
+| v2.0 tag unmoved | 9e6233a | **9e6233a** ✓ |
+| v2.6 tag unmoved | 033b65e / 01cdaa2 | **033b65e / 01cdaa2** ✓ |
+| v2.7 tag unmoved | a0fee10 → f58f6b4 | **a0fee10 → f58f6b4** ✓ |
+| GitHub Actions | success | **success** (run 28842758569) ✓ |
 
 ## 10. No-touch confirmation
 
@@ -236,9 +236,9 @@ node --check site/script.js  # PASS
 | 项 | 值 |
 |---|---|
 | STATUS | **PASS** |
-| Freeze commit | 待 commit 后回填 |
+| Freeze commit | `18b551b2e7c832bb5e34d2cf904b8ce90b887978` |
 | Live URL | https://conanxin.github.io/leonardo-chinese-exhibition/ |
-| Live byte size | 92,507 B（待 push + Actions 后 live 验证） |
+| Live byte size | **92,507 B**（live 验证已通过） |
 | Verified source tag | `v2.7-zh-exhibition-polish` @ `f58f6b4`（起点） |
 | v2.8 marker count | 1 (meta) + 1 (comment) + 1 (footer) = 3 层 |
 | 4 个深度模块数量 | 1 / 1 / 1 / 1 |
