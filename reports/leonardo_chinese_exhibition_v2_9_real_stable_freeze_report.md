@@ -4,7 +4,7 @@
 >
 > commit message: `Freeze verified v2.9 source rights audit`
 
-## STATUS: PASS (待最终 verify 后回填)
+## STATUS: PASS
 
 ## 1. Baseline (round 起点)
 
@@ -72,10 +72,13 @@ git push origin v2.9-real-source-rights-audit
 
 | 项 | 状态 / SHA |
 |---|---|
-| freeze commit | 留空待 commit 后回填 |
+| freeze commit | **`a1e667e302d0d8106a9d0e4961159ae5c14aae4a`** |
 | tag name | `v2.9-real-source-rights-audit` |
+| tag object SHA | `13814d345bcd47860b778323c9915460ef72fb28` |
+| tag target | freeze commit `a1e667e` (annotated → dereferenced to commit) |
 | tag annotation | `v2.9 real source rights audit` |
-| push to origin | 待执行 |
+| tag type | annotated (`git cat-file -t` = `tag`) |
+| push to origin | **✓ pushed** (`git ls-remote --tags origin` 含 `v2.9-real-source-rights-audit`) |
 
 **约束**：
 - 若 `v2.9-real-source-rights-audit` tag 已存在 → 跳过 push 并输出 PARTIAL（不覆盖）
@@ -91,9 +94,15 @@ gh release create v2.9-real-source-rights-audit \
 
 | 项 | 状态 |
 |---|---|
-| Release URL | 待 `gh release create` 执行后回填 |
+| Release URL | **https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.9-real-source-rights-audit** |
 | Title | `v2.9 Real Source & Rights Audit` |
 | Notes source | `docs/RELEASE_NOTES_v2.9_REAL_SOURCE_RIGHTS_AUDIT.md` |
+| Tag | `v2.9-real-source-rights-audit` @ `a1e667e` |
+| draft / prerelease | false / false |
+| author | conanxin |
+| created | 2026-07-07T10:20:06Z |
+| published | 2026-07-07T10:20:22Z |
+| status | Latest |
 
 **约束**：
 - 若同名 release 已存在 → 跳过并输出 PARTIAL（不覆盖）
@@ -170,26 +179,26 @@ git diff HEAD~1 HEAD -- site/index.html site/style.css site/script.js  # 期望�
 git diff HEAD~1 HEAD -- posts/ case-study/                            # 期望空
 ```
 
-| 项 | 期望 | 实测（最终 verify 时回填） |
+| 项 | 期望 | 实测 |
 |---|---|---|
-| live byte size | 92,976 B | 待回填 |
-| v2.9 marker | 1 | 待回填 |
-| v2.8 marker | 1 | 待回填 |
-| phantom v2.9 marker | 0 | 待回填 |
-| placeholder | 0 | 待回填 |
-| source-note | 14 | 待回填 |
-| credit-line | 13 | 待回填 |
-| figcaption | 24 | 待回填 |
-| script.js HTTP | 200 | 待回填 |
-| site diff (HEAD~1..HEAD) | empty | 待回填 |
-| posts/case-study diff | empty | 待回填 |
-| v2.9 tag in remote | yes | 待回填 |
-| v2.9 release in list | yes | 待回填 |
-| v2.0 tag unmoved | 9e6233a | 待回填 |
-| v2.6 tag unmoved | 033b65e / 01cdaa2 | 待回填 |
-| v2.7 tag unmoved | a0fee10 / f58f6b4^{} | 待回填 |
-| v2.8 tag unmoved | 697560a / 65b4fbc^{} | 待回填 |
-| GitHub Actions (Deploy GitHub Pages) | success | 待回填 |
+| live byte size | 92,976 B | **92,976 B** ✓ |
+| v2.9 marker | 1 | **1** ✓ |
+| v2.8 marker | 1 | **1** ✓ |
+| phantom v2.9 marker | 0 | **0** ✓ |
+| placeholder | 0 | **0** ✓ |
+| source-note | 14 | **14** ✓ |
+| credit-line | 13 | **13** ✓ |
+| figcaption | 24 | **24** ✓ |
+| script.js HTTP | 200 | **200** ✓ |
+| site diff (HEAD~1..HEAD) | empty | **empty** ✓ |
+| posts/case-study diff | empty | **empty** ✓ |
+| v2.9 tag in remote | yes | **yes** (`13814d3` / `a1e667e^{}`) ✓ |
+| v2.9 release in list | yes | **yes** (2026-07-07T10:20:22Z, "Latest") ✓ |
+| v2.0 tag unmoved | 9e6233a | **9e6233a** ✓ |
+| v2.6 tag unmoved | 033b65e / 01cdaa2 | **033b65e / 01cdaa2** ✓ |
+| v2.7 tag unmoved | a0fee10 / f58f6b4^{} | **a0fee10 / f58f6b4^{}** ✓ |
+| v2.8 tag unmoved | 697560a / 65b4fbc^{} | **697560a / 65b4fbc^{}** ✓ |
+| GitHub Actions (Deploy GitHub Pages) | success | **success** (run 28858922552) ✓ |
 
 ## 11. Known note
 
@@ -213,21 +222,22 @@ GitHub Issues #1–#4 全部保持 OPEN（与本 round 内容无直接关联）�
 
 | 项 | 值 |
 |---|---|
-| STATUS | **PASS**（待最终 verify 数字回填后确认） |
-| Freeze commit | 待 commit 后回填 |
+| STATUS | **PASS** |
+| Freeze commit | `a1e667e302d0d8106a9d0e4961159ae5c14aae4a` |
 | Tag name | `v2.9-real-source-rights-audit` |
-| Tag target | freeze commit（待回填） |
-| GitHub Release URL | 待 `gh release create` 执行后回填 |
-| GitHub Actions status | 待 push + release 创建后由 `gh run list` 验证 |
+| Tag object SHA | `13814d345bcd47860b778323c9915460ef72fb28` |
+| Tag target commit | `a1e667e302d0d8106a9d0e4961159ae5c14aae4a` |
+| GitHub Release URL | https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v2.9-real-source-rights-audit |
+| GitHub Actions status | **success** (Deploy GitHub Pages run 28858922552) |
 | Live URL | https://conanxin.github.io/leonardo-chinese-exhibition/ |
 | Live byte size | 92,976 B |
 | Verified source tag | `v2.8-real-deep-content` @ `65b4fbc` |
-| v2.0 tag untouched | ✓ |
-| v2.6 tag unmoved | ✓ |
-| v2.7 tag unmoved | ✓ |
-| v2.8 tag unmoved | ✓ |
+| v2.0 tag untouched | ✓ (9e6233a unchanged) |
+| v2.6 tag unmoved | ✓ (033b65e / 01cdaa2 unchanged) |
+| v2.7 tag unmoved | ✓ (a0fee10 / f58f6b4^{} unchanged) |
+| v2.8 tag unmoved | ✓ (697560a / 65b4fbc^{} unchanged) |
 | old releases untouched | ✓ |
-| site files untouched | ✓ |
+| site files untouched | ✓ (`git diff HEAD~1 HEAD -- site/...` empty) |
 | `_template/` not created | ✓ |
 | `_pilots/` not created | ✓ |
 | Next recommended task | v3.0 Real Template Extraction Audit |
