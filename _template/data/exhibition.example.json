@@ -1,0 +1,8 @@
+{
+  "title": "示例展览：一件作品的旅程",
+  "subtitle": "从一张纸开始，看它如何被阅读、被研究、被展示",
+  "description": "一件作品不会孤立存在。它被人收藏、被学者翻读、被策展人放进展柜。这场示例展览用 4 个 section 演示如何用同一份 JSON 数据驱动一个中文数字展览站点。",
+  "version": "v3.0-template-example",
+  "liveUrl": "https://example.com/example-exhibition/",
+  "status": "draft"
+}

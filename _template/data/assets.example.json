@@ -1,0 +1,67 @@
+{
+  "assets": [
+    {
+      "id": "example-svg-01",
+      "title": "示例自制图：单件作品的时间轴",
+      "origin": "project-generated",
+      "image": "assets/diagrams/example-timeline.svg",
+      "alt": "一张自制 SVG 时间轴示意图，标记单件作品从创作到现代展览的关键节点。",
+      "caption": "示例自制图：用项目自绘 SVG 演示单件作品的时间轴。",
+      "sourceNote": "项目自绘。基于通用展览策展实践绘制，无具体作品引用。",
+      "creditLine": "示例项目 / Project-generated diagram (CC0 1.0)",
+      "viewingNote": "可点击放大查看节点细节。"
+    },
+    {
+      "id": "example-svg-02",
+      "title": "示例自制图：策展四角模型",
+      "origin": "project-generated",
+      "image": "assets/diagrams/example-curator-model.svg",
+      "alt": "一张自制 SVG 示意图，展示策展四角模型：作品 / 收藏 / 研究 / 观众。",
+      "caption": "示例自制图：策展四角模型的可视化骨架。",
+      "sourceNote": "项目自绘。基于通用策展方法绘制。",
+      "creditLine": "示例项目 / Project-generated diagram (CC0 1.0)"
+    },
+    {
+      "id": "example-svg-03",
+      "title": "示例自制图：源出处链",
+      "origin": "project-generated",
+      "image": "assets/diagrams/example-source-chain.svg",
+      "alt": "一张自制 SVG 示意图，展示源出处链：原作机构 → 数字档案 → 展览截图 → 展览展签。",
+      "caption": "示例自制图：从原作机构到展览展签的源出处链。",
+      "sourceNote": "项目自绘。基于通用数字展览源出处实践绘制。",
+      "creditLine": "示例项目 / Project-generated diagram (CC0 1.0)"
+    },
+    {
+      "id": "example-svg-04",
+      "title": "示例自制图：展览动线示意",
+      "origin": "project-generated",
+      "image": "assets/diagrams/example-flow.svg",
+      "alt": "一张自制 SVG 示意图，展示观众在展柜前的动线与停留时间。",
+      "caption": "示例自制图：观众动线与停留时间示意。",
+      "sourceNote": "项目自绘。基于通用观众行为观察绘制。",
+      "creditLine": "示例项目 / Project-generated diagram (CC0 1.0)"
+    }
+  ],
+  "siteMetadata": [
+    {
+      "id": "example-favicon",
+      "title": "示例 favicon",
+      "origin": "metadata",
+      "image": "assets/meta/example-favicon.svg",
+      "alt": "示例展览 favicon。",
+      "caption": "示例 favicon。",
+      "sourceNote": "项目自绘 SVG 图标。",
+      "creditLine": "示例项目 / CC0 1.0"
+    },
+    {
+      "id": "example-og-cover",
+      "title": "示例 OG cover",
+      "origin": "metadata",
+      "image": "assets/meta/example-og-cover.svg",
+      "alt": "示例展览开放图谱封面。",
+      "caption": "示例 OG cover。",
+      "sourceNote": "项目自绘 SVG 封面。",
+      "creditLine": "示例项目 / CC0 1.0"
+    }
+  ]
+}

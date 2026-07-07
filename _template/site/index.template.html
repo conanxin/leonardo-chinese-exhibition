@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="中文数字展览模板骨架 / Chinese digital exhibition template skeleton">
+  <title>{{EXHIBITION_TITLE}} — 中文数字展览模板</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="template">
+
+  <!--
+    中文数字展览模板 / Chinese Digital Exhibition Template
+    Source case: v2.9-real-source-rights-audit (leonardo-chinese-exhibition)
+    Template version: v3.0-template-skeleton
+    This file is a TEMPLATE. Replace {{PLACEHOLDERS}} before publishing.
+  -->
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <p class="site-eyebrow">中文数字展览模板</p>
+      <h1 class="site-title">{{EXHIBITION_TITLE}}</h1>
+      <p class="site-subtitle">{{EXHIBITION_SUBTITLE}}</p>
+      <p class="site-version">Template skeleton · v3.0-template-skeleton</p>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <p class="hero-eyebrow">导览起点</p>
+        <h2 id="hero-title">{{HERO_QUESTION}}</h2>
+        <p class="hero-description">{{HERO_BODY}}</p>
+        <a class="hero-cta" href="#quick-guide">开始 3 分钟导览</a>
+      </div>
+    </section>
+
+    <!-- Quick guide -->
+    <section id="quick-guide" class="quick-guide" aria-labelledby="quick-guide-title">
+      <div class="container">
+        <h2 id="quick-guide-title">3 分钟导览</h2>
+        <ol class="quick-guide-list">
+          <li>{{QUICK_GUIDE_POINT_1}}</li>
+          <li>{{QUICK_GUIDE_POINT_2}}</li>
+          <li>{{QUICK_GUIDE_POINT_3}}</li>
+          <li>{{QUICK_GUIDE_POINT_4}}</li>
+          <li>{{QUICK_GUIDE_POINT_5}}</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Exhibition map -->
+    <section class="exhibition-map" aria-labelledby="map-title">
+      <div class="container">
+        <h2 id="map-title">展览地图</h2>
+        <ul class="map-list">
+          <li><a href="#section-01">01 · {{SECTION_01_TITLE}}</a></li>
+          <li><a href="#section-02">02 · {{SECTION_02_TITLE}}</a></li>
+          <li><a href="#section-03">03 · {{SECTION_03_TITLE}}</a></li>
+          <li><a href="#section-04">04 · {{SECTION_04_TITLE}}</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section cards -->
+    <section id="section-01" class="section-card" data-section-id="section-01">
+      <div class="container">
+        <p class="section-kicker">{{SECTION_01_KICKER}}</p>
+        <h2 class="section-title">{{SECTION_01_TITLE}}</h2>
+        <p class="section-body">{{SECTION_01_BODY}}</p>
+        <p class="section-takeaway">{{SECTION_01_TAKEAWAY}}</p>
+        <p class="section-viewer-action">{{SECTION_01_VIEWER_ACTION}}</p>
+
+        <!-- Deep block placeholders (4 module types) -->
+        <div class="deep-block deep-reading-block" hidden>
+          <h3 class="deep-block-label">深度阅读</h3>
+          <p class="deep-block-body">{{SECTION_01_DEEP_READING_BODY}}</p>
+        </div>
+        <div class="deep-block material-evidence-block" hidden>
+          <h3 class="deep-block-label">材料证据</h3>
+          <p class="deep-block-body">{{SECTION_01_MATERIAL_EVIDENCE_BODY}}</p>
+        </div>
+        <div class="deep-block visual-thinking-block" hidden>
+          <h3 class="deep-block-label">视觉思维</h3>
+          <p class="deep-block-body">{{SECTION_01_VISUAL_THINKING_BODY}}</p>
+        </div>
+        <div class="deep-block research-model-block" hidden>
+          <h3 class="deep-block-label">研究模型</h3>
+          <p class="deep-block-body">{{SECTION_01_RESEARCH_MODEL_BODY}}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-02" class="section-card" data-section-id="section-02">
+      <div class="container">
+        <p class="section-kicker">{{SECTION_02_KICKER}}</p>
+        <h2 class="section-title">{{SECTION_02_TITLE}}</h2>
+        <p class="section-body">{{SECTION_02_BODY}}</p>
+        <p class="section-takeaway">{{SECTION_02_TAKEAWAY}}</p>
+        <p class="section-viewer-action">{{SECTION_02_VIEWER_ACTION}}</p>
+      </div>
+    </section>
+
+    <section id="section-03" class="section-card" data-section-id="section-03">
+      <div class="container">
+        <p class="section-kicker">{{SECTION_03_KICKER}}</p>
+        <h2 class="section-title">{{SECTION_03_TITLE}}</h2>
+        <p class="section-body">{{SECTION_03_BODY}}</p>
+        <p class="section-takeaway">{{SECTION_03_TAKEAWAY}}</p>
+        <p class="section-viewer-action">{{SECTION_03_VIEWER_ACTION}}</p>
+      </div>
+    </section>
+
+    <section id="section-04" class="section-card" data-section-id="section-04">
+      <div class="container">
+        <p class="section-kicker">{{SECTION_04_KICKER}}</p>
+        <h2 class="section-title">{{SECTION_04_TITLE}}</h2>
+        <p class="section-body">{{SECTION_04_BODY}}</p>
+        <p class="section-takeaway">{{SECTION_04_TAKEAWAY}}</p>
+        <p class="section-viewer-action">{{SECTION_04_VIEWER_ACTION}}</p>
+      </div>
+    </section>
+
+    <!-- Artifact cards -->
+    <section class="artifacts" aria-labelledby="artifacts-title">
+      <div class="container">
+        <h2 id="artifacts-title">展品</h2>
+        <div class="artifact-grid">
+          <figure class="artifact-card" data-artifact-id="artifact-01">
+            <img src="{{ARTIFACT_01_IMAGE}}" alt="{{ARTIFACT_01_ALT}}" loading="lazy">
+            <figcaption class="artifact-caption">{{ARTIFACT_01_CAPTION}}</figcaption>
+            <p class="source-note">{{ARTIFACT_01_SOURCE_NOTE}}</p>
+            <p class="credit-line">{{ARTIFACT_01_CREDIT_LINE}}</p>
+          </figure>
+          <figure class="artifact-card" data-artifact-id="artifact-02">
+            <img src="{{ARTIFACT_02_IMAGE}}" alt="{{ARTIFACT_02_ALT}}" loading="lazy">
+            <figcaption class="artifact-caption">{{ARTIFACT_02_CAPTION}}</figcaption>
+            <p class="source-note">{{ARTIFACT_02_SOURCE_NOTE}}</p>
+            <p class="credit-line">{{ARTIFACT_02_CREDIT_LINE}}</p>
+          </figure>
+          <figure class="artifact-card" data-artifact-id="artifact-03">
+            <img src="{{ARTIFACT_03_IMAGE}}" alt="{{ARTIFACT_03_ALT}}" loading="lazy">
+            <figcaption class="artifact-caption">{{ARTIFACT_03_CAPTION}}</figcaption>
+            <p class="source-note">{{ARTIFACT_03_SOURCE_NOTE}}</p>
+            <p class="credit-line">{{ARTIFACT_03_CREDIT_LINE}}</p>
+          </figure>
+          <figure class="artifact-card" data-artifact-id="artifact-04">
+            <img src="{{ARTIFACT_04_IMAGE}}" alt="{{ARTIFACT_04_ALT}}" loading="lazy">
+            <figcaption class="artifact-caption">{{ARTIFACT_04_CAPTION}}</figcaption>
+            <p class="source-note">{{ARTIFACT_04_SOURCE_NOTE}}</p>
+            <p class="credit-line">{{ARTIFACT_04_CREDIT_LINE}}</p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Glossary -->
+    <section class="glossary" aria-labelledby="glossary-title">
+      <div class="container">
+        <h2 id="glossary-title">术语表</h2>
+        <dl class="glossary-list">
+          <dt>{{GLOSSARY_TERM_1}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_1}}</dd>
+          <dt>{{GLOSSARY_TERM_2}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_2}}</dd>
+          <dt>{{GLOSSARY_TERM_3}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_3}}</dd>
+          <dt>{{GLOSSARY_TERM_4}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_4}}</dd>
+          <dt>{{GLOSSARY_TERM_5}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_5}}</dd>
+          <dt>{{GLOSSARY_TERM_6}}</dt>
+          <dd>{{GLOSSARY_DEFINITION_6}}</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Source / rights footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container">
+        <h2 class="footer-title">来源与权利</h2>
+        <p class="rights-note">{{RIGHTS_NOTE}}</p>
+        <details class="sources-details">
+          <summary>查看来源清单</summary>
+          <ul class="sources-list">
+            <li><a href="{{SOURCE_01_URL}}">{{SOURCE_01_LABEL}}</a> — {{SOURCE_01_NOTE}}</li>
+            <li><a href="{{SOURCE_02_URL}}">{{SOURCE_02_LABEL}}</a> — {{SOURCE_02_NOTE}}</li>
+            <li><a href="{{SOURCE_03_URL}}">{{SOURCE_03_LABEL}}</a> — {{SOURCE_03_NOTE}}</li>
+          </ul>
+        </details>
+        <p class="template-attribution">
+          模板来源：<code>_template/</code> · 基线 <code>{{SOURCE_TAG}}</code>
+        </p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Lightbox placeholder -->
+  <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="图片放大">
+    <button class="lightbox-close" type="button" aria-label="关闭">×</button>
+    <img class="lightbox-image" alt="">
+    <p class="lightbox-caption"></p>
+    <p class="lightbox-credit"></p>
+  </div>
+
+  <!-- Guided mode placeholder -->
+  <nav id="guided-mode" class="guided-mode" hidden aria-label="导览模式">
+    <ol class="guided-steps"></ol>
+    <button class="guided-prev" type="button">←</button>
+    <button class="guided-next" type="button">→</button>
+    <button class="guided-exit" type="button">退出导览</button>
+  </nav>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
