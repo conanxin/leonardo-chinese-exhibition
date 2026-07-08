@@ -16,7 +16,7 @@ Pilot commit:
 `ae1a54ea00918517f10516f301b84f0d2b8dee34`（v3.1 pilot round HEAD）
 
 Freeze commit:
-本轮提交后填写
+`de017f91c605ab65276283cb7a006164980f1986`
 
 ---
 

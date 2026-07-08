@@ -15,7 +15,7 @@
 | Pilot 版本 | pilot-v0.1 |
 | Pilot 部署 | **不部署**（repository only） |
 | 目标 tag | `v3.1-real-second-exhibition-pilot` |
-| Freeze commit | 本 round 提交后填写 |
+| Freeze commit | `de017f91c605ab65276283cb7a006164980f1986` |
 
 ## Baseline
 
