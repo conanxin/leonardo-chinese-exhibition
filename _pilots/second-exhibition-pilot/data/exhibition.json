@@ -1,0 +1,9 @@
+{
+  "title": "一件作品的旅程",
+  "subtitle": "从图像、来源、路径到知识网络",
+  "description": "这场 pilot 验证中文数字展览模板能否独立组织一个小型研究型展览。它用 4 个 section、4 张自制示意图、6 个通用术语，演示从单件作品出发如何展开一场可被引用、可被复用的展览。",
+  "version": "v3.1-second-exhibition-pilot",
+  "liveUrl": "https://example.com/pilot-second-exhibition/",
+  "status": "pilot",
+  "notes": "pilot 不部署。liveUrl 仅作 schema 字段占位；真实项目部署后会替换。pilot 的实际文件位于本仓库的 _pilots/second-exhibition-pilot/site/。"
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280" role="img" aria-label="单件作品流转路径示意">
+  <title>单件作品的旅程</title>
+  <desc>线性流程：工作室 → 收藏 → 装裱 → 数字化 → 展柜</desc>
+  <style>
+    .node { fill: #f6f4ee; stroke: #4b3a2a; stroke-width: 1.2; }
+    .node-text { font: 14px/1.4 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #2b1f12; text-anchor: middle; }
+    .kicker { font: 11px/1.2 -apple-system, sans-serif; fill: #6b5a45; text-anchor: middle; letter-spacing: 0.1em; }
+    .arrow { stroke: #4b3a2a; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+    .label { font: 11px/1.2 -apple-system, sans-serif; fill: #6b5a45; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b3a2a"/>
+    </marker>
+  </defs>
+  <g class="kicker" transform="translate(400,30)">单件作品的旅程 · OBJECT JOURNEY</g>
+  <g>
+    <rect class="node" x="40"  y="100" width="120" height="80" rx="4"/>
+    <text class="node-text" x="100" y="140">工作室</text>
+    <text class="kicker"  x="100" y="160">creation</text>
+
+    <rect class="node" x="200" y="100" width="120" height="80" rx="4"/>
+    <text class="node-text" x="260" y="140">收藏</text>
+    <text class="kicker"  x="260" y="160">collection</text>
+
+    <rect class="node" x="360" y="100" width="120" height="80" rx="4"/>
+    <text class="node-text" x="420" y="140">装裱</text>
+    <text class="kicker"  x="420" y="160">mounting</text>
+
+    <rect class="node" x="520" y="100" width="120" height="80" rx="4"/>
+    <text class="node-text" x="580" y="140">数字化</text>
+    <text class="kicker"  x="580" y="160">digitisation</text>
+
+    <rect class="node" x="680" y="100" width="80"  height="80" rx="4"/>
+    <text class="node-text" x="720" y="140">展柜</text>
+    <text class="kicker"  x="720" y="160">display</text>
+  </g>
+  <g class="arrow">
+    <line x1="160" y1="140" x2="195" y2="140"/>
+    <line x1="320" y1="140" x2="355" y2="140"/>
+    <line x1="480" y1="140" x2="515" y2="140"/>
+    <line x1="640" y1="140" x2="675" y2="140"/>
+  </g>
+  <g class="label" transform="translate(400,230)">
+    <text>项目自绘（pilot · CC0 1.0）· 通用策展流转骨架</text>
+  </g>
+</svg>

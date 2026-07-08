@@ -179,6 +179,23 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - [`release-assets/v3.0-real-template-extraction-audit-manifest.md`](release-assets/v3.0-real-template-extraction-audit-manifest.md) — release manifest
 - 报告：[`reports/leonardo_chinese_exhibition_v3_0_real_template_extraction_audit_report.md`](reports/leonardo_chinese_exhibition_v3_0_real_template_extraction_audit_report.md)、[`reports/leonardo_chinese_exhibition_v3_0_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_0_real_stable_freeze_report.md)
 
+## v3.1 Second Exhibition Pilot
+
+- **Pilot 路径**：[`_pilots/second-exhibition-pilot/`](_pilots/second-exhibition-pilot/)
+- **源模板**：[`_template/`](_template/)（`v3.0-real-template-extraction-audit` @ `dd7d589`）
+- **主题**：《一件作品的旅程》— 从图像、来源、路径到知识网络
+- **状态**：repository pilot，**不部署**到 GitHub Pages
+- **Live site**：未变更（92,976 B / v2.9 marker / source-note 14 / credit-line 13）
+- **目的**：验证可复用中文数字展览模板能否独立组织一个小型研究型展览
+- **组成**：3 张自制 SVG（project-generated） + 4 section + 4 artifact card + 6 glossary + 5 内部 docs + README/manifest/notes
+- **不做的事**：不修改 `_template/`，不创建 tag / Release，不引用任何真实馆藏图，不创建第三个 pilot
+
+详见：
+- [`_pilots/second-exhibition-pilot/README.md`](_pilots/second-exhibition-pilot/README.md) — pilot 入口
+- [`_pilots/second-exhibition-pilot/PILOT_MANIFEST.md`](_pilots/second-exhibition-pilot/PILOT_MANIFEST.md) — pilot 文件清单
+- [`_pilots/second-exhibition-pilot/PILOT_NOTES.md`](_pilots/second-exhibition-pilot/PILOT_NOTES.md) — 模板可复用性观察
+- [`reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md`](reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md) — 本 round 报告
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

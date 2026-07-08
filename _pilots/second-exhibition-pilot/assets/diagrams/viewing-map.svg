@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320" role="img" aria-label="观众观看动线与停留时间示意图">
+  <title>观看动线与停留时间</title>
+  <desc>展柜前动线 + 三段停留时间（5s / 30s / 90s）</desc>
+  <style>
+    .cabinet { fill: #f6f4ee; stroke: #4b3a2a; stroke-width: 1.2; }
+    .path { stroke: #4b3a2a; stroke-width: 1.4; fill: none; stroke-dasharray: 6 4; }
+    .stop { fill: #c0392b; stroke: #4b3a2a; stroke-width: 1.2; }
+    .stop-text { font: 11px/1.2 -apple-system, sans-serif; fill: #2b1f12; text-anchor: middle; }
+    .kicker { font: 11px/1.2 -apple-system, sans-serif; fill: #6b5a45; text-anchor: middle; letter-spacing: 0.1em; }
+    .legend { font: 11px/1.3 -apple-system, sans-serif; fill: #2b1f12; text-anchor: start; }
+  </style>
+  <g class="kicker" transform="translate(400,30)">观看动线与停留时间 · VIEWING MAP</g>
+  <g>
+    <rect class="cabinet" x="80"  y="80"  width="640" height="120"/>
+    <text class="kicker" x="400" y="150">展柜 · CABINET</text>
+
+    <path class="path" d="M 60 260 Q 200 260 240 200 L 320 200" />
+    <path class="path" d="M 320 200 L 480 200" />
+    <path class="path" d="M 480 200 Q 520 260 740 260" />
+
+    <circle class="stop" cx="320" cy="200" r="6"/>
+    <text class="stop-text" x="320" y="185">5s · 路过</text>
+    <circle class="stop" cx="400" cy="200" r="6"/>
+    <text class="stop-text" x="400" y="185">30s · 停留</text>
+    <circle class="stop" cx="480" cy="200" r="6"/>
+    <text class="stop-text" x="480" y="185">90s · 深读</text>
+  </g>
+  <g class="legend" transform="translate(80,290)">
+    <text>展柜长度 = 作品排列密度；停留点 = 观众阅读深度的离散化。pilot 中以 5/30/90 秒作为典型取值。</text>
+  </g>
+</svg>

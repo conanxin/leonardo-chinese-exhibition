@@ -8,33 +8,44 @@
 
 | 项 | 值 |
 |---|---|
-| 状态 | **In progress**（本 round 进行中） |
+| 状态 | **Done**（v3.0-real-template-extraction-audit @ `dd7d589`，tag + GitHub Release + freeze report 全部落地） |
 | 起点 | v2.9-real-source-rights-audit @ a1e667e |
-| 交付物 | `_template/` 真实创建（18 文件） |
+| 交付物 | `_template/` 真实创建（17 文件，freeze round 实测；extraction round 误写 18 已 patch 修正） |
 | 范围 | docs/TEMPLATE_EXTRACTION_AUDIT.md + docs/REUSABLE_EXHIBITION_COMPONENTS.md + _template/ |
-| 不做的事 | 不创建 `_pilots/`，不部署模板，不创建 tag / release |
-| 下一步 | v3.0-real-stable-freeze（独立 freeze round） |
+| 不做的事 | 不创建 `_pilots/`，不部署模板，tag 已封版 |
+| 下一步 | v3.1 Second Exhibition Pilot（当前 round） |
 
 ## v3.0 Real Stable Freeze
 
 | 项 | 值 |
 |---|---|
-| 状态 | **Next** |
-| 起点 | 本 round 创建的 `_template/` HEAD |
-| 交付物 | 创建 `v3.0-real-template-extraction-audit` tag + GitHub Release |
+| 状态 | **Done**（`v3.0-real-template-extraction-audit` tag 已 push，Release 已发布 Latest 2026-07-07T22:48:44Z） |
+| 起点 | v3.0 extraction round HEAD `9aea3ae` |
+| 交付物 | freeze commit `beb2d7b` + SHA-backfill `dd7d589` + tag `v3.0-real-template-extraction-audit` (`3b5404f`) + GitHub Release |
 | 范围 | 冻结 `_template/` 骨架 + docs/ + reports/ |
-| 不做的事 | 不创建 `_pilots/`，不修改 live，部署影响限于 pages source 上传新文件 |
-| 下一步 | v3.1 Second Exhibition Pilot |
+| 不做的事 | 不创建 `_pilots/`，不修改 live |
+| 下一步 | v3.1 Second Exhibition Pilot（当前 round） |
 
 ## v3.1 Second Exhibition Pilot
 
 | 项 | 值 |
 |---|---|
-| 状态 | **Planned** |
-| 起点 | 已封版的 v3.0 tag |
-| 交付物 | `_pilots/second-exhibition-pilot/` |
-| 范围 | 小主题 + 自制 SVG + 4 section + 4 artifact + 6 glossary + source / rights docs + report |
-| 不做的事 | 不部署到 GitHub Pages，不引入真实馆藏图片，不修改旧 tag |
+| 状态 | **In progress**（本 round 进行中） |
+| 起点 | 已封版的 `v3.0-real-template-extraction-audit` @ `dd7d589` |
+| 交付物 | `_pilots/second-exhibition-pilot/`（基于 `_template/` 实例化的第一个 second pilot） |
+| 范围 | 主题《一件作品的旅程》 + 自制 SVG（3 张） + 4 section + 4 artifact card + 6 glossary + source/rights docs + 5 内部 docs + README/manifest/notes |
+| 不做的事 | 不部署到 GitHub Pages，不引入真实馆藏图片，不修改 `_template/`，不修改旧 tag，不创建 tag / Release |
+| 下一步 | v3.1-real-stable-freeze（独立 freeze round）或 v3.2 Template Documentation |
+
+## v3.1 Second Exhibition Pilot — stable freeze
+
+| 项 | 值 |
+|---|---|
+| 状态 | **Planned**（v3.1 pilot 验证模板真正可复用后才做） |
+| 起点 | 本 round 创建的 `_pilots/second-exhibition-pilot/` HEAD |
+| 交付物 | 给 pilot 自身打 tag + GitHub Release（pilot 内部 release，仅审计凭证） |
+| 范围 | 冻结 pilot 数据 / 站点 / 文档 + 写 freeze report |
+| 不做的事 | 不创建第二个 pilot，不部署 |
 | 下一步 | v3.2 Template Documentation |
 
 ## v3.2 Template Documentation
@@ -78,13 +89,15 @@
 ```
 v2.9-real-source-rights-audit  (verified, freeze)
     ↓
-v3.0-real-template-extraction-audit  (本 round) ──→ v3.0-real-stable-freeze
-    ↓                                                ↓
-v3.1-second-exhibition-pilot                       v3.1 → v3.2
-    ↓                                                ↓
-v3.2-template-documentation                   v3.3+ optional
+v3.0-real-template-extraction-audit  (Done — tag + Release)
     ↓
-v3.3 optional real second exhibition
+v3.1-second-exhibition-pilot  (本 round 进行中)
+    ↓
+v3.1-real-stable-freeze  (Planned — 给 pilot 自身打 tag)
+    ↓
+v3.2-template-documentation
+    ↓
+v3.3+ optional real second exhibition
 ```
 
 ---

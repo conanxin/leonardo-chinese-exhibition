@@ -1,0 +1,58 @@
+{
+  "assets": [
+    {
+      "id": "pilot-object-journey",
+      "title": "自制图 1：单件作品的旅程",
+      "origin": "project-generated",
+      "image": "../assets/diagrams/object-journey.svg",
+      "alt": "一张自制 SVG 示意图，用线性流程展示单件作品从工作室出发、经过收藏、装裱、数字化、再展览的流转路径。",
+      "caption": "自制图：单件作品从工作室到展柜的五步流转路径。",
+      "sourceNote": "项目自绘。基于通用策展流转实践绘制，无具体作品引用。",
+      "creditLine": "Pilot 项目 / Project-generated diagram (CC0 1.0)",
+      "viewingNote": "可点击放大查看节点细节。"
+    },
+    {
+      "id": "pilot-evidence-chain",
+      "title": "自制图 2：源出处链",
+      "origin": "project-generated",
+      "image": "../assets/diagrams/evidence-chain.svg",
+      "alt": "一张自制 SVG 示意图，展示从原作机构到数字档案、再到展览截图、再到展览展签的源出处链。",
+      "caption": "自制图：从原作机构到展览展签的源出处链。",
+      "sourceNote": "项目自绘。基于通用数字展览源出处实践绘制。",
+      "creditLine": "Pilot 项目 / Project-generated diagram (CC0 1.0)"
+    },
+    {
+      "id": "pilot-viewing-map",
+      "title": "自制图 3：观看动线与停留时间",
+      "origin": "project-generated",
+      "image": "../assets/diagrams/viewing-map.svg",
+      "alt": "一张自制 SVG 示意图，展示观众在展柜前的动线与停留时间。",
+      "caption": "自制图：观众动线与停留时间示意。",
+      "sourceNote": "项目自绘。基于通用观众行为观察绘制。",
+      "creditLine": "Pilot 项目 / Project-generated diagram (CC0 1.0)"
+    },
+    {
+      "id": "pilot-curator-model",
+      "title": "自制图 4：策展四角模型",
+      "origin": "project-generated",
+      "image": "../assets/diagrams/object-journey.svg",
+      "alt": "一张自制 SVG 示意图，展示策展四角模型：作品 / 收藏 / 研究 / 观众。",
+      "caption": "自制图：策展四角模型的可视化骨架（复用 object-journey.svg 演示布局原则）。",
+      "sourceNote": "项目自绘。基于通用策展方法绘制。",
+      "creditLine": "Pilot 项目 / Project-generated diagram (CC0 1.0)",
+      "viewingNote": "pilot 阶段以 object-journey.svg 充当布局占位，正式发布前替换为专属图。"
+    }
+  ],
+  "siteMetadata": [
+    {
+      "id": "pilot-favicon",
+      "title": "pilot favicon",
+      "origin": "metadata",
+      "image": "../assets/diagrams/object-journey.svg",
+      "alt": "pilot 展览 favicon 占位图。",
+      "caption": "pilot favicon（占位）。",
+      "sourceNote": "项目自绘 SVG。",
+      "creditLine": "Pilot 项目 / CC0 1.0"
+    }
+  ]
+}

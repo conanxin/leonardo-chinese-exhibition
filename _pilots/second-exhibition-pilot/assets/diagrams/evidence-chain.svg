@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360" role="img" aria-label="源出处链示意图">
+  <title>源出处链</title>
+  <desc>四层：原作机构 → 数字档案 → 展览截图 → 展览展签</desc>
+  <style>
+    .layer { fill: #fbf9f3; stroke: #4b3a2a; stroke-width: 1.2; }
+    .layer-text { font: 14px/1.4 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #2b1f12; text-anchor: middle; }
+    .layer-kicker { font: 11px/1.2 -apple-system, sans-serif; fill: #6b5a45; text-anchor: middle; letter-spacing: 0.1em; }
+    .arrow { stroke: #4b3a2a; stroke-width: 1.4; fill: none; marker-end: url(#arrow2); }
+    .note { font: 11px/1.3 -apple-system, sans-serif; fill: #6b5a45; text-anchor: start; }
+  </style>
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b3a2a"/>
+    </marker>
+  </defs>
+  <g class="layer-kicker" transform="translate(400,30)">源出处链 · EVIDENCE CHAIN</g>
+  <g>
+    <rect class="layer" x="40"  y="60"  width="720" height="50" rx="3"/>
+    <text class="layer-text"   x="400" y="90">原作机构 / 收藏方</text>
+    <text class="layer-kicker" x="400" y="105">L1 · primary holder</text>
+
+    <rect class="layer" x="40"  y="130" width="720" height="50" rx="3"/>
+    <text class="layer-text"   x="400" y="160">数字档案 / 公共域镜像</text>
+    <text class="layer-kicker" x="400" y="175">L2 · public-domain mirror</text>
+
+    <rect class="layer" x="40"  y="200" width="720" height="50" rx="3"/>
+    <text class="layer-text"   x="400" y="230">展览截图 / 项目自绘</text>
+    <text class="layer-kicker" x="400" y="245">L3 · exhibition capture / project-generated</text>
+
+    <rect class="layer" x="40"  y="270" width="720" height="50" rx="3"/>
+    <text class="layer-text"   x="400" y="300">展览展签 / 说明文字</text>
+    <text class="layer-kicker" x="400" y="315">L4 · wall label / caption</text>
+  </g>
+  <g class="arrow">
+    <line x1="400" y1="110" x2="400" y2="125"/>
+    <line x1="400" y1="180" x2="400" y2="195"/>
+    <line x1="400" y1="250" x2="400" y2="265"/>
+  </g>
+  <g class="note" transform="translate(40,340)">
+    <text>每一层都对应 sourceNote + creditLine；pilot 中 L3 全部为 project-generated（pilot-v0.1）。</text>
+  </g>
+</svg>
