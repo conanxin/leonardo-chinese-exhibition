@@ -139,6 +139,66 @@
 
 ---
 
+## v4.3 — Second Exhibition Build Planning
+
+**Goal.** Turn the 6 v4.2 verified candidates into a build plan. **No download, no asset import, no live change.** The v4.3 statuses are `selected-for-build-planning` / `defer` / `replace-with-project-generated-diagram` / `blocked-from-build` — **`approved` is not used.**
+
+**Tasks.**
+
+- For each of the 6 v4.2 verified candidates, assign a v4.3 status.
+- Build a 4-section scope with one primary candidate per section + 0–1 alternate + 1–2 project-generated diagrams per section.
+- Record the per-item evidence plan (the dossier) so that a future asset-import round can re-check the same fields.
+- Record the content draft brief (tone, hero, 3-minute guide, section briefs, artifact card briefs) so the future build round has a starting point.
+- Record the asset import plan (the 11-step import rule, the per-candidate import table, the file naming convention).
+- Make sure the C-03 CC BY-NC-SA subset is `blocked-from-build`.
+
+**Deliverables (this round).**
+
+- `docs/SECOND_EXHIBITION_BUILD_PLAN_v4.3.md` — candidate selection + minimum build set.
+- `docs/ITEM_EVIDENCE_DOSSIER_v4.3.md` — per-candidate evidence plan (6 entries, one per `selected-for-build-planning` row).
+- `docs/BUILD_SCOPE_v4.3.md` — section scope + page structure.
+- `docs/CONTENT_DRAFT_BRIEF_v4.3.md` — tone + hero + 3-minute guide + section drafts + artifact card briefs.
+- `docs/ASSET_IMPORT_PLAN_v4.3.md` — import rule + per-candidate import table + file naming convention.
+- `README.md` updated with a `v4.3 Second Exhibition Build Planning` block.
+- `reports/leonardo_chinese_exhibition_v4_3_second_exhibition_build_planning_report.md`.
+
+**Do NOT do in v4.3.**
+
+- Do not download any image.
+- Do not add any image file to the repository.
+- Do not write into `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/`.
+- Do not modify `scripts/template_quality_gate.py`.
+- Do not mark any candidate `approved`. The status `approved` is **not used** in v4.3 or any future round.
+- Do not pick a specific per-item selection (e.g., a specific BHL volume). Per-item selection is a v4.4 step.
+- Do not write the section bodies, the hero, the 3-minute guide, the artifact card captions, the curatorial essay, or the source notes. The content draft is a *brief*; the actual writing is a future round.
+- Do not draw any project-generated diagram. The diagrams are *planned*; the actual drawing is a future round.
+- Do not re-introduce any `needs clarification` candidate as `selected-for-build-planning`.
+- Do not re-introduce the v4.1 `replace with project-generated diagram` rows (C-02, Section-4 screenshot) as `selected-for-build-planning`.
+- Do not re-introduce the v4.1 `excluded` row (C-14, BHL CC BY-NC-SA) as `selected-for-build-planning`.
+- Do not create a tag or GitHub Release.
+- Do not move or rewrite any pre-existing tag (`v2.0` through `v3.4`) or any pre-existing GitHub Release.
+- Do not process the untracked `.firecrawl/` directory.
+
+**Exit criteria for v4.3.**
+
+- All five v4.3 planning docs exist and are committed.
+- `README.md` v4.3 block committed.
+- `docs/V4_ROADMAP.md` v4.3 section rewritten.
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- `git diff` against `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/` is **empty**.
+- Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**, pilot title in live still **0**.
+- `find` confirms no new image files (`.jpg` / `.jpeg` / `.png` / `.webp` / `.tif` / `.tiff`).
+- `selected-for-build-planning` count is **≥ 4**.
+- `approved` does not appear as a status value in any v4.3 doc.
+- C-03's `CC BY-NC-SA subset blocked` is recorded in the build plan.
+- No new tag, no new GitHub Release.
+
+**v4.3 → next round.**
+
+- The next round is **v4.4 — Asset Import Prep** (or, equivalently, the round that does the actual image download per the asset import plan). v4.4 picks one specific item per `selected-for-build-planning` row and runs the 11-step import rule.
+
+---
+
 ## v4.3 — Second Exhibition Build
 
 **Goal.** Instantiate the template into a new second exhibition working directory and write the content.

@@ -329,6 +329,36 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
 - Next: **v4.3 — Second Exhibition Build Planning** (verified count 6 ≥ 4, so v4.3 may proceed; per-item selection is the v4.3 step)
 
+## v4.3 Second Exhibition Build Planning
+
+- Status: **build planning only**
+- Verified candidates used: **6** from v4.2 (C-01, C-03, C-06, C-08, C-09, C-10)
+- No live changes
+- No images downloaded
+- No assets approved (the status `approved` is **not used** in v4.3 or any future round)
+- No site build yet
+- v4.3 status counts:
+  - `selected-for-build-planning`: **6** (C-01, C-03 [PD subset only], C-06, C-08 [alt], C-09, C-10)
+  - `defer`: **6** (C-04, C-05, C-07, C-11, C-12, C-13 — needs-clarification carry-overs)
+  - `replace-with-project-generated-diagram`: **2** (C-02 BHL Flickr, Section-4 screenshot row — v4.1 carry-overs, used as fallbacks)
+  - `blocked-from-build`: **1** (C-14 BHL in-copyright CC BY-NC-SA — v4.1 carry-over; **and the C-03 CC BY-NC-SA subset is blocked at the per-item level**)
+- Important caution: **C-03 CC BY-NC-SA subset blocked**. The C-03 row as a whole is `selected-for-build-planning` for the Public-domain subset only; the CC BY-NC-SA 4.0 in-copyright subset is `blocked-from-build` and must not be selected by v4.4.
+- Section coverage (4 sections × 1 primary + 0–1 alternate + 1 fallback diagram each):
+  - Section 1 (观察): C-01 (primary), C-09 (cross-section alternate), 1 fallback diagram.
+  - Section 2 (分类): C-06 (primary), C-09 (alternate), 1 fallback diagram.
+  - Section 3 (复制): C-03 (primary, PD subset only), C-08 (alternate), 1 fallback diagram.
+  - Section 4 (再组织): C-10 (primary), 1 fallback network diagram.
+- v4.3 planning docs created (5):
+  - [`docs/SECOND_EXHIBITION_BUILD_PLAN_v4.3.md`](docs/SECOND_EXHIBITION_BUILD_PLAN_v4.3.md) — candidate selection + minimum build set
+  - [`docs/ITEM_EVIDENCE_DOSSIER_v4.3.md`](docs/ITEM_EVIDENCE_DOSSIER_v4.3.md) — 6 per-candidate evidence plans
+  - [`docs/BUILD_SCOPE_v4.3.md`](docs/BUILD_SCOPE_v4.3.md) — section scope + page structure
+  - [`docs/CONTENT_DRAFT_BRIEF_v4.3.md`](docs/CONTENT_DRAFT_BRIEF_v4.3.md) — tone + hero + 3-minute guide + section drafts + artifact card briefs
+  - [`docs/ASSET_IMPORT_PLAN_v4.3.md`](docs/ASSET_IMPORT_PLAN_v4.3.md) — 11-step import rule + per-candidate import table + file naming convention
+- Pilot (`_pilots/second-exhibition-pilot/`) remains repository-only
+- Quality gate: `scripts/template_quality_gate.py` → 37/37 PASS
+- Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
+- Next: **v4.4 — Asset Import Prep** (picks one specific item per `selected-for-build-planning` row, runs the 11-step import rule, downloads the per-item images, writes the local files, updates the source audit manifest)
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
