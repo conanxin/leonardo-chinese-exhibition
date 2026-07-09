@@ -82,3 +82,20 @@ _pilots/second-exhibition-pilot/
 ## 下一 round
 
 **v3.1-real-stable-freeze**：冻结 pilot，给 pilot 自身打 tag。
+
+---
+
+## Hardening notes
+
+pilot 已经过 v3.4 hardening：
+
+- [`PILOT_QA_CHECKLIST.md`](PILOT_QA_CHECKLIST.md) — pilot QA 检查清单（identity / structural / data / rights / render / deployment）
+- [`PILOT_HANDOFF.md`](PILOT_HANDOFF.md) — pilot 交接指南（what this pilot proves / does not prove / if turning into real exhibition / safe reuse）
+- [`docs/PILOT_QA_REPORT.md`](docs/PILOT_QA_REPORT.md) — 最近一次 QA 报告（v3.4 round Playwright 实测）
+
+状态：
+
+- pilot 已经过 v3.4 hardening
+- repository only
+- not deployed
+- future formalization needs source audit and release workflow

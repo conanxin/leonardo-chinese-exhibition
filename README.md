@@ -238,6 +238,16 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 
 详见 [`docs/RELEASE_NOTES_v3.3_REAL_TEMPLATE_QUALITY_GATE.md`](docs/RELEASE_NOTES_v3.3_REAL_TEMPLATE_QUALITY_GATE.md)、[`release-assets/v3.3-real-template-quality-gate-manifest.md`](release-assets/v3.3-real-template-quality-gate-manifest.md)、[`reports/leonardo_chinese_exhibition_v3_3_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_3_real_stable_freeze_report.md)。
 
+## v3.4 Real Second Exhibition Hardening
+
+- **Source tag**: `v3.3-real-template-quality-gate` @ `fce2efb`
+- Adds pilot QA checklist — [`_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md`](_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md)
+- Adds pilot handoff guide — [`_pilots/second-exhibition-pilot/PILOT_HANDOFF.md`](_pilots/second-exhibition-pilot/PILOT_HANDOFF.md)
+- Adds pilot QA report — [`_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md`](_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md)
+- Keeps pilot repository-only
+- Does not modify live site
+- Does not deploy pilot
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
