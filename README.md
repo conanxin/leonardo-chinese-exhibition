@@ -252,6 +252,30 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   - Keeps pilot repository-only and not deployed
   - Does not modify live site
 
+## v4.0 Real Second Exhibition Plan
+
+- Status: **planning only**
+- Recommended direction: **《植物图谱与视觉分类》**
+- Recommended working title: 《植物图谱与视觉分类：从自然史图像到知识秩序》
+- Source release: `v3.4-real-second-exhibition-hardening`（tag target `81f5e92`，object `2d186a89`）
+- Source baseline HEAD: `14444d0`
+- Verified live byte size: 92,976 B（v4.0 不得变更）
+- No live changes
+- No deployment
+- No images imported
+- Pilot (`_pilots/second-exhibition-pilot/`) remains repository-only
+- Quality gate: `scripts/template_quality_gate.py` → 37/37 PASS
+- Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
+- No new tag, no new GitHub Release in v4.0
+- Planning docs:
+  - [`docs/SECOND_EXHIBITION_PLAN_v4.0.md`](docs/SECOND_EXHIBITION_PLAN_v4.0.md) — theme + MVE + non-goals
+  - [`docs/SECOND_EXHIBITION_SOURCE_SCOPE_v4.0.md`](docs/SECOND_EXHIBITION_SOURCE_SCOPE_v4.0.md) — preferred source types + candidate institutions + required metadata per asset + source acceptance rule
+  - [`docs/SECOND_EXHIBITION_RIGHTS_RISK_REGISTER_v4.0.md`](docs/SECOND_EXHIBITION_RIGHTS_RISK_REGISTER_v4.0.md) — risk levels + known risk categories + register table + release blocker rule
+  - [`docs/SECOND_EXHIBITION_CONTENT_OUTLINE_v4.0.md`](docs/SECOND_EXHIBITION_CONTENT_OUTLINE_v4.0.md) — working title + sections + artifact types + glossary candidates + writing tasks
+  - [`docs/V4_ROADMAP.md`](docs/V4_ROADMAP.md) — v4.0 → v4.4 phased plan
+- Report: [`reports/leonardo_chinese_exhibition_v4_0_real_second_exhibition_plan_report.md`](reports/leonardo_chinese_exhibition_v4_0_real_second_exhibition_plan_report.md)
+- Next recommended task: **v4.1 — Source Candidate Research** (populate candidate source table; no download; no live change)
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
