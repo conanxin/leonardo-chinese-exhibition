@@ -50,19 +50,30 @@
 
 | 项 | 值 |
 |---|---|
-| 状态 | **In progress**（本 round 进行中） |
+| 状态 | **Done**（`v3.2-real-template-documentation` @ `5a89fb2`，tag + GitHub Release + freeze report 全部落地） |
 | 起点 | 已封版的 `v3.1-real-second-exhibition-pilot` @ `c5e93d0` |
 | 交付物 | 五份中文模板使用手册（usage / authoring / rights checklist / pilot workflow / release workflow） + `_template/README.md` 追加"使用文档"小节 |
 | 范围 | `_template/USAGE_GUIDE_ZH.md` + `_template/CONTENT_AUTHORING_GUIDE_ZH.md` + `_template/SOURCE_RIGHTS_CHECKLIST_ZH.md` + `_template/PILOT_WORKFLOW_ZH.md` + `_template/RELEASE_WORKFLOW_ZH.md` |
 | 不做的事 | 不修改 `site/index.html` / `site/style.css` / `site/script.js`，不修改 `_template/site/`，不修改 `_template/data/`，不修改 `_pilots/second-exhibition-pilot/` 内容，不创建新 pilot，不部署，不移动任何旧 tag，不修改旧 GitHub Releases，不新增真实馆藏图片 |
-| 下一步 | v3.2-real-stable-freeze |
+| 下一步 | v3.3 Template Quality Gate（本 round）或 v3.3-real-stable-freeze |
 
-## v3.3 Optional Real Second Exhibition
+## v3.3 Template Quality Gate
 
 | 项 | 值 |
 |---|---|
-| 状态 | **Optional**（只有 v3.1 pilot 验证模板真正可复用后才做） |
-| 起点 | v3.0 / v3.1 / v3.2 都封版后 |
+| 状态 | **In progress**（本 round 进行中） |
+| 起点 | 已封版的 `v3.2-real-template-documentation` @ `5a89fb2` |
+| 交付物 | `scripts/template_quality_gate.py`（37 项检查：A required paths / B JSON validity / C forbidden terms / D pilot structure / E release workflow rule / F no accidental deployment signal / G summary） + `docs/TEMPLATE_QUALITY_GATE.md` |
+| 范围 | 自动化质量门禁脚本 + 文档说明；不修改 `_template/`、`_pilots/`、`site/` 内容 |
+| 不做的事 | 不修改 `site/index.html` / `site/style.css` / `site/script.js`，不修改 `_template/site/`，不修改 `_template/data/`，不修改 5 个手册正文，不修改 `_pilots/second-exhibition-pilot/` 内容，不创建新 pilot，不部署，不移动任何旧 tag，不修改旧 GitHub Releases |
+| 下一步 | v3.3-real-stable-freeze 或 v3.4-real-second-exhibition-hardening |
+
+## v3.4 Optional Real Second Exhibition
+
+| 项 | 值 |
+|---|---|
+| 状态 | **Optional**（只有 v3.3 quality gate 验证通过后才做） |
+| 起点 | v3.0 / v3.1 / v3.2 / v3.3 都封版后 |
 | 交付物 | 第二个真实展览（独立项目） |
 | 范围 | 全新主题、新数据、新图像、新文档流 |
 | 不做的事 | 不复用 Leonardo 资产，不影响 Leonardo live |
@@ -91,9 +102,11 @@ v3.0-real-template-extraction-audit  (Done — tag + Release)
     ↓
 v3.1-real-second-exhibition-pilot  (Done — pilot + tag + Release, freeze 同步)
     ↓
-v3.2-template-documentation  (In progress — 本 round)
+v3.2-real-template-documentation  (Done — tag + Release)
     ↓
-v3.3+ optional real second exhibition
+v3.3-template-quality-gate  (In progress — 本 round)
+    ↓
+v3.4+ optional real second exhibition
 ```
 
 ---
