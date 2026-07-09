@@ -178,10 +178,10 @@
 ## freeze commit 回填（commit + tag 创建后填）
 
 - freeze commit：`5a89fb2061ef3eee95c63dc3592d92fb859177fe`
-- tag object：（tag push 后回填）
+- tag object：`77a89fb5ffccaae0f686ed2eb388453b1901fe33`
 - tag target：`5a89fb2061ef3eee95c63dc3592d92fb859177fe`（annotated tag → freeze commit）
-- GitHub Release URL：（release create 后回填）
-- Actions run id：（Pages deploy 后回填）
+- GitHub Release URL：https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v3.2-real-template-documentation
+- Actions run id：`28988636250`（覆盖 freeze `5a89fb2` + backfill `a092acb`，Pages deploy success）
 
 ---
 
