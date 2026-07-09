@@ -15,14 +15,14 @@
 | Source tag object | `fb35a5d9aece0bf44d82e3f7f25c2a73b8e6a70e` |
 | Source tag target | `fce2efb5f0fcbbb3bd4e25c8008513f8c2462eb4` |
 | Hardening commit | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` |
-| Freeze commit (post-backfill HEAD) | `77d1d81a8bb17d9ba62dac104618f61f9b9f9f05` |
+| Freeze commit (post-backfill HEAD) | `f1e4b7eb66e8526a5fe2cd3c3f52297a3d561aba` |
 | GitHub Release URL | https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v3.4-real-second-exhibition-hardening |
 | GitHub Release created | `2026-07-09T02:57:06Z` (after real-recovery from initial lightweight push) |
 
 ## Baseline
 
-- baseline HEAD at round start = `77d1d81a8bb17d9ba62dac104618f61f9b9f9f05` (= freeze commit, post-backfill HEAD)
-- baseline origin/main = `77d1d81a8bb17d9ba62dac104618f61f9b9f9f05` (already in sync from prior v3.4 hardening round)
+- baseline HEAD at round start = `f1e4b7eb66e8526a5fe2cd3c3f52297a3d561aba` (= freeze commit, post-backfill HEAD)
+- baseline origin/main = `f1e4b7eb66e8526a5fe2cd3c3f52297a3d561aba` (already in sync from prior v3.4 hardening round)
 - baseline working tree: clean (only untracked `.firecrawl/`, recorded but not processed per rule)
 
 ## Source tag
@@ -206,7 +206,7 @@ prior v3.4-hardening round 初次 `git tag -a ...` 后，叙述工具返回的 t
 
 | 项 | 值 | 来源 |
 |---|---|---|
-| freeze commit SHA | `77d1d81a8bb17d9ba62dac104618f61f9b9f9f05` | `git rev-parse HEAD` |
+| freeze commit SHA | `f1e4b7eb66e8526a5fe2cd3c3f52297a3d561aba` | `git rev-parse HEAD` |
 | hardening commit SHA | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` | `git rev-parse v3.4-real-second-exhibition-hardening^{}` |
 | verified live byte | 92,976 B | `curl -L -s <live-url> \| wc -c` |
 | verified v3.4 tag object | `2d186a892af0e1ab41c1d9b8a055842e01339cb6` | `git rev-parse v3.4-...` |
@@ -227,4 +227,4 @@ prior v3.4-hardening round 初次 `git tag -a ...` 后，叙述工具返回的 t
 ---
 
 > 本报告由 v3.4-real-stable-freeze 真实创建。
-> 真实 SHA 三件套：freeze `77d1d81` + live byte 92,976 + tag object `2d186a89` → target `81f5e92`。
+> 真实 SHA 三件套：freeze `f1e4b7e` + live byte 92,976 + tag object `2d186a89` → target `81f5e92`。
