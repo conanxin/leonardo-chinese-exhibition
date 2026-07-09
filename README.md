@@ -240,13 +240,17 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 
 ## v3.4 Real Second Exhibition Hardening
 
-- **Source tag**: `v3.3-real-template-quality-gate` @ `fce2efb`
-- Adds pilot QA checklist — [`_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md`](_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md)
-- Adds pilot handoff guide — [`_pilots/second-exhibition-pilot/PILOT_HANDOFF.md`](_pilots/second-exhibition-pilot/PILOT_HANDOFF.md)
-- Adds pilot QA report — [`_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md`](_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md)
-- Keeps pilot repository-only
-- Does not modify live site
-- Does not deploy pilot
+- Live: https://conanxin.github.io/leonardo-chinese-exhibition/
+- Tag: `v3.4-real-second-exhibition-hardening`
+- Status: verified second exhibition pilot hardening
+- Verified live byte size: 92,976 B
+- Source tag: `v3.3-real-template-quality-gate`
+- Notes:
+  - Adds pilot QA checklist — [`_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md`](_pilots/second-exhibition-pilot/PILOT_QA_CHECKLIST.md)
+  - Adds pilot handoff guide — [`_pilots/second-exhibition-pilot/PILOT_HANDOFF.md`](_pilots/second-exhibition-pilot/PILOT_HANDOFF.md)
+  - Adds pilot QA report — [`_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md`](_pilots/second-exhibition-pilot/docs/PILOT_QA_REPORT.md)
+  - Keeps pilot repository-only and not deployed
+  - Does not modify live site
 
 ## 当前版本
 
