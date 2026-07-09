@@ -200,6 +200,18 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - [`release-assets/v3.1-real-second-exhibition-pilot-manifest.md`](release-assets/v3.1-real-second-exhibition-pilot-manifest.md) — release manifest
 - 报告：[`reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md`](reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md)、[`reports/leonardo_chinese_exhibition_v3_1_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_1_real_stable_freeze_report.md)
 
+## v3.2 Template Documentation
+
+v3.2 是基于已封版的 `v3.1-real-second-exhibition-pilot` 模板使用文档补齐轮。**只做文档，不改 live、不动 pilot、不部署**。
+
+- Adds template usage guide — [`_template/USAGE_GUIDE_ZH.md`](_template/USAGE_GUIDE_ZH.md)
+- Adds content authoring guide — [`_template/CONTENT_AUTHORING_GUIDE_ZH.md`](_template/CONTENT_AUTHORING_GUIDE_ZH.md)
+- Adds source and rights checklist — [`_template/SOURCE_RIGHTS_CHECKLIST_ZH.md`](_template/SOURCE_RIGHTS_CHECKLIST_ZH.md)
+- Adds pilot workflow — [`_template/PILOT_WORKFLOW_ZH.md`](_template/PILOT_WORKFLOW_ZH.md)
+- Adds release workflow — [`_template/RELEASE_WORKFLOW_ZH.md`](_template/RELEASE_WORKFLOW_ZH.md)
+- Does not modify live site or pilot
+- Stable freeze next
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

@@ -30,34 +30,32 @@
 
 | 项 | 值 |
 |---|---|
-| 状态 | **In progress**（本 round 进行中） |
+| 状态 | **Done**（`v3.1-real-second-exhibition-pilot` @ `c5e93d0`，tag + GitHub Release + freeze report 全部落地） |
 | 起点 | 已封版的 `v3.0-real-template-extraction-audit` @ `dd7d589` |
-| 交付物 | `_pilots/second-exhibition-pilot/`（基于 `_template/` 实例化的第一个 second pilot） |
+| 交付物 | `_pilots/second-exhibition-pilot/`（18 文件，pilot 验证模板真正可复用） |
 | 范围 | 主题《一件作品的旅程》 + 自制 SVG（3 张） + 4 section + 4 artifact card + 6 glossary + source/rights docs + 5 内部 docs + README/manifest/notes |
-| 不做的事 | 不部署到 GitHub Pages，不引入真实馆藏图片，不修改 `_template/`，不修改旧 tag，不创建 tag / Release |
-| 下一步 | v3.1-real-stable-freeze（独立 freeze round）或 v3.2 Template Documentation |
+| 不做的事 | 不部署到 GitHub Pages，不引入真实馆藏图片，不修改 `_template/`，不修改旧 tag |
+| 下一步 | v3.1-real-stable-freeze（已完成，与本 round 同 commit 链） |
 
 ## v3.1 Second Exhibition Pilot — stable freeze
 
 | 项 | 值 |
 |---|---|
-| 状态 | **Planned**（v3.1 pilot 验证模板真正可复用后才做） |
-| 起点 | 本 round 创建的 `_pilots/second-exhibition-pilot/` HEAD |
-| 交付物 | 给 pilot 自身打 tag + GitHub Release（pilot 内部 release，仅审计凭证） |
+| 状态 | **Done**（与 v3.1 pilot 同步完成，2-commit freeze：pilot 创建 `ae1a54e` → freeze `de017f9` → SHA backfill `c5e93d0`） |
+| tag | `v3.1-real-second-exhibition-pilot` (`f839187` / target `c5e93d0`) |
 | 范围 | 冻结 pilot 数据 / 站点 / 文档 + 写 freeze report |
 | 不做的事 | 不创建第二个 pilot，不部署 |
-| 下一步 | v3.2 Template Documentation |
 
 ## v3.2 Template Documentation
 
 | 项 | 值 |
 |---|---|
-| 状态 | **Planned** |
-| 起点 | v3.0 tag + v3.1 pilot |
-| 交付物 | 完整使用手册（usage / authoring / rights checklist / pilot workflow / release workflow） |
-| 范围 | `_template/USAGE_GUIDE_ZH.md` + `CONTENT_AUTHORING_GUIDE_ZH.md` + `SOURCE_RIGHTS_CHECKLIST_ZH.md` + `PILOT_WORKFLOW_ZH.md` + `RELEASE_WORKFLOW_ZH.md` |
-| 不做的事 | 不修改 live，不部署 |
-| 下一步 | v3.3+ Optional Real Second Exhibition |
+| 状态 | **In progress**（本 round 进行中） |
+| 起点 | 已封版的 `v3.1-real-second-exhibition-pilot` @ `c5e93d0` |
+| 交付物 | 五份中文模板使用手册（usage / authoring / rights checklist / pilot workflow / release workflow） + `_template/README.md` 追加"使用文档"小节 |
+| 范围 | `_template/USAGE_GUIDE_ZH.md` + `_template/CONTENT_AUTHORING_GUIDE_ZH.md` + `_template/SOURCE_RIGHTS_CHECKLIST_ZH.md` + `_template/PILOT_WORKFLOW_ZH.md` + `_template/RELEASE_WORKFLOW_ZH.md` |
+| 不做的事 | 不修改 `site/index.html` / `site/style.css` / `site/script.js`，不修改 `_template/site/`，不修改 `_template/data/`，不修改 `_pilots/second-exhibition-pilot/` 内容，不创建新 pilot，不部署，不移动任何旧 tag，不修改旧 GitHub Releases，不新增真实馆藏图片 |
+| 下一步 | v3.2-real-stable-freeze |
 
 ## v3.3 Optional Real Second Exhibition
 
@@ -91,11 +89,9 @@ v2.9-real-source-rights-audit  (verified, freeze)
     ↓
 v3.0-real-template-extraction-audit  (Done — tag + Release)
     ↓
-v3.1-second-exhibition-pilot  (本 round 进行中)
+v3.1-real-second-exhibition-pilot  (Done — pilot + tag + Release, freeze 同步)
     ↓
-v3.1-real-stable-freeze  (Planned — 给 pilot 自身打 tag)
-    ↓
-v3.2-template-documentation
+v3.2-template-documentation  (In progress — 本 round)
     ↓
 v3.3+ optional real second exhibition
 ```

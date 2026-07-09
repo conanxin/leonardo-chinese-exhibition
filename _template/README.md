@@ -133,6 +133,18 @@ v3.0 只创建骨架，不创建 pilot：
 
 ---
 
+## 使用文档
+
+v3.2 新增五份中文手册，分别覆盖模板使用、内容写作、来源与权利核验、pilot 工作流、发布与封版：
+
+- [USAGE_GUIDE_ZH.md](./USAGE_GUIDE_ZH.md) — 中文数字展览模板使用手册：从模板开始的 8 步、最小可行展览、目录结构、常见错误
+- [CONTENT_AUTHORING_GUIDE_ZH.md](./CONTENT_AUTHORING_GUIDE_ZH.md) — 内容写作指南：标题 / Hero / 3 分钟导览 / section / artifact card / deep block / glossary 的写作原则
+- [SOURCE_RIGHTS_CHECKLIST_ZH.md](./SOURCE_RIGHTS_CHECKLIST_ZH.md) — 来源与权利检查清单：图片 / 平台截图 / 自制图解 / 发布前核验
+- [PILOT_WORKFLOW_ZH.md](./PILOT_WORKFLOW_ZH.md) — Pilot 工作流：为什么先做 pilot、pilot 应包含什么、不应做什么、如何从 pilot 到正式展览
+- [RELEASE_WORKFLOW_ZH.md](./RELEASE_WORKFLOW_ZH.md) — 发布与封版工作流：版本阶段、必须记录项、禁止事项、stable freeze checklist、Reality recovery rule
+
+---
+
 ## 重要约束（使用本模板时也适用）
 
 - 不要修改 live 站点 `site/` 来"顺手"补模板
