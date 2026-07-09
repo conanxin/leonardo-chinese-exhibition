@@ -206,10 +206,10 @@
 ## freeze commit 回填（commit + tag 创建后填）
 
 - freeze commit：`fce2efb5f0fcbbb3bd4e25c8008513f8c2462eb4`
-- tag object：（tag push 后回填）
+- tag object：`fb35a5d9aece0bf44d82e3f7f25c2a73b8e6a70e`
 - tag target：`fce2efb5f0fcbbb3bd4e25c8008513f8c2462eb4`（annotated tag → freeze commit）
-- GitHub Release URL：（release create 后回填）
-- Actions run id：（Pages deploy 后回填）
+- GitHub Release URL：https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v3.3-real-template-quality-gate
+- Actions run id：`28989446822`（覆盖 freeze `fce2efb` + backfill `3a4a8c8`，Pages deploy success）
 
 ---
 
