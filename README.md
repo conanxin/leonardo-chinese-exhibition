@@ -276,6 +276,34 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - Report: [`reports/leonardo_chinese_exhibition_v4_0_real_second_exhibition_plan_report.md`](reports/leonardo_chinese_exhibition_v4_0_real_second_exhibition_plan_report.md)
 - Next recommended task: **v4.1 — Source Candidate Research** (populate candidate source table; no download; no live change)
 
+## v4.1 Source Candidate Research
+
+- Status: **source research only**
+- No live changes
+- No images downloaded
+- No assets approved (the status `approved` is **not used** in v4.1; only `candidate` / `needs rights audit` / `excluded`)
+- No new tag, no new GitHub Release
+- Candidate institutions researched (6):
+  - Biodiversity Heritage Library
+  - Wellcome Collection
+  - Smithsonian Open Access
+  - The Met Open Access
+  - Rijksmuseum
+  - Library of Congress
+- Candidate docs created (5):
+  - [`docs/SOURCE_CANDIDATES_v4.1.md`](docs/SOURCE_CANDIDATES_v4.1.md) — institution summaries + 12 candidate directions
+  - [`docs/SOURCE_CANDIDATE_TABLE_v4.1.md`](docs/SOURCE_CANDIDATE_TABLE_v4.1.md) — 14 candidate rows across 6 institutions
+  - [`docs/INSTITUTION_POLICY_NOTES_v4.1.md`](docs/INSTITUTION_POLICY_NOTES_v4.1.md) — per-institution policy notes
+  - [`docs/ASSET_CANDIDATE_MATRIX_v4.1.md`](docs/ASSET_CANDIDATE_MATRIX_v4.1.md) — 4-section matrix (观察 / 分类 / 复制 / 再组织)
+  - [`docs/RIGHTS_SCREENING_DECISIONS_v4.1.md`](docs/RIGHTS_SCREENING_DECISIONS_v4.1.md) — preliminary decisions (12 keep / 2 replace / 1 exclude)
+- v4.1 → v4.2: 12 rows enter v4.2 audit (`keep for v4.2 audit`)
+- v4.1 → project-generated: 2 rows (`replace with project-generated diagram`)
+- v4.1 → excluded at v4.1: 1 row (BHL in-copyright subset under CC BY-NC-SA 4.0, NC clause mismatch)
+- Pilot (`_pilots/second-exhibition-pilot/`) remains repository-only
+- Quality gate: `scripts/template_quality_gate.py` → 37/37 PASS
+- Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
+- Next: **v4.2 — Rights Audit** (per-item verification of the 12 `keep` rows; promotion to `verified` / downgrade to `blocked` / `excluded`)
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

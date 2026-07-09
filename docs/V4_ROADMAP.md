@@ -41,28 +41,49 @@
 
 ## v4.1 — Source Candidate Research
 
-**Goal.** Populate the candidate source table for the recommended direction (botanical plates and visual taxonomy). No download yet.
+**Goal.** Populate the candidate source table for the recommended direction (botanical plates and visual taxonomy). **No download, no asset approval, no live change.**
 
 **Tasks.**
 
 - Research each of the six candidate institutions (BHL, Wellcome, Smithsonian Open Access, The Met Open Access, Rijksmuseum, Library of Congress) at the **collection / search-page level** — not the individual asset level.
 - For each candidate institution: record overall rights posture, API or IIIF availability, per-item rights-metadata field, identifier persistence.
-- Identify **candidate assets** (not yet downloaded): one per section, plus one alternate per section.
-- Record, per candidate asset, the source URL, collection URL, identifier, and the *exact* rights string on the source page (or note that the source page does not expose a rights string).
-- Update the risk register rows from `pending` to a level when enough evidence exists (Low / Medium / High / Blocked).
+- Generate the source candidate table — at least 12 rows, ≥ 1 row per institution, every row's status is one of `candidate` / `needs rights audit` / `excluded` (never `approved`).
+- Generate per-institution policy notes: official rights / terms URL, open-access / public-domain wording *as written*, attribution expectation, download / API note, uncertainty, v4.2 audit question.
+- Generate the asset candidate matrix aligned with the v4.0 content outline's 4 sections (观察 / 分类 / 复制 / 再组织), with candidate asset types, possible source institutions, source / search URLs, rights risk, fit, and whether a project-generated diagram may substitute.
+- Generate preliminary rights-screening decisions: `keep for v4.2 audit` / `exclude` / `replace with project-generated diagram`. **v4.1 does not approve any asset.** Low risk is still only a candidate. High-risk platform screenshots are replaced with project-generated diagrams by default.
+
+**Deliverables (this round).**
+
+- `docs/SOURCE_CANDIDATES_v4.1.md` — institution summaries + 10–12 candidate directions.
+- `docs/SOURCE_CANDIDATE_TABLE_v4.1.md` — table with ≥ 12 rows, ≥ 1 per institution, status limited to `candidate` / `needs rights audit` / `excluded`.
+- `docs/INSTITUTION_POLICY_NOTES_v4.1.md` — per-institution policy notes (no legal conclusions; exact wording recorded).
+- `docs/ASSET_CANDIDATE_MATRIX_v4.1.md` — 4-section matrix with candidate asset types, source institutions, source / search URLs, rights risk, fit, and project-generated substitution guidance.
+- `docs/RIGHTS_SCREENING_DECISIONS_v4.1.md` — preliminary decision rules + per-row table.
+- `README.md` updated with a `v4.1 Source Candidate Research` block.
+- `reports/leonardo_chinese_exhibition_v4_1_source_candidate_research_report.md`.
 
 **Do NOT do in v4.1.**
 
 - Do not download or import any image file into the working tree.
-- Do not write into `site/`.
+- Do not add any image file to the repository.
+- Do not write into `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/`.
+- Do not modify `scripts/template_quality_gate.py`.
 - Do not start the template instantiation.
+- Do not mark any candidate `approved`. The status `approved` is **not used** in v4.1.
+- Do not create a tag or GitHub Release.
+- Do not move or rewrite any pre-existing tag (`v2.0` through `v3.4`) or any pre-existing GitHub Release.
+- Do not process the untracked `.firecrawl/` directory.
 
 **Exit criteria for v4.1.**
 
-- Candidate source table populated with one row per candidate asset.
-- Each row carries: title, creator, date, institution, collection URL, image URL (if reachable without download), rights statement (or "not exposed"), identifier, source note, audit status = `pending`.
-- `template_quality_gate.py` still PASS.
-- Live byte size still **92,976 B**.
+- All five v4.1 candidate docs (`SOURCE_CANDIDATES`, `SOURCE_CANDIDATE_TABLE`, `INSTITUTION_POLICY_NOTES`, `ASSET_CANDIDATE_MATRIX`, `RIGHTS_SCREENING_DECISIONS`) exist and are committed.
+- `README.md` v4.1 block committed.
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- `git diff` against `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/` is **empty**.
+- Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**, pilot title in live still **0**.
+- `find` confirms no new image files (`.jpg` / `.jpeg` / `.png` / `.webp` / `.tif` / `.tiff`).
+- `approved` does not appear as a Status value in `SOURCE_CANDIDATE_TABLE_v4.1.md`.
+- No new tag, no new GitHub Release.
 
 ---
 
