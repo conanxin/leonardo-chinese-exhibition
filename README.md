@@ -221,21 +221,22 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 
 详见 [`docs/RELEASE_NOTES_v3.2_REAL_TEMPLATE_DOCUMENTATION.md`](docs/RELEASE_NOTES_v3.2_REAL_TEMPLATE_DOCUMENTATION.md)、[`release-assets/v3.2-real-template-documentation-manifest.md`](release-assets/v3.2-real-template-documentation-manifest.md)、[`reports/leonardo_chinese_exhibition_v3_2_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_2_real_stable_freeze_report.md)。
 
-## v3.3 Template Quality Gate
+## v3.3 Real Template Quality Gate
 
-Adds a reusable quality gate script for the template and pilot:
+- **Live**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Tag**: `v3.3-real-template-quality-gate`
+- **Status**: verified template quality gate（PASS）
+- **Verified live byte size**: 92,976 B
+- **Source tag**: `v3.2-real-template-documentation`
+- **Quality gate**:
+  - [`scripts/template_quality_gate.py`](scripts/template_quality_gate.py)
+  - 37/37 checks PASS
+- **Notes**:
+  - Does not modify live site
+  - Does not modify pilot
+  - Keeps template and pilot quality checks repeatable
 
-- **Source tag**: `v3.2-real-template-documentation` @ `5a89fb2`
-- **Script**: [`scripts/template_quality_gate.py`](scripts/template_quality_gate.py)
-- **Doc**: [`docs/TEMPLATE_QUALITY_GATE.md`](docs/TEMPLATE_QUALITY_GATE.md)
-- **Checks**: required paths / JSON validity / forbidden terms / pilot structure / release workflow rule / no accidental deployment signal
-- Does not modify live site
-- Does not deploy the pilot
-- Run with:
-
-```bash
-python3 scripts/template_quality_gate.py
-```
+详见 [`docs/RELEASE_NOTES_v3.3_REAL_TEMPLATE_QUALITY_GATE.md`](docs/RELEASE_NOTES_v3.3_REAL_TEMPLATE_QUALITY_GATE.md)、[`release-assets/v3.3-real-template-quality-gate-manifest.md`](release-assets/v3.3-real-template-quality-gate-manifest.md)、[`reports/leonardo_chinese_exhibition_v3_3_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_3_real_stable_freeze_report.md)。
 
 ## 当前版本
 
