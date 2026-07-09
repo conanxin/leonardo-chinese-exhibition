@@ -304,6 +304,31 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
 - Next: **v4.2 — Rights Audit** (per-item verification of the 12 `keep` rows; promotion to `verified` / downgrade to `blocked` / `excluded`)
 
+## v4.2 Rights Audit
+
+- Status: **rights audit only**
+- No live changes
+- No images downloaded
+- No assets imported
+- No assets approved (the status `approved` is **not used** in v4.2; only `verified` / `needs clarification` / `blocked` / `excluded`)
+- No new tag, no new GitHub Release
+- Candidates audited: 12 (v4.1 shortlist)
+- Verified: **6** (C-01, C-03, C-06, C-08, C-09, C-10)
+- Needs clarification: **6** (C-04, C-05, C-07, C-11, C-12, C-13)
+- Blocked at row level: **0**; Blocked at per-item level: **1** (C-03 CC BY-NC-SA subset)
+- Excluded at row level: **0** in the 12-row shortlist
+- Build planning threshold: verified ≥ 4 → met → v4.3 may proceed
+- v4.2 docs created (5):
+  - [`docs/SOURCE_ACCEPTANCE_CHECKS_v4.2.md`](docs/SOURCE_ACCEPTANCE_CHECKS_v4.2.md) — 5 acceptance checks + status definitions
+  - [`docs/RIGHTS_AUDIT_v4.2.md`](docs/RIGHTS_AUDIT_v4.2.md) — 12-row per-candidate audit table
+  - [`docs/VERIFIED_SOURCE_SHORTLIST_v4.2.md`](docs/VERIFIED_SOURCE_SHORTLIST_v4.2.md) — verified candidates only (6 rows)
+  - [`docs/BLOCKED_OR_EXCLUDED_SOURCES_v4.2.md`](docs/BLOCKED_OR_EXCLUDED_SOURCES_v4.2.md) — needs-clarification / blocked / excluded rows
+  - [`docs/RIGHTS_RISK_REGISTER_v4.2.md`](docs/RIGHTS_RISK_REGISTER_v4.2.md) — per-row risk levels + open risks + release blocker rule
+- Pilot (`_pilots/second-exhibition-pilot/`) remains repository-only
+- Quality gate: `scripts/template_quality_gate.py` → 37/37 PASS
+- Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
+- Next: **v4.3 — Second Exhibition Build Planning** (verified count 6 ≥ 4, so v4.3 may proceed; per-item selection is the v4.3 step)
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

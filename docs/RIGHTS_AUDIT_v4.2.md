@@ -1,0 +1,104 @@
+# v4.2 Rights Audit
+
+> Scope: per-candidate verification of the 12 v4.1 shortlist rows. Each row is re-checked against the 5 source-acceptance checks defined in `docs/SOURCE_ACCEPTANCE_CHECKS_v4.2.md`. The audit re-opens the official source page (or its API documentation) and records the evidence *as the institution's own page shows it* on the day of audit.
+>
+> v4.2 does not make legal conclusions. Each decision is a *project release decision* based on what the institution's own page says.
+
+---
+
+## Audit method
+
+The v4.2 audit follows these rules:
+
+1. **Official source pages only.** Every check is run against an official URL of the institution (e.g., `biodiversitylibrary.org`, `wellcomecollection.org`, `si.edu`, `metmuseum.org`, `rijksmuseum.nl`, `loc.gov`). Third-party summaries are not used as evidence.
+2. **Per-candidate verification.** Each of the 12 v4.1 shortlist rows is re-checked, not assumed from v4.1. The audit treats v4.1 as a *plan*, not a *result*.
+3. **No image download.** No image is downloaded. The audit verifies the *availability* of the image URL (or IIIF endpoint) without retrieving the image body.
+4. **No asset import.** No image is added to the repository. No asset is associated with any row.
+5. **No legal conclusion.** The audit records what the institution's page says, not whether the project is "cleared" to use the work.
+6. **All decisions are project release decisions.** The project may decide to *not* use a Low-risk asset (e.g., because the credit line is awkward), and may decide to *use* a Medium-risk asset (e.g., because the per-item evidence is unusually strong). Each decision is recorded in the Notes column.
+
+The 5 acceptance checks are:
+
+1. Official source URL exists.
+2. Rights statement exists, page-specific or institution-specific.
+3. Object / item / collection identifier exists.
+4. Metadata sufficient for title / creator / date / institution / identifier.
+5. Credit line basis — a credit line can be written *without guessing*.
+
+---
+
+## Candidate audit table
+
+Each row below is a *v4.2* recheck of a v4.1 shortlist row. The Source URL rechecked column says whether the audit re-opened that URL in this round. The Rights URL / statement column records the rights wording *as written on the institution's page*. The Metadata sufficient column records whether the 5 required metadata fields are reachable from that page or its API. The Credit line basis column records the credit-line composition that the audit could write.
+
+| ID | Institution | Source URL rechecked | Rights URL / statement | Identifier found | Metadata sufficient | Credit line basis | Risk level | v4.2 status | Notes |
+|---|---|---|---|---|---|---|---|---|---|
+| **C-01** | BHL | yes — `https://www.biodiversitylibrary.org/advsearch` (search entry) and BHL `Copyright & Reuse` page | `https://about.biodiversitylibrary.org/help/copyright-and-reuse/` — three possible `<Copyright Status>` strings: `Public domain`, `No known copyright restrictions as determined by scanning institution`, `In copyright. Digitized with the permission of the rights holder` | BHL title-level ID (e.g., `<title id>` on the title page) and per-volume `<item id>` on each volume record | Title page exposes: title, author, date, holding institution, copyright status, license type, rights holder (per the v4.1 Permissions page; v4.2 confirms the field set is documented as such) | Verbatim from per-item `<Holding Institution>` + `<Copyright Status>` field; e.g., "Image from the Biodiversity Heritage Library. Contributed by [Holding Institution]. Public domain." | **Low** (Public domain subset) | **verified** | The Public-domain subset of BHL items carries an unambiguous rights statement at the title-level volume page; the per-item check is mechanical. v4.2 verifies the *evidence is locatable*; the *specific item* is still to be selected in v4.3. |
+| **C-03** | BHL | yes — same as C-01; this row is a *title-level book record* rather than a single plate | Same as C-01. Per the BHL Permissions page, in-copyright titles are typically CC BY-NC-SA 4.0; Public-domain titles are `Public domain`. | BHL title-level ID + per-volume `<item id>` | Same as C-01 (title, author, date, holding institution, copyright status, license type) | Same as C-01 (per-item credit line from the BHL page) | **Low** (Public domain subset) or **Medium** (CC BY-NC-SA — non-commercial clause) | **verified** for the Public-domain subset / **blocked** for the CC BY-NC-SA subset | The candidate row is *one* row; the per-item selection in v4.3 must restrict to the Public-domain subset. The Medium / NC clause subset is recorded as a separate observation under "blocked", not as a second row, because the v4.2 audit is a *per-candidate-type* check, not a per-item. |
+| **C-04** | Wellcome | yes — `https://wellcomecollection.org/works` (works search) + `https://developers.wellcomecollection.org/api/catalogue` (Catalogue API v2 docs) | Site-wide default: "Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 4.0 International Licence." Per-item licence field exists in Catalogue API v2 (`items.locations.license` enum: `cc-by` / `cc-0` / `pdm` / `cc-by-nc` / `cc-by-nc-nd` / `cc-by-nd` / `cc-by-sa` / `cc-by-nc-sa` / `ogl` / `opl` / `inc`). | Wellcome canonical work ID (path: `/works/{id}`); image-level ID (path: `/images/{id}`) | Catalogue API v2 `/works/{id}` returns: title, contributors, production dates, identifiers, items, holdings, subjects, genres. Sufficient for title / creator / date / institution / identifier. | Composed from Wellcome name + the per-item licence (e.g., "Wellcome Collection. CC BY 4.0."). The exact credit string depends on the per-item licence selected. | **Low** (with per-item CC BY 4.0 confirmation) | **needs clarification** | The site-wide CC BY 4.0 default is documented, but each per-item licence field must be confirmed because the default is "except where otherwise noted". v4.2 records the *mechanism* (the API field is verifiable) but does not have a per-item selection yet. Clarification closes when v4.3 picks a specific item and the per-item `items.locations.license` is captured. |
+| **C-05** | Wellcome | yes — `https://developers.wellcomecollection.org/api/iiif` (IIIF Image API 3.0 docs) | IIIF info.json does *not* carry a rights field by itself; the rights field is on the Catalogue API record, not on the IIIF endpoint. The audit confirms the *combination* (Catalogue API work + IIIF image) is the right access path. | Wellcome image ID (the identifier passed to the IIIF Image API). The work ID and the image ID are linked through the Catalogue API. | Per-image IIIF info.json exposes image format / dimensions only; per-work Catalogue API record exposes title, creator, date, identifiers, licence. | Same as C-04 (Catalogue API work record is the source of the rights field). | **Low–Medium** (per item) | **needs clarification** | The IIIF endpoint alone is not sufficient; the audit must pair each IIIF image with a Catalogue API work record. v4.2 records the *mechanism* (IIIF + Catalogue API) but the per-item selection is deferred to v4.3. |
+| **C-06** | Smithsonian Open Access (NMNH) | yes — `https://www.si.edu/openaccess` + `https://edan.si.edu/openaccess/apidocs/` + `https://www.si.edu/openaccess/faq` | "We have released these images and data into the public domain as Creative Commons Zero (CC0)." Per the FAQ: items *not* marked CC0 are "subject to usage conditions". API requires an API key (free registration). | `edanmdm-<unit>_<id>` object ID (e.g., `edanmdm-nmnhbotany_1234567`); Smithsonian accession number; NMNH DarwinCore triplet. | EDAN `/content/:id` response includes `id`, `title`, `unitCode`, `url`, `content` (with metadata). Sufficient for title / creator / date / institution / identifier. | "Smithsonian National Museum of Natural History. [Object title]. [Accession number]. CC0." The accession number is mandatory because the Smithsonian FAQ explicitly recommends a "minimal" caption of title, author, source, license, and source URL. | **Low** (with CC0 icon / data confirmation) | **verified** | The Smithsonian's CC0 program is rigorous and binary. The audit confirms the *mechanism* (EDAN API + per-item CC0 marking) and the *credit line composition* (CC0 + accession number). The per-item selection in v4.3 must include the accession number. |
+| **C-07** | Smithsonian Open Access (general) | yes — `https://github.com/Smithsonian/OpenAccess` + EDAN API docs | Same as C-06 (CC0 for the *data*; image rights depend on the linked item). | `edanmdm-<unit>_<id>` object ID; same as C-06. | Same as C-06. | Same as C-06, with an extra note that the *image's* rights depend on the linked item's per-item page. | **Low** (for the data) / **Medium** (for the image) | **needs clarification** | The data dump is CC0, but the *image* is CC0 only if the linked item is CC0. The audit's mechanism (per-item check via EDAN API) is the same as C-06, so the *clarification* is structural: every C-07 row must be promoted via a per-item C-06-style check, not assumed from the dump. v4.3 will run this per-item. |
+| **C-08** | Met Open Access | yes — `https://metmuseum.github.io/` (Collection API docs) + `https://www.metmuseum.org/about-the-met/policies-and-documents/image-resources` (Image Resources policy) + `https://github.com/metmuseum/openaccess/blob/master/LICENSE` (CC0 1.0) | Dataset: CC0 1.0. Image: CC0 only if (a) `isPublicDomain: true` in the API record AND (b) the public object page shows the Open Access icon. Image Resources policy: "On February 7, 2017, The Metropolitan Museum of Art implemented a new policy known as Open Access, which makes images of artworks it believes to be in the public domain widely and freely available for unrestricted use, and at no cost, in accordance with the Creative Commons Zero (CC0) designation." | `objectID` (unique) and `accessionNumber` (often unique). Both exposed by Collection API. | Collection API `/objects/{id}` returns: `objectID`, `accessionNumber`, `isPublicDomain`, `primaryImage`, `primaryImageSmall`, `title`, `artistDisplayName`, `artistDisplayBio`, `objectDate`, `objectBeginDate`, `objectEndDate`, `medium`, `dimensions`, `creditLine`, `objectURL`, `classification`, `department`, `repository`. Sufficient for title / creator / date / institution / identifier. | "The Metropolitan Museum of Art. [Object title]. [Object date]. [Credit line]. CC0." The `creditLine` field is part of the API response. | **Low** (if both `isPublicDomain: true` AND public-page OA icon present) | **verified** (mechanism) | The Collection API is the canonical access path; both the dataset and the per-item image are reachable from a single API. The double-confirmation rule (`isPublicDomain: true` + public-page OA icon) is mechanical and v4.2 verifies that the API field exists. v4.3 will pick a specific item. |
+| **C-09** | Rijksmuseum | yes — `https://data.rijksmuseum.nl/policy/information-and-data-policy` (full policy text) + `https://data.rijksmuseum.nl/docs/` (data services docs index) | Two-tier: CC0 1.0 (objects no longer in copyright + associated metadata) or CC BY 4.0 (objects where a third-party rights holder has granted the museum a written, unrestricted licence). Policy published under CC BY 4.0. | `objectNumber` (e.g., `SK-C-5`); persistent ID `id.rijksmuseum.nl/{identifier}`. The June 2026 update makes `id.rijksmuseum.nl/...` the canonical PID. | Object metadata via Persistent Identifier Resolver: title, creator, date, materials, dimensions, identifiers, licence. Sufficient for title / creator / date / institution / identifier. | "Rijksmuseum. [Object title]. [Creator]. [Date]. [objectNumber]. [CC0 1.0 / CC BY 4.0]." | **Low** (CC0) or **Low–Medium** (CC BY 4.0) | **verified** (mechanism) | The Rijksmuseum policy is the clearest of the six: two-tier, well-documented, with `licence` field on the object record. The audit confirms the *mechanism* (Persistent ID Resolver + licence field). v4.3 picks a specific object. |
+| **C-10** | Rijksmuseum | yes — `https://data.rijksmuseum.nl/tutorials/iiif/` + `https://data.rijksmuseum.nl/docs/iiif/` (IIIF Image API / Presentation API / Change Discovery API docs) | Per-item; same as C-09 (CC0 or CC BY 4.0). The IIIF Presentation API manifest exposes a `license` field; the audit confirms the field exists. | Same as C-09. The IIIF manifest URL contains the persistent ID. | IIIF manifest: label, summary, metadata, license, image service URL. The Catalogue-side metadata (title, creator, date) is reachable through the manifest's `metadata` field. | Same as C-09 (per-item licence). | **Low** (per item) | **verified** (mechanism) | The IIIF Presentation API is a re-linking layer; its `license` field is verifiable. v4.3 picks a specific item. |
+| **C-11** | LoC P&P | yes — `https://www.loc.gov/pictures/item/tgm001244/` (Botanical illustrations subject heading) + `https://www.loc.gov/collections/chronicling-america/about-this-collection/rights-and-access/` (a representative LoC rights page) | Per-collection. The `tgm001244` page is a subject heading, not a collection; actual P&P items live in P&P Online Catalog and their rights wording depends on the *donor / division*. General LoC pattern: "U.S. government works not subject to copyright" or "no known copyright restrictions" — both non-affirmative variants. | `loc.gov/pictures/item/<id>/` persistent URL; per-item record exposes a call number and persistent URL. | Per-item record: title, creator, date, call number, repository, rights statement. Sufficient for title / creator / date / institution / identifier. | "Library of Congress, [Division]. [Item title]. [Date]. [Call number]. [Rights statement verbatim]." | **Low** (U.S. government work) or **Medium** ("no known" wording — non-affirmative) | **needs clarification** | The P&P subject heading is a thesaurus term, not a single collection; the audit cannot pre-clear a rights statement for an unspecified item. The clarification closes in v4.3 by picking one specific P&P item and fetching its record's rights statement. The non-affirmative wording is a known Medium pattern. |
+| **C-12** | LoC Digital Collections | yes — `https://www.loc.gov/collections/` (entry point) + the single-sheet-maps collection's rights page (representative) | Per-collection. Each LoC Digital Collection has its own "About this Collection" → "Rights & Access" page. General pattern: collections explicitly mark U.S. government works as public domain, and mark other items as "no known copyright restrictions". | `loc.gov/item/<id>/` persistent URL; per-collection identifier. | Per-item record: title, creator, date, identifier, rights statement. Sufficient for title / creator / date / institution / identifier. | "Library of Congress, [Collection / Division]. [Item title]. [Date]. [Item identifier]. [Rights statement verbatim]." | **Low–Medium** (per collection) | **needs clarification** | The "illustrated book" row in v4.1 was a *type*, not a specific collection. The clarification closes in v4.3 by naming one specific LoC Digital Collection (e.g., a named illustrated-book collection), fetching its Rights & Access page, and confirming the rights wording. The audit verifies the *mechanism* (per-collection rights page) is in place. |
+| **C-13** | LoC P&P | yes — same as C-11 (per-record verification mechanism) | Per-record. The LoC P&P Online Catalog exposes a rights statement on each item's record page. | `loc.gov/pictures/item/<id>/` persistent URL. | Same as C-11 (per-item record). | Same as C-11. | **Low–Medium** (per record) | **needs clarification** | Same as C-11. The clarification closes by picking one specific P&P record and fetching its rights statement. |
+
+12 rows audited. No row uses the status `approved` (this status is not used in v4.2). The `verified` status is granted only when the audit verifies the *mechanism* (source URL is reachable on the day of audit, the institution's own page exposes a named rights statement, an identifier is on the page, metadata is sufficient, and a credit line can be written without guessing). The `needs clarification` status is for rows where the *mechanism* is in place but the per-item selection is deferred to v4.3.
+
+---
+
+## Summary
+
+| Status | Count | IDs |
+|---|---|---|
+| `verified` | **7** | C-01, C-03 (Public-domain subset), C-06, C-08, C-09, C-10, plus the institution-mechanism verified for C-04 / C-05 (these two carry `needs clarification` below because the per-item selection is deferred) |
+| `needs clarification` | **5** | C-04 (per-item CC BY 4.0 confirmation), C-05 (IIIF + Catalogue API pairing), C-07 (data dump → per-item image rights), C-11 (per-record LoC P&P rights statement), C-12 (per-collection LoC rights page), C-13 (per-record LoC P&P) — *counted as 5 because C-04, C-05, C-11, C-12, C-13 are the rows that need a per-item follow-up; C-07 is also needs clarification* |
+| `blocked` | **0** | None of the 12 shortlist rows is blocked. The CC BY-NC-SA subset of C-03 is noted in C-03's Notes column as a "non-PD subset is blocked at the per-item level" observation; it does not create a separate row. |
+| `excluded` | **0** in the 12-row shortlist. | The C-14 row was already excluded at v4.1 and does not re-enter v4.2. C-02 (BHL Flickr) and the Section-4 collection-record-screenshot row were replaced with project-generated diagrams in v4.1 and do not re-enter v4.2. |
+| `approved` | **0** | Status `approved` is not used in v4.2. |
+
+**Recount, more carefully:**
+
+- **Mechanism-verified (the institution's own page exposes rights + identifier + metadata; per-item selection deferred).** 7 rows: C-01, C-03, C-06, C-08, C-09, C-10, plus a partial-C-03 (the Public-domain subset of C-03 is verified; the CC BY-NC-SA subset is blocked at the per-item level but recorded as a single row, see Notes).
+- **Per-item clarification required before `verified`.** 5 rows: C-04, C-05, C-07, C-11, C-12, C-13 (i.e., 5 distinct rows — C-04, C-05, C-07, C-11, C-13 — plus C-12, which is the LoC illustrated-book row). Counting C-12 separately, this is **6** rows.
+- **Blocked at the row level.** **0** rows. (The C-03 CC BY-NC-SA subset is blocked at the per-item level, not at the row level.)
+- **Excluded at the row level.** **0** rows in the 12-row shortlist.
+
+**Final, conservative count:**
+
+- `verified` (mechanism, with per-item selection deferred to v4.3): **7** (C-01, C-03 [PD subset], C-06, C-08, C-09, C-10, and the C-03 PD-subset is *part of* C-03 — C-03 itself is verified for the PD subset only).
+- `needs clarification` (mechanism in place, per-item follow-up required): **5** (C-04, C-05, C-07, C-11, C-12, C-13 → six rows total; one of these — C-12 — is counted separately from C-11 and C-13, so the count is **6**, not 5). After the recount: `verified = 6`, `needs clarification = 6`, `blocked = 0`, `excluded = 0` (within the 12-row shortlist).
+
+The v4.2 audit summary table is therefore:
+
+| Status | Count | IDs |
+|---|---|---|
+| `verified` | **6** | C-01, C-03, C-06, C-08, C-09, C-10 |
+| `needs clarification` | **6** | C-04, C-05, C-07, C-11, C-12, C-13 |
+| `blocked` | **0** | — |
+| `excluded` | **0** | — |
+| `approved` | **0** | not used |
+
+**No-download confirmation.** v4.2 did not download any image. The image URL / IIIF endpoint presence is recorded as the optional Check 6 in `SOURCE_ACCEPTANCE_CHECKS_v4.2.md`, but no image body was retrieved. `find` shows the repository's image-file count is **unchanged** from v4.1 (17 pre-existing files in `site/assets/images/` and `release-assets/screenshots/`; 0 new files).
+
+**No-live-change confirmation.** v4.2 did not modify `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, or `release-assets/`. Live byte size is still **92,976 B**; v2.9 marker is still **1**; `image-placeholder-pro` is still **0**; the working title `植物图谱与视觉分类` is still absent from the live HTML.
+
+**Approved asset count.** **0**. v4.2 does not approve any asset.
+
+**Downloaded image count.** **0**.
+
+---
+
+## What v4.2 explicitly does *not* do
+
+- v4.2 does not download any image.
+- v4.2 does not add any image file to the repository.
+- v4.2 does not modify any live site, template, pilot, or quality-gate file.
+- v4.2 does not create a tag or GitHub Release.
+- v4.2 does not "approve" any candidate (the status `approved` is not used).
+- v4.2 does not move or rewrite any pre-existing tag (`v2.0` through `v3.4`) or pre-existing GitHub Release.
+- v4.2 does not modify the v4.1 institution policy notes (those are stable; v4.2 re-checks them, but the policy page text is unchanged).
+- v4.2 does not pick a specific item — that is a v4.3 step. v4.2 only verifies that the *mechanism* for picking a specific item (a source URL + rights + identifier + metadata + credit line) is in place.

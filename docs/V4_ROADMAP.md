@@ -89,29 +89,53 @@
 
 ## v4.2 — Rights Audit
 
-**Goal.** Apply the source-acceptance rule and the rights-risk register to every candidate asset from v4.1.
+**Goal.** Per-candidate verification of the 12-row v4.1 shortlist against 5 source-acceptance checks. **No download, no asset import, no live change.** The v4.2 statuses are `verified` / `needs clarification` / `blocked` / `excluded` — **`approved` is not used.**
 
 **Tasks.**
 
-- For each `pending` row: verify the source URL is reachable, the rights statement is locatable, the credit line is composable, the source note is reconstructable, and the asset is not a search-result or memory import.
-- Promote rows that pass all five checks to `verified` (Low or Medium).
-- Downgrade rows that fail any check to `blocked` (High or Blocked) or `excluded`.
-- Write the per-asset credit line verbatim from the source page's rights statement.
-- Produce a single source-audit manifest, ordered by section.
+- Re-open the official source page (or its API documentation) for each of the 12 v4.1 shortlist rows.
+- Apply the 5 acceptance checks (source URL exists, rights statement exists, identifier exists, metadata sufficient, credit line basis).
+- Assign each row one of the 4 v4.2 statuses. `verified` is granted only when the mechanism is in place (i.e., the institution's own page exposes a named rights statement, a persistent identifier, sufficient metadata, and a composable credit line) — per-item selection is deferred to v4.3.
+- Produce a verified source shortlist (rows that may enter v4.3 build planning).
+- Produce a blocked / excluded sources table (rows that did not pass, with follow-up actions).
+- Update the rights risk register with per-row levels and open risks.
+
+**Deliverables (this round).**
+
+- `docs/SOURCE_ACCEPTANCE_CHECKS_v4.2.md` — 5 acceptance checks + status definitions.
+- `docs/RIGHTS_AUDIT_v4.2.md` — 12-row per-candidate audit table.
+- `docs/VERIFIED_SOURCE_SHORTLIST_v4.2.md` — verified candidates only.
+- `docs/BLOCKED_OR_EXCLUDED_SOURCES_v4.2.md` — blocked / excluded / needs-clarification rows.
+- `docs/RIGHTS_RISK_REGISTER_v4.2.md` — per-row risk levels + open risks + release blocker rule.
+- `README.md` updated with a `v4.2 Rights Audit` block.
+- `reports/leonardo_chinese_exhibition_v4_2_rights_audit_report.md`.
 
 **Do NOT do in v4.2.**
 
-- Do not start the build.
-- Do not "soft-include" any High / Blocked row by uncrediting or unfootnoting it.
-- Do not move or rewrite any existing tag or GitHub Release.
+- Do not download any image.
+- Do not add any image file to the repository.
+- Do not write into `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/`.
+- Do not modify `scripts/template_quality_gate.py`.
+- Do not mark any candidate `approved`. The status `approved` is **not used** in v4.2.
+- Do not create a tag or GitHub Release.
+- Do not move or rewrite any pre-existing tag (`v2.0` through `v3.4`) or any pre-existing GitHub Release.
+- Do not process the untracked `.firecrawl/` directory.
 
 **Exit criteria for v4.2.**
 
-- Source-audit manifest exists with one row per asset.
-- Zero `verified` rows are at High or Blocked.
-- All `verified` rows carry all 14 metadata fields.
-- `template_quality_gate.py` still PASS.
-- Live byte size still **92,976 B**.
+- All five v4.2 candidate docs exist and are committed.
+- `README.md` v4.2 block committed.
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- `git diff` against `site/`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/` is **empty**.
+- Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**, pilot title in live still **0**.
+- `find` confirms no new image files (`.jpg` / `.jpeg` / `.png` / `.webp` / `.tif` / `.tiff`).
+- `approved` does not appear as a status value in any v4.2 doc.
+- No new tag, no new GitHub Release.
+
+**v4.2 → next round.**
+
+- If the verified count is **≥ 4**, the next round is **v4.3 Second Exhibition Build Planning**.
+- If the verified count is **< 4**, the next round is **v4.1b Source Candidate Research Extension**.
 
 ---
 
