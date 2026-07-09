@@ -200,17 +200,26 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - [`release-assets/v3.1-real-second-exhibition-pilot-manifest.md`](release-assets/v3.1-real-second-exhibition-pilot-manifest.md) — release manifest
 - 报告：[`reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md`](reports/leonardo_chinese_exhibition_v3_1_second_exhibition_pilot_report.md)、[`reports/leonardo_chinese_exhibition_v3_1_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_1_real_stable_freeze_report.md)
 
-## v3.2 Template Documentation
+## v3.2 Real Template Documentation
 
-v3.2 是基于已封版的 `v3.1-real-second-exhibition-pilot` 模板使用文档补齐轮。**只做文档，不改 live、不动 pilot、不部署**。
+- **Live**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Tag**: `v3.2-real-template-documentation`
+- **Status**: verified template documentation（PASS）
+- **Verified live byte size**: 92,976 B
+- **Source tag**: `v3.1-real-second-exhibition-pilot`
+- **Manual files**:
+  - [`_template/USAGE_GUIDE_ZH.md`](_template/USAGE_GUIDE_ZH.md)
+  - [`_template/CONTENT_AUTHORING_GUIDE_ZH.md`](_template/CONTENT_AUTHORING_GUIDE_ZH.md)
+  - [`_template/SOURCE_RIGHTS_CHECKLIST_ZH.md`](_template/SOURCE_RIGHTS_CHECKLIST_ZH.md)
+  - [`_template/PILOT_WORKFLOW_ZH.md`](_template/PILOT_WORKFLOW_ZH.md)
+  - [`_template/RELEASE_WORKFLOW_ZH.md`](_template/RELEASE_WORKFLOW_ZH.md)
+- **Notes**:
+  - Does not modify live site
+  - Does not modify pilot
+  - Keeps reality recovery rule as a release workflow requirement
+  - Old tags (v2.0 / v2.6 / v2.7 / v2.8 / v2.9 / v3.0 / v3.1) and old GitHub Releases untouched
 
-- Adds template usage guide — [`_template/USAGE_GUIDE_ZH.md`](_template/USAGE_GUIDE_ZH.md)
-- Adds content authoring guide — [`_template/CONTENT_AUTHORING_GUIDE_ZH.md`](_template/CONTENT_AUTHORING_GUIDE_ZH.md)
-- Adds source and rights checklist — [`_template/SOURCE_RIGHTS_CHECKLIST_ZH.md`](_template/SOURCE_RIGHTS_CHECKLIST_ZH.md)
-- Adds pilot workflow — [`_template/PILOT_WORKFLOW_ZH.md`](_template/PILOT_WORKFLOW_ZH.md)
-- Adds release workflow — [`_template/RELEASE_WORKFLOW_ZH.md`](_template/RELEASE_WORKFLOW_ZH.md)
-- Does not modify live site or pilot
-- Stable freeze next
+详见 [`docs/RELEASE_NOTES_v3.2_REAL_TEMPLATE_DOCUMENTATION.md`](docs/RELEASE_NOTES_v3.2_REAL_TEMPLATE_DOCUMENTATION.md)、[`release-assets/v3.2-real-template-documentation-manifest.md`](release-assets/v3.2-real-template-documentation-manifest.md)、[`reports/leonardo_chinese_exhibition_v3_2_real_stable_freeze_report.md`](reports/leonardo_chinese_exhibition_v3_2_real_stable_freeze_report.md)。
 
 ## 当前版本
 
