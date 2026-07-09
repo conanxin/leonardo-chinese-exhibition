@@ -11,7 +11,7 @@
 | Verified live byte size | 92,976 B |
 | Source tag | `v3.1-real-second-exhibition-pilot` |
 | Documentation commit | `2f617b1e6dc02f40683c2eb69101c4557670bbc0` |
-| Freeze commit | （本 round commit 后回填 — 见末尾"freeze commit 回填"小节） |
+| Freeze commit | `5a89fb2061ef3eee95c63dc3592d92fb859177fe` |
 
 ## Baseline
 
@@ -157,7 +157,7 @@
 
 | 项 | 值 | 来源 |
 |---|---|---|
-| commit SHA | （freeze commit 创建后回填） | `git rev-parse HEAD` |
+| commit SHA | `5a89fb2061ef3eee95c63dc3592d92fb859177fe` | `git rev-parse HEAD` |
 | verified live byte | 92,976 B | `curl -L -s <live-url> \| wc -c` |
 | verified tag | （tag 创建后回填） | `git rev-parse <tag>^{}` |
 
@@ -177,11 +177,11 @@
 
 ## freeze commit 回填（commit + tag 创建后填）
 
-- freeze commit：__________
-- tag object：__________
-- tag target：__________
-- GitHub Release URL：__________
-- Actions run id：__________
+- freeze commit：`5a89fb2061ef3eee95c63dc3592d92fb859177fe`
+- tag object：（tag push 后回填）
+- tag target：`5a89fb2061ef3eee95c63dc3592d92fb859177fe`（annotated tag → freeze commit）
+- GitHub Release URL：（release create 后回填）
+- Actions run id：（Pages deploy 后回填）
 
 ---
 
