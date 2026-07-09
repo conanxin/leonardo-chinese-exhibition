@@ -276,12 +276,25 @@ step 7 之后的 tag / Release 动作补充记录：
 | 项 | 值 |
 |---|---|
 | v3.4 tag name | `v3.4-real-second-exhibition-hardening` |
-| v3.4 tag object SHA | `bf9f5ddb1ce8c08f01b7e0c98fae26ef7f68cb41` |
+| v3.4 tag object SHA | `2d186a892af0e1ab41c1d9b8a055842e01339cb6` |
 | v3.4 tag target commit | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` (= step 6 freeze commit) |
 | v3.4 tag 推送结果 | `git push origin v3.4-real-second-exhibition-hardening` → exit 0 |
 | v3.4 GitHub Release | https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v3.4-real-second-exhibition-hardening |
 | v3.4 Release 创建命令 | `gh release create v3.4-real-second-exhibition-hardening --title "v3.4 Real Second Exhibition Hardening" --notes-file docs/RELEASE_NOTES_v3.4_REAL_SECOND_EXHIBITION_HARDENING.md` |
 | release notes 文件 | `docs/RELEASE_NOTES_v3.4_REAL_SECOND_EXHIBITION_HARDENING.md` |
+
+### 18a. 初次 tag 失败 → 修复（real recovery）
+
+step 7 初次推送后，本 round 自检发现 v3.4 tag 在 origin 是 **lightweight**（`git ls-remote` 缺少 `^{}` 行，`git cat-file -p` 直接 dereference 到 commit，没有 tag wrapper object），与 `git tag -a` 应产出 annotated tag 的预期不符。修复动作：
+
+1. `git push origin :refs/tags/v3.4-real-second-exhibition-hardening` — 删除 origin 上 lightweight tag
+2. `gh release delete v3.4-real-second-exhibition-hardening --yes` — 删除初次 release
+3. `git tag -d v3.4-real-second-exhibition-hardening` — 删除本地 lightweight ref
+4. `git tag -a v3.4-real-second-exhibition-hardening -m "v3.4 real second exhibition hardening" 81f5e92` — 重新创建 annotated tag
+5. `git push origin v3.4-real-second-exhibition-hardening` — 推送真实 annotated tag
+6. `gh release create ...` — 重新创建 release
+
+修复后真实 tag object SHA = `2d186a892af0e1ab41c1d9b8a055842e01339cb6`，与本节上表一致。
 
 3 个旧 tag（v3.0 / v3.1 / v3.2 / v3.3）的 commit target 全部未移动，10 个旧 release 全部未触碰。
 

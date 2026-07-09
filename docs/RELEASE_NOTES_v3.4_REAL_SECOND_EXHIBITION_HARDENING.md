@@ -87,7 +87,7 @@ This freeze follows `RELEASE_WORKFLOW_ZH.md`: every claim is anchored by **(comm
 |---|---|
 | freeze commit | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` |
 | tag name | `v3.4-real-second-exhibition-hardening` |
-| tag object SHA | `bf9f5ddb1ce8c08f01b7e0c98fae26ef7f68cb41` |
+| tag object SHA | `2d186a892af0e1ab41c1d9b8a055842e01339cb6` |
 | verified live byte | 92,976 B |
 | verified tag target | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` |
 
