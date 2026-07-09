@@ -265,11 +265,42 @@ v3.5+ optional real second exhibition
 
 | 项 | 值 | 来源 |
 |---|---|---|
-| commit SHA | （待本 round commit 后回填） | `git rev-parse HEAD` |
+| commit SHA | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` | `git rev-parse HEAD` |
 | verified live byte | 92,976 B | `curl -L -s https://conanxin.github.io/leonardo-chinese-exhibition/ \| wc -c` |
 | verified source tag | `v3.3-real-template-quality-gate` → `fce2efb5f0fcbbb3bd4e25c8008513f8c2462eb4` | `git rev-parse v3.3-real-template-quality-gate^{}` |
 
-提交后需要在 final verification 中独立校验 HEAD SHA 与 origin/main 一致。
+## 18. v3.4 stable freeze backfill（step 7 → 9 follow-up）
+
+step 7 之后的 tag / Release 动作补充记录：
+
+| 项 | 值 |
+|---|---|
+| v3.4 tag name | `v3.4-real-second-exhibition-hardening` |
+| v3.4 tag object SHA | `bf9f5ddb1ce8c08f01b7e0c98fae26ef7f68cb41` |
+| v3.4 tag target commit | `81f5e928aefdc4dc92a4dbb5aedecbd3cd564765` (= step 6 freeze commit) |
+| v3.4 tag 推送结果 | `git push origin v3.4-real-second-exhibition-hardening` → exit 0 |
+| v3.4 GitHub Release | https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v3.4-real-second-exhibition-hardening |
+| v3.4 Release 创建命令 | `gh release create v3.4-real-second-exhibition-hardening --title "v3.4 Real Second Exhibition Hardening" --notes-file docs/RELEASE_NOTES_v3.4_REAL_SECOND_EXHIBITION_HARDENING.md` |
+| release notes 文件 | `docs/RELEASE_NOTES_v3.4_REAL_SECOND_EXHIBITION_HARDENING.md` |
+
+3 个旧 tag（v3.0 / v3.1 / v3.2 / v3.3）的 commit target 全部未移动，10 个旧 release 全部未触碰。
+
+## 19. next recommended task（post-freeze 更新）
+
+`v3.4-real-stable-freeze` 已于本 step 7→9 阶段完成。下一 round 二选一：
+
+1. **`v3.5-real-template-instantiation-pilot`** — 用本模板实例化第三个 pilot，主题另选（建筑史 / 设计史 / 手稿学等），证明模板跨主题复用。
+2. **`v4.0-real-second-exhibition-plan`** — 决定下一个真实展览主题与研究范围。
+
+freeze 后路径更新：
+
+```
+v3.3-real-template-quality-gate  (Done)
+    ↓
+v3.4-real-second-exhibition-hardening  (Done — 本 round freeze + Release)
+    ↓
+v3.5+ optional real second exhibition / v4.0 plan
+```
 
 ---
 
