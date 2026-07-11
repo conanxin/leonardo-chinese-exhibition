@@ -498,6 +498,21 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - No new tag / no new Release
 - **Next:** v4.8-real-stable-freeze
 
+## v4.8 Real Second Exhibition Repository Hardening
+
+- **Tag:** `v4.8-real-second-exhibition-repository-hardening`
+- **Status:** verified repository hardening, not deployed
+- **Repository QA:** 161 PASS / 0 FAIL / 0 WARNINGS
+- **Browser QA:** 5/5 viewports PASS (1440/1280/768/390/320)
+- **Asset checksums:** 6/6
+- **External requests:** 0
+- **Console / page errors / failed requests:** 0 / 0 / 0
+- **Existing Leonardo live site:** unchanged (92,976 B, v2.9 marker present)
+- **Second exhibition:** remains unavailable on GitHub Pages (tested URLs return HTTP 404)
+- **Browser env:** Chromium 149.0.7827.55, Playwright build 1228, Playwright package 1.61.1
+- **Real a11y defect fixed:** lightbox focus restoration
+- **Next:** v5.0-second-exhibition-deployment-planning
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
