@@ -22,9 +22,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Build combined staging artifact (v5.3 controlled deploy)
+        run: |
+          python3 scripts/second_exhibition_staging_build.py \
+            --output "${{ runner.temp }}/leonardo-pages-artifact"
+      - name: Run staging gate (v5.3 controlled deploy)
+        run: |
+          python3 scripts/second_exhibition_staging_gate.py \
+            --artifact "${{ runner.temp }}/leonardo-pages-artifact" \
+            --audit "${{ runner.temp }}/leonardo-pages-artifact-audit"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: ${{ runner.temp }}/leonardo-pages-artifact
       - id: deployment
         uses: actions/deploy-pages@v4
