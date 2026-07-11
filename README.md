@@ -471,6 +471,18 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - No asset or data changes.
 - **Next**: **v4.7-real-stable-freeze**.
 
+## v4.7 Real Second Exhibition Repository QA
+
+- **Tag:** `v4.7-real-second-exhibition-repository-qa`
+- **Status:** verified repository QA, not deployed
+- **Repository QA:** 157 PASS / 0 FAIL / 2 WARNINGS
+- **ARIA:** 9/9 valid references
+- **Asset checksums:** 6/6
+- **Existing Leonardo live site:** unchanged (92,976 B, v2.9 marker present)
+- **Second exhibition:** remains unavailable on GitHub Pages (tested URLs return HTTP 404)
+- **Browser note:** full v4.6 Playwright PASS; v4.7b browser matrix not rerun due to missing browser binary
+- **Next:** v4.8 repository hardening or deployment planning
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
