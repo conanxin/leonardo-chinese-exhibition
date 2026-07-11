@@ -526,6 +526,24 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Rollback plan:** one revert commit restores `path: site` only.
 - **Next:** v5.1-staging-artifact-build
 
+## v5.1 Second Exhibition Staging Artifact
+
+- **Status:** staging-only — not deployed
+- **Artifact path:** `/tmp/leonardo-pages-artifact` (outside repository; `/tmp` only — not committed)
+- **Audit path:** `/tmp/leonardo-pages-artifact-audit` (sibling directory, also `/tmp` only)
+- **Builder:** `python3 scripts/second_exhibition_staging_build.py --output /tmp/leonardo-pages-artifact` → **PASS, exit 0**
+- **Gate:** `python3 scripts/second_exhibition_staging_gate.py --artifact /tmp/leonardo-pages-artifact --audit /tmp/leonardo-pages-artifact-audit` → **PASS, exit 0** (8 sections A–H)
+- **Existing Leonardo main site:** byte-identical in staging root (25 files copied SHA-equal; staging `index.html` = 92,976 B; v2.9 marker = 1)
+- **Second exhibition public subtree:** `second-exhibition/` with exactly 9 allowlisted files (3 site files + 6 raster images)
+- **Path rewrite:** 6 `../assets/images/` → `./assets/images/` in the staged `index.html` only. Tracked source `second-exhibition/site/index.html` SHA unchanged.
+- **Internal docs / data:** excluded (no `data/`, `docs/`, manifest, checksums, MD, JSON, SHA256)
+- **Browser QA:** `SECOND_EXHIBITION_QA_URL=http://127.0.0.1:8771/second-exhibition/ node scripts/second_exhibition_browser_qa.mjs` → **PASS, 5/5 viewports**, 0 console/page/failed/external requests, 6 images loaded per viewport
+- **Local HTTP QA:** root 200 / 92,976 B / v2.9 marker 1; `/second-exhibition/` 200 / title present; 6 images 200; all internal paths 404
+- **Production Pages workflow:** unchanged (still `path: site` only)
+- **Production Pages site:** unchanged (live byte 92,976 B, v2.9 marker 1, `/second-exhibition/` URLs still 404)
+- **Tags / Releases:** unchanged
+- **Next:** v5.2-deployment-dry-run
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

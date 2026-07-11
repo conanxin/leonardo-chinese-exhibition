@@ -79,6 +79,22 @@
 - No external requests.
 - No High / Blocked risks open.
 
+**v5.1 actual result — PASS** (commit SHA to be filled by round run)
+
+- Staging artifact assembled at `/tmp/leonardo-pages-artifact` (outside repo).
+- Audit summary at `/tmp/leonardo-pages-artifact-audit/` (outside repo, sibling dir).
+- Main site: 25 files copied byte-identical (SHA verified); staging `index.html` = 92,976 B; v2.9 marker = 1.
+- Second exhibition subtree: exactly 9 public files (3 site files + 6 raster images), allowlist extensions only.
+- Path rewrite: 6 `../assets/images/` → `./assets/images/` in staged `index.html` only. Source `second-exhibition/site/index.html` SHA unchanged.
+- Forbidden exposure: none (no `data/`, `docs/`, manifest, checksums, MD/JSON/SHA256 files, `_template/`, `_pilots/`, `reports/`, `scripts/`).
+- Staging gate `python3 scripts/second_exhibition_staging_gate.py` → **PASS, exit 0** (8 sections A–H all green).
+- Local HTTP QA: root 200 / 92,976 B / v2.9 marker 1; `/second-exhibition/` 200 / title present; 6 images 200; all internal paths 404.
+- Browser QA `SECOND_EXHIBITION_QA_URL=http://127.0.0.1:8771/second-exhibition/ node scripts/second_exhibition_browser_qa.mjs` → **PASS, 5/5 viewports**, 0 console/page/failed/external requests, 0 overflow, 6 images loaded per viewport.
+- Production Pages untouched: live byte still 92,976 B, v2.9 marker still 1, all `/second-exhibition/` Pages paths still 404.
+- Workflow unchanged: still `path: site` (top-level only).
+- Tags / Releases unchanged.
+- Next: **v5.2 deployment dry run**.
+
 ---
 
 ## v5.2 — Deployment Dry Run
