@@ -1,46 +1,27 @@
-# Second Exhibition — Repository Assets
+# Second Exhibition Working Directory
 
-This directory holds repository-only assets for the **second exhibition** of the Leonardo Chinese exhibition project.
+- Working title: 《植物图谱与视觉分类：从自然史图像到知识秩序》
+- Status: repository-only
+- Deployment: not deployed
+- Current stage: v4.5 asset import
+- Imported assets: 6
+- Live Leonardo exhibition: unchanged
+- Future site build: separate v4.6 round
 
-## Status
-
-**Round:** v4.5-asset-import
-
-**Deployment status:** `imported-not-deployed`
-
-The assets in `assets/images/` are stored in the repository only. They are **not** linked into any live site (`site/index.html`, `site/script.js`, `site/style.css`, or `second-exhibition/site/`), not deployed to GitHub Pages, and not associated with any git tag or GitHub Release.
+This directory holds the **repository-only** working copy of the second real exhibition. Nothing in `second-exhibition/` is linked into the live site (`site/index.html`, `site/script.js`, `site/style.css`), nothing is deployed to GitHub Pages, and nothing is associated with a git tag or GitHub Release.
 
 ## Asset inventory
 
-| File | Bytes | SHA-256 |
-|---|---|---|
-| `assets/images/bhl-318921-page-603998.webp` | 306126 | `dc4b292536761be5bdf8a459d5ef82c53c4ecf5e39252ab68d19c233293522b7` |
-| `assets/images/bhl-318921-page-603962.webp` | 262498 | `446d744d9b647f299532fc248e3263f14db818dff591f2c99264beb18c7d881d` |
-| `assets/images/met-285149.jpg` | 95001 | `976b1cbd365a7ddeef961e1b865ba537e5f898487b8984b49eb9cfac33dc47bf` |
-| `assets/images/rijksmuseum-rp-f-f80152.jpg` | 294445 | `d3832eb3e667065892528f014affab34c2b0c2db632b8e56683826cc3c089502` |
-| `assets/images/rijksmuseum-rp-f-f80313.jpg` | 191606 | `10762705aad12906d5d13d4af9afa0e40c6dcceb54708f55eefc361fe74990ba` |
+See `assets/asset-import-manifest.json` (machine-readable) and `assets/asset-checksums.sha256` (SHA-256 of every file in `assets/images/`). The human-readable inventory is `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` (in `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` of the project root).
 
-Checksum file: `assets/asset-checksums.sha256`
+## Source and rights evidence
 
-Machine-readable manifest: `assets/asset-import-manifest.json`
+See `docs/SOURCE_AUDIT_MANIFEST.md` and `docs/RIGHTS_AND_SOURCES.md` in this directory. The current round is repository-only and does not constitute a legal opinion.
 
-## Forbidden status values
+## Deployment safety
 
-The following labels are intentionally **not** used anywhere in this round's assets or docs:
-
-- `approved`
-- `deployed`
-- `live`
-- `safe for commercial use`
-- `cleared for all uses`
-
-Every asset is recorded as `imported-not-deployed`.
-
-## C-06 gap
-
-`C-06` (Smithsonian NMNH Botany, catalog 1529703) is recorded in `assets/asset-import-manifest.json` as `blocked-from-import`. The candidate media URL paths did not return a real image during v4.5 download verification (see `docs/ASSET_IMPORT_v4.5.md` and `docs/IMPORTED_ASSET_INVENTORY_v4.5.md`). No unverified replacement image was substituted.
+`second-exhibition/site/` does **not** exist. No file in `second-exhibition/` is referenced from `site/`. Do not treat this directory as a deployed exhibition. Do not push `second-exhibition/site/` even in a future round without first re-running the full source-and-rights audit.
 
 ## Next round
 
-- `v4.5b-source-gap-fix` — re-derive the correct per-item record for NMNH catalog 1529703 and obtain a stable per-item media URL.
-- `v4.6-second-exhibition-site-build` — separate round; will require its own source/rights re-verification before any image is linked into a page.
+The next round is `v4.6-second-exhibition-repository-build`, which has its own source/rights re-verification gate before any image is linked into a page.

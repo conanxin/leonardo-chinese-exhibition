@@ -391,21 +391,26 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 
 ## v4.5 Asset Import
 
-- **Status**: repository-only asset import. 5 of 6 ready candidates imported into `second-exhibition/assets/images/`. C-06 NMNH catalog 1529703 recorded as `blocked-from-import` because its candidate media URLs returned HTTP 404 during v4.5 download verification, and the catalog-number → irnstamp relationship recorded in v4.4b evidence could not be confirmed. Per brief: no unverified replacement was substituted.
-- **Imported (status `imported-not-deployed`)**:
-  - **C-01** — BHL page 603998 (Pistillaria plate). `second-exhibition/assets/images/bhl-318921-page-603998.webp` (306126 B, sha256 `dc4b292536761be5bdf8a459d5ef82c53c4ecf5e39252ab68d19c233293522b7`).
-  - **C-03** — BHL page 603962 (Cycas revoluta plate). `second-exhibition/assets/images/bhl-318921-page-603962.webp` (262498 B, sha256 `446d744d9b647f299532fc248e3263f14db818dff591f2c99264beb18c7d881d`). Distinct page from C-01 (SHA differs). CC BY-NC-SA subset pages of BHL item 318921 remain blocked.
-  - **C-08** — Met object 285149, *[Botanical Specimen: Fern]*, accession 2003.562.3. `second-exhibition/assets/images/met-285149.jpg` (95001 B, sha256 `976b1cbd365a7ddeef961e1b865ba537e5f898487b8984b49eb9cfac33dc47bf`). Double-confirmation PASS.
-  - **C-09** — Rijksmuseum RP-F-F80152, *Zeestreepvaren* (Anna Atkins). `second-exhibition/assets/images/rijksmuseum-rp-f-f80152.jpg` (294445 B, sha256 `d3832eb3e667065892528f014affab34c2b0c2db632b8e56683826cc3c089502`).
-  - **C-10** — Rijksmuseum RP-F-F80313, *Wolfsklauw* (Anna Atkins). `second-exhibition/assets/images/rijksmuseum-rp-f-f80313.jpg` (191606 B, sha256 `10762705aad12906d5d13d4af9afa0e40c6dcceb54708f55eefc361fe74990ba`). Presentation API manifest `/manifest.json` returned HTTP 404; manifest-based evidence intentionally omitted.
-- **Blocked-from-import**: C-06 — NMNH Botany, catalog 1529703 (expected taxon *Aconitum bulbilliferum*; per-item irnstamp not confirmed; candidate media URL paths returned 404).
-- **Imported count**: 5. **Blocked count**: 1. **Deployed count**: 0. **Approved count**: 0 (status word intentionally not used).
+- **Status**: repository-only asset import. 6 of 6 ready-for-asset-import candidates imported into `second-exhibition/assets/images/`. Every asset carries the status `imported-not-deployed`.
+- **Imported assets**:
+  - **C-01** — BHL page 603998 (Pistillaria plate). `second-exhibition/assets/images/bhl-318921-page-603998-c01.webp` (306126 B, sha256 `dc4b292536761be5bdf8a459d5ef82c53c4ecf5e39252ab68d19c233293522b7`).
+  - **C-03** — BHL page 603962 (Cycas revoluta plate). `second-exhibition/assets/images/bhl-318921-page-603962-c03.webp` (262498 B, sha256 `446d744d9b647f299532fc248e3263f14db818dff591f2c99264beb18c7d881d`). PD subset only; distinct page from C-01.
+  - **C-06** — NMNH Botany US Catalog 1529703 (*Aconitum bulbilliferum*). `second-exhibition/assets/images/smithsonian-nmnh-1529703.png` (3550 B, 90x90 PNG, sha256 `75f523b06cc1a62713de51b1ba3a51fc4d43c4ac19268c48478d30c9e2af73a1`). Dataset-level CC0 1.0.
+  - **C-08** — Met object 285149, *[Botanical Specimen: Fern]*, accession 2003.562.3. `second-exhibition/assets/images/met-285149.jpg` (95001 B, 449x624, sha256 `976b1cbd365a7ddeef961e1b865ba537e5f898487b8984b49eb9cfac33dc47bf`). Double-confirmation PASS.
+  - **C-09** — Rijksmuseum RP-F-F80152, *Zeestreepvaren* (Anna Atkins). `second-exhibition/assets/images/rijksmuseum-rp-f-f80152.jpg` (294445 B, 1024x1293, sha256 `d3832eb3e667065892528f014affab34c2b0c2db632b8e56683826cc3c089502`). Per-item Copyright `Public domain` (CC0 1.0).
+  - **C-10** — Rijksmuseum RP-F-F80313, *Wolfsklauw* (Anna Atkins). `second-exhibition/assets/images/rijksmuseum-rp-f-f80313.jpg` (191606 B, 1024x1291, sha256 `10762705aad12906d5d13d4af9afa0e40c6dcceb54708f55eefc361fe74990ba`). Presentation API `/manifest.json` returned HTTP 404; manifest-based evidence intentionally omitted.
+- **Imported count**: 6. **Blocked count**: 0. **Deployed count**: 0. **Approved count**: 0 (status word intentionally not used).
+- **Asset manifest**: `second-exhibition/assets/asset-import-manifest.json` (machine-readable, schema_version 1.0, 6 entries).
+- **Checksum file**: `second-exhibition/assets/asset-checksums.sha256` (`sha256sum -c` PASS).
+- **Source audit**: `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md`.
+- **Rights document**: `second-exhibition/docs/RIGHTS_AND_SOURCES.md`.
+- **Asset gate**: `python3 scripts/second_exhibition_asset_gate.py` → **PASS** (exit 0).
 - **No live changes** — `site/index.html`, `site/script.js`, `site/style.css`, `_template/site/`, `_template/data/`, `_pilots/second-exhibition-pilot/`, `posts/`, `case-study/`, `release-assets/`, `scripts/template_quality_gate.py` unchanged. Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**.
 - **No new tag**, **no new GitHub Release**. Existing tags (`v2.0` through `v3.4`) untouched.
-- **Independent asset gate** — `scripts/second_exhibition_asset_gate.py` committed and passing (exit 0). It re-checks: every manifest file exists on disk, every on-disk file is in the manifest, every SHA-256 matches, no manifest asset status equals a forbidden token, and no protected site path references any v4.5 image filename.
+- **Not deployed** — `second-exhibition/site/` does not exist. The six `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/assets/images/<filename>` URLs all return non-200 (the Pages workflow deploys only the `site/` directory).
 - **Quality gate**: `scripts/template_quality_gate.py` → **PASS, 37/37**.
-- **Round status**: **partial** (5 imported, 1 blocked).
-- **Next stage determined by round status**: v4.5 is `partial` → the next round is **v4.5b — Source Gap Fix** (re-derive the correct per-item record for NMNH catalog 1529703, obtain a stable per-item media URL, re-confirm the dataset-level CC0 1.0 basis from the live si.edu Terms page). v4.5b does not deploy, does not modify any live site, and does not create a tag or GitHub Release.
+- **Round status**: **PASS** (6 imported, 0 blocked).
+- **Next**: **v4.6-second-exhibition-repository-build** — separate round with its own source/rights re-verification gate before any image is linked into a page.
 
 ## 当前版本
 

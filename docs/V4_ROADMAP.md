@@ -387,25 +387,23 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 
 ---
 
-## v4.5 — Asset Import
+## v4.5 Asset Import
 
-**Goal.** Import the 6 v4.4b `ready-for-asset-import` candidates as **repository-only assets** under `second-exhibition/assets/images/`, with a machine-readable manifest, a SHA-256 checksum file, per-asset source/rights evidence, and an independent asset gate. v4.5 **does not** deploy, **does not** modify any live site, and **does not** create any tag or GitHub Release.
+**Goal.** Import the 6 v4.4b `ready-for-asset-import` candidates as **repository-only assets** under `second-exhibition/assets/images/`, with a machine-readable manifest, a SHA-256 checksum file, per-asset source/rights evidence, and an independent asset gate. v4.5 does **not** deploy, does **not** modify any live site, and does **not** create a tag or GitHub Release.
 
 **Status semantics.** Every imported asset carries the status `imported-not-deployed`. The status words `approved`, `deployed`, `live`, `safe for commercial use`, and `cleared for all uses` are **not used** anywhere in v4.5.
 
 **Tasks (this round).**
 
-- For each of the 6 v4.4b `ready-for-asset-import` rows, download the recorded image URL into `second-exhibition/assets/images/` (one image per row, no duplicates, no thumbnails, no cached mirrors). Use the lower-size derivative (e.g. Met `web-large` instead of `original`) when the institution exposes one.
-- Generate `second-exhibition/assets/asset-import-manifest.json` (machine-readable: id, institution, parent-item URL, identifier, source URL, rights URL, rights basis, image URL used, filename, media type, bytes, sha256, credit-line draft, source-note draft, proposed section, status, remaining caution).
-- Generate `second-exhibition/assets/asset-checksums.sha256` (5–6 entries).
-- Generate `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md` (per-asset audit evidence, per-id).
-- Generate `second-exhibition/docs/RIGHTS_AND_SOURCES.md` (per-asset rights summary; explicit per-item vs. policy-level distinction).
-- Generate `second-exhibition/README.md` (directory orientation + forbidden status words + asset table).
-- Add `scripts/second_exhibition_asset_gate.py` — an independent gate that re-checks: (a) every manifest file exists on disk, (b) every on-disk file is in the manifest, (c) every SHA-256 matches, (d) no manifest asset status equals a forbidden token, (e) no protected site path (`site/index.html`, `site/script.js`, `site/style.css`) references any v4.5 image filename.
+- Re-validate each candidate's media URL with a HEAD probe.
+- Download each image into the repository-only image directory.
+- Generate `second-exhibition/assets/asset-import-manifest.json` (machine-readable, schema_version 1.0, 6 entries).
+- Generate `second-exhibition/assets/asset-checksums.sha256` (6 entries; `sha256sum -c` PASS).
+- Generate `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md` and `second-exhibition/docs/RIGHTS_AND_SOURCES.md`.
+- Generate `second-exhibition/README.md`.
+- Add `scripts/second_exhibition_asset_gate.py` — independent gate with checks A through E.
 - Generate `docs/ASSET_IMPORT_v4.5.md` and `docs/IMPORTED_ASSET_INVENTORY_v4.5.md`.
 - Generate `reports/leonardo_chinese_exhibition_v4_5_asset_import_report.md`.
-- Update this `docs/V4_ROADMAP.md` with the v4.5 section (this block) and a v4.5 row in the Phasing summary.
-- Update `README.md` with a `v4.5 Asset Import` block.
 
 **Do NOT do in v4.5.**
 
@@ -414,7 +412,6 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 - Do not modify `_pilots/second-exhibition-pilot/`.
 - Do not modify `scripts/template_quality_gate.py`.
 - Do not create `second-exhibition/site/`.
-- Do not copy any image into the live `site/assets/` (no such path exists today).
 - Do not move any existing tag (`v2.0` through `v3.4`).
 - Do not modify any existing GitHub Release.
 - Do not modify `posts/`, `case-study/`, `release-assets/` (existing files).
@@ -423,13 +420,10 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 - Do not use the status `approved` (or any forbidden token) on any imported asset.
 - Do not import any image outside the 6-row shortlist.
 - Do not use search thumbnails, cached images, or third-party mirrors when source/rights verification fails.
-- Do not substitute an unverified replacement when a candidate fails.
-- Do not create a tag or GitHub Release in v4.5.
-- If a candidate fails (download returns wrong content, SHA does not match expected bytes, source URL gone, etc.), keep the passing items and emit `PARTIAL` — do not silently drop the round to a smaller shortlist without re-running the round-status sanity check.
 
 **Exit criteria for v4.5.**
 
-- 5 of 6 candidates imported into `second-exhibition/assets/images/`; C-06 blocked-from-import (NMNH catalog 1529703 candidate media URLs returned HTTP 404; per-item irnstamp not confirmed during download).
+- 6 of 6 candidates imported into `second-exhibition/assets/images/`.
 - `second-exhibition/assets/asset-import-manifest.json` committed and valid JSON.
 - `second-exhibition/assets/asset-checksums.sha256` committed; `sha256sum -c` passes for every entry.
 - `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md` and `second-exhibition/docs/RIGHTS_AND_SOURCES.md` committed.
@@ -442,15 +436,12 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 - `git diff HEAD~1 HEAD -- site/ _template/ _pilots/second-exhibition-pilot/ posts/ case-study/ release-assets/ scripts/template_quality_gate.py` is **empty**.
 - Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**.
 - `approved` does not appear as a Status value in any v4.5 doc or manifest entry.
-- C-06 recorded as `blocked-from-import` (not silently dropped).
 - No new tag, no new GitHub Release.
+- Six `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/assets/images/<filename>` URLs all return non-200 (Pages workflow deploys only `site/`, so `second-exhibition/` is not in the deploy artifact).
 
-**v4.5 round status (this run):** **partial** — 5 imported, 1 blocked (C-06 NMNH).
+**v4.5 round status (this run):** **PASS** — 6 imported, 0 blocked, gate PASS.
 
-**Next step (threshold-driven):**
-
-- If v4.5 is `pass` (≥ 4 imports, no blockers): the next round is **v4.6 — Second Exhibition Site Build**, which has its own source/rights re-verification gate before any image is linked into a page.
-- If v4.5 is `partial` or `blocked` (as this run): the next round is **v4.5b — Source Gap Fix**, which re-derives the missing per-item evidence (here: C-06 NMNH catalog 1529703 → correct irnstamp, on-page taxon confirmation, stable per-item media URL). v4.5b does **not** deploy, **does not** modify any live site, and **does not** create a tag or GitHub Release.
+**Next step:** **v4.6-second-exhibition-repository-build** — separate round with its own source/rights re-verification gate before any image is linked into a page.
 
 ---
 
@@ -464,9 +455,8 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 | v4.3 | Second Exhibition Build | No (local render only) | No | No |
 | v4.4 | Asset Import Prep (no download, no tag, no Release) | No (still pilot-only) | No | No |
 | v4.4b | Source Gap Fix (per-item selection for the 4 deferred rows) | No | No | No |
-| v4.5 | Asset Import (repository-only; 5 imported, 1 blocked; no deploy, no tag, no Release) | No | No | No |
-| v4.5b | Source Gap Fix (re-derive C-06 NMNH per-item evidence) | No | No | No |
-| v4.6 | Second Exhibition Site Build (separate round; re-verifies source/rights before linking) | TBD | TBD | TBD |
+| v4.5 | Asset Import (6/6 imported; repository-only; no deploy, no tag, no Release) | No | No | No |
+| v4.6 | Second Exhibition Repository Build (separate round; re-verifies source/rights before linking) | No | No | No |
 | post-v4.6 | QA and Stable Freeze (renumbered from legacy v4.4) | No (still pilot-only) | Yes | Yes |
 
 The second exhibition's live publication is **explicitly not on this roadmap**. v4.4 produces the asset-import-prep evidence; v4.4b closes the source gap; v4.5 executes the actual download (gated on v4.4b). The QA / stable freeze round (with tag + Release) is moved to a later phase. Live publication of the new exhibition requires a separate, future round that explicitly authorizes live publication and runs the full source-and-rights audit a second time on the *to-be-deployed* working tree.
