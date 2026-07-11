@@ -18,11 +18,12 @@
 
 ## Freeze evidence three-piece
 
-- Freeze commit: to be filled after push.
-- Tag target: to be filled after tag creation.
+- Freeze commit: `a70c8430a8e3d01153153e54f055d9907340d6b7`
+- Tag target: `a70c8430a8e3d01153153e54f055d9907340d6b7`
 - Verified live byte: **92,976 B**.
-- Verified tag: to be filled after tag creation.
-- GitHub Release: to be filled after Release creation.
+- Verified tag: `v4.8-real-second-exhibition-repository-hardening` (object `1c868b054424c348f273be4148a6a3f184e374ba`)
+- GitHub Release: https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v4.8-real-second-exhibition-repository-hardening (createdAt `2026-07-11T09:39:43Z`)
+- Evidence backfill commit (after tag target): to be filled after push
 
 ---
 
@@ -163,8 +164,8 @@ The freeze commit must not modify any of the following. (Empty diff = pass.)
 ## Tag / Release status
 
 - Tag created: `v4.8-real-second-exhibition-repository-hardening` (annotated)
-- Tag target: to be filled after tag creation.
-- GitHub Release created: to be filled after Release creation.
+- Tag target: `a70c8430a8e3d01153153e54f055d9907340d6b7`
+- GitHub Release created: yes (URL https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v4.8-real-second-exhibition-repository-hardening, createdAt `2026-07-11T09:39:43Z`)
 - Old tags (`v2.0` through `v4.7`) and Releases: untouched.
 
 ---
