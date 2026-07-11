@@ -15,11 +15,11 @@
 
 ## Freeze evidence three-piece
 
-- Freeze commit: to be filled after push.
-- Tag target: to be filled after tag creation.
+- Freeze commit: 
+- Tag target: 
 - Verified live byte: **92,976 B**.
-- Verified tag: to be filled after tag creation.
-- GitHub Release: to be filled after Release creation.
+- Verified tag:  (object )
+- GitHub Release: https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v4.7-real-second-exhibition-repository-qa (createdAt )
 
 ---
 
@@ -129,7 +129,7 @@ The following paths were not modified during v4.7-real-stable-freeze:
 ## Tag / Release status
 
 - Tag created: `v4.7-real-second-exhibition-repository-qa` (annotated)
-- Tag target: to be filled after tag creation.
+- Tag target: 
 - GitHub Release created: to be filled after Release creation.
 - Old tags (`v2.0` through `v3.4`) and Releases: untouched.
 
@@ -147,9 +147,9 @@ After tag / Release creation, this section may be filled with:
 
 - Tag object SHA.
 - Tag target commit.
-- Release URL.
+- Release URL: https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v4.7-real-second-exhibition-repository-qa.
 - Release `createdAt`.
-- GitHub Actions run ID.
+- GitHub Actions run ID: .
 - Any additional deployment-path verification.
 
 The evidence backfill commit, if any, will be located **after** the tag target commit and will not move the tag.
