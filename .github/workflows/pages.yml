@@ -28,7 +28,8 @@ jobs:
       - name: Build combined staging artifact (v5.3 controlled deploy)
         run: |
           python3 scripts/second_exhibition_staging_build.py \
-            --output "${{ runner.temp }}/leonardo-pages-artifact"
+            --output "${{ runner.temp }}/leonardo-pages-artifact" \
+            --audit "${{ runner.temp }}/leonardo-pages-artifact-audit"
       - name: Run staging gate (v5.3 controlled deploy)
         run: |
           python3 scripts/second_exhibition_staging_gate.py \
