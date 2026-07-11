@@ -513,6 +513,19 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Real a11y defect fixed:** lightbox focus restoration
 - **Next:** v5.0-second-exhibition-deployment-planning
 
+## v5.0 Second Exhibition Deployment Planning
+
+- **Status:** planning only (no deployment)
+- **Recommended architecture:** existing GitHub Pages site + isolated staging artifact under `/second-exhibition/`
+- **Deployment method:** artifact-only path rewrite (`../assets/images/` → `./assets/images/`) applied to a staging copy of the second-exhibition page; tracked source files remain unchanged
+- **Repository root is never published.** Workflow change uploads only the staging directory.
+- **Current Pages workflow unchanged** (still deploys `site/`).
+- **Second exhibition remains unavailable publicly** — all `second-exhibition/` Pages URLs still return HTTP 404.
+- **Preflight:** `python3 scripts/second_exhibition_deployment_preflight.py` → **PASS**
+- **Risk register:** 15 named risks; release blocker = any High / Blocked open.
+- **Rollback plan:** one revert commit restores `path: site` only.
+- **Next:** v5.1-staging-artifact-build
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
