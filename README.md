@@ -454,6 +454,23 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **No new tag / no new Release**.
 - **Next**: **v4.7b-repository-qa-recovery** — fix the missing `#lightbox-title` ARIA target and re-run repository QA to full PASS.
 
+## v4.7b Repository QA Recovery
+
+- Fixed the lightbox accessible-name reference by adding a real `<h2 id="lightbox-title" class="visually-hidden">图片查看器</h2>` element inside the lightbox.
+- Added a standard `.visually-hidden` CSS utility (no `display: none`, no `visibility: hidden`).
+- Did not modify JavaScript behavior.
+- Repository QA: **157 PASS / 0 FAIL / 2 WARNINGS** (exit code 0).
+- ARIA references: **9/9** valid, missing targets: **0**.
+- Two warnings remain non-blocking: C-03 wording check, C-06 hero inconclusive.
+- Template gate: PASS 37/37.
+- Build gate: PASS.
+- Asset checksums: 6/6 OK.
+- Live byte: 92,976 B (unchanged).
+- No deployment: all `second-exhibition/` URLs still return HTTP 404.
+- No new tag / no new Release.
+- No asset or data changes.
+- **Next**: **v4.7-real-stable-freeze**.
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
