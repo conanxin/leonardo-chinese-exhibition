@@ -117,6 +117,20 @@
 - A documented one-line workflow change proposal exists in `reports/`.
 - Rollback plan is confirmed against the proposed change.
 
+**v5.2 actual result — PASS** (commit SHA to be filled by round run)
+
+- Project-site base path verified: `/leonardo-chinese-exhibition/`.
+- Base-path HTTP probe: **14/14 allowlist URLs returned 200** (root 92,976 B, v2.9 marker 1, second-exhibition 24,380 B with title, all 6 images with correct byte counts).
+- Base-path HTTP probe: **16/16 forbidden paths returned 404** (data/, docs/, manifest, checksums, _template/, _pilots/, reports/, scripts/, .firecrawl/, README.md, V4/V5_ROADMAP.md).
+- Out-of-base sanity probe `/some-other-base/second-exhibition/` → 404.
+- Artifact pack: 34 files → `/tmp/leonardo-pages-artifact.tar.gz` (5,802,670 bytes); unpack → `/tmp/leonardo-pages-roundtrip`; **all 34 files SHA-identical**.
+- Rollback rehearsal: workflow `path: site` appears exactly once; proposed change is 1 line (`path: site` → `path: __STAGING_ARTIFACT_DIR__`); revert is 1 line; workflow NOT modified.
+- Base-path browser QA: 5/5 viewports PASS, 0 console/page/failed/external errors, 6 images loaded per viewport, all interactions and a11y OK.
+- Production Pages untouched: live byte still 92,976 B, v2.9 marker still 1, all `/second-exhibition/` Pages paths still 404.
+- Workflow unchanged.
+- Tags / Releases unchanged.
+- Next: **v5.3 controlled deployment**.
+
 ---
 
 ## v5.3 — Controlled Deployment

@@ -544,6 +544,21 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Tags / Releases:** unchanged
 - **Next:** v5.2-deployment-dry-run
 
+## v5.2 Second Exhibition Deployment Dry Run
+
+- **Status:** dry-run-only — no production deploy
+- **Project-site base path:** `/leonardo-chinese-exhibition/`
+- **Dry-run script:** `python3 scripts/second_exhibition_deployment_dry_run.py` → **PASS, exit 0**
+- **Browser QA wrapper:** `scripts/second_exhibition_deployment_dry_run_browser.mjs` → **PASS, 5/5 viewports**
+- **Base-path HTTP probe (Section A):** 14/14 allowlist URLs returned 200 (root 92,976 B, v2.9 marker 1, second-exhibition 24,380 B with title, all 6 images with correct byte counts); 16/16 forbidden paths returned 404; out-of-base sanity 404.
+- **Artifact pack + roundtrip (Section B):** 34 files packed → `/tmp/leonardo-pages-artifact.tar.gz` (5,802,670 bytes); unpacked → `/tmp/leonardo-pages-roundtrip/`; **all 34 files byte-identical via per-file SHA256**.
+- **Rollback rehearsal (Section C):** current workflow has exactly one `path: site` line; proposed change is 1 line (`path: site` → `path: __STAGING_ARTIFACT_DIR__`); revert is 1 line; workflow NOT modified.
+- **Base-path browser QA:** 5/5 viewports PASS, 0 console/page/failed/external requests, 6 images loaded per viewport, all interactions and a11y OK.
+- **Production Pages workflow:** unchanged (still `path: site` only)
+- **Production Pages site:** unchanged (live byte 92,976 B, v2.9 marker 1, `/second-exhibition/` URLs still 404)
+- **Tags / Releases:** unchanged
+- **Next:** v5.3-controlled-deployment
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
