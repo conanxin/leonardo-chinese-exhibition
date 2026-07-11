@@ -412,6 +412,31 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Round status**: **PASS** (6 imported, 0 blocked).
 - **Next**: **v4.6-second-exhibition-repository-build** — separate round with its own source/rights re-verification gate before any image is linked into a page.
 
+## v4.6 Second Exhibition Repository Build
+
+- **Status**: repository-only-not-deployed
+- **Working title**: 植物图谱与视觉分类
+- **Site path**: `second-exhibition/site/`
+- **Data path**: `second-exhibition/data/` (4 JSON)
+- **Content docs**: `second-exhibition/docs/` (4 markdown)
+- **Assets**: 6 `imported-not-deployed` files under `second-exhibition/assets/images/` (from v4.5; not modified in v4.6)
+- **4 sections**: 观察 / 分类 / 复制 / 再组织
+- **Local run**:
+
+  ```bash
+  python3 -m http.server 8770 --directory second-exhibition
+  ```
+
+  Then open `http://127.0.0.1:8770/site/` (must serve from `second-exhibition/` root, not from `second-exhibition/site/`).
+- **Build gate**: `python3 scripts/second_exhibition_build_gate.py` → **PASS** (exit 0)
+- **Asset gate**: `python3 scripts/second_exhibition_asset_gate.py` → **PASS** (exit 0)
+- **Local Playwright QA**: 0 console errors, 0 failed requests, 6 imgs all 200, C-06 naturalWidth = 90, lightbox (C-06 disabled) + ESC + guided mode all work, desktop + mobile (390) no horizontal overflow.
+- **Live Leonardo exhibition unchanged**: byte size 92,976 B, v2.9 marker = 1, `image-placeholder-pro` = 0, v4 title live count = 0.
+- **No deployment**: `second-exhibition/site/` is a repository-only site; the GitHub Pages workflow (`.github/workflows/pages.yml`) deploys only the top-level `site/` directory. All 6 `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/...` URLs return HTTP 404.
+- **No new tag / no new GitHub Release**: existing tags (`v2.0` through `v3.4`) and Releases untouched.
+- **Round status**: **PASS**.
+- **Next**: **v4.7-second-exhibition-repository-qa** — separate round for deeper QA sweep without changing repository structure.
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

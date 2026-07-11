@@ -445,6 +445,68 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 
 ---
 
+## v4.6 Second Exhibition Repository Build
+
+**Goal.** Create the second-exhibition's **repository-only** website (HTML / CSS / JS / data JSON / content docs) under `second-exhibition/site/` and `second-exhibition/data/`, referencing the 6 v4.5 imported assets via `../assets/images/`. v4.6 does **not** deploy, does **not** modify any live site, and does **not** create a tag or GitHub Release.
+
+**Round status (this run):** **PASS** — 6 assets referenced, 4 sections, 6 artifact cards, 12 glossary items, 4 deep blocks, lightbox (C-06 disabled), guided-mode toggle, build gate PASS, Playwright PASS.
+
+**Tasks (this round).**
+
+- Create `second-exhibition/data/exhibition.json`, `sections.json`, `glossary.json`, `assets.json` (all valid JSON, no external references).
+- Create `second-exhibition/docs/VISITOR_GUIDE_ZH.md`, `CURATORIAL_ESSAY_ZH.md`, `DEEP_RESEARCH_NOTES_ZH.md`, `BUILD_ASSET_USAGE.md`.
+- Create `second-exhibition/site/index.html`, `style.css`, `script.js`, `README.md`.
+- Create `scripts/second_exhibition_build_gate.py` — independent gate with checks A through F.
+- Run `scripts/second_exhibition_build_gate.py` — must PASS.
+- Run local Playwright Chromium QA against `http://127.0.0.1:8770/site/` — must PASS.
+- Update `docs/V4_ROADMAP.md` and `README.md` with a v4.6 block.
+
+**Do NOT do in v4.6.**
+
+- Do not modify `site/index.html`, `site/style.css`, `site/script.js` (top-level).
+- Do not modify `_template/site/`, `_template/data/`.
+- Do not modify `_pilots/second-exhibition-pilot/`.
+- Do not modify `scripts/template_quality_gate.py`.
+- Do not modify `scripts/second_exhibition_asset_gate.py`.
+- Do not modify the 6 imported image files.
+- Do not modify `asset-checksums.sha256` or `asset-import-manifest.json`.
+- Do not modify `SOURCE_AUDIT_MANIFEST.md` or `RIGHTS_AND_SOURCES.md` historical evidence.
+- Do not introduce any new raster image.
+- Do not reference external image URLs as `<img src>`.
+- Do not copy images into top-level `site/assets/`.
+- Do not deploy `second-exhibition/`.
+- Do not modify the GitHub Pages workflow.
+- Do not create a tag or GitHub Release.
+- Do not move any existing tag (`v2.0` through `v3.4`) or modify any existing Release.
+- Do not modify `posts/`, `case-study/`, `release-assets/`.
+- Do not process the untracked `.firecrawl/` directory.
+- Do not use `git add .` — explicitly add each created/modified file.
+- Do not use `approved` / `deployed` / `live` / "safe for commercial use" / "cleared for all uses" as a status description for the second exhibition.
+- Page status: `repository-only-not-deployed`.
+
+**Exit criteria for v4.6.**
+
+- 4 data JSON files committed and valid.
+- 4 content docs committed.
+- `second-exhibition/site/{index.html, style.css, script.js, README.md}` committed.
+- `scripts/second_exhibition_build_gate.py` committed; gate passes (exit 0).
+- Local Playwright QA passes.
+- `node --check second-exhibition/site/script.js` passes.
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- `scripts/second_exhibition_asset_gate.py` → **PASS**.
+- `sha256sum -c second-exhibition/assets/asset-checksums.sha256` → **6/6 OK**.
+- Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**, v4 title live count still **0**.
+- All 6 `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/...` URLs return HTTP 404.
+- `approved` / `deployed` / `live` / etc. do not appear as a Status value in any v4.6 artifact.
+- Six `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/{,site/,site/index.html}` URLs all return non-200.
+- No new tag, no new GitHub Release.
+
+**v4.6 round status (this run):** **PASS**.
+
+**Next step:** **v4.7-second-exhibition-repository-qa** — separate round that does a deeper QA sweep (visual review, deeper field re-verification, accessibility pass) without changing repository structure.
+
+---
+
 ## Phasing summary
 
 | Phase | Theme | Deploy? | Tag? | Release? |

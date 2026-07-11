@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "title": "植物图谱与视觉分类",
+  "subtitle": "从自然史图像到知识秩序",
+  "working_title": "《植物图谱与视觉分类：从自然史图像到知识秩序》",
+  "version": "second-exhibition-v0.1",
+  "status": "repository-only-not-deployed",
+  "core_question": "自然史图像如何一步步从直观的视觉记录，转化为可被分类、复制、检索、并重新组织的知识载体？",
+  "visitor_duration": "3 分钟导览；深度阅读 25–40 分钟",
+  "section_count": 4,
+  "section_titles": [
+    "观察",
+    "分类",
+    "复制",
+    "再组织"
+  ],
+  "artifact_count": 6,
+  "glossary_count_target": 12,
+  "marker": "second-exhibition-v0.1",
+  "deployment_status": "repository-only-not-deployed",
+  "serving_contract": {
+    "command": "python3 -m http.server 8770 --directory second-exhibition",
+    "url": "http://127.0.0.1:8770/site/",
+    "rationale": "页面通过 ../assets/images/ 引用本地图片。必须从 second-exhibition/ 根目录启动 http.server，而不是 second-exhibition/site/，否则 ../assets/ 在该 serving model 下会解析错误。"
+  },
+  "forbidden_statuses_not_used": ["approved", "deployed", "live", "safe for commercial use", "cleared for all uses"],
+  "page_classes_used": [
+    ".artifact-card",
+    ".glossary-item",
+    ".deep-reading-block",
+    ".material-evidence-block",
+    ".visual-thinking-block",
+    ".research-model-block",
+    ".source-note",
+    ".credit-line",
+    ".repository-status"
+  ]
+}

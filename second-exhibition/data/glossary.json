@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "marker": "second-exhibition-v0.1",
+  "status": "repository-only-not-deployed",
+  "items": [
+    {
+      "id": "glossary-botanical-plate",
+      "term": "植物图谱",
+      "alias_zh": ["植物画谱", "本草图谱"],
+      "definition": "对植物形态进行图像化记录的合集，常见于植物志、本草书、博物学图谱。它既是科学记录，也是视觉艺术。",
+      "section_hint": "section-1-observation"
+    },
+    {
+      "id": "glossary-taxonomy",
+      "term": "分类学",
+      "alias_zh": ["系统学"],
+      "definition": "对生物进行命名、分群、并按演化关系排序的学科。本展览讨论的不是分类学本身的理论，而是图像如何被放进分类秩序。",
+      "section_hint": "section-2-classification"
+    },
+    {
+      "id": "glossary-specimen",
+      "term": "标本",
+      "alias_zh": ["样本"],
+      "definition": "经过压制、干燥或装订后保存于标本馆（herbarium）的植物个体或局部器官。它是分类学的物质基础，也是图像的对照样本。",
+      "section_hint": "section-2-classification"
+    },
+    {
+      "id": "glossary-herbarium",
+      "term": "植物标本馆",
+      "alias_zh": ["腊叶标本室", "Herbarium"],
+      "definition": "保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。NMNH Botany 与 Rijksprentenkabinet 都属于此类机构。",
+      "section_hint": "section-2-classification"
+    },
+    {
+      "id": "glossary-plate",
+      "term": "图版",
+      "alias_zh": ["图版", "Plate"],
+      "definition": "植物图谱中单页或跨页的整版图像，通常配有图注和说明文字。本展览的 BHL C-01、C-03 都是图版。",
+      "section_hint": "section-1-observation"
+    },
+    {
+      "id": "glossary-print",
+      "term": "版画",
+      "alias_zh": ["Print"],
+      "definition": "通过雕版、蚀刻、石印、蓝晒 cyanotype 等复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 作品属于此类。",
+      "section_hint": "section-3-reproduction"
+    },
+    {
+      "id": "glossary-public-domain",
+      "term": "公共领域",
+      "alias_zh": ["Public domain", "PD"],
+      "definition": "版权已过期或因机构主动放弃而进入公共使用的状态。CC0 1.0 是常见的公共领域贡献许可。本展览的 6 件资产都基于公共领域或 CC0 1.0。",
+      "section_hint": "section-2-classification"
+    },
+    {
+      "id": "glossary-digitization",
+      "term": "数字化",
+      "alias_zh": ["Digitization"],
+      "definition": "把物理图像或标本转写为数字副本的过程。数字副本与原物的关系（分辨率、色彩管理、元数据）决定了它能否被独立引用。",
+      "section_hint": "section-3-reproduction"
+    },
+    {
+      "id": "glossary-metadata",
+      "term": "元数据",
+      "alias_zh": ["Metadata"],
+      "definition": "描述图像、标本、出版物的结构化字段。本展览涉及的元数据包括 identifier、institution、date、rights、credit line、source note。",
+      "section_hint": "section-4-reorganization"
+    },
+    {
+      "id": "glossary-collection-record",
+      "term": "馆藏记录",
+      "alias_zh": ["Collection record"],
+      "definition": "机构对单件资产发布的官方记录页，承载 identifier、来源、版权、获取方式。本展览的 6 件资产都对应一条馆藏记录。",
+      "section_hint": "section-2-classification"
+    },
+    {
+      "id": "glossary-iiif",
+      "term": "IIIF",
+      "alias_zh": ["国际图像互操作框架"],
+      "definition": "International Image Interoperability Framework。包含 Image API（按尺寸/区域派生图像）和 Presentation API（提供 manifest，描述图像的结构化元数据）。本展览使用 IIIF Image API 下载图像；Presentation API manifest 在 C-10 上返回 404。",
+      "section_hint": "section-3-reproduction"
+    },
+    {
+      "id": "glossary-credit-source-note",
+      "term": "信用行与来源说明",
+      "alias_zh": ["Credit line", "Source note"],
+      "definition": "信用行 credit line 记录资产的归属与版权状态；来源说明 source note 记录资产的可访问 URL 与获取时间。两者都是数字引用场景下不可省略的字段。",
+      "section_hint": "section-4-reorganization"
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第二展览 repository-only 页面：从自然史图像到知识秩序。状态：repository-only-not-deployed。">
+<title>植物图谱与视觉分类 · 第二展览 v0.1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-marker="second-exhibition-v0.1">
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header">
+  <div class="container">
+    <p class="kicker">second-exhibition · v0.1 · repository-only</p>
+    <h1>植物图谱与视觉分类</h1>
+    <p class="subtitle">从自然史图像到知识秩序</p>
+    <p class="repository-status" role="status">
+      <span class="badge">repository-only-not-deployed</span>
+      本页面是 v4.6 阶段产物，只用于 repository QA。本展览未部署到 GitHub Pages；6 件资产状态为 <code>imported-not-deployed</code>。
+    </p>
+    <nav class="section-nav" aria-label="分节导航">
+      <a href="#section-1-observation">01 观察</a>
+      <a href="#section-2-classification">02 分类</a>
+      <a href="#section-3-reproduction">03 复制</a>
+      <a href="#section-4-reorganization">04 再组织</a>
+      <a href="#glossary">术语</a>
+      <a href="#deep-reading-block">深度阅读</a>
+    </nav>
+    <p class="guided-toggle">
+      <button id="guided-toggle" type="button" aria-pressed="false" aria-controls="guided-mode-banner">开启导览模式</button>
+    </p>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+<section class="hero" aria-labelledby="hero-heading">
+  <h2 id="hero-heading">3 分钟导览</h2>
+  <p>本展览由 4 节组成：观察、分类、复制、再组织。每节给出一段策展短文 + 一组 artifact cards。6 件 asset 全部来自 v4.5 asset import。</p>
+  <p class="muted">导览文本详见 <code>second-exhibition/docs/VISITOR_GUIDE_ZH.md</code>。</p>
+</section>
+
+<section id="guided-mode-banner" class="guided-banner" hidden>
+  <p>导览模式开启。你可以按 Tab 顺序浏览 artifact card；按下 <kbd>Esc</kbd> 关闭任意打开的 lightbox。</p>
+</section>
+
+<!-- ===== Section 1 ===== -->
+<section id="section-1-observation" class="exhibition-section" data-section-id="section-1-observation" data-candidate-ids="C-01">
+  <p class="kicker">01 · 观察</p>
+  <h2>观察：图像如何抓住植物特征</h2>
+  <p>观察是植物图谱的起点。当画家、博物学家或摄影师面对一株活体或一份标本，他们需要做出选择：哪些特征值得记录？哪些细节会因为印刷或数字化而丢失？本节以两份 BHL《Album of watercolors of Asian fruits and flowers》中的页面为引子，观察 18—19 世纪的水彩如何把花的轮廓、叶的脉络、果的质感固定为可被反复观看的图像。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>观察不是被动地复制视觉，而是一连串关于保留什么、舍弃什么的判断。</p>
+  <p class="viewer-action"><em>Viewer action：</em>把两张水彩图像并排放在一起，对比它们的取景方式与细节密度。</p>
+
+  <div class="visual-thinking-block deep-block" data-block-type="visual-thinking">
+    <h3>视觉思考 / Visual Thinking</h3>
+    <p>如果你只能保留图像中的一种视觉信息（颜色、轮廓、纹理、比例），你会留下哪一种？为什么？</p>
+  </div>
+</section>
+
+<!-- ===== Section 2 ===== -->
+<section id="section-2-classification" class="exhibition-section" data-section-id="section-2-classification" data-candidate-ids="C-06 C-08">
+  <p class="kicker">02 · 分类</p>
+  <h2>分类：图像如何服务命名与秩序</h2>
+  <p>分类让图像有了位置。每一份植物标本背后都对应一个学名、一段采集信息和一份机构记录。本节以 Smithsonian NMNH Botany 馆藏的 <em>Aconitum bulbilliferum</em> 与大都会博物馆的 <em>Botanical Specimen: Fern</em> 为对照样本，观察图像如何从被观察的对象变成被命名的对象。NMNH 提供的低分辨率缩略图与 Met 提供的相对完整的 JPEG 也在提醒我们：不同机构对可发布图像的尺度不同。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>分类学秩序依赖图像，图像的可获得性也受机构政策影响。</p>
+  <p class="viewer-action"><em>Viewer action：</em>比较两件作品的 credit line 与 source note：谁提供了图像、以何种授权、在怎样的元数据层级？</p>
+
+  <div class="material-evidence-block deep-block" data-block-type="material-evidence">
+    <h3>物质证据 / Material Evidence</h3>
+    <p>把同一物种在不同机构、不同年份、不同授权下出现的版本放在一起，分类秩序如何因元数据不同而呈现差异？</p>
+  </div>
+</section>
+
+<!-- ===== Section 3 ===== -->
+<section id="section-3-reproduction" class="exhibition-section" data-section-id="section-3-reproduction" data-candidate-ids="C-03 C-09 C-10">
+  <p class="kicker">03 · 复制</p>
+  <h2>复制：书籍、版画与数字化如何改变传播</h2>
+  <p>从手稿到印刷，从印刷到扫描，从扫描到 IIIF，复制技术决定了图像能否走出书房、走出博物馆、走出图书馆。本节以 Rijksmuseum Rijksprentenkabinet 收藏的 Anna Atkins 蓝晒 cyanotype 图像为引子，讨论 19 世纪的摄影/蓝晒印刷与今天的 IIIF Image API 在复制语义上的连续性与断裂。两件 Rijksmuseum 作品分别通过 Micrio IIIF 端点提供 JPG，本节同时记录了一条不能引用的 IIIF Presentation API manifest（404）作为研究路径中的边界。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>复制技术决定图像的命运，也决定后人能否独立验证它。</p>
+  <p class="viewer-action"><em>Viewer action：</em>尝试在浏览器中直接打开图像的 IIIF 端点，观察它在不同尺寸下的呈现。</p>
+
+  <div class="material-evidence-block deep-block" data-block-type="material-evidence">
+    <h3>物质证据 / Material Evidence</h3>
+    <p>如果你只能保留原图的某一种复制版本——扫描件、印刷件、IIIF 派生——你会保留哪一种？为什么？</p>
+  </div>
+</section>
+
+<!-- ===== Section 4 ===== -->
+<section id="section-4-reorganization" class="exhibition-section" data-section-id="section-4-reorganization" data-candidate-ids="C-01 C-03 C-06 C-08 C-09 C-10">
+  <p class="kicker">04 · 再组织</p>
+  <h2>再组织：数字馆藏如何让图像重新连接</h2>
+  <p>再组织是本展览的尾声，也是数字馆藏时代最大的可能：当图像有了稳定的 identifier、可校验的元数据、可机器读取的 rights 字段，它们就不再是孤立的艺术品，而可以与其它图像重新连接。本节不展示新图像，而是把前 3 节出现的 6 件资产放回一张"使用图谱"，让观者看见：哪些字段是稳定的（identifier、source URL、rights URL），哪些字段是脆弱的（90×90 的缩略图、404 的 manifest、变动的版权字段）。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>再组织的前提是诚实的元数据；脆弱的字段必须被标注，不能被静默使用。</p>
+  <p class="viewer-action"><em>Viewer action：</em>打开 <code>second-exhibition/docs/BUILD_ASSET_USAGE.md</code>，列出哪些字段在你的下一轮研究中需要重新打开原页面核对。</p>
+
+  <div class="research-model-block deep-block" data-block-type="research-model">
+    <h3>研究模型 / Research Model</h3>
+    <p>如果你要为这 6 件资产写一个统一的元数据模板，哪些字段是必填、哪些是可选、哪些必须随每一次引用都重新验证？</p>
+  </div>
+</section>
+
+<!-- ===== Artifact cards ===== -->
+<section class="artifact-cards" aria-labelledby="artifact-cards-heading">
+  <h2 id="artifact-cards-heading">资产卡片 / Artifact Cards</h2>
+  <p class="muted">6 件资产。每张卡片都包含 image、alt、caption、source note、credit line、viewing note。C-06 lightbox 已禁用。</p>
+
+  <article class="artifact-card" data-candidate-id="C-01" data-low-resolution="false" data-lightbox-enabled="true">
+    <figure>
+      <img src="../assets/images/bhl-318921-page-603998-c01.webp"
+           alt="Album of watercolors of Asian fruits and flowers, page 603998 — Pistillaria plate, watercolour on paper, between 1798 and 1850."
+           width="720" height="540" loading="lazy" decoding="async">
+      <figcaption class="caption">BHL item 318921 第 603998 页：一份 18—19 世纪的水彩植物图谱。观察者需要决定保留哪些视觉信息。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://www.biodiversitylibrary.org/page/603998" rel="noopener noreferrer">https://www.biodiversitylibrary.org/page/603998</a></p>
+    <p class="credit-line">Album of watercolors of Asian fruits and flowers (page 603998) / Biodiversity Heritage Library / Public domain</p>
+    <p class="viewing-note">图片以 WebP 形式从 BHL /pageimage/ 端点下载。可放大查看细节。</p>
+    <p class="artifact-meta">ID: C-01 · Section: 01 · 观察 · Institution: Biodiversity Heritage Library · Identifier: BHL item 318921 / page 603998 · Status: imported-not-deployed</p>
+  </article>
+
+  <article class="artifact-card" data-candidate-id="C-03" data-low-resolution="false" data-lightbox-enabled="true">
+    <figure>
+      <img src="../assets/images/bhl-318921-page-603962-c03.webp"
+           alt="Album of watercolors of Asian fruits and flowers, page 603962 — Cycas revoluta plate, watercolour on paper, between 1798 and 1850. PD subset only."
+           width="720" height="540" loading="lazy" decoding="async">
+      <figcaption class="caption">BHL item 318921 第 603962 页：另一页水彩植物图谱。本页只属于 Public-domain 子集；同 item 的 CC BY-NC-SA 子集仍被 blocked-from-import。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://www.biodiversitylibrary.org/page/603962" rel="noopener noreferrer">https://www.biodiversitylibrary.org/page/603962</a></p>
+    <p class="credit-line">Album of watercolors of Asian fruits and flowers (page 603962) / Biodiversity Heritage Library / Public domain (PD subset only)</p>
+    <p class="viewing-note caution">PD subset caution：本页只属于 Public-domain 子集；BHL 同 item 的 CC BY-NC-SA 子集仍被排除。</p>
+    <p class="artifact-meta">ID: C-03 · Section: 03 · 复制 · Institution: Biodiversity Heritage Library · Identifier: BHL item 318921 / page 603962 · Status: imported-not-deployed</p>
+  </article>
+
+  <article class="artifact-card" data-candidate-id="C-06" data-low-resolution="true" data-lightbox-enabled="false">
+    <figure>
+      <img src="../assets/images/smithsonian-nmnh-1529703.png"
+           alt="Smithsonian NMNH Botany specimen, US Catalog 1529703 — Aconitum bulbilliferum Hand.-Mazz. (Ranunculaceae, Type fragment), 90x90 PNG thumbnail."
+           width="90" height="90" loading="lazy" decoding="async">
+      <figcaption class="caption">NMNH Botany US Catalog 1529703：<em>Aconitum bulbilliferum</em> 标本的低分辨率缩略图。该端点返回 90×90 PNG，机构数据级 CC0 1.0。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://collections.nmnh.si.edu/search/botany/?ark=ark:/65665/31e002158-f911-411b-bbfb-63a2d207e920" rel="noopener noreferrer">https://collections.nmnh.si.edu/search/botany/?ark=ark:/65665/31e002158-f911-411b-bbfb-63a2d207e920</a></p>
+    <p class="credit-line">Aconitum bulbilliferum Hand.-Mazz., Handel-Mazzetti 5202, 17 Sep 1914 / Smithsonian National Museum of Natural History, US Catalog 1529703 / Smithsonian Open Access (CC0 1.0, dataset-level)</p>
+    <p class="viewing-note caution">Low-resolution caution：90×90 缩略图。页面不作为大幅展示；不启用 lightbox；image-rendering 使用浏览器默认值。</p>
+    <p class="artifact-meta">ID: C-06 · Section: 02 · 分类 · Institution: Smithsonian NMNH Botany · Identifier: US Catalog 1529703 · Status: imported-not-deployed</p>
+  </article>
+
+  <article class="artifact-card" data-candidate-id="C-08" data-low-resolution="false" data-lightbox-enabled="true">
+    <figure>
+      <img src="../assets/images/met-285149.jpg"
+           alt="[Botanical Specimen: Fern], 1855–60 / The Metropolitan Museum of Art, accession 2003.562.3. Public domain."
+           width="449" height="624" loading="lazy" decoding="async">
+      <figcaption class="caption">大都会博物馆 285149：<em>Botanical Specimen: Fern</em>。Met Collection API isPublicDomain=true，且公开页面显示了 Public Domain 指示（double-confirmation PASS）。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://www.metmuseum.org/art/collection/search/285149" rel="noopener noreferrer">https://www.metmuseum.org/art/collection/search/285149</a></p>
+    <p class="credit-line">[Botanical Specimen: Fern], 1855–60 / The Metropolitan Museum of Art, Gift of Russell C. Vail, 2003 (2003.562.3) / Public domain</p>
+    <p class="viewing-note caution">Double-confirmation note：API `isPublicDomain=true` AND public-page Public Domain indicator。</p>
+    <p class="artifact-meta">ID: C-08 · Section: 02 · 分类 · Institution: The Metropolitan Museum of Art · Identifier: Met object 285149 / accession 2003.562.3 · Status: imported-not-deployed</p>
+  </article>
+
+  <article class="artifact-card" data-candidate-id="C-09" data-low-resolution="false" data-lightbox-enabled="true">
+    <figure>
+      <img src="../assets/images/rijksmuseum-rp-f-f80152.jpg"
+           alt="Zeestreepvaren (Pteris), Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80152. Cyanotype photogram on paper. Public domain / CC0 1.0."
+           width="480" height="606" loading="lazy" decoding="async">
+      <figcaption class="caption">Rijksmuseum RP-F-F80152：<em>Zeestreepvaren</em>。Anna Atkins 的蓝晒作品。Rijksmuseum 公开页面逐项标注版权为 Public domain（CC0 1.0）。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://www.rijksmuseum.nl/en/collection/RP-F-F80152" rel="noopener noreferrer">https://www.rijksmuseum.nl/en/collection/RP-F-F80152</a></p>
+    <p class="credit-line">Zeestreepvaren, Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80152 / Public domain (CC0 1.0)</p>
+    <p class="viewing-note">Per-item licence：Rijksmuseum 公开页面逐项标注版权为 Public domain（CC0 1.0）。对象类型为 photogram（cyanotype），不是传统版画。</p>
+    <p class="artifact-meta">ID: C-09 · Section: 03 · 复制 · Institution: Rijksmuseum / Rijksprentenkabinet · Identifier: RP-F-F80152 · Status: imported-not-deployed</p>
+  </article>
+
+  <article class="artifact-card" data-candidate-id="C-10" data-low-resolution="false" data-lightbox-enabled="true">
+    <figure>
+      <img src="../assets/images/rijksmuseum-rp-f-f80313.jpg"
+           alt="Wolfsklauw (Lycopodium), Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80313. Cyanotype photogram on paper. Public domain / CC0 1.0."
+           width="480" height="605" loading="lazy" decoding="async">
+      <figcaption class="caption">Rijksmuseum RP-F-F80313：<em>Wolfsklauw</em>。Anna Atkins 的另一张蓝晒。Rijksmuseum IIIF Presentation API manifest <code>/manifest.json</code> 在本轮返回 404；manifest-based 证据未使用。</figcaption>
+    </figure>
+    <p class="source-note">Source: <a href="https://www.rijksmuseum.nl/en/collection/RP-F-F80313" rel="noopener noreferrer">https://www.rijksmuseum.nl/en/collection/RP-F-F80313</a></p>
+    <p class="credit-line">Wolfsklauw, Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80313 / Public domain (CC0 1.0)</p>
+    <p class="viewing-note caution">Manifest 404 caveat：Rijksmuseum IIIF Presentation API manifest <code>/manifest.json</code> 在 v4.5 阶段返回 HTTP 404；本展览不基于 IIIF Presentation API manifest 撰写任何陈述。</p>
+    <p class="artifact-meta">ID: C-10 · Section: 03 · 复制 · Institution: Rijksmuseum / Rijksprentenkabinet · Identifier: RP-F-F80313 · Status: imported-not-deployed</p>
+  </article>
+</section>
+
+<!-- ===== Glossary ===== -->
+<section id="glossary" class="glossary" aria-labelledby="glossary-heading">
+  <h2 id="glossary-heading">术语 / Glossary</h2>
+  <p class="muted">12 个术语。术语与第二展览策展短文、deep research notes 配套使用。</p>
+  <dl class="glossary-list">
+    <div class="glossary-item"><dt>植物图谱</dt><dd>对植物形态进行图像化记录的合集，常见于植物志、本草书、博物学图谱。它既是科学记录，也是视觉艺术。</dd></div>
+    <div class="glossary-item"><dt>分类学</dt><dd>对生物进行命名、分群、并按演化关系排序的学科。本展览讨论的不是分类学本身的理论，而是图像如何被放进分类秩序。</dd></div>
+    <div class="glossary-item"><dt>标本</dt><dd>经过压制、干燥或装订后保存于标本馆（herbarium）的植物个体或局部器官。它是分类学的物质基础，也是图像的对照样本。</dd></div>
+    <div class="glossary-item"><dt>植物标本馆</dt><dd>保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。NMNH Botany 与 Rijksprentenkabinet 都属于此类机构。</dd></div>
+    <div class="glossary-item"><dt>图版</dt><dd>植物图谱中单页或跨页的整版图像，通常配有图注和说明文字。本展览的 BHL C-01、C-03 都是图版。</dd></div>
+    <div class="glossary-item"><dt>版画</dt><dd>通过雕版、蚀刻、石印、蓝晒 cyanotype 等复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 作品属于此类。</dd></div>
+    <div class="glossary-item"><dt>公共领域</dt><dd>版权已过期或因机构主动放弃而进入公共使用的状态。CC0 1.0 是常见的公共领域贡献许可。本展览的 6 件资产都基于公共领域或 CC0 1.0。</dd></div>
+    <div class="glossary-item"><dt>数字化</dt><dd>把物理图像或标本转写为数字副本的过程。数字副本与原物的关系（分辨率、色彩管理、元数据）决定了它能否被独立引用。</dd></div>
+    <div class="glossary-item"><dt>元数据</dt><dd>描述图像、标本、出版物的结构化字段。本展览涉及的元数据包括 identifier、institution、date、rights、credit line、source note。</dd></div>
+    <div class="glossary-item"><dt>馆藏记录</dt><dd>机构对单件资产发布的官方记录页，承载 identifier、来源、版权、获取方式。本展览的 6 件资产都对应一条馆藏记录。</dd></div>
+    <div class="glossary-item"><dt>IIIF</dt><dd>International Image Interoperability Framework。包含 Image API（按尺寸/区域派生图像）和 Presentation API（提供 manifest，描述图像的结构化元数据）。本展览使用 IIIF Image API 下载图像；Presentation API manifest 在 C-10 上返回 404。</dd></div>
+    <div class="glossary-item"><dt>信用行与来源说明</dt><dd>信用行 credit line 记录资产的归属与版权状态；来源说明 source note 记录资产的可访问 URL 与获取时间。两者都是数字引用场景下不可省略的字段。</dd></div>
+  </dl>
+</section>
+
+<!-- ===== Deep blocks (one of each kind) ===== -->
+<section id="deep-reading-block" class="deep-reading-block deep-block" data-block-type="deep-reading">
+  <h2>深度阅读 / Deep Reading</h2>
+  <p>深度阅读入口：</p>
+  <ul>
+    <li>策展短文：<a href="../docs/CURATORIAL_ESSAY_ZH.md">CURATORIAL_ESSAY_ZH.md</a></li>
+    <li>深度研究笔记：<a href="../docs/DEEP_RESEARCH_NOTES_ZH.md">DEEP_RESEARCH_NOTES_ZH.md</a></li>
+    <li>资产使用图谱：<a href="../docs/BUILD_ASSET_USAGE.md">BUILD_ASSET_USAGE.md</a></li>
+    <li>3 分钟导览：<a href="../docs/VISITOR_GUIDE_ZH.md">VISITOR_GUIDE_ZH.md</a></li>
+  </ul>
+  <p class="muted">本块把页面层与文档层（4 个 markdown）连接起来。深度阅读不在线发生，它在文件树中。</p>
+</section>
+
+<section class="material-evidence-block deep-block" data-block-type="material-evidence" aria-labelledby="material-evidence-heading">
+  <h2 id="material-evidence-heading">物质证据 / Material Evidence</h2>
+  <p>6 件资产在元数据层（v4.5 import）的不变量：</p>
+  <ul>
+    <li>identifier（parent item id、page id、object number、persistent URL、EZID）</li>
+    <li>institution</li>
+    <li>date</li>
+    <li>rights basis（per-item 或 dataset-level）</li>
+    <li>source URL</li>
+    <li>media URL</li>
+  </ul>
+  <p>脆弱变量：</p>
+  <ul>
+    <li>media URL 端点的可达性（C-10 IIIF Presentation API manifest 404）</li>
+    <li>media URL 端点返回的尺寸（C-06 NMNH `/media/?i=…` 仅 90×90）</li>
+    <li>机构 Open Access 政策的措辞（随机构主页更新而可能变化）</li>
+  </ul>
+</section>
+
+<section class="visual-thinking-block deep-block" data-block-type="visual-thinking" aria-labelledby="visual-thinking-heading">
+  <h2 id="visual-thinking-heading">视觉思考 / Visual Thinking</h2>
+  <p>观察阶段：把视觉信号分类成"轮廓 / 颜色 / 纹理 / 比例"四类。每一类的取舍都决定了图像能否被分类秩序接住。</p>
+  <p>复制阶段：把同样的取舍重复做一遍。IIIF Image API 的不同尺寸派生就是这种重复。</p>
+  <p>再组织阶段：把同一物种在不同机构、不同年份、不同授权下的版本放回一张图——分类秩序如何呈现差异？</p>
+</section>
+
+<section class="research-model-block deep-block" data-block-type="research-model" aria-labelledby="research-model-heading">
+  <h2 id="research-model-heading">研究模型 / Research Model</h2>
+  <p>本展览的研究模型基于以下命题：</p>
+  <ol>
+    <li>自然史图像的生命周期由四个动作组成：观察、分类、复制、再组织。</li>
+    <li>每一个动作都对应一组工程层的脆弱字段（端点可达性、返回尺寸、措辞稳定性）。</li>
+    <li>每一次外部引用前必须重新打开官方页面核对脆弱字段。</li>
+    <li>数字策展的伦理边界不来自"是否合规"，而来自"是否诚实标注脆弱字段"。</li>
+  </ol>
+  <p class="muted">本块不替代任何具体研究计划；详见 <a href="../docs/DEEP_RESEARCH_NOTES_ZH.md">DEEP_RESEARCH_NOTES_ZH.md</a>。</p>
+</section>
+
+<section class="source-rights-entry" aria-labelledby="source-rights-heading">
+  <h2 id="source-rights-heading">来源与版权 / Source &amp; Rights</h2>
+  <p>本展览的 6 件资产的来源与版权证据位于 <code>second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md</code> 与 <code>second-exhibition/docs/RIGHTS_AND_SOURCES.md</code>。这两份文件不可修改，除非新一轮的源/版权核对产生了真实差异。</p>
+  <p>每张 artifact card 的 source note 与 credit line 与上述两份文件一一对应。</p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="repository-status">
+      <span class="badge">second-exhibition-v0.1</span>
+      <span class="badge">repository-only-not-deployed</span>
+    </p>
+    <p class="muted">marker: <code>second-exhibition-v0.1</code></p>
+    <p class="muted">资产状态：<code>imported-not-deployed</code> × 6 · 部署状态：<code>not deployed</code></p>
+    <p class="muted">本页面与 GitHub Pages workflow 不耦合：Pages workflow 只部署 <code>site/</code>，不部署 <code>second-exhibition/</code>。</p>
+  </div>
+</footer>
+
+<!-- ===== Lightbox ===== -->
+<div id="lightbox" class="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <div class="lightbox-overlay" data-lightbox-close></div>
+  <figure class="lightbox-inner">
+    <img id="lightbox-img" alt="">
+    <figcaption id="lightbox-caption"></figcaption>
+    <p class="lightbox-source-note" id="lightbox-source-note"></p>
+    <p class="lightbox-credit-line" id="lightbox-credit-line"></p>
+    <button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭 lightbox">关闭 (Esc)</button>
+  </figure>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

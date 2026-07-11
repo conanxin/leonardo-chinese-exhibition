@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "marker": "second-exhibition-v0.1",
+  "status": "repository-only-not-deployed",
+  "sections": [
+    {
+      "id": "section-1-observation",
+      "kicker": "01 · 观察",
+      "title": "观察：图像如何抓住植物特征",
+      "body": "观察是植物图谱的起点。当画家、博物学家或摄影师面对一株活体或一份标本，他们需要做出选择：哪些特征值得记录？哪些细节会因为印刷或数字化而丢失？本节以两份 BHL《Album of watercolors of Asian fruits and flowers》中的页面为引子，观察 18—19 世纪的水彩如何把花的轮廓、叶的脉络、果的质感固定为可被反复观看的图像。",
+      "takeaway": "观察不是被动地复制视觉，而是一连串关于保留什么、舍弃什么的判断。",
+      "viewer_action": "把两张水彩图像并排放在一起，对比它们的取景方式与细节密度。",
+      "artifact_candidate_ids": ["C-01"],
+      "deep_block_type": "visual-thinking",
+      "deep_block_prompt": "如果你只能保留图像中的一种视觉信息（颜色、轮廓、纹理、比例），你会留下哪一种？为什么？"
+    },
+    {
+      "id": "section-2-classification",
+      "kicker": "02 · 分类",
+      "title": "分类：图像如何服务命名与秩序",
+      "body": "分类让图像有了位置。每一份植物标本背后都对应一个学名、一段采集信息和一份机构记录。本节以 Smithsonian NMNH Botany 馆藏的 Aconitum bulbilliferum 与大都会博物馆的 Botanical Specimen: Fern 为对照样本，观察图像如何从被观察的对象变成被命名的对象。NMNH 提供的低分辨率缩略图与 Met 提供的相对完整的 JPEG 也在提醒我们：不同机构对可发布图像的尺度不同。",
+      "takeaway": "分类学秩序依赖图像，图像的可获得性也受机构政策影响。",
+      "viewer_action": "比较两件作品的 credit line 与 source note：谁提供了图像、以何种授权、在怎样的元数据层级？",
+      "artifact_candidate_ids": ["C-06", "C-08"],
+      "deep_block_type": "material-evidence",
+      "deep_block_prompt": "把同一物种在不同机构、不同年份、不同授权下出现的版本放在一起，分类秩序如何因元数据不同而呈现差异？"
+    },
+    {
+      "id": "section-3-reproduction",
+      "kicker": "03 · 复制",
+      "title": "复制：书籍、版画与数字化如何改变传播",
+      "body": "从手稿到印刷，从印刷到扫描，从扫描到 IIIF，复制技术决定了图像能否走出书房、走出博物馆、走出图书馆。本节以 Rijksmuseum Rijksprentenkabinet 收藏的 Anna Atkins 蓝晒 cyanotype 图像为引子，讨论 19 世纪的摄影/蓝晒印刷与今天的 IIIF Image API 在复制语义上的连续性与断裂。两件 Rijksmuseum 作品分别通过 Micrio IIIF 端点提供 JPG，本节同时记录了一条不能引用的 IIIF Presentation API manifest（404）作为研究路径中的边界。",
+      "takeaway": "复制技术决定图像的命运，也决定后人能否独立验证它。",
+      "viewer_action": "尝试在浏览器中直接打开图像的 IIIF 端点，观察它在不同尺寸下的呈现。",
+      "artifact_candidate_ids": ["C-03", "C-09", "C-10"],
+      "deep_block_type": "material-evidence",
+      "deep_block_prompt": "如果你只能保留原图的某一种复制版本——扫描件、印刷件、IIIF 派生——你会保留哪一种？为什么？"
+    },
+    {
+      "id": "section-4-reorganization",
+      "kicker": "04 · 再组织",
+      "title": "再组织：数字馆藏如何让图像重新连接",
+      "body": "再组织是本展览的尾声，也是数字馆藏时代最大的可能：当图像有了稳定的 identifier、可校验的元数据、可机器读取的 rights 字段，它们就不再是孤立的艺术品，而可以与其它图像重新连接。本节不展示新图像，而是把前 3 节出现的 6 件资产放回一张使用图谱，让观者看见：哪些字段是稳定的（identifier、source URL、rights URL），哪些字段是脆弱的（90×90 的缩略图、404 的 manifest、变动的版权字段）。",
+      "takeaway": "再组织的前提是诚实的元数据；脆弱的字段必须被标注，不能被静默使用。",
+      "viewer_action": "打开 second-exhibition/docs/BUILD_ASSET_USAGE.md，列出哪些字段在你的下一轮研究中需要重新打开原页面核对。",
+      "artifact_candidate_ids": ["C-01", "C-03", "C-06", "C-08", "C-09", "C-10"],
+      "deep_block_type": "research-model",
+      "deep_block_prompt": "如果你要为这 6 件资产写一个统一的元数据模板，哪些字段是必填、哪些是可选、哪些必须随每一次引用都重新验证？"
+    }
+  ]
+}
