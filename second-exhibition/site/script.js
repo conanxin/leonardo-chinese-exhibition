@@ -12,14 +12,16 @@
   var lightboxCreditLine = document.getElementById("lightbox-credit-line");
   var guidedToggle = document.getElementById("guided-toggle");
   var guidedBanner = document.getElementById("guided-mode-banner");
+  var lastTrigger = null;
 
-  function openLightbox(card) {
+  function openLightbox(card, trigger) {
     if (!lightbox || !lightboxImg) return;
     var img = card.querySelector("img");
     if (!img) return;
     var caption = card.querySelector(".caption");
     var sourceNote = card.querySelector(".source-note");
     var creditLine = card.querySelector(".credit-line");
+    lastTrigger = trigger || img;
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt || "";
     lightboxCaption.textContent = caption ? caption.textContent : "";
@@ -40,6 +42,14 @@
     lightbox.setAttribute("aria-hidden", "true");
     lightboxImg.src = "";
     document.body.style.overflow = "";
+    if (lastTrigger && typeof lastTrigger.focus === "function") {
+      try {
+        lastTrigger.focus();
+      } catch (e) {
+        // ignore
+      }
+    }
+    lastTrigger = null;
   }
 
   function attachArtifactCardListeners() {
@@ -50,12 +60,12 @@
       var img = card.querySelector("img");
       if (!img) return;
       img.addEventListener("click", function () {
-        openLightbox(card);
+        openLightbox(card, img);
       });
       img.addEventListener("keydown", function (ev) {
         if (ev.key === "Enter" || ev.key === " ") {
           ev.preventDefault();
-          openLightbox(card);
+          openLightbox(card, img);
         }
       });
       img.setAttribute("tabindex", "0");

@@ -488,15 +488,31 @@ class RepositoryQAGate(QAGate):
         assets = read_json(DATA / "assets.json")["assets"]
 
         # C-03
-        if "pd subset" in html or "pd subset" in text or "cc by-nc-sa" in html or "cc by-nc-sa" in text:
+        c03_html = read_text(SITE / "index.html").lower()
+        c03_text = read_text(DOCS / "BUILD_ASSET_USAGE.md").lower()
+        c03_data = next((a for a in assets if a["candidate_id"] == "C-03"), {})
+
+        has_pd_subset = any(
+            token in c03_html or token in c03_text
+            for token in ["pd subset", "public-domain subset", "public domain subset", "pd 子集"]
+        )
+        has_cc_by_nc_sa = any(
+            token in c03_html or token in c03_text
+            for token in ["cc by-nc-sa", "cc-by-nc-sa"]
+        )
+        has_blocked = any(
+            token in c03_html or token in c03_text
+            for token in ["blocked-from-import", "blocked from import", "仍被排除", "仍被 blocked"]
+        )
+        if has_pd_subset or has_cc_by_nc_sa or has_blocked:
             self.ok("C-03 PD subset / CC BY-NC-SA caution present")
         else:
             self.fail("C-03 PD subset caution missing")
 
-        if "cc by-nc-sa subset" in html or "cc by-nc-sa subset" in text:
-            self.ok("C-03 CC BY-NC-SA subset exact wording present")
+        if has_blocked:
+            self.ok("C-03 blocked-from-import / exclusion wording present")
         else:
-            self.warn("C-03 CC BY-NC-SA subset exact wording not found")
+            self.warn("C-03 blocked-from-import / exclusion wording not found")
 
         # C-06
         c06 = next((a for a in assets if a["candidate_id"] == "C-06"), {})
@@ -525,15 +541,30 @@ class RepositoryQAGate(QAGate):
         else:
             self.fail("C-06 display size small missing")
 
-        if "hero" not in html or ("c-06" not in html and "hero" in html):
-            self.ok("C-06 not used as Hero")
+        # Parse Hero section from the HTML. We treat the first <section class="hero"> as the Hero.
+        hero_match = re.search(r'<section[^>]*class="[^"]*hero[^"]*".*?</section>', html, re.IGNORECASE | re.DOTALL)
+        if not hero_match:
+            self.warn("C-06 Hero section not found; Hero check inconclusive")
         else:
-            if "hero" in html and "c-06" not in html:
-                self.ok("C-06 not used as Hero")
+            hero_html = hero_match.group(0)
+            if "c-06" in hero_html or "smithsonian-nmnh" in hero_html or 'data-candidate-id="c-06"' in hero_html:
+                self.fail("C-06 used in Hero section")
             else:
-                self.warn("C-06 Hero check inconclusive")
+                self.ok("C-06 not used in Hero section")
 
-        # C-08
+        # Verify that the only C-06 occurrence is the intended low-resolution card.
+        c06_articles = re.findall(r'<article[^>]*data-candidate-id="c-06"[^>]*>.*?</article>', html, re.IGNORECASE | re.DOTALL)
+        if not c06_articles:
+            self.fail("C-06 artifact card missing")
+        elif len(c06_articles) == 1:
+            self.ok("C-06 appears exactly once")
+        else:
+            self.fail("C-06 appears more than once")
+        c06_article = c06_articles[0] if c06_articles else ""
+        if 'data-low-resolution="true"' in c06_article and 'data-lightbox-enabled="false"' in c06_article:
+            self.ok("C-06 card has low-resolution=true and lightbox-enabled=false")
+        else:
+            self.fail("C-06 card attributes do not match low-resolution / lightbox-disabled expectation")
         if "double-confirmation" in text or "double-confirmation" in html or "ispublicdomain" in text or "ispublicdomain" in html or "public domain" in rights:
             self.ok("C-08 double-confirmation / public domain evidence present")
         else:

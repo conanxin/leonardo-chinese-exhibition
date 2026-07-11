@@ -554,4 +554,14 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 - No new tag / no new GitHub Release.
 - **Next:** **v4.7-real-stable-freeze**.
 
+## v4.8 Second Exhibition Repository Hardening
+
+- Repository QA warnings resolved
+- Reproducible browser QA runner added (`scripts/second_exhibition_browser_qa.mjs`)
+- Five-viewport browser matrix completed (1440/1280/768/390/320)
+- Interaction and accessibility hardened: focus restoration on lightbox close fixed
+- No asset, source, or deployment changes
+- Second exhibition remains **repository-only-not-deployed**
+- **Next:** **v4.8-real-stable-freeze**
+
 The second exhibition's live publication is **explicitly not on this roadmap**. v4.4 produces the asset-import-prep evidence; v4.4b closes the source gap; v4.5 executes the actual download (gated on v4.4b). The QA / stable freeze round (with tag + Release) is moved to a later phase. Live publication of the new exhibition requires a separate, future round that explicitly authorizes live publication and runs the full source-and-rights audit a second time on the *to-be-deployed* working tree.

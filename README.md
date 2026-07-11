@@ -481,7 +481,22 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Existing Leonardo live site:** unchanged (92,976 B, v2.9 marker present)
 - **Second exhibition:** remains unavailable on GitHub Pages (tested URLs return HTTP 404)
 - **Browser note:** full v4.6 Playwright PASS; v4.7b browser matrix not rerun due to missing browser binary
-- **Next:** v4.8 repository hardening or deployment planning
+- **Next**: v4.8 repository hardening or deployment planning
+
+## v4.8 Second Exhibition Repository Hardening
+
+- **Repository QA:** 161 PASS / 0 FAIL / 0 WARNINGS (exit code 0)
+- **Warnings:** 0 (C-03 wording broadened, C-06 hero check structured)
+- **Browser QA:** `node scripts/second_exhibition_browser_qa.mjs` (Playwright Chromium)
+- **Five viewports verified:** 1440 × 1000, 1280 × 900, 768 × 1024, 390 × 844, 320 × 700
+- **Real a11y defect fixed:** lightbox now restores focus to trigger image after close (`second-exhibition/site/script.js`)
+- **No external requests / 0 failed requests / 0 console errors**
+- **No-JS mode:** all 6 cards and source notes / credit lines visible
+- **Reduced-motion mode:** lightbox open / ESC close PASS
+- **Not deployed**; existing Leonardo live site unchanged
+- No asset, data, source, rights, or workflow changes
+- No new tag / no new Release
+- **Next:** v4.8-real-stable-freeze
 
 ## 当前版本
 
