@@ -133,7 +133,7 @@
 
 ---
 
-## v5.3 — Controlled Deployment
+## v5.3 — Controlled Deployment (executed)
 
 **Goal.** Publish the second exhibition to Pages. Verify the existing top-level site remains intact. Verify the new route.
 
@@ -160,6 +160,94 @@
 - Browser QA against the public URL PASS.
 - External requests = 0.
 - Source / rights recheck: no changes.
+
+**Actual outcome (commits on `main`).**
+
+- `f84e53f` — wire staging builder + gate + upload path `${{ runner.temp }}/leonardo-pages-artifact`
+- `83ab6d8` — pass `--audit "${{ runner.temp }}/leonardo-pages-artifact-audit"` to the builder (fix mismatch that aborted first run 29154310813)
+- GitHub Actions run `29154365778` succeeded in 18s.
+- Live root 92,976 B / v2.9 = 1 unchanged; `/second-exhibition/` and all 6 images return HTTP 200; all forbidden paths 404.
+
+---
+
+## v5.3b — Production State Reconciliation (prepared, awaiting authorization)
+
+**Goal.** Reconcile visible on-page wording with the new production state established by v5.3, without rewriting historical v4.5 import evidence. Page-level status text and current publication metadata must reflect the v5.3 reality; immutable v4.5 import records remain in place.
+
+**Problem observed after v5.3 deploy.**
+
+- The deployed page still displayed `repository-only-not-deployed` and the asset cards exposed only `imported-not-deployed` (historical import status). This is a factual status mismatch between the visible page and the actual deployed state — not a deployment failure.
+
+**Status layering (introduced in v5.3b).**
+
+| Layer | Field | Value | Source |
+|---|---|---|---|
+| Historical import (per asset, immutable) | `import_status` | `imported-not-deployed` | `second-exhibition/assets/asset-import-manifest.json` (v4.5) |
+| Current publication (per asset) | `publication_status` | `published-in-v5.3` | added to `second-exhibition/data/assets.json` |
+| Current exhibition publication (top-level) | `status` / `publication_status` / `deployment_status` | `production-deployed-v5.3` | `second-exhibition/data/exhibition.json` |
+| Public URL | `deployment_url` | `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/` | `second-exhibition/data/exhibition.json` |
+| Deployment round | `deployment_round` | `v5.3-controlled-deployment` | `second-exhibition/data/exhibition.json` |
+| Build-time audit marker | (in `build-summary.json`) | `staging-only-not-deployed` | preserved as build-pipeline marker, not page text |
+
+**Files modified in v5.3b prep.**
+
+- `second-exhibition/site/index.html` — meta description, kicker, header badge + sentence, 6× artifact-meta lines (split `Status: imported-not-deployed` into `Import record: imported-not-deployed (v4.5) · Publication status: published-in-v5.3`), footer badge + status block.
+- `second-exhibition/data/exhibition.json` — top-level `status` / `deployment_status` → `production-deployed-v5.3`; added `publication_status`, `deployment_url`, `deployment_round`, `historical_import_round`; replaced `forbidden_statuses_not_used` overclaim list.
+- `second-exhibition/data/assets.json` — top-level `status` → `production-deployed-v5.3`, added `publication_status: published-in-v5.3`; each of 6 assets gained `publication_status: published-in-v5.3` while `import_status: imported-not-deployed` preserved.
+- `second-exhibition/site/README.md` — header description + status block + forbidden-status list updated to v5.3 reality.
+- `second-exhibition/README.md` — status section rewritten; deployment-safety section describes the v5.3 Pages workflow allowlist.
+- `scripts/second_exhibition_build_gate.py` — JSON checks require `production-deployed-v5.3` for `status` / `publication_status` / `deployment_status` + matching `deployment_url`; per-asset dual-status check (preserve `import_status`, add `publication_status`); page-text check requires current status + per-asset status + preserved historical record; forbids stale badge/prose.
+- `scripts/second_exhibition_repository_qa.py` — status field check now requires `production-deployed-v5.3`; status-text check requires `production-deployed-v5.3` AND `published-in-v5.3` on page; explicit preservation check for `imported-not-deployed`.
+- `scripts/second_exhibition_staging_gate.py` — Group H rewritten: requires current status + per-asset status + preserved historical record + no stale phrasing.
+- `scripts/second_exhibition_browser_qa.mjs` — per-viewport page-text check requires `production-deployed-v5.3` + `published-in-v5.3` + preserved `imported-not-deployed` + no stale prose; aggregation requires all 5 viewports to see current status.
+- `scripts/second_exhibition_deployment_dry_run.py` — Section C updated to verify v5.3 workflow semantics (`${{ runner.temp }}/leonardo-pages-artifact` upload path + matching `--audit` flag), instead of the obsolete `path: site` check. Rollback rehearsal now references reverting `f84e53f` + `83ab6d8` to restore prior `pages.yml`.
+- `README.md` — added v5.3 (executed) and v5.3b (prepared) blocks; preserved all historical v3.x / v4.x / v5.0–v5.2 sections.
+- `docs/V5_ROADMAP.md` — added this v5.3b section.
+
+**Files preserved (v4.5 immutable evidence).**
+
+- `second-exhibition/assets/asset-import-manifest.json` (historical import record, untouched)
+- `second-exhibition/assets/asset-checksums.sha256` (untouched)
+- All six image bytes under `second-exhibition/assets/images/` (untouched; `sha256sum -c` 6/6 OK)
+- `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md` (untouched)
+- `second-exhibition/docs/RIGHTS_AND_SOURCES.md` (untouched)
+- All `release-assets/`, `reports/`, `docs/RELEASE_NOTES_*`, `_template/`, `_pilots/`, `posts/`, `case-study/` content (untouched)
+- `site/index.html`, `site/script.js`, `site/style.css` (untouched; root byte 92,976 B preserved)
+- `.github/workflows/pages.yml` (untouched in v5.3b prep; v5.3 wiring already in place)
+
+**Validation gates (all PASS before push).**
+
+- `python3 scripts/template_quality_gate.py` → PASS 37/37
+- `python3 scripts/second_exhibition_build_gate.py` → PASS
+- `python3 scripts/second_exhibition_repository_qa.py` → PASS 164/164
+- `sha256sum -c second-exhibition/assets/asset-checksums.sha256` → 6/6 OK
+- `node --check second-exhibition/site/script.js` → clean
+- `node --check scripts/second_exhibition_browser_qa.mjs` → clean
+- Staging build + staging gate → PASS (root 92,976 B, 34 public files, 6 image SHA identical, 0 forbidden leakage)
+- Deployment dry-run with v5.3-aware Section C → PASS exit 0
+- Browser QA 5/5 viewports → PASS (current status visible, no stale phrasing, 0 console/page/failed/external, 6 images per viewport, all interactions OK)
+
+**Do NOT do in v5.3b.**
+
+- Do not commit / push / trigger Actions without explicit `DEPLOY v5.3b` from the user.
+- Do not move or create any tag.
+- Do not overwrite any existing Release.
+- Do not modify any of the v4.5 immutable evidence files listed above.
+- Do not modify `.github/workflows/pages.yml` again — v5.3 wiring is correct.
+
+**Exit criteria for v5.3b.**
+
+- All listed gates and validations PASS.
+- Working tree contains only the 11 modified files listed above plus the untracked `.firecrawl/`.
+- No tracked file under `second-exhibition/assets/`, `second-exhibition/docs/`, top-level `site/`, `_template/`, `_pilots/`, `release-assets/`, `reports/`, `.github/`, or workflow area is modified.
+- `git reflog` shows no new commits this round.
+- Live production still at root 92,976 B / v2.9 = 1 / `/second-exhibition/` 200 / 6 images 200 / forbidden paths 404 / page text still reflects v5.3b-prep-old wording (until push).
+
+**Required authorization to commit + push + deploy.**
+
+```
+DEPLOY v5.3b
+```
 
 ---
 

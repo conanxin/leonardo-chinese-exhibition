@@ -559,6 +559,35 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Tags / Releases:** unchanged
 - **Next:** v5.3-controlled-deployment
 
+## v5.3 Second Exhibition Controlled Deployment — Executed
+
+- **Status:** executed (commits `f84e53f` + `83ab6d8` on `main`)
+- **Workflow commits:** `f84e53f7f1c5fa20fc8fc40e747bbf934cdfdf92` (wire) + `83ab6d8bc8a3f278d53c72516cf72d1a747e13bd` (audit-path fix)
+- **GitHub Actions run:** `29154365778` — success, 18s
+- **Public URL:** https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/ (HTTP 200)
+- **Root byte:** 92,976 B (unchanged)
+- **v2.9 marker:** 1 (unchanged)
+- **Six public images:** all HTTP 200, byte-identical to source SHA-256
+- **Forbidden paths:** all HTTP 404
+- **Workflow changes:** `.github/workflows/pages.yml` now runs staging builder + staging gate before `upload-pages-artifact`, with `path: ${{ runner.temp }}/leonardo-pages-artifact` and matching `--audit "${{ runner.temp }}/leonardo-pages-artifact-audit"`
+- **Tags / Releases:** unchanged
+
+## v5.3b Production State Reconciliation — Prepared
+
+- **Status:** prep complete; awaiting `DEPLOY v5.3b` authorization
+- **Baseline HEAD / origin/main:** `83ab6d8bc8a3f278d53c72516cf72d1a747e13bd`
+- **Public URL:** https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/
+- **Current exhibition publication status:** `production-deployed-v5.3`
+- **Current per-asset publication status:** `published-in-v5.3`
+- **Historical import status (preserved):** `imported-not-deployed` (v4.5, immutable per-asset record)
+- **Root byte unchanged:** 92,976 B
+- **Six public images unchanged:** all SHA-256 identical to `second-exhibition/assets/asset-checksums.sha256`
+- **v5.5 immutable evidence untouched:** `asset-import-manifest.json`, `asset-checksums.sha256`, six image bytes, `SOURCE_AUDIT_MANIFEST.md`, `RIGHTS_AND_SOURCES.md`
+- **Workflow untouched in this prep round:** `.github/workflows/pages.yml` unchanged
+- **Tags / Releases:** unchanged
+- **Working tree:** 11 files modified, none staged, no commit, no push, no Actions triggered, production unchanged
+- **Required authorization:** `DEPLOY v5.3b`
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

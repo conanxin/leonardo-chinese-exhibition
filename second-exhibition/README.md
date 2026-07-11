@@ -1,26 +1,26 @@
 # Second Exhibition Working Directory
 
 - Working title: 《植物图谱与视觉分类：从自然史图像到知识秩序》
-- Status: repository-only
-- Deployment: not deployed
-- Current stage: v4.5 asset import
-- Imported assets: 6
-- Live Leonardo exhibition: unchanged
-- Future site build: separate v4.6 round
+- Status: production-deployed-v5.3
+- Deployment: production-deployed-v5.3 (publicly available through the controlled Pages artifact at https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/)
+- Current stage: v5.3b production-state-reconciliation (post-deployment wording reconciliation)
+- Imported assets (historical): 6 — each carries `import_status: imported-not-deployed` (v4.5, immutable)
+- Per-asset current publication status: `published-in-v5.3`
+- Live Leonardo exhibition: unchanged at root (`site/index.html` still 92,976 B, v2.9 marker still 1)
 
-This directory holds the **repository-only** working copy of the second real exhibition. Nothing in `second-exhibition/` is linked into the live site (`site/index.html`, `site/script.js`, `site/style.css`), nothing is deployed to GitHub Pages, and nothing is associated with a git tag or GitHub Release.
+This directory holds the working copy of the second real exhibition. The public subtree (`second-exhibition/site/` + `second-exhibition/assets/images/` allowlisted files) is publicly available through the controlled Pages artifact since v5.3 controlled deployment (commits f84e53f + 83ab6d8). Internal-only artefacts — `second-exhibition/data/`, source/rights evidence, asset-import-manifest.json, asset-checksums.sha256 — remain non-public by design and are excluded from the Pages upload by the v5.3 staging builder allowlist.
 
 ## Asset inventory
 
-See `assets/asset-import-manifest.json` (machine-readable) and `assets/asset-checksums.sha256` (SHA-256 of every file in `assets/images/`). The human-readable inventory is `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` (in `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` of the project root).
+See `assets/asset-import-manifest.json` (machine-readable, immutable v4.5 import record) and `assets/asset-checksums.sha256` (SHA-256 of every file in `assets/images/`). The human-readable inventory is `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` (in `docs/IMPORTED_ASSET_INVENTORY_v4.5.md` of the project root).
 
 ## Source and rights evidence
 
-See `docs/SOURCE_AUDIT_MANIFEST.md` and `docs/RIGHTS_AND_SOURCES.md` in this directory. The current round is repository-only and does not constitute a legal opinion.
+See `docs/SOURCE_AUDIT_MANIFEST.md` and `docs/RIGHTS_AND_SOURCES.md` in this directory. These two files are immutable historical evidence and are excluded from the Pages upload. Public availability of the second exhibition is not a legal opinion.
 
 ## Deployment safety
 
-`second-exhibition/site/` does **not** exist. No file in `second-exhibition/` is referenced from `site/`. Do not treat this directory as a deployed exhibition. Do not push `second-exhibition/site/` even in a future round without first re-running the full source-and-rights audit.
+The v5.3 GitHub Pages workflow runs the staging builder and staging gate before any `upload-pages-artifact` step. Only the allowlisted public artifact (root index + root assets + `second-exhibition/{index.html, style.css, script.js}` + `second-exhibition/assets/images/*.jpg,png,webp`) reaches Pages. `second-exhibition/data/`, `second-exhibition/docs/`, `second-exhibition/assets/asset-import-manifest.json`, `second-exhibition/assets/asset-checksums.sha256`, source/rights evidence, the second-exhibition staging-builder audit directory, the second-exhibition dry-run report, and the second-exhibition roundtrip directory are all excluded.
 
 ## Next round
 

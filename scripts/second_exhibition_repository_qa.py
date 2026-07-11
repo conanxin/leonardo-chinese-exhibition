@@ -142,7 +142,9 @@ class RepositoryQAGate(QAGate):
         expected_ids = ["C-01", "C-03", "C-06", "C-08", "C-09", "C-10"]
 
         for field, value in [
-            ("status", "repository-only-not-deployed"),
+            ("status", "production-deployed-v5.3"),
+            ("publication_status", "production-deployed-v5.3"),
+            ("deployment_status", "production-deployed-v5.3"),
             ("version", "second-exhibition-v0.1"),
         ]:
             if exhibition.get(field) == value:
@@ -696,16 +698,25 @@ class RepositoryQAGate(QAGate):
         else:
             self.ok("no CNAME")
 
-        if "not deployed" in second_html and "repository-only" in second_html:
-            self.ok("second exhibition status text correct")
+        if "production-deployed-v5.3" in second_html and "published-in-v5.3" in second_html:
+            self.ok("second exhibition current publication status text correct")
         else:
-            self.fail("second exhibition status text missing")
+            self.fail("second exhibition current publication status text missing (must contain 'production-deployed-v5.3' and 'published-in-v5.3')")
+
+        # Historical import record must remain present
+        if "imported-not-deployed" not in second_html:
+            self.fail("second exhibition page lost historical import record 'imported-not-deployed' — must be preserved as v4.5 evidence")
+        else:
+            self.ok("second exhibition preserves historical import record 'imported-not-deployed'")
 
         readme = read_text(REPO_ROOT / "README.md").lower()
-        # Allow negation phrases; flag only positive claims of deployment/live.
+        # Allow negation phrases and v5.3 legitimate deployment status; flag only positive
+        # claims of deployment/live that are not the v5.3 sanctioned phrasing.
         allowed_phrases = [
             "not deployed", "not deploy", "no deployment", "repository-only-not-deployed",
-            "imported-not-deployed", "does not deploy", "deployment status", "deployed count: 0", "**deployed count**: 0"
+            "imported-not-deployed", "does not deploy", "deployment status", "deployed count: 0", "**deployed count**: 0",
+            "production-deployed-v5.3", "published-in-v5.3", "v5.3 controlled deployment",
+            "v5.3b production state reconciliation",
         ]
         readme_clean = readme
         for phrase in allowed_phrases:
@@ -715,7 +726,7 @@ class RepositoryQAGate(QAGate):
         if found:
             self.fail(f"README contains bad status phrases: {found}")
         else:
-            self.ok("README does not claim second exhibition deployed/live")
+            self.ok("README does not claim second exhibition deployed/live (v5.3 sanctioned phrasing allowed)")
 
     @group("J. Stage-gate applicability")
     def check_j_stage_gate_applicability(self):

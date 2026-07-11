@@ -1,8 +1,9 @@
 {
   "schema_version": "1.0",
   "marker": "second-exhibition-v0.1",
-  "status": "repository-only-not-deployed",
-  "manifest_source": "second-exhibition/assets/asset-import-manifest.json (v4.5 asset import)",
+  "status": "production-deployed-v5.3",
+  "publication_status": "published-in-v5.3",
+  "manifest_source": "second-exhibition/assets/asset-import-manifest.json (v4.5 asset import — historical import_status records preserved)",
   "checksum_source": "second-exhibition/assets/asset-checksums.sha256",
   "assets": [
     {
@@ -18,6 +19,7 @@
       "source_note": "Source: https://www.biodiversitylibrary.org/page/603998",
       "credit_line": "Album of watercolors of Asian fruits and flowers (page 603998) / Biodiversity Heritage Library / Public domain",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": false,
       "lightbox_enabled": true,
       "viewing_note": "图片以 WebP 形式从 BHL /pageimage/ 端点下载。可放大查看细节。"
@@ -35,6 +37,7 @@
       "source_note": "Source: https://www.biodiversitylibrary.org/page/603962",
       "credit_line": "Album of watercolors of Asian fruits and flowers (page 603962) / Biodiversity Heritage Library / Public domain (PD subset only)",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": false,
       "lightbox_enabled": true,
       "viewing_note": "本页是 PD subset only。BHL 同 item 的 CC BY-NC-SA 子集仍被排除，引用时不得越过 page-level copyright 边界。"
@@ -52,6 +55,7 @@
       "source_note": "Source: https://collections.nmnh.si.edu/search/botany/?ark=ark:/65665/31e002158-f911-411b-bbfb-63a2d207e920",
       "credit_line": "Aconitum bulbilliferum Hand.-Mazz., Handel-Mazzetti 5202, 17 Sep 1914 / Smithsonian National Museum of Natural History, US Catalog 1529703 / Smithsonian Open Access (CC0 1.0, dataset-level)",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": true,
       "lightbox_enabled": false,
       "viewing_note": "低分辨率（90×90）缩略图。页面不得将其作为大幅背景或宽屏展示；不得强制放大；不得启用 lightbox。请作为机构元数据与命名秩序的对照点，而非视觉证据。"
@@ -69,6 +73,7 @@
       "source_note": "Source: https://www.metmuseum.org/art/collection/search/285149",
       "credit_line": "[Botanical Specimen: Fern], 1855–60 / The Metropolitan Museum of Art, Gift of Russell C. Vail, 2003 (2003.562.3) / Public domain",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": false,
       "lightbox_enabled": true,
       "viewing_note": "使用 web-large 派生（449×624 JPEG），原图 URL 仍可达。Double-confirmation PASS：API + public page Public Domain 指示。"
@@ -86,6 +91,7 @@
       "source_note": "Source: https://www.rijksmuseum.nl/en/collection/RP-F-F80152",
       "credit_line": "Zeestreepvaren, Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80152 / Public domain (CC0 1.0)",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": false,
       "lightbox_enabled": true,
       "viewing_note": "Micrio IIIF Image API 1024px 派生。对象类型为 photogram（cyanotype），不是传统版画。"
@@ -103,6 +109,7 @@
       "source_note": "Source: https://www.rijksmuseum.nl/en/collection/RP-F-F80313",
       "credit_line": "Wolfsklauw, Anna Atkins, c. 1854 / Rijksmuseum, object RP-F-F80313 / Public domain (CC0 1.0)",
       "import_status": "imported-not-deployed",
+      "publication_status": "published-in-v5.3",
       "low_resolution": false,
       "lightbox_enabled": true,
       "viewing_note": "Micrio IIIF Image API 1024px 派生。**Presentation API manifest 404 caveat**：本轮 IIIF Presentation API manifest /manifest.json 返回 HTTP 404；不得基于 manifest 撰写陈述。"

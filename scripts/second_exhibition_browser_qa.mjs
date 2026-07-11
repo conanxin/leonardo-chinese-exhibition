@@ -204,6 +204,8 @@ async function runViewport(page, viewport) {
       imageCount: images.length,
       imagesLoaded: loaded.filter(Boolean).length,
       repoStatusVisible: repoStatus ? repoStatus.checkVisibility() : false,
+      repoStatusText: repoStatus ? repoStatus.textContent : "",
+      bodyText: document.body.textContent,
       bodyOverflow: bodyWidth > viewportWidth,
       docOverflow: docWidth > viewportWidth,
       viewportWidth,
@@ -225,6 +227,14 @@ async function runViewport(page, viewport) {
   check(metrics.repoStatusVisible, "repository status visible");
   check(!metrics.bodyOverflow, "no body overflow");
   check(!metrics.docOverflow, "no document overflow");
+
+  // v5.3b: current publication status must be visible on the page
+  check(metrics.bodyText.includes("production-deployed-v5.3"), "page declares current publication status 'production-deployed-v5.3'");
+  check(metrics.bodyText.includes("published-in-v5.3"), "page declares per-asset publication status 'published-in-v5.3'");
+  // Historical import record must remain visible (immutable v4.5 evidence)
+  check(metrics.bodyText.includes("imported-not-deployed"), "page preserves historical import record 'imported-not-deployed'");
+  // Stale current-status phrasing must NOT appear
+  check(!metrics.bodyText.includes("本展览未部署到 GitHub Pages"), "page does not currently claim 'this exhibition is not deployed'");
 
   const failed = checks.filter((c) => !c.ok);
   const result = {
@@ -510,6 +520,9 @@ async function main() {
   if (RESULTS.failedRequests > 0) failures.push("failed requests");
   if (RESULTS.consoleErrors > 0) failures.push("console errors");
   if (RESULTS.pageErrors > 0) failures.push("page errors");
+  // v5.3b: per-viewport current publication status check (all 5 viewports must have seen it)
+  const viewportsWithCurrentStatus = (RESULTS.viewportMatrix || []).filter(v => v.metrics && v.metrics.bodyText && v.metrics.bodyText.includes("production-deployed-v5.3") && v.metrics.bodyText.includes("published-in-v5.3")).length;
+  if (viewportsWithCurrentStatus < 5) failures.push(`current publication status visible in only ${viewportsWithCurrentStatus}/5 viewports`);
 
   if (failures.length > 0) {
     RESULTS.status = "FAIL";

@@ -125,13 +125,22 @@ def main() -> int:
 
     if "exhibition.json" in data:
         ex = data["exhibition.json"]
-        if ex.get("status") != "repository-only-not-deployed":
+        # v5.3b: current publication status must be production-deployed-v5.3
+        if ex.get("status") != "production-deployed-v5.3":
             failures.append(
-                f"B.json: exhibition.status must be 'repository-only-not-deployed', got {ex.get('status')!r}"
+                f"B.json: exhibition.status must be 'production-deployed-v5.3', got {ex.get('status')!r}"
             )
-        if ex.get("deployment_status") != "repository-only-not-deployed":
+        if ex.get("publication_status") != "production-deployed-v5.3":
             failures.append(
-                f"B.json: exhibition.deployment_status must be 'repository-only-not-deployed', got {ex.get('deployment_status')!r}"
+                f"B.json: exhibition.publication_status must be 'production-deployed-v5.3', got {ex.get('publication_status')!r}"
+            )
+        if ex.get("deployment_status") != "production-deployed-v5.3":
+            failures.append(
+                f"B.json: exhibition.deployment_status must be 'production-deployed-v5.3', got {ex.get('deployment_status')!r}"
+            )
+        if ex.get("deployment_url") != "https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/":
+            failures.append(
+                f"B.json: exhibition.deployment_url must match public Pages URL, got {ex.get('deployment_url')!r}"
             )
         if ex.get("section_count") != 4:
             failures.append(
@@ -160,6 +169,15 @@ def main() -> int:
 
     if "assets.json" in data:
         as_ = data["assets.json"]
+        # v5.3b: top-level status / publication_status reflect current publication
+        if as_.get("status") != "production-deployed-v5.3":
+            failures.append(
+                f"B.json: assets.status must be 'production-deployed-v5.3', got {as_.get('status')!r}"
+            )
+        if as_.get("publication_status") != "published-in-v5.3":
+            failures.append(
+                f"B.json: assets.publication_status must be 'published-in-v5.3', got {as_.get('publication_status')!r}"
+            )
         assets = as_.get("assets")
         if not isinstance(assets, list) or len(assets) != 6:
             failures.append(f"B.json: assets.assets[] must contain exactly 6 entries, got {len(assets) if isinstance(assets, list) else 'n/a'}")
@@ -167,6 +185,18 @@ def main() -> int:
         for cid in REQUIRED_CANDIDATE_IDS:
             if cid not in ids_in_assets:
                 failures.append(f"B.json: assets.json missing candidate_id {cid}")
+        # v5.3b: each asset must carry both historical import_status and current publication_status
+        if isinstance(assets, list):
+            for a in assets:
+                cid = a.get("candidate_id", "<missing>")
+                if a.get("import_status") != "imported-not-deployed":
+                    failures.append(
+                        f"B.json: assets[{cid}].import_status must remain 'imported-not-deployed' (v4.5 historical record preserved), got {a.get('import_status')!r}"
+                    )
+                if a.get("publication_status") != "published-in-v5.3":
+                    failures.append(
+                        f"B.json: assets[{cid}].publication_status must be 'published-in-v5.3', got {a.get('publication_status')!r}"
+                    )
 
     # --- C. Asset integrity ---
     if MANIFEST.is_file():
@@ -274,12 +304,24 @@ def main() -> int:
             if f'id="{sid}"' not in index_html:
                 failures.append(f"D.page-structure: section id #{sid} missing")
 
-        # forbidden status words must not appear as status in page
-        # (allow them only in "forbidden/not used" prose context)
-        # We do a conservative check: look for the literal phrase "Status: approved" / "Status: deployed" / "Status: live"
-        for tok in ("Status: approved", "Status: deployed", "Status: live", "status: approved", "status: deployed", "status: live"):
+        # v5.3b: page must carry the current publication status text
+        if "production-deployed-v5.3" not in index_html:
+            failures.append("D.page-structure: page does not declare current publication status 'production-deployed-v5.3'")
+        if "published-in-v5.3" not in index_html:
+            failures.append("D.page-structure: page does not declare per-asset publication status 'published-in-v5.3'")
+        # Page must not claim current status is repository-only or not deployed.
+        # (Historical import record "imported-not-deployed" remains legitimate; that phrase must still appear.)
+        for tok in (
+            'class="badge">repository-only-not-deployed',
+            '<span class="badge">not deployed',
+            '本展览未部署到 GitHub Pages',
+            'Status: repository-only',
+            'Status: not deployed',
+        ):
             if tok in index_html:
-                failures.append(f"D.page-structure: forbidden status phrase {tok!r} appears in page")
+                failures.append(f"D.page-structure: stale current-status phrase {tok!r} appears in page")
+        if "imported-not-deployed" not in index_html:
+            failures.append("D.page-structure: historical import record 'imported-not-deployed' missing from page (must be preserved)")
 
     # --- E. Candidate rules ---
     if index_html:

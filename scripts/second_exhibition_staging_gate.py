@@ -466,13 +466,28 @@ def main():
         group_fail("audit directory is inside artifact directory")
     group_pass("audit directory is outside artifact directory")
 
-    # ---- H. Deployment status ----
+    # ---- H. Deployment status (page text) ----
+    # v5.3b: staged second-exhibition page must declare current publication status 'production-deployed-v5.3'
+    # and per-asset 'published-in-v5.3'. Historical import record 'imported-not-deployed' must remain present.
     section("H. Deployment status (page text)")
     se_text = (se_dir / "index.html").read_text(encoding="utf-8", errors="replace")
-    has_repo_only = ("repository-only" in se_text.lower()) or ("not deployed" in se_text.lower())
-    if not has_repo_only:
-        group_fail("staged second-exhibition index.html does not carry repository-only / not deployed text")
-    group_pass("staged second-exhibition index.html carries repository-only / not deployed text")
+    has_current_status = ("production-deployed-v5.3" in se_text) and ("published-in-v5.3" in se_text)
+    has_historical_record = ("imported-not-deployed" in se_text)
+    # Forbidden stale phrasing — page must not currently claim repository-only / not deployed
+    stale_phrases = [
+        "repository-only-not-deployed</span>",
+        "<span class=\"badge\">not deployed",
+        "本展览未部署到 GitHub Pages",
+    ]
+    found_stale = [s for s in stale_phrases if s in se_text]
+    if not has_current_status:
+        group_fail("staged second-exhibition index.html missing current publication status 'production-deployed-v5.3' or per-asset 'published-in-v5.3'")
+    if not has_historical_record:
+        group_fail("staged second-exhibition index.html lost historical import record 'imported-not-deployed' (must be preserved)")
+    if found_stale:
+        group_fail(f"staged second-exhibition index.html contains stale current-status phrasing: {found_stale}")
+    if has_current_status and has_historical_record and not found_stale:
+        group_pass("staged second-exhibition index.html carries production-deployed-v5.3 + published-in-v5.3 + preserved imported-not-deployed")
 
     print()
     print("============================================")

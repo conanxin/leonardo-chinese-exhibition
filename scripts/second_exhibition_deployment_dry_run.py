@@ -35,6 +35,7 @@ import hashlib
 import http.server
 import json
 import os
+import re
 import shutil
 import socket
 import socketserver
@@ -434,41 +435,109 @@ def main():
         fail(f"roundtrip root index byte mismatch: {rnd_root.stat().st_size}", report)
     ok(f"roundtrip root index byte = {rnd_root.stat().st_size}")
 
-    # ---- C. Rollback rehearsal ----
+    # ---- C. Rollback rehearsal (v5.3-aware) ----
     section("C. Rollback rehearsal")
-    # The future production change would be: change `path: site` -> `path: <artifact>`.
-    # A clean rollback = revert that one commit (one line), restoring `path: site`.
-    # This round does NOT modify the workflow; we just verify the rollback semantics.
+    # v5.3 controlled deployment changed the workflow from `path: site` to a 5-step chain:
+    #   checkout -> setup-python -> staging builder (--output + --audit to runner.temp) ->
+    #   staging gate (--artifact + --audit from runner.temp) ->
+    #   configure-pages -> upload-pages-artifact (path: runner.temp/leonardo-pages-artifact) ->
+    #   deploy-pages.
+    # A clean rollback to pre-v5.3 means reverting both commits f84e53f + 83ab6d8,
+    # which restores the prior workflow that deploys only site/. v5.3b is a separate
+    # commit layered on top; reverting v5.3b alone restores the v5.3 wording (the
+    # workflow is untouched by v5.3b).
+    #
+    # This round does NOT modify the workflow and does NOT execute any revert.
 
     wf = Path(".github/workflows/pages.yml")
     wf_text = wf.read_text(encoding="utf-8")
-    if "path: site" not in wf_text:
-        fail("current workflow does not contain 'path: site'", report)
-    ok("current workflow still uses 'path: site'")
 
-    # Check that the proposed change would be a single-line, reviewable edit.
-    proposed_old = "          path: site"
-    proposed_new = "          path: __STAGING_ARTIFACT_DIR__"
-    if wf_text.count(proposed_old) != 1:
-        fail("could not locate unique 'path: site' line in workflow", report)
-    ok("'path: site' appears exactly once in workflow")
+    # Required v5.3 semantics: workflow must invoke the staging builder with both --output
+    # and --audit pointing to runner.temp, must invoke the staging gate with matching
+    # --artifact + --audit, must configure-pages + upload + deploy in correct order.
+    # Section C is informational — record all findings, do not abort on first miss.
+    section_c_issues: list[str] = []
 
-    # Rollback rehearsal: simulate `git revert <freeze-commit>` producing a diff that
-    # restores 'path: site'. We do NOT run git revert; we just confirm the line
-    # count and reversibility.
+    required_builder = re.search(
+        r"second_exhibition_staging_build\.py\s*\\\s*\n\s*--output\s+\"?\$\{\{\s*runner\.temp\s*\}\}/leonardo-pages-artifact\"?\s*\\\s*\n\s*--audit\s+\"?\$\{\{\s*runner\.temp\s*\}\}/leonardo-pages-artifact-audit\"?",
+        wf_text,
+        re.MULTILINE,
+    )
+    if not required_builder:
+        section_c_issues.append("workflow does not invoke staging builder with both --output and --audit pointing to runner.temp")
+    else:
+        ok("workflow invokes staging builder with --output and --audit both at runner.temp")
+
+    required_gate = re.search(
+        r"second_exhibition_staging_gate\.py\s*\\\s*\n\s*--artifact\s+\"?\$\{\{\s*runner\.temp\s*\}\}/leonardo-pages-artifact\"?\s*\\\s*\n\s*--audit\s+\"?\$\{\{\s*runner\.temp\s*\}\}/leonardo-pages-artifact-audit\"?",
+        wf_text,
+        re.MULTILINE,
+    )
+    if not required_gate:
+        section_c_issues.append("workflow does not invoke staging gate with --artifact and --audit pointing to runner.temp")
+    else:
+        ok("workflow invokes staging gate with --artifact and --audit both at runner.temp")
+
+    # upload-pages-artifact path must point to the runner-temp artifact
+    upload_path_match = re.search(
+        r"upload-pages-artifact[^\n]*\n(?:[^\n]*\n)*?[^\n]*path:\s*\$\{\{\s*runner\.temp\s*\}\}/leonardo-pages-artifact",
+        wf_text,
+    )
+    if not upload_path_match:
+        section_c_issues.append("upload-pages-artifact path does not point to ${{ runner.temp }}/leonardo-pages-artifact")
+    else:
+        ok("upload-pages-artifact path points to ${{ runner.temp }}/leonardo-pages-artifact")
+
+    # Required step order: configure-pages, upload-pages-artifact, deploy-pages
+    cfg_idx = wf_text.find("actions/configure-pages")
+    upl_idx = wf_text.find("actions/upload-pages-artifact")
+    dep_idx = wf_text.find("actions/deploy-pages")
+    if cfg_idx < 0 or upl_idx < 0 or dep_idx < 0:
+        section_c_issues.append("workflow missing one of configure-pages / upload-pages-artifact / deploy-pages")
+    elif not (cfg_idx < upl_idx < dep_idx):
+        section_c_issues.append("workflow step order is not checkout -> builder -> gate -> configure-pages -> upload -> deploy")
+    else:
+        ok("workflow step order is correct: checkout -> builder -> gate -> configure-pages -> upload -> deploy")
+
+    # Stale pre-v5.3 markers must be absent (defensive: catch accidental regression)
+    if "          path: site" in wf_text:
+        section_c_issues.append("workflow still contains pre-v5.3 'path: site' line — v5.3 wiring appears reverted")
+    else:
+        ok("workflow does not contain pre-v5.3 'path: site' line")
+
+    if section_c_issues:
+        for issue in section_c_issues:
+            print(f"  FAIL: {issue}", file=sys.stderr)
+        fail("workflow does not match v5.3 controlled-deployment semantics", report, issues=section_c_issues)
+
+    # Rollback rehearsal: simulate `git revert f84e53f 83ab6d8` to restore pre-v5.3
+    # workflow. We do NOT run git revert; we just confirm the line count and reversibility.
     rehearsal = {
-        "current_workflow_path_line": proposed_old,
-        "proposed_change": proposed_old + " -> " + proposed_new,
-        "rollback_method": "git revert <deployment-commit>; one-line diff restores 'path: site'",
-        "rollback_diff_size_lines": 1,
+        "current_workflow_path_line": "          path: ${{ runner.temp }}/leonardo-pages-artifact",
+        "current_workflow_steps": [
+            "actions/checkout@v4",
+            "actions/setup-python@v5 (python-version: '3.x')",
+            "Build combined staging artifact (v5.3 controlled deploy)",
+            "Run staging gate (v5.3 controlled deploy)",
+            "actions/configure-pages@v5",
+            "actions/upload-pages-artifact@v3 (path: ${{ runner.temp }}/leonardo-pages-artifact)",
+            "actions/deploy-pages@v4",
+        ],
+        "v5_3_deployment_commits": ["f84e53f7f1c5fa20fc8fc40e747bbf934cdfdf92", "83ab6d8bc8a3f278d53c72516cf72d1a747e13bd"],
+        "rollback_method_v5_3_to_pre": "git revert 83ab6d8 f84e53f; two-commit revert restores pre-v5.3 workflow (path: site only).",
+        "rollback_method_v5_3b_to_v5_3": "git revert <v5.3b-commit>; one-commit revert restores v5.3 wording and v5.3 workflow.",
+        "rollback_diff_size_lines_v5_3": 14,
+        "rollback_diff_size_lines_v5_3b": "<see git diff stat after v5.3b push>",
         "rollback_verification": [
             "live byte returns to 92,976",
             "v2.9 marker count returns to 1",
-            "/second-exhibition/ Pages URLs return 404 again",
+            "/second-exhibition/ Pages URLs return 404 again (pre-v5.3) or 200 with v5.3 wording (v5.3b revert)",
+            "forbidden paths remain 404",
+            "no tag / Release moved",
         ],
     }
     report["results"]["rollback_rehearsal"] = rehearsal
-    ok("rollback rehearsal documented (one-line revert restores 'path: site')")
+    ok("rollback rehearsal documented (v5.3-aware: revert f84e53f + 83ab6d8 restores pre-v5.3; revert v5.3b restores v5.3 wording)")
 
     # Verify no actual workflow modification happened
     if "path: __STAGING_ARTIFACT_DIR__" in wf_text:
@@ -486,7 +555,7 @@ def main():
     # Summary
     print()
     print("============================================")
-    print(f"PASS: v5.2 deployment dry-run complete")
+    print(f"PASS: v5.2+v5.3-aware deployment dry-run complete")
     print(f"  artifact  -> base path {base}")
     print(f"  allowlist probes : {len(report['results']['allowlist_probes'])}/{len(report['results']['allowlist_probes'])}")
     print(f"  forbidden probes : {len(report['results']['forbidden_probes'])}/{len(report['results']['forbidden_probes'])}")
