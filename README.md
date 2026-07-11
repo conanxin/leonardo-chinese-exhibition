@@ -437,6 +437,23 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Round status**: **PASS**.
 - **Next**: **v4.7-second-exhibition-repository-qa** — separate round for deeper QA sweep without changing repository structure.
 
+## v4.7 Second Exhibition Repository QA — PARTIAL
+
+- **Repository QA script**: `scripts/second_exhibition_repository_qa.py`
+- **Result**: 156 PASS / 1 FAIL / 2 WARNINGS (exit code 1)
+- **Blocker**: `second-exhibition/site/index.html` uses `aria-labelledby="lightbox-title"` but the page has no element with `id="lightbox-title"`. Independent ARIA check: 9 references, 1 missing target.
+- **Warnings**:
+  - C-03 CC BY-NC-SA subset wording check (informational; no blocked asset imported).
+  - C-06 hero check inconclusive (low-resolution asset correctly constrained, so hero use is not possible).
+- **Second exhibition status**: `repository-only-not-deployed` (unchanged).
+- **Template gate**: PASS 37/37.
+- **Build gate**: PASS.
+- **Asset checksums**: 6/6 OK.
+- **Live byte**: 92,976 B (unchanged).
+- **No deployment**: all `second-exhibition/` URLs still return HTTP 404.
+- **No new tag / no new Release**.
+- **Next**: **v4.7b-repository-qa-recovery** — fix the missing `#lightbox-title` ARIA target and re-run repository QA to full PASS.
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

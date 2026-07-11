@@ -519,6 +519,25 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 | v4.4b | Source Gap Fix (per-item selection for the 4 deferred rows) | No | No | No |
 | v4.5 | Asset Import (6/6 imported; repository-only; no deploy, no tag, no Release) | No | No | No |
 | v4.6 | Second Exhibition Repository Build (separate round; re-verifies source/rights before linking) | No | No | No |
+| v4.7 | Second Exhibition Repository QA — PARTIAL | No | No | No |
 | post-v4.6 | QA and Stable Freeze (renumbered from legacy v4.4) | No (still pilot-only) | Yes | Yes |
+
+### v4.7 Second Exhibition Repository QA — PARTIAL
+
+- Reality gate PASS (HEAD `1d2da052baed13558fd978d351903d74dad52f2d`, live byte 92,976 B, no prior v4.7 changes).
+- Repository QA script `scripts/second_exhibition_repository_qa.py` created and run.
+- Repository QA result: **156 PASS / 1 FAIL / 2 WARNINGS** (exit code 1).
+- **Blocker:** `second-exhibition/site/index.html` uses `aria-labelledby="lightbox-title"` but no element with `id="lightbox-title"` exists. Independent ARIA check: 9 references, 1 missing target.
+- **Warnings:**
+  - C-03 CC BY-NC-SA subset wording check (informational; no blocked asset imported).
+  - C-06 hero check inconclusive (low-resolution asset correctly constrained, so hero use is not possible; heuristic could not positively confirm a hero element).
+- Template quality gate: **PASS, 37/37**.
+- Second exhibition build gate: **PASS**.
+- Asset checksums: **6/6 OK**.
+- JSON validity: all 4 data files valid.
+- No protected content paths modified.
+- Second exhibition remains **repository-only-not-deployed**; live site unchanged at 92,976 B; v4 title live count 0; all `second-exhibition/` URLs return HTTP 404.
+- No new tag / no new GitHub Release.
+- **Next:** **v4.7b-repository-qa-recovery** — fix missing `#lightbox-title` ARIA target and re-run repository QA gate to PASS.
 
 The second exhibition's live publication is **explicitly not on this roadmap**. v4.4 produces the asset-import-prep evidence; v4.4b closes the source gap; v4.5 executes the actual download (gated on v4.4b). The QA / stable freeze round (with tag + Release) is moved to a later phase. Live publication of the new exhibition requires a separate, future round that explicitly authorizes live publication and runs the full source-and-rights audit a second time on the *to-be-deployed* working tree.
