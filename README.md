@@ -374,6 +374,21 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **C-09 / C-10 per-item licence field required** (recorded verbatim at v4.4b / v4.5).
 - **next: v4.4b-source-gap-fix** (closes the source gap; v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows).
 
+## v4.4b Source Gap Fix
+
+- **Status**: item-level evidence completion — v4.4b closes the per-item evidence gaps for C-06, C-08, C-09, C-10 and records image / IIIF URLs without downloading any image.
+- **Previous ready count**: 2 (v4.4).
+- **Updated ready count**: **6** (v4.4b). All 4 v4.4 `defer` rows promoted to `ready-for-asset-import`:
+  - **C-06**: NMNH Botany, US Catalog 1529703, *Aconitum bulbilliferum* Hand.-Mazz. (Type fragment, China / Sichuan, Handel-Mazzetti H. R. 5202, 17 Sep 1914). Dataset-level CC0 1.0 verbatim from `https://collections.nmnh.si.edu/ipt/resource?r=nmnh_botany`. Media URL `https://collections.nmnh.si.edu/media/?i=1529703&ph=yes&thumb=yes` (HEAD test HTTP/2 200, `Content-Type: image/png`; URL recorded, not downloaded).
+  - **C-08**: Met object 285149, *[Botanical Specimen: Fern]*, 1855–60, accession 2003.562.3. **Double-confirmation PASS**: (a) Met Collection API `isPublicDomain: true` AND (b) public object page "Public Domain" button + "Download Image" controls. `primaryImage: https://images.metmuseum.org/CRDImages/ph/original/DP147833.jpg`.
+  - **C-09**: Rijksmuseum RP-F-F80152, *Zeestreepvaren*, Anna Atkins, c. 1854, cyanotype on paper. Per-item Copyright field on the public object page reads verbatim `Public domain` (with hyperlink to `https://creativecommons.org/publicdomain/mark/1.0/deed.en`). Micrio IIIF Image API: `https://iiif.micr.io/vGipU/full/1024,/0/default.jpg` (HEAD test HTTP/2 200, `Content-Type: image/jpeg`; URL recorded, not downloaded).
+  - **C-10**: Rijksmuseum RP-F-F80313, *Wolfsklauw*, Anna Atkins, c. 1854 (distinct per-item record from C-09 — different objectNumber, different persistent URL, different micrioId). Per-item Copyright field reads verbatim `Public domain`. Micrio IIIF Image API: `https://iiif.micr.io/PrcdN/full/1024,/0/default.jpg` (HEAD test HTTP/2 200, `Content-Type: image/jpeg`; URL recorded, not downloaded). The Rijksmuseum IIIF Presentation API manifest at `https://iiif.micr.io/PrcdN/manifest.json` returned HTTP/2 404; the per-item public object page's Copyright field is the authoritative source for the credit line.
+- **No images downloaded** in v4.4b.
+- **No assets imported** in v4.4b.
+- **No live changes** — `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, `release-assets/`, `scripts/template_quality_gate.py` unchanged. Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**.
+- **No approved status** — the status `approved` is **not used**.
+- **Next stage determined by ready count**: `ready-for-asset-import` count = **6 ≥ 4** → the next round is **v4.5 — Asset Import** (unblocked).
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

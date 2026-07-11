@@ -364,6 +364,29 @@ The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actua
 
 ---
 
+## v4.4b Source Gap Fix
+
+**Round identity.** v4.4b is a prep-only round that closes the per-item evidence gaps for the 4 v4.4 `defer` rows (C-06, C-08, C-09, C-10). v4.4b does **not** download images, does **not** create `second-exhibition/assets/images/`, does **not** create a tag, and does **not** publish a GitHub Release. The status `approved` is **not used**.
+
+**Status.**
+
+- **C-06 concrete NMNH item status**: `ready-for-asset-import`. Item: NMNH Botany, US Catalog 1529703, *Aconitum bulbilliferum* Hand.-Mazz. (Ranunculaceae, Type fragment), China / Sichuan, Handel-Mazzetti H. R. 5202, 17 Sep 1914. Dataset-level CC0 1.0 confirmed on `https://collections.nmnh.si.edu/ipt/resource?r=nmnh_botany` and cross-confirmed on `https://www.gbif.org/dataset/821cc27a-e3bb-4bc5-ac34-89ada245069d`. Media URL template `https://collections.nmnh.si.edu/media/?i={catalog_number}&ph=yes&thumb=yes` reachable via HEAD test (HTTP/2 200, `Content-Type: image/png`; URL recorded, not downloaded).
+- **C-08 double-confirmation result**: PASS. (a) Met Collection API `https://collectionapi.metmuseum.org/public/collection/v1/objects/285149` returned `isPublicDomain: true` AND `primaryImage: https://images.metmuseum.org/CRDImages/ph/original/DP147833.jpg`. (b) Public object page `https://www.metmuseum.org/art/collection/search/285149` shows a "Public Domain" button + "Download Image" + "Enlarge Image" controls (Open Access icon present). objectID = 285149 matches the URL. Accession = 2003.562.3. Title = `[Botanical Specimen: Fern]`.
+- **C-09 concrete Rijksmuseum item status**: `ready-for-asset-import`. Item: Rijksmuseum RP-F-F80152, *Zeestreepvaren*, Anna Atkins (photographer, England), c. 1854, cyanotype on paper. Per-item Copyright field on the public object page reads verbatim `Public domain` (with hyperlink to `https://creativecommons.org/publicdomain/mark/1.0/deed.en`). Image / IIIF URL (Micrio IIIF Image API): `https://iiif.micr.io/vGipU/full/1024,/0/default.jpg` (HEAD test HTTP/2 200, `Content-Type: image/jpeg`; URL recorded, not downloaded).
+- **C-10 concrete Rijksmuseum item status**: `ready-for-asset-import`. Item: Rijksmuseum RP-F-F80313, *Wolfsklauw*, Anna Atkins (photographer, England), c. 1854. Distinct per-item record from C-09 (different objectNumber, different persistent URL, different micrioId). Per-item Copyright field reads verbatim `Public domain` (with the CC0 1.0 hyperlink). Image / IIIF URL (Micrio IIIF Image API): `https://iiif.micr.io/PrcdN/full/1024,/0/default.jpg` (HEAD test HTTP/2 200, `Content-Type: image/jpeg`; URL recorded, not downloaded). The Rijksmuseum IIIF Presentation API manifest at `https://iiif.micr.io/PrcdN/manifest.json` returned HTTP/2 404; the per-item public object page's Copyright field is the authoritative source for the credit line.
+
+**Updated ready count**: **6** (was 2 in v4.4). All 4 v4.4 `defer` rows promoted to `ready-for-asset-import` in v4.4b.
+
+**No image downloads.** v4.4b records URLs only. Transient `/tmp` fetch artifacts were cleaned up immediately.
+
+**No live changes.** v4.4b does not modify `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, `release-assets/`, or `scripts/template_quality_gate.py`. Live byte size still **92,976 B**, v2.9 marker still **1**, `image-placeholder-pro` still **0**.
+
+**Next step (threshold-driven)**:
+- `ready-for-asset-import` count = **6 ≥ 4** → the next round is **v4.5 — Asset Import**.
+- If a future round reduces the ready count below 4 (e.g. an item is reclassified), the next round is **v4.4c — Source Gap Research** instead.
+
+---
+
 ## Phasing summary
 
 | Phase | Theme | Deploy? | Tag? | Release? |
