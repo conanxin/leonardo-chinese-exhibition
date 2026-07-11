@@ -361,6 +361,19 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - v4.4 selection totals (committed): `ready-for-asset-import` = **2** (C-01, C-03 — BHL item 318921, PD subset only); `defer` = **4** (C-06, C-08, C-09, C-10 — per-item selection deferred); `approved` = **0** (not used in v4.4).
 - Next after v4.4: **v4.4b — Source Gap Fix** (picks the deferred candidates' specific items and re-runs the v4.4 import-readiness assessment). v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows.
 
+## v4.4 Asset Import Prep
+
+- **Status**: asset import preparation only — v4.4 records per-item / source-level evidence, draft credit lines, draft source notes, and a filename map. v4.4 does **not** download images.
+- **ready-for-asset-import**: **2** (C-01, C-03 — BHL item 318921, PD subset only).
+- **defer**: **4** (C-06 NMNH Botany, C-08 Met 285149 double-confirmation, C-09 Rijksmuseum botanical print, C-10 Rijksmuseum IIIF manifest).
+- **no images downloaded** in v4.4.
+- **no assets imported** in v4.4.
+- **no approved status** — the status `approved` is **not used** in v4.4 or any future round.
+- **C-03 CC BY-NC-SA subset blocked** at the per-page / per-volume level.
+- **C-08 double-confirmation required** (Collection API `isPublicDomain: true` AND Open Access icon on public object page).
+- **C-09 / C-10 per-item licence field required** (recorded verbatim at v4.4b / v4.5).
+- **next: v4.4b-source-gap-fix** (closes the source gap; v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows).
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

@@ -1,8 +1,22 @@
 # v4.4 Asset Import Prep
 
-> Scope of this document: per-candidate item-level evidence for the 6 v4.3 `selected-for-build-planning` candidates, plus the import-readiness assessment. v4.4 does not download any image. v4.4 only records the *plan* (URL, identifier, rights statement, image/IIIF URL, future filename, credit line basis, pre-import action) so that a future asset-import round can execute the 11-step import rule.
->
-> 本轮不得下载图片，不得新增图片文件。`approved` is **not used** in v4.4 or any future round. The 4 v4.4 statuses are: `ready-for-asset-import` / `defer` / `blocked-from-import` / `replace-with-project-generated-diagram`.
+> Scope of this document: per-candidate item-level / source-level evidence for the 6 v4.3 `selected-for-build-planning` candidates, plus the import-readiness assessment. v4.4 does not download any image. v4.4 only records the *plan* (URL, identifier, rights statement, image/IIIF URL, future filename, credit line basis, pre-import action) so that a future asset-import round can execute the 11-step import rule.
+
+> 本轮不得下载图片，不得新增图片文件。`approved` is **not used** in v4.4 or any future round. The 4 v4.4 statuses are: `ready-for-asset-import` / `defer` / `blocked-from-import` / `replace-with-project-generated-diagram`. v4.4 status values for the per-row tables are `ready-for-asset-import` or `defer` only — the other two statuses (`blocked-from-import`, `replace-with-project-generated-diagram`) are policy-level entries, not row-level.
+
+## v4.4 Asset Import Prep — summary block
+
+- **item-level / source-level import prep completed** for the 6 v4.3 selected candidates.
+- **ready-for-asset-import count = 2** (C-01, C-03 — BHL item 318921, PD subset only).
+- **defer count = 4** (C-06, C-08, C-09, C-10 — per-item record deferred).
+- **ready-for-asset-import count < 4** (2 < 4) — the asset import threshold is not met.
+- **no images downloaded** in v4.4.
+- **no assets imported** in v4.4.
+- **no approved status** in v4.4 or any future round (the status `approved` is not used).
+- **C-03 CC BY-NC-SA subset blocked** at the per-page / per-volume level.
+- **C-08 double-confirmation required** (Collection API `isPublicDomain: true` AND Open Access icon on public object page).
+- **C-09 / C-10 per-item licence field required** (recorded verbatim at v4.4b / v4.5).
+- **next recommended task = v4.4b-source-gap-fix** (closes the source gap; v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows).
 
 ---
 

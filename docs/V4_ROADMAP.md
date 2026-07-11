@@ -299,6 +299,71 @@
 
 ---
 
+## v4.4 Asset Import Prep (current round — summary)
+
+**Round identity.** v4.4 is the *current* asset import prep round. The legacy "QA and Stable Freeze" block above is **not** the current v4.4 — it is retained for historical record only.
+
+**Status.**
+
+- item-level / source-level import prep completed for the 6 v4.3 selected candidates.
+- `ready-for-asset-import` count = **2** (C-01, C-03 — BHL item 318921, PD subset only).
+- `defer` count = **4** (C-06 NMNH Botany, C-08 Met 285149, C-09 Rijksmuseum botanical print, C-10 Rijksmuseum IIIF manifest).
+- `ready-for-asset-import` count < 4 (2 < 4) — the asset import threshold is not met.
+- no images downloaded in v4.4.
+- no assets imported in v4.4.
+- no approved status in v4.4 or any future round.
+- C-03 CC BY-NC-SA subset blocked at the per-page / per-volume level.
+- C-08 double-confirmation required (Collection API `isPublicDomain: true` AND Open Access icon on public object page).
+- C-09 / C-10 per-item licence field required (recorded verbatim at v4.4b / v4.5).
+
+**Next: v4.4b-source-gap-fix** (closes the source gap; v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows).
+
+---
+
+## v4.4b Source Gap Fix
+
+**Goal.** Resolve the C-06, C-08, C-09, C-10 source gaps so that the future asset-import round (v4.5) has enough `ready-for-asset-import` rows. v4.4b is a **prep-only** round — it still does **not** download images unless a separate v4.5 import round is explicitly invoked.
+
+**Tasks.**
+
+- **C-06 (NMNH Botany, Section 2 分类):** Run the NMNH Botany search at https://collections.nmnh.si.edu/search/botany/ . Pick a specific herbarium sheet that is marked CC0 1.0 on its per-item page and that has an image. Capture the per-item title, collector / maker, date, accession number, official record URL, and media URL. Confirm CC0 1.0 on the per-item page (https://www.si.edu/openaccess/faq).
+- **C-08 (Met 285149, Section 3 复制 alternate):** Re-open Met object 285149 at https://www.metmuseum.org/art/collection/search/285149 . Run the double-confirmation: (a) Met Collection API record `https://collectionapi.metmuseum.org/public/collection/v1/objects/285149` returns `isPublicDomain: true`, and (b) the Open Access icon is present on the public object page. Capture the `primaryImage` URL. If either confirmation fails, C-08 is `blocked-from-import` and the Section 3 alternate slot is filled by a project-generated diagram.
+- **C-09 (Rijksmuseum botanical print, Section 1 观察 primary / Section 2 分类 alternate):** Run the Rijksmuseum search by `type` and `creator` (Rijksprentenkabinet entry at https://www.rijksmuseum.nl/en/research/our-research/print-room). Pick a specific Rijksprentenkabinet object. Record the per-item `licence` field verbatim (`CC0 1.0` or `CC BY 4.0`), the `objectNumber`, the `id.rijksmuseum.nl/...` PID, and the per-item Rijksstudio image URL or IIIF Image API URL.
+- **C-10 (Rijksmuseum IIIF Presentation API manifest, Section 4 再组织):** Same Rijksmuseum object as C-09. Capture the IIIF Presentation API manifest URL (on the per-item Catalogue record) and the manifest's `license` field. The manifest's `license` field is the authoritative source for the credit line.
+- Re-run the v4.4 import-readiness assessment on the 4 deferred rows. Promote the rows that pass their pre-import action; keep the rest as `defer`.
+- Update `docs/ITEM_IMPORT_EVIDENCE_TABLE_v4.4.md` to v4.4b (or write a v4.4b evidence table).
+- Update `docs/SOURCE_AUDIT_MANIFEST_DRAFT_v4.4.md` to v4.4b (graduate from `DRAFT` to `final`).
+- Update `docs/CREDIT_LINE_AND_SOURCE_NOTE_DRAFTS_v4.4.md` to v4.4b (fill placeholders).
+- Update `docs/ASSET_FILENAME_MAP_v4.4.md` to v4.4b (replace `<accession_number>` / `<object_number>` placeholders).
+
+**Do NOT do in v4.4b.**
+
+- Do not download any image. v4.4b is a prep-only round — image download is a v4.5 step.
+- Do not create `second-exhibition/assets/images/` directory. v4.4b is a prep-only round — directory creation is a v4.5 step.
+- Do not create a tag or GitHub Release.
+- Do not modify `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, `release-assets/`.
+- Do not modify `scripts/template_quality_gate.py`.
+- Do not use `approved` as a status value.
+- Do not promote any CC BY-NC-SA subset of C-03 to `ready-for-asset-import`.
+
+**Exit criteria for v4.4b.**
+
+- All 4 deferred rows (C-06 / C-08 / C-09 / C-10) have a specific per-item record.
+- Per-item rights statements are confirmed on the institution's own page on the day of audit.
+- Per-item `licence` fields (C-09 / C-10) are recorded verbatim.
+- Per-item accession number (C-06) is captured.
+- Met double-confirmation (C-08) has passed.
+- The updated v4.4 import-readiness assessment shows `ready-for-asset-import` ≥ 4.
+- All 5 v4.4 prep docs are updated to v4.4b.
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- Live byte size still **92,976 B** (v4.4b does not modify `site/`).
+- v2.9 marker still **1**, `image-placeholder-pro` still **0**.
+- `find` confirms no new image files.
+
+The round **after** v4.4b is **v4.5 — Asset Import**, which executes the actual download (gated on v4.4b producing ≥ 4 `ready-for-asset-import` rows).
+
+---
+
 ## Phasing summary
 
 | Phase | Theme | Deploy? | Tag? | Release? |
