@@ -227,11 +227,52 @@
 
 ---
 
-## v4.4 — QA and Stable Freeze
+## v4.4 — Asset Import Prep (renumbered from earlier draft "QA and Stable Freeze")
 
-**Goal.** Run the full quality gate, confirm the live site is unaffected, and freeze a stable tag / GitHub Release for the second exhibition.
+> **v4.4 was redefined during v4.4 prep.** The earlier draft of this section named v4.4 "QA and Stable Freeze" and placed the QA freeze + tag + Release at v4.4. The actual v4.4 round is **Asset Import Prep** — it records per-item evidence, draft credit lines, draft source notes, and a filename map for the 6 v4.3 selected candidates. v4.4 does **not** download images, does **not** create a tag, and does **not** publish a GitHub Release. The QA / freeze round is moved to a later phase (post v4.5). The legacy "QA and Stable Freeze" content below is retained as a historical record of the *earlier* draft plan, with an explicit marker that the round was renamed.
 
-**Tasks.**
+**Goal (current v4.4).** Record per-item evidence for the 6 v4.3 `selected-for-build-planning` candidates so that a future asset-import round can execute the 11-step import rule. v4.4 only writes the *plan*; v4.4 does not download images.
+
+**Tasks (current v4.4).**
+
+- Re-open each v4.3 selected candidate's official page (BHL item 318921, NMNH Botany search, Met object 285149, Rijksprentenkabinet entry).
+- Capture the 14 v4.4 per-item fields per row (item URL, institution, title, creator / maker, date, identifier, rights statement, rights / terms URL, image / IIIF URL pattern, proposed filename, alt text, caption, source note, credit line).
+- Apply the 4 v4.4 statuses (`ready-for-asset-import` / `defer` / `blocked-from-import` / `replace-with-project-generated-diagram`). The status `approved` is **not used**.
+- Produce 5 v4.4 prep docs in `docs/`: `ASSET_IMPORT_PREP_v4.4.md`, `ITEM_IMPORT_EVIDENCE_TABLE_v4.4.md`, `SOURCE_AUDIT_MANIFEST_DRAFT_v4.4.md`, `CREDIT_LINE_AND_SOURCE_NOTE_DRAFTS_v4.4.md`, `ASSET_FILENAME_MAP_v4.4.md`.
+- Write `reports/leonardo_chinese_exhibition_v4_4_asset_import_prep_report.md` with the commit SHA + verified live byte + verified quality-gate three-piece evidence.
+- Update `README.md` v4.4 block to match the redefined scope (v4.4 does **not** download images).
+
+**Do NOT do in v4.4 (current).**
+
+- Do not download any image.
+- Do not create any image file (`*.jpg` / `*.jpeg` / `*.png` / `*.webp` / `*.tif` / `*.tiff`).
+- Do not modify `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, `release-assets/`.
+- Do not modify `scripts/template_quality_gate.py`.
+- Do not mark any candidate `approved`.
+- Do not create a tag or GitHub Release in v4.4.
+- Do not move or rewrite any pre-existing tag (`v2.0` through `v3.4`) or any pre-existing GitHub Release.
+
+**Exit criteria for v4.4 (current).**
+
+- All 5 v4.4 prep docs committed.
+- `README.md` v4.4 block committed (and corrected: v4.4 does not download images).
+- `scripts/template_quality_gate.py` → **PASS, 37/37**.
+- Live byte size still **92,976 B**, `image-placeholder-pro` still **0**.
+- `find` confirms no new image files.
+- `git diff` against `site/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, `release-assets/`, `scripts/template_quality_gate.py` is empty.
+- `ready-for-asset-import` count is recorded (2 in this round, < 4 → v4.4b is the next round).
+- `approved` does not appear as a status value in any v4.4 doc.
+- v4.4 report carries the commit SHA + verified live byte + verified quality-gate three-piece.
+
+---
+
+## v4.4 (legacy draft, retained for historical record) — "QA and Stable Freeze"
+
+> The following block was the original v4.4 definition in an earlier draft of `V4_ROADMAP.md`. It is **not** the current v4.4 — see "v4.4 — Asset Import Prep (renumbered from earlier draft "QA and Stable Freeze")" above for the current round. The legacy block is retained so that the QA / freeze plan is not silently dropped; it is now scheduled for a later phase (post v4.5).
+
+**Goal (legacy draft).** Run the full quality gate, confirm the live site is unaffected, and freeze a stable tag / GitHub Release for the second exhibition.
+
+**Tasks (legacy draft).**
 
 - Run `template_quality_gate.py` one final time.
 - Confirm the existing live site (`site/`) is unchanged: byte size, v2.9 marker, `image-placeholder-pro` count, pilot title count.
@@ -242,13 +283,13 @@
 - Create a tag for v4.4 (e.g., `v4.4-<short-name>`) only after the above passes.
 - Create a GitHub Release for v4.4 only after the tag is verified.
 
-**Do NOT do in v4.4.**
+**Do NOT do in v4.4 (legacy draft).**
 
 - Do not move or rewrite any pre-existing tag (`v2.0` through `v3.4`).
 - Do not modify any pre-existing GitHub Release.
 - Do not "publish" the new exhibition to the live site before the live-no-change check passes.
 
-**Exit criteria for v4.4.**
+**Exit criteria for v4.4 (legacy draft).**
 
 - Quality gate PASS.
 - Live no-change confirmed (byte size still 92,976 B; markers unchanged).
@@ -266,6 +307,9 @@
 | v4.1 | Source Candidate Research | No | No | No |
 | v4.2 | Rights Audit | No | No | No |
 | v4.3 | Second Exhibition Build | No (local render only) | No | No |
-| v4.4 | QA and Stable Freeze | No (still pilot-only) | Yes (v4.4) | Yes (v4.4) |
+| v4.4 | Asset Import Prep (no download, no tag, no Release) | No (still pilot-only) | No | No |
+| v4.4b | Source Gap Fix (per-item selection for the 4 deferred rows) | No | No | No |
+| v4.5 | Asset Import (downloads the per-item images; gated on v4.4b producing ≥ 4 `ready-for-asset-import` rows) | TBD | TBD | TBD |
+| post-v4.5 | QA and Stable Freeze (renumbered from legacy v4.4) | No (still pilot-only) | Yes | Yes |
 
-The second exhibition's live publication is **explicitly not on this roadmap**. v4.4 produces a tag and a Release that mark the *repository* state of the second exhibition, but the live site is not updated until a separate, future round explicitly authorizes live publication and runs the full source-and-rights audit a second time on the *to-be-deployed* working tree.
+The second exhibition's live publication is **explicitly not on this roadmap**. v4.4 produces the asset-import-prep evidence; v4.4b closes the source gap; v4.5 executes the actual download (gated on v4.4b). The QA / stable freeze round (with tag + Release) is moved to a later phase. Live publication of the new exhibition requires a separate, future round that explicitly authorizes live publication and runs the full source-and-rights audit a second time on the *to-be-deployed* working tree.

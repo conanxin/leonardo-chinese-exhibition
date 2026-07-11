@@ -357,7 +357,9 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - Pilot (`_pilots/second-exhibition-pilot/`) remains repository-only
 - Quality gate: `scripts/template_quality_gate.py` → 37/37 PASS
 - Old tags (`v2.0` … `v3.4`) and old GitHub Releases untouched
-- Next: **v4.4 — Asset Import Prep** (picks one specific item per `selected-for-build-planning` row, runs the 11-step import rule, downloads the per-item images, writes the local files, updates the source audit manifest)
+- Next: **v4.4 — Asset Import Prep** (re-opens the official page for each v4.3 selected candidate, captures the 14 v4.4 per-item fields per row, applies the 4 v4.4 statuses `ready-for-asset-import` / `defer` / `blocked-from-import` / `replace-with-project-generated-diagram`, produces 5 prep docs and 1 prep report; **v4.4 does not download images**). The legacy "v4.4 = QA and Stable Freeze" plan was retired — see `docs/V4_ROADMAP.md` "v4.4 — Asset Import Prep (renumbered from earlier draft "QA and Stable Freeze")".
+- v4.4 selection totals (committed): `ready-for-asset-import` = **2** (C-01, C-03 — BHL item 318921, PD subset only); `defer` = **4** (C-06, C-08, C-09, C-10 — per-item selection deferred); `approved` = **0** (not used in v4.4).
+- Next after v4.4: **v4.4b — Source Gap Fix** (picks the deferred candidates' specific items and re-runs the v4.4 import-readiness assessment). v4.5 — Asset Import — is conditioned on v4.4b producing ≥ 4 `ready-for-asset-import` rows.
 
 ## 当前版本
 
