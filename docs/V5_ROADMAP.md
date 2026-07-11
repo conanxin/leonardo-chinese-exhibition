@@ -240,8 +240,8 @@
 - All listed gates and validations PASS.
 - Working tree contains only the 11 modified files listed above plus the untracked `.firecrawl/`.
 - No tracked file under `second-exhibition/assets/`, `second-exhibition/docs/`, top-level `site/`, `_template/`, `_pilots/`, `release-assets/`, `reports/`, `.github/`, or workflow area is modified.
-- `git reflog` shows no new commits this round.
-- Live production still at root 92,976 B / v2.9 = 1 / `/second-exhibition/` 200 / 6 images 200 / forbidden paths 404 / page text still reflects v5.3b-prep-old wording (until push).
+| `git reflog` shows no new commits this round. |
+| Live production still at root 92,976 B / v2.9 = 1 / `/second-exhibition/` 200 / 6 images 200 / forbidden paths 404 / page text still reflects v5.3b-prep-old wording (until push). |
 
 **Required authorization to commit + push + deploy.**
 
@@ -249,22 +249,74 @@
 DEPLOY v5.3b
 ```
 
+Only after receiving this exact string will commit + push + deploy be executed.
+
+---
+
+## v5.3c — Live Production Browser QA (executed)
+
+**Goal.** Verify the v5.3b-published second exhibition against the live public URL from a real Chromium browser across five representative viewports, four environment variants (default, interaction, no-JS, reduced-motion), and verify the v5.3b status wording is intact, that all six candidate images load byte-identical to the local asset-checksums, and that the live root has not regressed.
+
+**Result (this round).**
+
+- Public URL `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/` reached from Chromium headless shell `148.0.7778.96` (Chrome for Testing).
+- Five-viewport matrix (1440x1000, 1280x900, 768x1024, 390x844, 320x700) -- all five pass.
+- Per-viewport counts: `<section class="deep-block"> = 4`, artifact cards `[data-candidate-id] = 6` (C-01 / C-03 / C-06 / C-08 / C-09 / C-10), glossary items `.glossary-item = 12`, source notes `.source-note = 6`, credit lines `.credit-line = 6`, six images loaded (naturalWidth > 0).
+- Per-viewport text: `production-deployed-v5.3` OK, `published-in-v5.3` OK, `imported-not-deployed` OK (only inside the `Import record: imported-not-deployed (v4.5)` annotation), `repository-only-not-deployed` ABSENT, stale `未部署` / `not deployed` phrase ABSENT.
+- Per-viewport runtime: external requests = 0, failed requests = 0, console errors = 0, page errors = 0, horizontal overflow = 0.
+- Interactions (1440x1000): guided toggle `aria-pressed` switches false -> true, C-01 lightbox opens with `role=dialog` + `aria-modal=true` + accessible name `图片查看器` (via `#lightbox-title`), close button receives focus, ESC closes, focus returns to the C-01 trigger; C-06 click is blocked (low-resolution warning); section navigation links (6) and 6 primary buttons are tab-reachable.
+- no-JS render (JS disabled, 1440x1000): title, body text including all three status phrases, six artifact cards, source notes, credit lines, and `.repository-status` element all remain visible.
+- reduced-motion (1440x1000, `prefers-reduced-motion: reduce`): `matchMedia` reports true; lightbox opens and ESC closes cleanly.
+- Live root byte = 92,976 / v2.9 marker = 4 occurrences in body / `https://conanxin.github.io/leonardo-chinese-exhibition/` HTTP 200 (unchanged from v5.3).
+- Live second-exhibition byte = 25,635 / HTTP 200 (unchanged from v5.3).
+- Live six image SHA-256: byte-identical to `second-exhibition/assets/asset-checksums.sha256` (6/6 OK).
+- Forbidden public paths: 16/16 -> HTTP 404.
+- `git status -sb`: 0 modified, only `.firecrawl/` + the two v5.3b prep files untracked. No commit / push / Actions / Pages re-deploy / tag / Release this round.
+
+**Files created in v5.3c (not yet committed; awaiting DEPLOY v5.3c).**
+
+- `docs/SECOND_EXHIBITION_LIVE_PRODUCTION_QA_v5.3c.md` -- full QA baseline doc with 5-viewport matrix, interaction, a11y, no-JS, reduced-motion, asset SHA, forbidden paths, rollback method.
+- `reports/leonardo_chinese_exhibition_v5_3c_live_production_browser_qa_report.md` -- round report with STATUS, totals, image SHA comparison, protected-path confirmation, tags/Releases unchanged, next = v5.4-real-stable-freeze.
+
+**Files updated in v5.3c (not yet committed; awaiting DEPLOY v5.3c).**
+
+- `docs/V5_ROADMAP.md` -- this section.
+- `README.md` -- v5.3c block added alongside v5.3b block.
+
+**Files preserved (v5.3c must NOT modify).**
+
+- `site/`, `second-exhibition/site/`, `second-exhibition/data/`, `second-exhibition/assets/` (incl. all six image bytes), `second-exhibition/docs/SOURCE_AUDIT_MANIFEST.md`, `second-exhibition/docs/RIGHTS_AND_SOURCES.md`, `_template/`, `_pilots/`, `release-assets/`, existing `reports/` files, `.github/workflows/pages.yml`, and every script under `scripts/`. The browser QA runner used this round lives at `/tmp/qa/` (not in the repo).
+
+**Exit criteria for v5.3c (all met).**
+
+- Live root byte unchanged at 92,976 B.
+- v2.9 marker still present.
+- `/second-exhibition/` HTTP 200.
+- All six candidate images HTTP 200 with byte-identical SHA.
+- Forbidden public paths 16/16 -> HTTP 404.
+- 5/5 viewports see the current publication status; 0/5 see any stale phrasing.
+- 0 external requests, 0 failed requests, 0 console errors, 0 page errors.
+- C-01 lightbox open + ESC close + focus return; C-06 click blocked.
+- no-JS render preserves status text, cards, source notes, credit lines.
+- reduced-motion: lightbox open + ESC close under `prefers-reduced-motion: reduce`.
+
+**Required authorization.**
+
+```
+DEPLOY v5.3c
+```
+
+Only after receiving this exact string will commit + push of the two new docs and the README/ROADMAP update be executed.
+
+**Next.** **v5.4 — Public Stable Freeze** (annotated tag, Release, release notes, manifest, freeze report).
+
 ---
 
 ## v5.4 — Public Stable Freeze
 
 **Goal.** Final QA, public source / rights recheck, release notes, annotated tag, GitHub Release.
 
-**Tasks.**
 
-- Draft `docs/RELEASE_NOTES_v5_0_REAL_SECOND_EXHIBITION_DEPLOYMENT.md`.
-- Draft `release-assets/v5.0-real-second-exhibition-deployment-manifest.md`.
-- Draft `reports/leonardo_chinese_exhibition_v5_4_public_stable_freeze_report.md`.
-- Run all gates one final time.
-- Create annotated tag `v5.0-real-second-exhibition-deployment`.
-- Push the tag to origin.
-- Create the GitHub Release.
-- (Optional) backfill the freeze report with the tag object SHA, tag target SHA, Release URL, `createdAt`, and GitHub Actions run ID.
 
 **Do NOT do in v5.4.**
 

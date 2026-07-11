@@ -572,6 +572,40 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Workflow changes:** `.github/workflows/pages.yml` now runs staging builder + staging gate before `upload-pages-artifact`, with `path: ${{ runner.temp }}/leonardo-pages-artifact` and matching `--audit "${{ runner.temp }}/leonardo-pages-artifact-audit"`
 - **Tags / Releases:** unchanged
 
+## v5.3c Live Production Browser QA — Executed
+
+- **Status:** executed on `2026-07-11T23:29:11.044Z → 2026-07-11T23:30:07.186Z`; awaiting `DEPLOY v5.3c` authorization to commit + push the two new docs and the README/ROADMAP update.
+- **Browser / engine:** Chromium headless shell `148.0.7778.96` (Chrome for Testing) on local Playwright.
+- **Public URL:** https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/
+- **Public URL root (unchanged from v5.3):** https://conanxin.github.io/leonardo-chinese-exhibition/ — HTTP 200, 92,976 B, v2.9 marker 4 occurrences.
+- **Public URL second exhibition (unchanged from v5.3):** HTTP 200, 25,635 B; six images HTTP 200, byte-identical to `second-exhibition/assets/asset-checksums.sha256`.
+- **Forbidden public paths:** 16/16 → HTTP 404 (root data/docs/_template/_pilots/reports/scripts/.firecrawl/README/V4+V5_ROADMAP/manifests/checksums + second-exhibition data/docs/manifests/checksums).
+- **Five-viewport matrix (1440×1000 / 1280×900 / 768×1024 / 390×844 / 320×700):** all five pass.
+  - `<section class="deep-block"> = 4` (one section per 节: 观察 / 分类 / 复制 / 再组织).
+  - `[data-candidate-id]` artifact cards = 6 (C-01, C-03, C-06, C-08, C-09, C-10).
+  - `.glossary-item` glossary items = 12.
+  - `.source-note` source notes = 6; `.credit-line` credit lines = 6.
+  - 6/6 images loaded per viewport (`naturalWidth > 0`); 1 zero-src favicon SVG icon.
+  - Horizontal overflow = 0 in every viewport.
+- **Per-viewport text:** `production-deployed-v5.3` visible, `published-in-v5.3` visible, `imported-not-deployed` visible only inside the `Import record: imported-not-deployed (v4.5)` annotation; `repository-only-not-deployed` ABSENT; stale `未部署` / `not deployed` phrase ABSENT.
+- **Per-viewport runtime:** external requests = 0, failed requests = 0, console errors = 0, page errors = 0 across all 5 viewports + 4 environment variants (default, interaction, no-JS, reduced-motion).
+- **Interactions (1440×1000):**
+  - Guided toggle (`#guided-toggle`) `aria-pressed` switches `false → true`.
+  - C-01 lightbox opens with `role=dialog` + `aria-modal=true`; accessible name resolves to `图片查看器` via `aria-labelledby="lightbox-title"`.
+  - Close button receives focus on open; `ESC` closes; focus returns to the C-01 trigger.
+  - C-06 (low-resolution) click is blocked; only the warning surfaces.
+  - Section navigation: 6 real `<a href="#…">` links; first click updates `window.location.hash`.
+  - 6 primary buttons are tab-reachable.
+- **no-JS render:** title, body text (all three status phrases), 6 artifact cards, source notes, credit lines, and `.repository-status` element all remain visible with JavaScript disabled.
+- **reduced-motion:** `matchMedia('(prefers-reduced-motion: reduce)').matches === true`; lightbox opens and ESC closes cleanly under reduced motion.
+- **Image checksum:** live 6-image SHA-256 byte-identical to `second-exhibition/assets/asset-checksums.sha256` (sha256sum -c 6/6 OK); cross-checked via fresh `curl` download of every image and diff against local SHA file.
+- **v5.3b immutable evidence untouched this round:** `asset-import-manifest.json`, `asset-checksums.sha256`, six image bytes, `SOURCE_AUDIT_MANIFEST.md`, `RIGHTS_AND_SOURCES.md`.
+- **Workflow untouched this round:** `.github/workflows/pages.yml` unchanged; no Actions triggered.
+- **Tags / Releases:** unchanged. Most recent source-freeze anchor remains `v4.8-real-second-exhibition-repository-hardening`. `v5.0-real-second-exhibition-deployment` tag deferred to v5.4.
+- **Protected paths unchanged:** `site/`, `second-exhibition/site/`, `second-exhibition/data/`, `second-exhibition/assets/`, `_template/`, `_pilots/`, `release-assets/`, existing `reports/`, `.github/workflows/`, `scripts/`.
+- **Working tree this round (before DEPLOY v5.3c):** 0 modified, 2 new untracked docs (`docs/SECOND_EXHIBITION_LIVE_PRODUCTION_QA_v5.3c.md`, `reports/leonardo_chinese_exhibition_v5_3c_live_production_browser_qa_report.md`) + the two pre-existing v5.3b prep files + `.firecrawl/`. No commit / push / Actions / Pages re-deploy / tag / Release this round.
+- **Required authorization:** `DEPLOY v5.3c`
+
 ## v5.3b Production State Reconciliation — Prepared
 
 - **Status:** prep complete; awaiting `DEPLOY v5.3b` authorization
@@ -587,6 +621,7 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Tags / Releases:** unchanged
 - **Working tree:** 11 files modified, none staged, no commit, no push, no Actions triggered, production unchanged
 - **Required authorization:** `DEPLOY v5.3b`
+
 
 ## 当前版本
 
