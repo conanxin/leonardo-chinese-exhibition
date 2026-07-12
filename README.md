@@ -752,6 +752,45 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   [`reports/leonardo_chinese_exhibition_v5_5b_staging_audit_key_semantics_fix_report.md`](reports/leonardo_chinese_exhibition_v5_5b_staging_audit_key_semantics_fix_report.md)
 
 
+## v5.6 Second Exhibition Content Iteration Prep
+
+- **Stable deployment remains unchanged**: root 92,976 B /
+  SHA `e2be1077…`; second-exhibition 25,635 B / SHA
+  `7c05f39d…`; six image checksums; status phrase counts
+  `production-deployed-v5.3 = 5` / `published-in-v5.3 = 8` /
+  `imported-not-deployed = 8` / `repository-only-not-deployed = 0`;
+  forbidden paths 17/17 → 404; tag pinned to freeze
+  `ac0f19e2…`; Release v5.0 unchanged.
+- **Content audit completed**:
+  [`docs/SECOND_EXHIBITION_CONTENT_AUDIT_v5.6.md`](docs/SECOND_EXHIBITION_CONTENT_AUDIT_v5.6.md)
+  — 15 issues recorded (1 high-severity factual, 9 medium-severity
+  terminology / narrative, 4 low-severity wording).
+- **Fact-check matrix created**:
+  [`docs/SECOND_EXHIBITION_FACT_CHECK_MATRIX_v5.6.md`](docs/SECOND_EXHIBITION_FACT_CHECK_MATRIX_v5.6.md)
+  — 30 facts classified; 17 verified, 9 wording-needs-precision,
+  1 unsupported (the Rijksprentenkabinet herbarium error),
+  4 interpretation-only, 4 research-needed (out of scope).
+- **v0.2 scope defined**:
+  [`docs/SECOND_EXHIBITION_CONTENT_ITERATION_PLAN_v5.6.md`](docs/SECOND_EXHIBITION_CONTENT_ITERATION_PLAN_v5.6.md)
+  — still 4 sections, 6 artifact cards, 6 images, glossary 12
+  → 14; URL / status model / source-evidence files unchanged.
+- **Exact changeset drafted (15 rows)**:
+  [`docs/SECOND_EXHIBITION_CONTENT_CHANGESET_DRAFT_v5.6.md`](docs/SECOND_EXHIBITION_CONTENT_CHANGESET_DRAFT_v5.6.md)
+  — each row names file / JSON path / current / proposed /
+  evidence / impact (page byte, source SHA, staged/live SHA,
+  browser QA, gate QA, asset checksums).
+- **Acceptance criteria defined**:
+  [`docs/SECOND_EXHIBITION_CONTENT_ACCEPTANCE_CRITERIA_v5.6.md`](docs/SECOND_EXHIBITION_CONTENT_ACCEPTANCE_CRITERIA_v5.6.md)
+  — Content / Data / Assets / Tooling / Page-render /
+  Deployment / Source-rights / Authority gates.
+- **No page / data / image / manifest / checksum / source-rights
+  changes** in this round; only the 8 named planning docs.
+- **Round report**:
+  [`reports/leonardo_chinese_exhibition_v5_6_content_iteration_prep_report.md`](reports/leonardo_chinese_exhibition_v5_6_content_iteration_prep_report.md)
+- **Next authorization required**:
+  `IMPLEMENT v5.6b`
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

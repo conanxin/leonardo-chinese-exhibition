@@ -647,3 +647,86 @@ is re-emitted.
   unchanged.
 
 **Next.** `v5.6-second-exhibition-content-iteration-prep`.
+
+---
+
+## v5.6 Second Exhibition Content Iteration Prep
+
+**Goal.** Plan the first content iteration of the second exhibition
+(`second-exhibition-v0.1 → second-exhibition-v0.2`) without modifying
+any production content. Produce five planning documents: an audit,
+a fact-check matrix, an iteration plan, a changeset draft, and an
+acceptance criteria document. Next round awaits explicit
+`IMPLEMENT v5.6b` authorization.
+
+**Tasks.**
+
+- Capture a frozen snapshot of the second exhibition content as
+  recorded at HEAD `ce01f1d…` (source / staged / live identity,
+  section / artifact / glossary counts, hero region, status-phrase
+  counts, image roster, data JSON shapes).
+- Audit current content across five dimensions: factual accuracy,
+  narrative structure, visitor comprehension, content depth,
+  source / curation boundary.
+- Tag each finding with a severity (`blocker / high / medium / low`)
+  and a type (`factual / terminology / narrative / repetition /
+  accessibility / visitor comprehension / source-boundary / metadata`).
+- Produce a fact-check matrix that classifies every candidate claim
+  as `verified / wording-needs-precision / unsupported /
+  interpretation-only / research-needed` and traces each
+  `verified` row to either `docs/SOURCE_AUDIT_MANIFEST.md` or the
+  institutional source URL.
+- Define v0.2 scope: still 4 sections, still 6 artifact cards, still
+  6 images, glossary 12 → 14; URL / status model / source-evidence
+  files unchanged.
+- Draft a 15-row changeset (CHG-01 … CHG-15), each row naming its
+  target file, JSON path or HTML section, current state, proposed
+  state, reason, evidence, risk, and impact on page byte, source
+  SHA, staged/live SHA, browser QA, gate QA, and asset checksums.
+- Define the v0.2 acceptance criteria (Content / Data consistency /
+  Assets / Tooling / Page-render / Deployment / Source & rights /
+  Authority).
+- Do **not** modify any production file; the allowlist for this
+  round is exactly the eight documents named below.
+
+**Deliverables.**
+
+- `docs/SECOND_EXHIBITION_CONTENT_AUDIT_v5.6.md` (audit)
+- `docs/SECOND_EXHIBITION_FACT_CHECK_MATRIX_v5.6.md` (matrix)
+- `docs/SECOND_EXHIBITION_CONTENT_ITERATION_PLAN_v5.6.md` (plan)
+- `docs/SECOND_EXHIBITION_CONTENT_CHANGESET_DRAFT_v5.6.md` (changeset)
+- `docs/SECOND_EXHIBITION_CONTENT_ACCEPTANCE_CRITERIA_v5.6.md` (gate)
+- `docs/V5_ROADMAP.md` (this round's section)
+- `README.md` (one new section)
+- `reports/leonardo_chinese_exhibition_v5_6_content_iteration_prep_report.md`
+
+**Do NOT do in v5.6-prep.**
+
+- Do not edit any file under `site/`, `second-exhibition/site/`,
+  `second-exhibition/data/`, `second-exhibition/assets/`,
+  `second-exhibition/docs/`, or `.github/workflows/`.
+- Do not modify the six image files, the asset manifest, the
+  checksums, or the source / rights evidence files.
+- Do not create a new tag or Release.
+- Do not modify the v5.0 freeze tag.
+- Do not bypass the planning gate by editing `second-exhibition/`
+  in this round.
+- Do not process the untracked `.firecrawl/` directory.
+
+**Exit criteria for v5.6-prep.**
+
+- All 8 allowlisted files committed.
+- `git status` shows exactly those 8 files modified or added; other
+  paths empty.
+- Reality gate (§1 of the brief) PASS.
+- Push triggers the Pages workflow; post-push verification shows
+  **0 production drift** (root SHA, second-exhibition SHA, six image
+  checksums, status-phrase counts, and the browser QA 5/5 result
+  all unchanged).
+- Stable tag still annotated on freeze commit `ac0f19e2…`; Release
+  v5.0 still `isDraft=false`, `isPrerelease=false`.
+
+**Next.** `v5.6b-content-iteration-implementation-prep`.
+
+**Required authorization before v5.6b starts:**
+`IMPLEMENT v5.6b`.
