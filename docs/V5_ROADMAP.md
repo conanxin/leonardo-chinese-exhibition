@@ -835,3 +835,52 @@ Round after v5.6b deployment (commit `6b7ee06`).
 ### Next
 
 - v5.6-real-stable-freeze
+
+## v5.6d — Live Browser QA Reproducibility
+
+Promote v5.6c's `/tmp/v56c-live-browser-qa.mjs` fixes into the official
+runner `scripts/second_exhibition_browser_qa.mjs` so that public QA is
+reproducible from repository content alone (no `/tmp` scripts, no
+user-specific paths, no `/home/conanxin/...` hardcoding).
+
+### Changes (additive; v4.8 design preserved)
+
+- `checkServer()` now uses `https.request` for `https://` URLs (was
+  `http.get` only — failed against public Pages).
+- `trackRequests()` is now **origin-aware**: same-origin subresource
+  fetches (whether `http://127.0.0.1:8770/site/...` or
+  `https://conanxin.github.io/.../second-exhibition/...`) are first-party,
+  never counted as "external".
+- `main()` error message adapts to whether the target is local
+  (suggests `python3 -m http.server 8770`) or remote (neutral).
+- Docstring updated to document both invocation patterns
+  (local server, public URL).
+
+### What did NOT change
+
+- `loadPlaywright()` — unchanged. `PLAYWRIGHT_NODE_PATH` env var
+  remains the canonical override. No `~/.local/...` lookup in the
+  script.
+- Selectors, viewport matrix, interaction / a11y / no-JS /
+  reduced-motion checks — all byte-identical to v4.8.
+- Lazy-image handling — unchanged (still scroll + 800 ms).
+- Exit codes, JSON summary shape, default URL — unchanged.
+
+### Verification (this round, official runner only)
+
+- Local 5-viewport QA: 5/5 PASS, 0 errors of any kind.
+- Public 5-viewport QA (against
+  `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/`):
+  5/5 PASS, 0 errors of any kind.
+- Default production healthcheck: 70/70 PASS, root 92,976 B / second
+  31,452 B — unchanged.
+- Public artifact (root + second) byte-identical to v5.6c.
+- Scope guard: only `scripts/second_exhibition_browser_qa.mjs`
+  modified. All protected paths (`site/`, `second-exhibition/`,
+  `.github/workflows/`, `_template/`, `_pilots/`, `posts/`,
+  `case-study/`, `release-assets/`, other `scripts/*.py`,
+  `__pycache__`) empty.
+
+### Next
+
+- v5.6-real-stable-freeze

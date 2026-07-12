@@ -1,10 +1,21 @@
 #!/usr/bin/env node
 /**
- * v4.8 Second Exhibition Browser QA Runner (ESM)
+ * Second Exhibition Browser QA Runner (ESM)
  *
- * Does not modify the repository. Does not access the public network.
- * Requires a local HTTP server to be running, e.g.:
- *   python3 -m http.server 8770 --directory second-exhibition
+ * Originally written for the v4.8 local-server case (python3 -m http.server 8770
+ * --directory second-exhibition). Since v5.6d it is also the official runner
+ * for the public Pages URL — selectors, lazy-image handling, and origin-aware
+ * request tracking are all unified here. The same script can be pointed at:
+ *
+ *   - a local server, e.g.:
+ *       python3 -m http.server 8770 --directory second-exhibition
+ *       SECOND_EXHIBITION_QA_URL=http://127.0.0.1:8770/site/ \
+ *         node scripts/second_exhibition_browser_qa.mjs
+ *
+ *   - the public Pages URL, e.g.:
+ *       PLAYWRIGHT_NODE_PATH=/abs/path/to/node_modules/playwright-core \
+ *       SECOND_EXHIBITION_QA_URL=https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/ \
+ *         node scripts/second_exhibition_browser_qa.mjs
  *
  * Exit codes:
  *   0 - PASS
@@ -12,20 +23,37 @@
  *   2 - Browser environment not available
  *
  * Environment variables:
- *   SECOND_EXHIBITION_QA_URL (default: http://127.0.0.1:8770/site/)
+ *   SECOND_EXHIBITION_QA_URL    (default: http://127.0.0.1:8770/site/)
  *   PLAYWRIGHT_CHROMIUM_EXECUTABLE - path to a Chromium executable
- *   PLAYWRIGHT_NODE_PATH             - extra path to require('playwright') from
+ *   PLAYWRIGHT_NODE_PATH         - extra path to require('playwright') from
+ *
+ * Does not modify the repository. Reads the page over HTTP(S) only.
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import http from "node:http";
+import https from "node:https";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
 const DEFAULT_URL = "http://127.0.0.1:8770/site/";
 const TARGET_URL = process.env.SECOND_EXHIBITION_QA_URL || DEFAULT_URL;
+
+// Origin of TARGET_URL (scheme + host [+ port]). All same-origin subresource
+// requests are treated as first-party, never "external". This lets the same
+// runner validate a local server AND the public Pages site without counting
+// in-page assets (images, css) as external traffic.
+function targetOrigin() {
+  try {
+    const u = new URL(TARGET_URL);
+    return u.port ? `${u.protocol}//${u.host}` : `${u.protocol}//${u.host}`;
+  } catch (_e) {
+    return null;
+  }
+}
+const ORIGIN = targetOrigin();
 
 const RESULTS = {
   status: "unknown",
@@ -60,9 +88,19 @@ function printSummary() {
 
 async function checkServer() {
   const u = new URL(TARGET_URL);
+  const isHttps = u.protocol === "https:";
+  const lib = isHttps ? https : http;
+  const defaultPort = isHttps ? 443 : 80;
   return new Promise((resolve) => {
-    const req = http.get(
-      { hostname: u.hostname, port: u.port, path: u.pathname },
+    const req = lib.request(
+      {
+        hostname: u.hostname,
+        port: u.port || defaultPort,
+        path: u.pathname,
+        method: "GET",
+        // SNI / TLS handshake defaults are fine for a public host; for local
+        // http, agent is a no-op.
+      },
       (res) => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(true);
@@ -76,6 +114,7 @@ async function checkServer() {
       req.destroy();
       resolve(false);
     });
+    req.end();
   });
 }
 
@@ -412,9 +451,11 @@ async function trackRequests(page) {
   const pageErrors = [];
   page.on("request", (req) => {
     const url = req.url();
-    if (url.startsWith("http://127.0.0.1") || url.startsWith("http://localhost") || url.startsWith("data:")) {
-      return;
-    }
+    // Skip same-origin (TARGET_URL origin) subresources — they are first-party
+    // assets, not "external" traffic. local http and public https are both
+    // matched by the origin prefix. data:/blob: are never network calls.
+    if (ORIGIN && url.startsWith(ORIGIN)) return;
+    if (url.startsWith("data:") || url.startsWith("blob:")) return;
     external.push(url);
   });
   page.on("requestfailed", (req) => {
@@ -443,7 +484,12 @@ async function main() {
   const serverOk = await checkServer();
   if (!serverOk) {
     console.error(`Server not responding at ${TARGET_URL}`);
-    console.error("Start it with: python3 -m http.server 8770 --directory second-exhibition");
+    const isLocal = TARGET_URL.startsWith("http://127.0.0.1") || TARGET_URL.startsWith("http://localhost");
+    if (isLocal) {
+      console.error("Start it with: python3 -m http.server 8770 --directory second-exhibition");
+    } else {
+      console.error("Check network/proxy. If running on GitHub Actions or behind a corporate firewall, this is expected.");
+    }
     process.exit(2);
   }
   log("ENV", `Server responding at ${TARGET_URL}`);

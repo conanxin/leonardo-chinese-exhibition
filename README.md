@@ -1289,3 +1289,23 @@ v1.6 distribution pack 6 个传播材料 + 36 标题保留。
 - Workflow: unchanged
 - Stable v5.0 tag `v5.0-real-second-exhibition-deployment` remains the initial-deployment anchor (unchanged)
 - Next: v5.6 real stable freeze
+
+## v5.6d Live Browser QA Reproducibility (verified, 2026-07-12)
+
+- Official runner `scripts/second_exhibition_browser_qa.mjs` is now
+  the **single source of truth** for both local and public 5-viewport
+  QA.
+- Runner now supports HTTPS targets (so the public URL is a first-class
+  target, not an exception path), and request tracking is origin-aware
+  (same-origin subresources are not counted as external).
+- v4.8 default URL `http://127.0.0.1:8770/site/` and exit codes
+  preserved — no breaking change for any prior invocation.
+- Verified live:
+  - **Local** (default URL, no env override): 5/5 viewports PASS, 0 errors
+  - **Public** (`SECOND_EXHIBITION_QA_URL=https://conanxin.github.io/.../second-exhibition/`):
+    5/5 viewports PASS, 0 errors
+- Playwright resolve stays env-driven (`PLAYWRIGHT_NODE_PATH`); no
+  hardcoded user home or absolute install path in the runner.
+- Public artifact (root + second) byte-identical to v5.6c.
+- Stable v5.0 tag / Release unchanged.
+- Next: v5.6 real stable freeze
