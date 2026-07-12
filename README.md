@@ -1332,3 +1332,25 @@ v1.6 distribution pack 6 个传播材料 + 36 标题保留。
 - Public artifact (root 92,976 B, second 31,452 B) — **unchanged**.
 - Stable v5.0 tag / Release — **unchanged**.
 - Next: v5.6 real stable freeze
+
+## v5.1 Real Second Exhibition v0.2 — Stable Freeze (prepared)
+
+- Public version: `second-exhibition-v0.2`
+- Proposed stable tag: `v5.1-real-second-exhibition-v0.2`
+- Proposed Release title: `v5.1 Real Second Exhibition v0.2`
+- Root URL: `https://conanxin.github.io/leonardo-chinese-exhibition/`
+- Second exhibition URL: `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/`
+- Production identity (this round):
+  - root: 92,976 B / SHA `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
+  - second: 31,452 B / SHA `00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2`
+  - marker `second-exhibition-v0.2` (count = 3), stale v0.1 = 0
+  - 4 sections, 6 artifact cards, 14 glossary entries, 6 images
+- Official QA runner: `scripts/second_exhibition_browser_qa.mjs`
+- Verified this round: 3/3 local exact-base-path + 3/3 production,
+  5/5 viewports each, imgsLoaded `[6, 6, 6, 6, 6]`, 0 errors,
+  0 overflow
+- 6 / 6 image SHA-256 unchanged
+- Source / rights evidence: unchanged
+- Workflow: unchanged
+- Previous v5.0 stable tag retained as initial-deployment anchor
+- Next: stable maintenance / future v0.3 planning

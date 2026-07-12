@@ -965,3 +965,34 @@ failures, no `FAIL → WARN` downgrade.
 ### Next
 
 - v5.6-real-stable-freeze
+
+## v5.6 Real Stable Freeze — Prepared
+
+The v0.2 content is now fully verified end-to-end and the
+stable-freeze manifest is committed in the freeze commit (this
+round). Concretely:
+
+- second-exhibition-v0.2 is fully verified (gates, repository QA,
+  healthcheck, checksums, staging, dry-run, browser QA — both
+  local and production)
+- freeze manifest prepared:
+  - `docs/SECOND_EXHIBITION_V0_2_STABLE_FREEZE_v5.6.md`
+  - `release-assets/v5.1-real-second-exhibition-v0.2-manifest.md`
+  - `release-assets/v5.1-real-second-exhibition-v0.2-release-notes.md`
+- proposed tag: `v5.1-real-second-exhibition-v0.2`
+- the proposed tag will target the freeze commit (the commit that
+  contains the manifest and release notes above)
+- the previous `v5.0-real-second-exhibition-deployment` tag
+  remains the initial-deployment anchor; it is **not** moved
+- the evidence backfill (tag object SHA, Release URL,
+  `publishedAt`, post-tag verification) will be a separate
+  commit **after** the tag is created; the backfill commit is
+  **not** the tag target
+
+### Next
+
+- create the annotated tag (after the freeze commit's Pages
+  workflow succeeds)
+- create the GitHub Release (not draft, not prerelease)
+- backfill the evidence (separate commit, not the tag target)
+- stable maintenance / future v0.3 planning
