@@ -791,6 +791,54 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   `IMPLEMENT v5.6b`
 
 
+## v5.6b Second Exhibition v0.2 Candidate
+
+v5.6b takes the v5.6-prep changeset draft and executes the 15 changes.
+Production surface remains unchanged until `DEPLOY v5.6b` is received.
+
+- **Candidate version**: `second-exhibition-v0.2`
+- **Sections**: 4
+- **Artifact cards**: 6
+- **Glossary**: **14** (was 12; added cyanotype + photogram)
+- **Images**: **unchanged** (6 SHA match `asset-checksums.sha256`)
+- **Sources and rights**: **unchanged**
+- **Candidate source**:
+  `second-exhibition/site/index.html` = **31,458 B** /
+  SHA `662bee42799a5e92fb7407a37d2fe57d02bfd123a344cbeada0cb51b99c5030e`
+- **Candidate staged** (after 6 image-path rewrites):
+  `second-exhibition/index.html` = **31,452 B** /
+  SHA `00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2`
+- **Root identity (unchanged)**: 92,976 B /
+  SHA `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
+- **Gates**: PASS
+  - `template_quality_gate`
+  - `second_exhibition_build_gate`
+  - `second_exhibition_repository_qa` → **166 PASS / 0 FAIL / 0 WARNINGS**
+  - staging build + gate
+  - exact-base-path dry-run (14/14 allowlist, 16/16 forbidden,
+    34/34 roundtrip byte-identical, workflow NOT modified)
+- **Browser QA**: **5/5 PASS** at
+  1440×1000, 1280×900, 768×1024, 390×844, 320×700
+  (with 4 × inline `style="scroll-margin-top: 2px;"` to fix
+  the 320×700 sub-pixel anchor positioning).
+- **Healthcheck dual-track**:
+  - current production v0.1 (live): PASS
+  - local candidate v0.2 (`--candidate-v0.2` against 127.0.0.1:8772): PASS
+- **Inline-only adjustment** (not in CHG rows, documented): 4 ×
+  `style="scroll-margin-top: 2px;"` on the 4 `<section id="…">` elements.
+  No semantic / CSS / asset impact.
+- **Workflow / tags / Releases**: NOT modified
+- **Production remains v0.1 before approval**.
+
+详见
+[`docs/SECOND_EXHIBITION_CONTENT_ITERATION_IMPLEMENTATION_v5.6b.md`](docs/SECOND_EXHIBITION_CONTENT_ITERATION_IMPLEMENTATION_v5.6b.md)
+与
+[`reports/leonardo_chinese_exhibition_v5_6b_content_iteration_implementation_prep_report.md`](reports/leonardo_chinese_exhibition_v5_6b_content_iteration_implementation_prep_report.md)。
+
+- **Next authorization required**:
+  `DEPLOY v5.6b`
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

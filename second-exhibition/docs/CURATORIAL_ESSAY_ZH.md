@@ -38,7 +38,7 @@
 - **C-09**：Rijksmuseum Rijksprentenkabinet 馆藏 RP-F-F80152，标题 *Zeestreepvaren*，作者 Anna Atkins（英格兰摄影师），年代约 1854。Rijksmuseum 公开页面逐项标注版权为 **Public domain（CC0 1.0）**——这是"逐项 licence"（per-item licence）的范例，不是从机构政策推断出来的。Micrio IIIF Image API 端点（`https://iiif.micr.io/vGipU/full/1024,/0/default.jpg`）给出 1024px 派生图。
 - **C-10**：Rijksmuseum Rijksprentenkabinet 馆藏 RP-F-F80313，标题 *Wolfsklauw*，同样为 Anna Atkins 的 cyanotype 蓝晒作品。Rijksmuseum 公开页面同样逐项标注版权为 Public domain（CC0 1.0）。**caveat**：本轮（v4.5）核验时，Rijksmuseum IIIF Presentation API manifest `/manifest.json`（端点 `https://iiif.micr.io/PrcdN/manifest.json`）返回 HTTP 404。因此本展览**不基于 IIIF Presentation API manifest 撰写任何陈述**；licence 依据是 Rijksmuseum 公开页面的"逐项 Copyright 字段"，不是 manifest 内的 license 字段。
 
-C-09 与 C-10 的对象类型是 photogram（蓝晒），不是传统版画。读者如果期待看到雕版线条，会在这里遇到不同的视觉语法。这是 Anna Atkins 的具体作品特征，不是 Rijksmuseum 的服务异常。
+C-09 与 C-10 的对象类型是 cyanotype photogram（蓝晒接触印相），不是传统雕版／蚀刻／石印的版画——它们与一般意义上的"版画"在媒介上是不同的。读者如果期待看到雕版线条，会在这里遇到不同的视觉语法。这是 Anna Atkins 的具体作品特征与 cyanotype 的工艺特性，不是 Rijksmuseum 的服务异常。同时，**Rijksprentenkabinet 是 Rijksmuseum 的版画／素描／摄影部门（print room），不是植物标本馆**，因此 C-09 / C-10 的归属关系与 NMNH Botany（C-06）并不属于同一机构类别——C-06 是 herbarium（植物标本馆）中的标本记录，而 C-09 / C-10 是 print room（版画室）中的 cyanotype 摄影印刷。
 
 **策展假设**：复制技术的连续性（手稿 → 雕版 → 蓝晒 → 扫描 → IIIF Image API）与断裂（IIIF Presentation API manifest 404）共同决定了图像的传播半径。今天的数字展览如果想走得比博物馆网页更远，必须把"哪些端点会失败"也写进策展说明——这正是 v4.5 / v4.6 阶段反复核对 source URL 的原因。
 

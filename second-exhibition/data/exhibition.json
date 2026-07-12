@@ -3,7 +3,7 @@
   "title": "植物图谱与视觉分类",
   "subtitle": "从自然史图像到知识秩序",
   "working_title": "《植物图谱与视觉分类：从自然史图像到知识秩序》",
-  "version": "second-exhibition-v0.1",
+  "version": "second-exhibition-v0.2",
   "status": "production-deployed-v5.3",
   "publication_status": "production-deployed-v5.3",
   "deployment_url": "https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/",
@@ -19,15 +19,20 @@
     "再组织"
   ],
   "artifact_count": 6,
-  "glossary_count_target": 12,
-  "marker": "second-exhibition-v0.1",
+  "glossary_count_target": 14,
+  "marker": "second-exhibition-v0.2",
   "deployment_status": "production-deployed-v5.3",
   "serving_contract": {
     "command": "python3 -m http.server 8770 --directory second-exhibition",
     "url": "http://127.0.0.1:8770/site/",
     "rationale": "页面通过 ../assets/images/ 引用本地图片。必须从 second-exhibition/ 根目录启动 http.server，而不是 second-exhibition/site/，否则 ../assets/ 在该 serving model 下会解析错误。Local serving contract unchanged from v4.6; v5.3 production deployment uses GitHub Pages project-site base path /leonardo-chinese-exhibition/."
   },
-  "forbidden_statuses_not_used": ["approved", "safe for commercial use", "cleared for all uses", "watermark-free originals"],
+  "forbidden_statuses_not_used": [
+    "approved",
+    "safe for commercial use",
+    "cleared for all uses",
+    "watermark-free originals"
+  ],
   "page_classes_used": [
     ".artifact-card",
     ".glossary-item",

@@ -730,3 +730,81 @@ acceptance criteria document. Next round awaits explicit
 
 **Required authorization before v5.6b starts:**
 `IMPLEMENT v5.6b`.
+## v5.6b Second Exhibition v0.2 Implementation — Prepared
+
+This round is content-iteration execution on top of v5.6 prep's
+audit + fact-check + plan + changeset draft + acceptance criteria.
+
+- **CHG-01 through CHG-15 implemented** (factual corrections,
+  terminology, hero / 3-min-guide rewrites, sections 1–4, glossary
+  12 → 14, marker v0.1 → v0.2, build_gate + repository_qa + production
+  healthcheck sync).
+- **Candidate marker**: `second-exhibition-v0.2` (5 HTML occurrences in
+  `site/index.html`; `v0.1` count = 0; both build_gate + repository_qa
+  enforce the bidirectional regression guard).
+- **Sections**: 4 (`section-1-observation`, `section-2-classification`,
+  `section-3-reproduction`, `section-4-reorganization`).
+- **Artifacts**: 6 (C-01, C-03, C-06, C-08, C-09, C-10).
+- **Glossary**: **14** items (was 12; added `cyanotype` + `photogram`).
+- **Images**: **unchanged** — 6 SHA match `asset-checksums.sha256`.
+- **Source / rights evidence**: **unchanged** — `SOURCE_AUDIT_MANIFEST.md`
+  and `RIGHTS_AND_SOURCES.md` untouched.
+- **Candidate root identity**: 92,976 B / SHA `e2be1077…` (unchanged).
+- **Candidate second-exhibition source identity**:
+  31,458 B / SHA `662bee42799a5e92fb7407a37d2fe57d02bfd123a344cbeada0cb51b99c5030e`.
+- **Candidate second-exhibition staged identity**:
+  31,452 B / SHA `00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2`
+  (= source − 6 bytes from exactly 6 image-path rewrites).
+- **Inline-only adjustment**: 4 × `style="scroll-margin-top: 2px;"` on
+  the 4 `<section id="section-N-…">` elements — fixes the 320×700
+  viewport section-nav sub-pixel anchor positioning; no semantic / CSS
+  / asset impact.
+- **Candidate gates**:
+  - template_quality_gate: **PASS**
+  - second_exhibition_build_gate: **PASS**
+  - second_exhibition_repository_qa: **166 PASS / 0 FAIL / 0 WARNINGS**
+  - 4 × JSON: OK
+  - 6 × image checksum: OK
+- **Staging / dry-run**:
+  - `second_exhibition_staging_build`: PASS (6 path rewrites, schema v2 audit)
+  - `second_exhibition_staging_gate`: PASS (34 entries, identity verified)
+  - `second_exhibition_deployment_dry_run`: PASS (14/14 allowlist,
+    16/16 forbidden, 34/34 roundtrip byte-identical, workflow NOT modified)
+- **Five-viewport browser QA**: **PASS** at
+  1440×1000, 1280×900, 768×1024, 390×844, 320×700.
+  - consoleErrors: 0, pageErrors: 0, failedRequests: 0, externalRequests: 0
+  - 12/12 interactions PASS (incl. section navigation True post-fix)
+- **Healthcheck dual-track**:
+  - current production v0.1: PASS (68/68; root 92,976 B; second 25,635 B)
+  - local candidate v0.2 (`--candidate-v0.2`): PASS (68/68; root 92,976 B;
+    second 31,452 B / SHA `00894e8d…`)
+- **Workflow**: NOT modified.
+- **Tags / Releases**: NOT modified.
+- **Working tree**: 11 modified + 4 new files; 0 staged, 0 commit, 0 push.
+- **Current production**: still `second-exhibition-v0.1` (live, unchanged).
+
+### Known carry-overs (NOT v5.6b regressions)
+
+- `second-exhibition/data/assets.json` `marker: second-exhibition-v0.1`
+  (asset-data historical field, NOT current-exhibition public marker;
+  not copied into public artifact).
+- `second-exhibition/site/README.md` `second-exhibition-v0.1`
+  (NOT copied into public artifact).
+
+Both carry-overs are scope-bounded by brief §15 and are explicitly
+documented in `docs/SECOND_EXHIBITION_CONTENT_ITERATION_IMPLEMENTATION_v5.6b.md`
+under "Known carry-overs".
+
+### Stop point
+
+- **No** `git add`, **no** `git commit`, **no** `git push`, **no** new
+  tag, **no** new Release.
+- Local background http servers stopped; staging directories cleaned
+  to scope-managed temp paths.
+- **Required authorization**: `DEPLOY v5.6b`.
+
+Without this token, the production surface remains v5.0-frozen
+v0.1 (`ac0f19e2…`). With the token, the commit(s) produced from this
+working tree go through the Pages workflow, post-push reality
+verification confirms `0 production drift` on every identity
+checkbox, and `v0.2` becomes the live surface.

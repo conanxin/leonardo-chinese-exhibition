@@ -1,6 +1,6 @@
 # 资产使用图谱 / Build Asset Usage
 
-> 本表把 v4.5 阶段导入的 6 件资产放回本展览（v4.6 阶段）的页面使用上下文：每个 asset 在哪一节出现、扮演什么角色、显示多大尺寸、是否启用 lightbox、caveat 是什么。本表是元数据层（v4.5 manifest / source audit / rights docs）与页面层（v4.6 index.html）之间的桥梁。
+> 本表把 v4.5 阶段导入的 6 件资产放回本展览（v0.2 内容迭代；v5.0 freeze 已部署）的页面使用上下文：每个 asset 在哪一节出现、扮演什么角色、显示多大尺寸、是否启用 lightbox、caveat 是什么。本表是元数据层（v4.5 manifest / source audit / rights docs）与页面层（v0.2 index.html）之间的桥梁。
 >
 > 本表与 `second-exhibition/data/assets.json` 一一对应；本表是它的可读版本（适合 markdown 阅读），`assets.json` 是它的机器可读版本（适合 gate / script / future-round validator）。
 >
@@ -14,8 +14,8 @@
 | **C-03** | `bhl-318921-page-603962-c03.webp` | 03 · 复制 | publication / page example | large (max-width 720px on desktop) | enabled | yes | yes | **PD subset only**；BHL 同 item 的 CC BY-NC-SA 子集仍被 blocked-from-import。Distinct page from C-01。 |
 | **C-06** | `smithsonian-nmnh-1529703.png` | 02 · 分类 | compact specimen / catalogue thumbnail | small (max-width 180px, natural size 90×90) | **disabled** | yes | yes | **90×90 low-resolution source media**；不放大，不作为 Hero，不启用 lightbox。 |
 | **C-08** | `met-285149.jpg` | 02 · 分类 | institutional specimen comparison | medium-large (max-width 480px on desktop) | enabled | yes | yes | **Double-confirmation PASS**：API `isPublicDomain=true` + public-page Public Domain indicator。Credit line "Gift of Russell C. Vail, 2003" 待 v4.7 repository QA 复核。 |
-| **C-09** | `rijksmuseum-rp-f-f80152.jpg` | 03 · 复制 | printed reproduction (cyanotype) | large (max-width 480px on desktop) | enabled | yes | yes | **Per-item licence**：Rijksmuseum 公开页面逐项标注版权为 Public domain（CC0 1.0）。对象类型为 photogram（cyanotype），不是传统版画。 |
-| **C-10** | `rijksmuseum-rp-f-f80313.jpg` | 03 · 复制 | printed reproduction (cyanotype), companion to C-09 | large (max-width 480px on desktop) | enabled | yes | yes | **Per-item licence**：Public domain（CC0 1.0）。**Manifest 404 caveat**：Rijksmuseum IIIF Presentation API manifest `/manifest.json` 在 v4.5 阶段返回 HTTP 404；本展览不基于 IIIF Presentation API manifest 撰写任何陈述。 |
+| **C-09** | `rijksmuseum-rp-f-f80152.jpg` | 03 · 复制 | cyanotype photogram (blue-toned contact print) | large (max-width 480px on desktop) | enabled | yes | yes | **Per-item licence**：Rijksmuseum 公开页面逐项标注版权为 Public domain（CC0 1.0）。对象类型为 cyanotype photogram（蓝晒接触印相），不是传统雕版／蚀刻／石印版画。Rijksprentenkabinet 是 print room，不是 herbarium。 |
+| **C-10** | `rijksmuseum-rp-f-f80313.jpg` | 03 · 复制 | cyanotype photogram, companion to C-09 | large (max-width 480px on desktop) | enabled | yes | yes | **Per-item licence**：Public domain（CC0 1.0）。**Manifest 404 caveat**：Rijksmuseum IIIF Presentation API manifest `/manifest.json` 在 v5.3 deployment 阶段返回 HTTP 404；本展览仅依赖 IIIF Image API，不基于 IIIF Presentation API manifest 撰写任何陈述。每次外部引用或重新发布前，应重新打开该 manifest 端点确认可达性。 |
 
 ## 章节分布（与 `second-exhibition/data/sections.json` 一致）
 
@@ -47,9 +47,9 @@
 
 - **C-01 / C-03**：BHL 同 item 不同 page；SHA-256 互不相同；C-03 仅 PD 子集。
 - **C-06**：低分辨率（90×90）缩略图；页面不得作为大幅展示；不启用 lightbox；image-rendering 使用浏览器默认值（不像素化、不模糊扩展）。
-- **C-08**：double-confirmation PASS（API + public-page）。
-- **C-09 / C-10**：per-item Public domain / CC0 1.0；对象类型 cyanotype（不是传统版画）。
-- **C-10**：IIIF Presentation API manifest `/manifest.json` 返回 404，本展览不基于 manifest 撰写任何陈述。
+- **C-08**：double-confirmation PASS（Met Collection API `isPublicDomain: true` 与公共页面 Public Domain 指示）。
+- **C-09 / C-10**：per-item Public domain / CC0 1.0；对象类型 cyanotype photogram（蓝晒接触印相，**不是传统雕版／蚀刻／石印版画**，亦不是植物标本）；Rijksprentenkabinet 是 Rijksmuseum 的版画／素描／摄影部门（print room），**不是植物标本馆（herbarium）**。
+- **C-10**：IIIF Presentation API manifest `/manifest.json` 在 v5.3 deployment 阶段返回 404；本展览**仅依赖 IIIF Image API**——按尺寸、区域、格式派生图像——而不依赖 Presentation API；不基于 Presentation API manifest 撰写任何陈述。每次外部引用或重新发布前，应重新打开该 manifest 端点确认可达性。
 
 ## 引用规则
 

@@ -1,91 +1,139 @@
 {
   "schema_version": "1.0",
-  "marker": "second-exhibition-v0.1",
+  "marker": "second-exhibition-v0.2",
   "status": "repository-only-not-deployed",
   "items": [
     {
       "id": "glossary-botanical-plate",
       "term": "植物图谱",
-      "alias_zh": ["植物画谱", "本草图谱"],
+      "alias_zh": [
+        "植物画谱",
+        "本草图谱"
+      ],
       "definition": "对植物形态进行图像化记录的合集，常见于植物志、本草书、博物学图谱。它既是科学记录，也是视觉艺术。",
       "section_hint": "section-1-observation"
     },
     {
       "id": "glossary-taxonomy",
       "term": "分类学",
-      "alias_zh": ["系统学"],
+      "alias_zh": [
+        "系统学"
+      ],
       "definition": "对生物进行命名、分群、并按演化关系排序的学科。本展览讨论的不是分类学本身的理论，而是图像如何被放进分类秩序。",
       "section_hint": "section-2-classification"
     },
     {
       "id": "glossary-specimen",
       "term": "标本",
-      "alias_zh": ["样本"],
+      "alias_zh": [
+        "样本"
+      ],
       "definition": "经过压制、干燥或装订后保存于标本馆（herbarium）的植物个体或局部器官。它是分类学的物质基础，也是图像的对照样本。",
       "section_hint": "section-2-classification"
     },
     {
       "id": "glossary-herbarium",
       "term": "植物标本馆",
-      "alias_zh": ["腊叶标本室", "Herbarium"],
-      "definition": "保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。NMNH Botany 与 Rijksprentenkabinet 都属于此类机构。",
+      "alias_zh": [
+        "腊叶标本室",
+        "Herbarium"
+      ],
+      "definition": "保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。本展览中，NMNH Botany（C-06）属于此类机构；Rijksprentenkabinet（C-09 / C-10）是 Rijksmuseum 的版画／素描／摄影作品部门（print room），不保存植物标本。",
       "section_hint": "section-2-classification"
     },
     {
       "id": "glossary-plate",
       "term": "图版",
-      "alias_zh": ["图版", "Plate"],
+      "alias_zh": [
+        "图版",
+        "Plate"
+      ],
       "definition": "植物图谱中单页或跨页的整版图像，通常配有图注和说明文字。本展览的 BHL C-01、C-03 都是图版。",
       "section_hint": "section-1-observation"
     },
     {
       "id": "glossary-print",
       "term": "版画",
-      "alias_zh": ["Print"],
-      "definition": "通过雕版、蚀刻、石印、蓝晒 cyanotype 等复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 作品属于此类。",
+      "alias_zh": [
+        "Print"
+      ],
+      "definition": "通过雕版、蚀刻、石印等非摄影复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 蓝晒作品（C-09 / C-10）属于 cyanotype（请见 `glossary-cyanotype`）——一种以植物本身为底片的摄影接触印相，与传统手雕版画在媒介上不同；它在'复制'维度上仍属于本条目的扩展含义，但应在术语上单独标注。",
       "section_hint": "section-3-reproduction"
     },
     {
       "id": "glossary-public-domain",
       "term": "公共领域",
-      "alias_zh": ["Public domain", "PD"],
-      "definition": "版权已过期或因机构主动放弃而进入公共使用的状态。CC0 1.0 是常见的公共领域贡献许可。本展览的 6 件资产都基于公共领域或 CC0 1.0。",
+      "alias_zh": [
+        "Public domain",
+        "PD"
+      ],
+      "definition": "**公共领域 (Public Domain, PD) 是一种法律状态**：版权已过期，或机构在司法允许的范围内主动放弃对其作品的专有使用权。**CC0 1.0 是一种法律工具**：由机构通过 Creative Commons 主动以'不保留权利'的方式贡献作品。两者并不完全等价——一件被机构标为 Public Domain 的对象可能并没有正式的 CC0 文件，反之亦然。本展览的实例：C-08 通过 Met Collection API `isPublicDomain: true` 与公共页面 Public Domain 指示做了**双重确认**；C-09 / C-10 的 Rijksmuseum 公开页面上每件作品都标注为 Public domain 并附带 CC0 1.0 链接；C-06 的 NMNH Botany 记录以数据集级 CC0 1.0 发布。在每一处使用前重新核对权利状态。",
       "section_hint": "section-2-classification"
     },
     {
       "id": "glossary-digitization",
       "term": "数字化",
-      "alias_zh": ["Digitization"],
+      "alias_zh": [
+        "Digitization"
+      ],
       "definition": "把物理图像或标本转写为数字副本的过程。数字副本与原物的关系（分辨率、色彩管理、元数据）决定了它能否被独立引用。",
       "section_hint": "section-3-reproduction"
     },
     {
       "id": "glossary-metadata",
       "term": "元数据",
-      "alias_zh": ["Metadata"],
+      "alias_zh": [
+        "Metadata"
+      ],
       "definition": "描述图像、标本、出版物的结构化字段。本展览涉及的元数据包括 identifier、institution、date、rights、credit line、source note。",
       "section_hint": "section-4-reorganization"
     },
     {
       "id": "glossary-collection-record",
       "term": "馆藏记录",
-      "alias_zh": ["Collection record"],
+      "alias_zh": [
+        "Collection record"
+      ],
       "definition": "机构对单件资产发布的官方记录页，承载 identifier、来源、版权、获取方式。本展览的 6 件资产都对应一条馆藏记录。",
       "section_hint": "section-2-classification"
     },
     {
       "id": "glossary-iiif",
       "term": "IIIF",
-      "alias_zh": ["国际图像互操作框架"],
-      "definition": "International Image Interoperability Framework。包含 Image API（按尺寸/区域派生图像）和 Presentation API（提供 manifest，描述图像的结构化元数据）。本展览使用 IIIF Image API 下载图像；Presentation API manifest 在 C-10 上返回 404。",
+      "alias_zh": [
+        "国际图像互操作框架"
+      ],
+      "definition": "International Image Interoperability Framework（国际图像互操作框架）。三个常用 API：**(a) Image API**——按尺寸、区域、旋转、格式派生单张图像的位图（如 C-09 / C-10 通过 Micrio IIIF Image API 在 1024px 上派生下载）；**(b) Presentation API**——以 manifest（JSON / JSON-LD）描述一个作品、一个清单或一组图像的结构化元数据（轮次、画布、标签、归属）；**(c) Authentication API**——用于受控访问，本展览不使用。本展览仅依赖 Image API；C-10 的 Presentation API manifest /manifest.json 在 v5.3 deployment 中返回 HTTP 404，因此本展览不基于 Presentation API manifest 撰写任何陈述。",
       "section_hint": "section-3-reproduction"
     },
     {
       "id": "glossary-credit-source-note",
       "term": "信用行与来源说明",
-      "alias_zh": ["Credit line", "Source note"],
+      "alias_zh": [
+        "Credit line",
+        "Source note"
+      ],
       "definition": "信用行 credit line 记录资产的归属与版权状态；来源说明 source note 记录资产的可访问 URL 与获取时间。两者都是数字引用场景下不可省略的字段。",
       "section_hint": "section-4-reorganization"
+    },
+    {
+      "id": "glossary-cyanotype",
+      "term": "蓝晒 / Cyanotype",
+      "alias_zh": [
+        "蓝晒法"
+      ],
+      "definition": "一种 19 世纪的摄影复制工艺：将物体直接放在涂有铁盐感光药剂的纸上曝光，被涂面随光照发生蓝色化学反应而形成图像。Anna Atkins 的蕨类与石松类图谱（C-09 / C-10）即属于 cyanotype。cyanotype 与雕版／石印等印刷的最大区别在于它本质是接触印相的摄影结果，而非雕版或石印。",
+      "section_hint": "section-3-reproduction"
+    },
+    {
+      "id": "glossary-photogram",
+      "term": "接触印相 / Photogram",
+      "alias_zh": [
+        "物影成像",
+        "无镜头摄影"
+      ],
+      "definition": "将物体本身作为底片直接放在感光材料上曝光所得的摄影图像——不需要相机。蓝晒 cyanotype（C-09 / C-10）即一种典型的 photogram。",
+      "section_hint": "section-3-reproduction"
     }
   ]
 }

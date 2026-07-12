@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="第二展览：从自然史图像到知识秩序。当前发布状态：production-deployed-v5.3。公开 URL：https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/">
-<title>植物图谱与视觉分类 · 第二展览 v0.1</title>
+<title>植物图谱与视觉分类 · 第二展览 v0.2</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-marker="second-exhibition-v0.1">
+<body data-marker="second-exhibition-v0.2">
 <a class="skip-link" href="#main">跳到正文</a>
 
 <header class="site-header">
   <div class="container">
-    <p class="kicker">second-exhibition · v0.1 · production-deployed-v5.3</p>
+    <p class="kicker">second-exhibition · v0.2 · production-deployed-v5.3</p>
     <h1>植物图谱与视觉分类</h1>
     <p class="subtitle">从自然史图像到知识秩序</p>
+    <p class="hero-question" role="note">
+      <strong>核心问题：</strong>图像如何从一对植物的视觉观察记录，转变为可被分类、复制、并由网络重新连接的知识节点？本展览以 4 节、6 件资产、12 → 14 条术语，把这个问题从媒介（手稿／印刷／摄影／IIIF）讲到元数据（identifier / rights / manifest）。
+    </p>
     <p class="repository-status" role="status">
       <span class="badge">production-deployed-v5.3</span>
       本页面是 v5.3 controlled deployment 产物，通过 GitHub Pages 公开：<a href="https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/">https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/</a>。6 件资产的当前发布状态为 <code>published-in-v5.3</code>；历史导入记录 <code>imported-not-deployed</code> 保留在 <code>second-exhibition/assets/asset-import-manifest.json</code> 中，作为 v4.5 阶段的可审计证据。
@@ -36,8 +39,15 @@
 <main id="main" class="container">
 
 <section class="hero" aria-labelledby="hero-heading">
-  <h2 id="hero-heading">3 分钟导览</h2>
-  <p>本展览由 4 节组成：观察、分类、复制、再组织。每节给出一段策展短文 + 一组 artifact cards。6 件 asset 全部来自 v4.5 asset import。</p>
+  <h2 id="hero-heading">3 分钟导览 · 观看方法</h2>
+  <p>本展览由 4 节组成：观察、分类、复制、再组织。建议的观看顺序与方法：</p>
+  <ol class="guide-steps">
+    <li><strong>先看媒介，再看图像</strong>——每一节的水彩／标本照片／接触印相三者媒介并不相同，先辨认媒介差异再讨论"图像"。</li>
+    <li><strong>在 artifact card 之间交叉比对</strong>——把 C-01（水彩）与 C-09 / C-10（cyanotype）并排，注意它们的获取方式不同（手绘 vs. 接触印相）。</li>
+    <li><strong>跟随 4 节叙事弧</strong>：观察 → 分类 → 复制 → 再组织。每节策展短文之后，响应一个 deep-block 提示。</li>
+    <li><strong>回到 6 件资产卡片</strong>——资产卡片在 4 节之后，列出每件资产的 source_note 与 credit_line。</li>
+    <li><strong>术语表</strong>：12 → 14 条术语。点击术语获得定义；新增 cyanotype 与 photogram 在 Section 3。</li>
+  </ol>
   <p class="muted">导览文本详见 <code>second-exhibition/docs/VISITOR_GUIDE_ZH.md</code>。</p>
 </section>
 
@@ -46,12 +56,12 @@
 </section>
 
 <!-- ===== Section 1 ===== -->
-<section id="section-1-observation" class="exhibition-section" data-section-id="section-1-observation" data-candidate-ids="C-01">
+<section id="section-1-observation" class="exhibition-section" data-section-id="section-1-observation" data-candidate-ids="C-01" style="scroll-margin-top: 2px;">
   <p class="kicker">01 · 观察</p>
   <h2>观察：图像如何抓住植物特征</h2>
-  <p>观察是植物图谱的起点。当画家、博物学家或摄影师面对一株活体或一份标本，他们需要做出选择：哪些特征值得记录？哪些细节会因为印刷或数字化而丢失？本节以两份 BHL《Album of watercolors of Asian fruits and flowers》中的页面为引子，观察 18—19 世纪的水彩如何把花的轮廓、叶的脉络、果的质感固定为可被反复观看的图像。</p>
-  <p class="takeaway"><strong>Takeaway：</strong>观察不是被动地复制视觉，而是一连串关于保留什么、舍弃什么的判断。</p>
-  <p class="viewer-action"><em>Viewer action：</em>把两张水彩图像并排放在一起，对比它们的取景方式与细节密度。</p>
+  <p>观察是植物图谱的起点。当画家、博物学家或摄影师面对一株活体或一份标本，他们需要做出选择：哪些特征值得记录？哪些细节会因为印刷或数字化而丢失？本节以 BHL《Album of watercolors of Asian fruits and flowers》的两份水彩图版（C-01 / C-03）为引子。需要说明的是：水彩图版是对真实标本的视觉再现，本身并不是标本；而 Rijksprentenkabinet 收藏的 Anna Atkins 蓝晒作品（C-09 / C-10）属于把植物本身作为底片晒出的摄影印刷（photogram），与水彩图版在媒介上也有区别。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>观察不是被动地复制视觉，而是一连串关于保留什么、舍弃什么的判断；并且，水彩图版与接触印相分属两种不同的媒介——前者是手绘再现，后者是把植物自身作为底片获得的摄影结果。</p>
+  <p class="viewer-action"><em>Viewer action：</em>把两张水彩图像并排放在一起，对比它们的取景方式与细节密度；然后把它们与 C-09 / C-10 的 cyanotype photogram 并排，<strong>观察"手绘再现"和"接触印相"在图像密度与色调上的差异</strong>。</p>
 
   <div class="visual-thinking-block deep-block" data-block-type="visual-thinking">
     <h3>视觉思考 / Visual Thinking</h3>
@@ -60,10 +70,10 @@
 </section>
 
 <!-- ===== Section 2 ===== -->
-<section id="section-2-classification" class="exhibition-section" data-section-id="section-2-classification" data-candidate-ids="C-06 C-08">
+<section id="section-2-classification" class="exhibition-section" data-section-id="section-2-classification" data-candidate-ids="C-06 C-08" style="scroll-margin-top: 2px;">
   <p class="kicker">02 · 分类</p>
   <h2>分类：图像如何服务命名与秩序</h2>
-  <p>分类让图像有了位置。每一份植物标本背后都对应一个学名、一段采集信息和一份机构记录。本节以 Smithsonian NMNH Botany 馆藏的 <em>Aconitum bulbilliferum</em> 与大都会博物馆的 <em>Botanical Specimen: Fern</em> 为对照样本，观察图像如何从被观察的对象变成被命名的对象。NMNH 提供的低分辨率缩略图与 Met 提供的相对完整的 JPEG 也在提醒我们：不同机构对可发布图像的尺度不同。</p>
+  <p>分类让图像有了位置。每一份植物标本背后都对应一个学名、一段采集信息和一份机构记录。本节以 Smithsonian NMNH Botany 馆藏的 <em>Aconitum bulbilliferum</em> 标本记录（C-06）与大都会博物馆的 <em>Botanical Specimen: Fern</em> 馆藏条目（C-08）为对照样本。两者都属于机构性植物记录，但并不属于同一类别：C-06 是压制并保存的真实植物标本（herbarium specimen）的低分辨率缩略图；C-08 是对一份 1855–60 年的植物标本照片（已为机构收藏对象）的更完整数字派生。换言之，前者让我们看到"什么样的植物对应一个学名"，后者让我们看到"机构如何让一份 19 世纪的标本照片获得数字身份"。NMNH 提供的 90×90 缩略图与 Met 提供的相对完整的 JPEG 也在提醒我们：图像的可获得性受机构政策影响，分类秩序并不脱离于图像的物理与法律状态。</p>
   <p class="takeaway"><strong>Takeaway：</strong>分类学秩序依赖图像，图像的可获得性也受机构政策影响。</p>
   <p class="viewer-action"><em>Viewer action：</em>比较两件作品的 credit line 与 source note：谁提供了图像、以何种授权、在怎样的元数据层级？</p>
 
@@ -74,24 +84,24 @@
 </section>
 
 <!-- ===== Section 3 ===== -->
-<section id="section-3-reproduction" class="exhibition-section" data-section-id="section-3-reproduction" data-candidate-ids="C-03 C-09 C-10">
+<section id="section-3-reproduction" class="exhibition-section" data-section-id="section-3-reproduction" data-candidate-ids="C-03 C-09 C-10" style="scroll-margin-top: 2px;">
   <p class="kicker">03 · 复制</p>
   <h2>复制：书籍、版画与数字化如何改变传播</h2>
-  <p>从手稿到印刷，从印刷到扫描，从扫描到 IIIF，复制技术决定了图像能否走出书房、走出博物馆、走出图书馆。本节以 Rijksmuseum Rijksprentenkabinet 收藏的 Anna Atkins 蓝晒 cyanotype 图像为引子，讨论 19 世纪的摄影/蓝晒印刷与今天的 IIIF Image API 在复制语义上的连续性与断裂。两件 Rijksmuseum 作品分别通过 Micrio IIIF 端点提供 JPG，本节同时记录了一条不能引用的 IIIF Presentation API manifest（404）作为研究路径中的边界。</p>
-  <p class="takeaway"><strong>Takeaway：</strong>复制技术决定图像的命运，也决定后人能否独立验证它。</p>
-  <p class="viewer-action"><em>Viewer action：</em>尝试在浏览器中直接打开图像的 IIIF 端点，观察它在不同尺寸下的呈现。</p>
+  <p>从手稿到印刷，从印刷到扫描，从扫描到 IIIF，复制技术决定了图像能否走出书房、走出博物馆、走出图书馆。本节展示四种复制媒介之间的关系：本展览中 C-01 / C-03 是手工绘制的水彩图版，C-08 是机构对 19 世纪标本照片的更完整数字派生，C-09 / C-10 是 Rijksmuseum Rijksprentenkabinet（版画／素描／摄影部门，区别于植物标本馆）馆藏的 Anna Atkins 蓝晒摄影印刷（cyanotype photogram），二者均通过 Micrio IIIF Image API 在 1024px 上派生后下载；C-10 的 IIIF Presentation API /manifest.json 在 v5.3 deployment 中返回 HTTP 404，因此不基于 manifest 撰写任何陈述。19 世纪的接触印相与今天的 IIIF Image API 之间既有复制语义上的连续性（都是分层、区域可取的图像派生），也有根本性断裂（前者是模拟光化学反应，后者是数字端点）。</p>
+  <p class="takeaway"><strong>Takeaway：</strong>复制技术决定图像的命运，也决定后人能否独立验证它；Image API 与 Presentation API 在 IIIF 框架下是两条不同的端点。</p>
+  <p class="viewer-action"><em>Viewer action：</em>尝试在浏览器中直接打开 C-09 / C-10 的 IIIF Image API 派生端点，观察它在不同尺寸下的呈现；并把 IIIF Image API 与 Presentation API 区分开——本展览仅基于前者。</p>
 
   <div class="material-evidence-block deep-block" data-block-type="material-evidence">
     <h3>物质证据 / Material Evidence</h3>
-    <p>如果你只能保留原图的某一种复制版本——扫描件、印刷件、IIIF 派生——你会保留哪一种？为什么？</p>
+    <p>在 C-01 / C-03 / C-08 / C-09 / C-10 之间，你最舍不得丢失的是哪一类复制？—— 手工绘制、机构拍照、cyanotype 接触印相，还是 IIIF 派生？</p>
   </div>
 </section>
 
 <!-- ===== Section 4 ===== -->
-<section id="section-4-reorganization" class="exhibition-section" data-section-id="section-4-reorganization" data-candidate-ids="C-01 C-03 C-06 C-08 C-09 C-10">
+<section id="section-4-reorganization" class="exhibition-section" data-section-id="section-4-reorganization" data-candidate-ids="C-01 C-03 C-06 C-08 C-09 C-10" style="scroll-margin-top: 2px;">
   <p class="kicker">04 · 再组织</p>
   <h2>再组织：数字馆藏如何让图像重新连接</h2>
-  <p>再组织是本展览的尾声，也是数字馆藏时代最大的可能：当图像有了稳定的 identifier、可校验的元数据、可机器读取的 rights 字段，它们就不再是孤立的艺术品，而可以与其它图像重新连接。本节不展示新图像，而是把前 3 节出现的 6 件资产放回一张"使用图谱"，让观者看见：哪些字段是稳定的（identifier、source URL、rights URL），哪些字段是脆弱的（90×90 的缩略图、404 的 manifest、变动的版权字段）。</p>
+  <p>再组织是本展览的尾声，也是数字馆藏时代最大的可能：当图像有了稳定的 identifier、可校验的元数据、可机器读取的 rights 字段，它们就不再是孤立的艺术品，而可以与其它图像重新连接。本节不展示新图像，而是把前 3 节出现的 6 件资产放回一张"使用图谱"，让观者看见：identifier 让我们能回头找到原页面（C-06 的 EZID arK、C-08 的 accession 2003.562.3、C-09 / C-10 的 objectNumber）；rights 字段让我们能在不同的使用场景下复用（C-08 通过 Met Collection API `isPublicDomain: true` 与公共页面 Public Domain 指示做了双重确认；C-09 / C-10 的 Rijksmuseum 公开页面都标注为 Public domain 并附带 CC0 1.0 链接；C-06 的 NMNH Botany 记录以数据集级 CC0 1.0 发布）；IIIF 让机器可以按尺寸、按区域、按格式请求图像派生（C-09 / C-10 通过 Micrio IIIF Image API 在 1024px 上派生后下载，C-10 的 Presentation API /manifest.json 在 v5.3 deployment 中返回 HTTP 404——让"基于 manifest 的证据"变成不可使用）。哪些字段是稳定的（identifier、source URL、rights URL），哪些字段是脆弱的（90×90 的缩略图、media 端点是否仍然 200、manifest 是否可达），必须被诚实地标注，不能被静默使用。</p>
   <p class="takeaway"><strong>Takeaway：</strong>再组织的前提是诚实的元数据；脆弱的字段必须被标注，不能被静默使用。</p>
   <p class="viewer-action"><em>Viewer action：</em>打开 <code>second-exhibition/docs/BUILD_ASSET_USAGE.md</code>，列出哪些字段在你的下一轮研究中需要重新打开原页面核对。</p>
 
@@ -188,20 +198,22 @@
 <!-- ===== Glossary ===== -->
 <section id="glossary" class="glossary" aria-labelledby="glossary-heading">
   <h2 id="glossary-heading">术语 / Glossary</h2>
-  <p class="muted">12 个术语。术语与第二展览策展短文、deep research notes 配套使用。</p>
+  <p class="muted">14 个术语（v0.1 → v0.2 增加 cyanotype、photogram；herbarium / print / public-domain / IIIF 措辞修订）。术语与第二展览策展短文、deep research notes 配套使用。</p>
   <dl class="glossary-list">
     <div class="glossary-item"><dt>植物图谱</dt><dd>对植物形态进行图像化记录的合集，常见于植物志、本草书、博物学图谱。它既是科学记录，也是视觉艺术。</dd></div>
     <div class="glossary-item"><dt>分类学</dt><dd>对生物进行命名、分群、并按演化关系排序的学科。本展览讨论的不是分类学本身的理论，而是图像如何被放进分类秩序。</dd></div>
     <div class="glossary-item"><dt>标本</dt><dd>经过压制、干燥或装订后保存于标本馆（herbarium）的植物个体或局部器官。它是分类学的物质基础，也是图像的对照样本。</dd></div>
-    <div class="glossary-item"><dt>植物标本馆</dt><dd>保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。NMNH Botany 与 Rijksprentenkabinet 都属于此类机构。</dd></div>
+    <div class="glossary-item"><dt>植物标本馆</dt><dd>保存植物标本的机构及其空间，通常隶属于自然史博物馆或大学。本展览中，NMNH Botany（C-06）属于此类机构；Rijksprentenkabinet（C-09 / C-10）是 Rijksmuseum 的版画／素描／摄影作品部门（print room），不保存植物标本。</dd></div>
     <div class="glossary-item"><dt>图版</dt><dd>植物图谱中单页或跨页的整版图像，通常配有图注和说明文字。本展览的 BHL C-01、C-03 都是图版。</dd></div>
-    <div class="glossary-item"><dt>版画</dt><dd>通过雕版、蚀刻、石印、蓝晒 cyanotype 等复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 作品属于此类。</dd></div>
-    <div class="glossary-item"><dt>公共领域</dt><dd>版权已过期或因机构主动放弃而进入公共使用的状态。CC0 1.0 是常见的公共领域贡献许可。本展览的 6 件资产都基于公共领域或 CC0 1.0。</dd></div>
+    <div class="glossary-item"><dt>版画</dt><dd>通过雕版、蚀刻、石印等非摄影复制工艺制作的图像。Anna Atkins 的 Rijksmuseum 蓝晒作品（C-09 / C-10）属于 cyanotype（参见下方"蓝晒 / Cyanotype"）——一种以植物本身为底片的摄影接触印相，与传统手雕版画在媒介上不同；它在"复制"维度上仍属于本条目的扩展含义，但应在术语上单独标注。</dd></div>
+    <div class="glossary-item"><dt>公共领域</dt><dd><strong>公共领域 (Public Domain, PD) 是一种法律状态</strong>：版权已过期，或机构在司法允许的范围内主动放弃对其作品的专有使用权。<strong>CC0 1.0 是一种法律工具</strong>：由机构通过 Creative Commons 主动以"不保留权利"的方式贡献作品。两者并不完全等价——一件被机构标为 Public Domain 的对象可能并没有正式的 CC0 文件，反之亦然。本展览的实例：C-08 通过 Met Collection API `isPublicDomain: true` 与公共页面 Public Domain 指示做了双重确认；C-09 / C-10 的 Rijksmuseum 公开页面都标注为 Public domain 并附带 CC0 1.0 链接；C-06 的 NMNH Botany 记录以数据集级 CC0 1.0 发布。</dd></div>
     <div class="glossary-item"><dt>数字化</dt><dd>把物理图像或标本转写为数字副本的过程。数字副本与原物的关系（分辨率、色彩管理、元数据）决定了它能否被独立引用。</dd></div>
     <div class="glossary-item"><dt>元数据</dt><dd>描述图像、标本、出版物的结构化字段。本展览涉及的元数据包括 identifier、institution、date、rights、credit line、source note。</dd></div>
     <div class="glossary-item"><dt>馆藏记录</dt><dd>机构对单件资产发布的官方记录页，承载 identifier、来源、版权、获取方式。本展览的 6 件资产都对应一条馆藏记录。</dd></div>
-    <div class="glossary-item"><dt>IIIF</dt><dd>International Image Interoperability Framework。包含 Image API（按尺寸/区域派生图像）和 Presentation API（提供 manifest，描述图像的结构化元数据）。本展览使用 IIIF Image API 下载图像；Presentation API manifest 在 C-10 上返回 404。</dd></div>
+    <div class="glossary-item"><dt>IIIF</dt><dd>International Image Interoperability Framework（国际图像互操作框架）。三个常用 API：<strong>(a) Image API</strong>——按尺寸、区域、旋转、格式派生单张图像的位图（如 C-09 / C-10 通过 Micrio IIIF Image API 在 1024px 上派生下载）；<strong>(b) Presentation API</strong>——以 manifest（JSON / JSON-LD）描述一个作品、一个清单或一组图像的结构化元数据；<strong>(c) Authentication API</strong>——用于受控访问，本展览不使用。本展览仅依赖 Image API；C-10 的 Presentation API manifest /manifest.json 在 v5.3 deployment 中返回 HTTP 404，因此本展览不基于 Presentation API manifest 撰写任何陈述。</dd></div>
     <div class="glossary-item"><dt>信用行与来源说明</dt><dd>信用行 credit line 记录资产的归属与版权状态；来源说明 source note 记录资产的可访问 URL 与获取时间。两者都是数字引用场景下不可省略的字段。</dd></div>
+    <div class="glossary-item"><dt>蓝晒 / Cyanotype</dt><dd>一种 19 世纪的摄影复制工艺：将物体直接放在涂有铁盐感光药剂的纸上曝光，被涂面随光照发生蓝色化学反应而形成图像。Anna Atkins 的蕨类与石松类图谱（C-09 / C-10）即属于 cyanotype。cyanotype 与雕版／石印等印刷的最大区别在于它本质是接触印相的摄影结果。</dd></div>
+    <div class="glossary-item"><dt>接触印相 / Photogram</dt><dd>将物体本身作为底片直接放在感光材料上曝光所得的摄影图像——不需要相机。蓝晒 cyanotype（C-09 / C-10）即一种典型的 photogram。</dd></div>
   </dl>
 </section>
 
@@ -267,10 +279,10 @@
 <footer class="site-footer">
   <div class="container">
     <p class="repository-status">
-      <span class="badge">second-exhibition-v0.1</span>
+      <span class="badge">second-exhibition-v0.2</span>
       <span class="badge">production-deployed-v5.3</span>
     </p>
-    <p class="muted">marker: <code>second-exhibition-v0.1</code></p>
+    <p class="muted">marker: <code>second-exhibition-v0.2</code></p>
     <p class="muted">当前发布状态：<code>production-deployed-v5.3</code> · 公开 URL：<a href="https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/">https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/</a> · 资产当前发布状态：<code>published-in-v5.3</code> × 6 · 历史导入记录：<code>imported-not-deployed</code>（v4.5，保留在 <code>second-exhibition/assets/asset-import-manifest.json</code>）</p>
     <p class="muted">页面通过 v5.3 改造后的 GitHub Pages workflow 部署：workflow 在 upload-pages-artifact 前必须运行 staging builder 与 staging gate，且只上传 allowlisted artifact；本仓库根目录、second-exhibition/data、second-exhibition/assets/audit 与 source/rights 证据仍保持不可公开。</p>
   </div>

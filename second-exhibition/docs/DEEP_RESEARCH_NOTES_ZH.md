@@ -48,3 +48,4 @@
 - C 部分（7 个后续研究方向）属于**研究提案**，并未启动。
 - 本展览不构成法律意见；本文不构成法律意见。
 - 任何引用本文事实部分的研究者，必须重新打开对应 source URL 与 rights URL 核对现状，不允许直接引用"v4.6 时的核对"作为长期依据。
+- **IIIF Presentation API manifest caveat 的再验证节奏**：C-10 的 IIIF Presentation API manifest /manifest.json 在 v5.3 deployment 阶段返回 404；本展览**仅依赖 IIIF Image API**（按尺寸、区域、格式派生图像），不基于 Presentation API manifest 撰写任何陈述。每次外部引用或重新发布前，应重新打开该 manifest 端点确认当前可达性——可达性是可观察事实，不是固定属性。

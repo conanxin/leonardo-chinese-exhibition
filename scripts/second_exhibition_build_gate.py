@@ -262,10 +262,13 @@ def main() -> int:
     if not index_html:
         failures.append("D.page-structure: index.html missing or empty")
     else:
-        # marker
-        marker_count = _count_html_occurrences(index_html, "second-exhibition-v0.1")
-        if marker_count < 1:
-            failures.append("D.page-structure: marker 'second-exhibition-v0.1' not found in index.html")
+        # marker — expects v0.2 (v0.1 marker must be absent to catch regression)
+        v02_marker_count = _count_html_occurrences(index_html, "second-exhibition-v0.2")
+        v01_marker_count = _count_html_occurrences(index_html, "second-exhibition-v0.1")
+        if v02_marker_count < 1:
+            failures.append("D.page-structure: marker 'second-exhibition-v0.2' not found in index.html")
+        if v01_marker_count != 0:
+            failures.append(f"D.page-structure: stale marker 'second-exhibition-v0.1' still present in index.html ({v01_marker_count} occurrences)")
 
         # artifact-card count
         artifact_card_count = index_html.count('class="artifact-card"')
@@ -423,7 +426,7 @@ def main() -> int:
     info.append(f"B.json: 4 data JSON files valid")
     info.append(f"C.assets: 6 expected image filenames present, all referenced in page")
     info.append(f"C.assets: checksum file matches all 6 local files")
-    info.append(f"D.page-structure: marker 'second-exhibition-v0.1' present")
+    info.append(f"D.page-structure: marker 'second-exhibition-v0.2' present (v0.1 marker absent)")
     info.append(f"D.page-structure: 6 artifact cards, {glossary_item_count} glossary items, {source_note_count} source notes, {credit_line_count} credit lines")
     info.append(f"D.page-structure: 4 deep block classes present")
     info.append(f"D.page-structure: .repository-status present")

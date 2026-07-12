@@ -145,7 +145,7 @@ class RepositoryQAGate(QAGate):
             ("status", "production-deployed-v5.3"),
             ("publication_status", "production-deployed-v5.3"),
             ("deployment_status", "production-deployed-v5.3"),
-            ("version", "second-exhibition-v0.1"),
+            ("version", "second-exhibition-v0.2"),
         ]:
             if exhibition.get(field) == value:
                 self.ok(f"exhibition.{field} = {value}")
@@ -390,10 +390,15 @@ class RepositoryQAGate(QAGate):
             else:
                 self.fail(f"{cls} missing")
 
-        if "second-exhibition-v0.1" in html:
-            self.ok("marker second-exhibition-v0.1 present")
+        # v0.2 marker must be present AND v0.1 marker must be absent (regression guard)
+        if "second-exhibition-v0.2" in html:
+            self.ok("marker second-exhibition-v0.2 present")
         else:
-            self.fail("marker second-exhibition-v0.1 missing")
+            self.fail("marker second-exhibition-v0.2 missing")
+        if "second-exhibition-v0.1" in html:
+            self.fail("stale marker second-exhibition-v0.1 still present in HTML")
+        else:
+            self.ok("stale marker second-exhibition-v0.1 absent")
 
     @group("D2. ARIA reference integrity")
     def check_d2_aria_references(self):
@@ -679,11 +684,16 @@ class RepositoryQAGate(QAGate):
         top_html = read_text(REPO_ROOT / "site" / "index.html").lower()
         second_html = read_text(SITE / "index.html").lower()
 
-        for marker in ["second-exhibition-v0.1", "植物图谱与视觉分类"]:
+        # Marker must be the v0.2 version; bare v0.1 must not appear in the top-level live site
+        for marker in ["second-exhibition-v0.2", "植物图谱与视觉分类"]:
             if marker in top_html:
                 self.fail(f"top-level live site contains second exhibition marker: {marker}")
             else:
                 self.ok(f"top-level live site does NOT contain: {marker}")
+        if "second-exhibition-v0.1" in top_html:
+            self.fail("top-level live site contains stale v0.1 marker (regression)")
+        else:
+            self.ok("top-level live site does NOT contain stale v0.1 marker")
 
         workflow_files = list((REPO_ROOT / ".github" / "workflows").glob("*.yml"))
         for wf in workflow_files:

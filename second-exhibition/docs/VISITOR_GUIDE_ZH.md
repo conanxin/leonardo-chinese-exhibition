@@ -1,6 +1,6 @@
 # 3 分钟导览 / Visitor Guide
 
-> 本文件是《植物图谱与视觉分类》展览的 3 分钟导览。展览当前状态为 **repository-only / not deployed**——本仓库仅用于本地 QA 与字段校验，并不部署到 GitHub Pages。本轮（v4.6）不修改 live Leonardo 展览，不修改任何 tag / GitHub Release。
+> 本文件是《植物图谱与视觉分类》展览的 3 分钟导览。展览当前状态为 **production-deployed-v5.3**——通过 GitHub Pages 公开，6 件资产 `published-in-v5.3`，历史导入记录 `imported-not-deployed` 保留。本轮 v0.2 内容迭代不改变 URL、发布状态或资产 roster，只在保留 4 节结构与 6 张图的前提下修改策展术语与观看方法。
 
 ## 第一步：理解状态
 
@@ -33,18 +33,18 @@
 - **不要把本展览当作最终版本。** 6 件资产都是 v4.5 阶段导入的，尚未在 v4.7 repository QA 中经过完整逐页复核。
 - **C-06 是低分辨率缩略图。** 这是 NMNH Botany 当前 `/media/?i=…` 端点直接返回的尺寸（90×90）。在本展览中它被用作"机构元数据与命名秩序的对照点"，而非视觉证据。**不要试图在 lightbox 中放大它。**
 - **C-03 仅属于 Public-domain 子集。** BHL 同 item 的 CC BY-NC-SA 子集仍被 blocked-from-import。
-- **C-10 的 IIIF Presentation API manifest 在 v4.5 阶段返回 404。** 本展览不基于 manifest 撰写任何陈述。
+- **C-10 的 IIIF Presentation API manifest 在 v5.3 deployment 中返回 404。** 本展览**仅依赖 IIIF Image API**——按尺寸、区域、格式派生图像——而不依赖 Presentation API；本展览不基于 manifest 撰写任何陈述，且将"基于 manifest 的证据"标为不可使用。
 - **重复验证原则。** 本展览在每一次外部引用前都必须重新打开 6 件资产的官方 source URL 与 rights URL 重新核对。本轮 (v4.6) 已经做过一次核对；下一次 v4.7 / future round 必须再做一次。
 
 ---
 
 ## 状态与版本
 
-- `version`: `second-exhibition-v0.1`
-- `status`: `repository-only-not-deployed`
-- `marker`: `second-exhibition-v0.1`
-- 部署状态：`not deployed`
-- 资产状态：`imported-not-deployed`（6 件）
+- `version`: `second-exhibition-v0.2`
+- `status`: `production-deployed-v5.3`（v5.0 freeze；本轮 v0.2 内容迭代不改变这一发布状态）
+- `marker`: `second-exhibition-v0.2`
+- 部署状态：`production-deployed-v5.3`（当前）；详细历史导入链保留在 `second-exhibition/assets/asset-import-manifest.json`
+- 资产状态：`published-in-v5.3` × 6（当前）；`imported-not-deployed`（历史 v4.5 导入记录，保留）
 - 资产门：`python3 scripts/second_exhibition_asset_gate.py` → PASS
 - 构建门：`python3 scripts/second_exhibition_build_gate.py` → PASS
 

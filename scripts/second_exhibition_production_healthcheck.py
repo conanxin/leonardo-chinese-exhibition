@@ -73,6 +73,19 @@ SECOND_EXPECTED_SHA256 = (
 )
 SECOND_TITLE_FRAGMENT = "植物图谱与视觉分类"
 
+# v5.6b second-exhibition v0.2 candidate baseline (worker-only).
+# Captured at v5.6b build time against /tmp/v56b-artifact staging
+# (NOT live production). Activate ONLY for local candidate v0.2
+# dry-run/health-check via `--candidate-v0.2`.
+SECOND_V02_CANDIDATE_BYTES = 31452  # staged candidate at v5.6b build
+SECOND_V02_CANDIDATE_SHA256 = (
+    "00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2"
+)
+SECOND_V02_SOURCE_BYTES = 31458  # source candidate
+SECOND_V02_SOURCE_SHA256 = (
+    "662bee42799a5e92fb7407a37d2fe57d02bfd123a344cbeada0cb51b99c5030e"
+)
+
 # Production status phrase expectations (live HTML).
 PHRASE_PRODUCTION_DEPLOYED = "production-deployed-v5.3"
 PHRASE_PUBLISHED = "published-in-v5.3"
@@ -375,6 +388,7 @@ def check_second(
     second_url: str,
     timeout: float,
     retries: int,
+    candidate_v02: bool = False,
 ) -> Tuple[bool, Dict[str, int], Dict[str, float]]:
     all_ok = True
     sizes: Dict[str, int] = {}
@@ -388,6 +402,17 @@ def check_second(
     text = body.decode("utf-8", errors="replace")
     sizes["second"] = len(body)
 
+    if candidate_v02:
+        expected_bytes = SECOND_V02_CANDIDATE_BYTES
+        expected_sha = SECOND_V02_CANDIDATE_SHA256
+        byte_label = f"{SECOND_V02_CANDIDATE_BYTES} (v0.2 candidate staged)"
+        sha_label = "SHA256 matches v0.2 candidate staged baseline (worker-only)"
+    else:
+        expected_bytes = SECOND_EXPECTED_BYTES
+        expected_sha = SECOND_EXPECTED_SHA256
+        byte_label = f"{SECOND_EXPECTED_BYTES}"
+        sha_label = "SHA256 matches freeze baseline (live == staging artifact)"
+
     if not expect(
         rep,
         "B. Second-exhibition identity",
@@ -400,8 +425,8 @@ def check_second(
     if not expect(
         rep,
         "B. Second-exhibition identity",
-        "byte size = 25635",
-        len(body) == SECOND_EXPECTED_BYTES,
+        f"byte size = {byte_label}",
+        len(body) == expected_bytes,
         f"actual={len(body)}",
     ):
         all_ok = False
@@ -410,8 +435,8 @@ def check_second(
     if not expect(
         rep,
         "B. Second-exhibition identity",
-        "SHA256 matches freeze baseline (live == staging artifact)",
-        second_sha == SECOND_EXPECTED_SHA256,
+        sha_label,
+        second_sha == expected_sha,
         f"live={second_sha}",
     ):
         all_ok = False
@@ -755,6 +780,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--repo-root", default=os.getcwd(),
         help="path used to read site/index.html and asset checksums",
     )
+    p.add_argument(
+        "--candidate-v0.2", action="store_true", dest="candidate_v02",
+        help="Compare second-exhibition bytes/SHA against v5.6b v0.2 candidate "
+             "baseline (worker-only); must point --second-url at the candidate "
+             "host (NOT live production). Does NOT affect root baseline.",
+    )
     args = p.parse_args(argv)
 
     repo_root = os.path.abspath(args.repo_root)
@@ -764,7 +795,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     rep = Reporter()
 
     ok_a, sizes_a, lat_a = check_root(rep, args.root_url, repo_root, args.timeout, args.retries)
-    ok_b, sizes_b, lat_b = check_second(rep, args.root_url, args.second_url, args.timeout, args.retries)
+    ok_b, sizes_b, lat_b = check_second(
+        rep, args.root_url, args.second_url, args.timeout, args.retries,
+        candidate_v02=args.candidate_v02,
+    )
     ok_c = check_public_files(rep, args.root_url, args.timeout, args.retries)
     ok_d = check_images(rep, args.root_url, repo_root, args.timeout, args.retries)
     ok_e = check_forbidden(rep, args.root_url, args.timeout, args.retries)
