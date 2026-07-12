@@ -10,6 +10,8 @@
 |---|---|
 | HEAD at start of this round | `bfce140029a66a95a0b52115f5083b3aef308f6a` |
 | `origin/main` at start of this round | `bfce140029a66a95a0b52115f5083b3aef308f6a` |
+| `origin/main` after freeze doc commit | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` |
+| `origin/main` after backfill commit | `TBD — see Evidence backfill section below` |
 | Head subject | `Verify live second exhibition production QA` |
 | Working tree at start | clean (only `.firecrawl/` untracked) |
 
@@ -19,11 +21,11 @@
 
 ## Freeze commit
 
-`TBD on commit step` -- the freeze commit is created by `git commit -m "Freeze verified v5.0 second exhibition deployment"` against the 5 doc files. This report is backfilled with the freeze commit SHA after `git commit` returns; the value lands in this file via an evidence-backfill commit that is a child of the freeze commit (the freeze commit itself remains the documented freeze anchor; the backfill commit is purely textual).
+`ac0f19e2c03b09738ae49b4a15c629a1f2177068` (freezed on `bfce140..ac0f19e`) -- the freeze commit is created by `git commit -m "Freeze verified v5.0 second exhibition deployment"` against the 5 doc files. This report is backfilled with the freeze commit SHA after `git commit` returns; the value lands in this file via an evidence-backfill commit that is a child of the freeze commit (the freeze commit itself remains the documented freeze anchor; the backfill commit is purely textual).
 
 ## Optional evidence-backfill commit
 
-`TBD on tag + release step` -- after the annotated tag is created and pushed and the GitHub Release is created, an evidence-backfill commit updates this report (and the release notes / manifest if needed) with the concrete tag object SHA, tag target commit, Release URL, `publishedAt`, and the freeze-round Actions run ID. The backfill commit does NOT move the tag.
+`TBD on this commit step (after this backfill commits)` -- after the annotated tag is created and pushed and the GitHub Release is created, an evidence-backfill commit updates this report (and the release notes / manifest if needed) with the concrete tag object SHA, tag target commit, Release URL, `publishedAt`, and the freeze-round Actions run ID. The backfill commit does NOT move the tag.
 
 ## Tag
 
@@ -38,8 +40,8 @@ Backfilled after `git tag -a`:
 
 | Field | Value |
 |---|---|
-| Tag object SHA | `TBD` |
-| Tag target commit SHA | `TBD (= freeze commit SHA)` |
+| Tag object SHA | `c8871f09e4003675d5796c76058d589a08541f45` (annotated, type `tag`) |
+| Tag target commit SHA | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` (= freeze commit SHA) |
 
 ## Release URL / status / publishedAt
 
@@ -47,7 +49,7 @@ Backfilled after `gh release create`:
 
 | Field | Value |
 |---|---|
-| Release URL | `TBD` |
+| Release URL | `https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v5.0-real-second-exhibition-deployment` |
 | Status | `TBD` |
 | `publishedAt` | `TBD` |
 
@@ -261,16 +263,16 @@ This section is updated by an evidence-backfill commit after the annotated tag i
 
 | Field | Value |
 |---|---|
-| Freeze commit SHA | `TBD` |
-| Evidence-backfill commit SHA | `TBD` |
-| Tag object SHA | `TBD` |
+| Freeze commit SHA | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` |
+| Evidence-backfill commit SHA | `TBD — filled by this commit` |
+| Tag object SHA | `c8871f09e4003675d5796c76058d589a08541f45` (annotated, type `tag`) |
 | Tag target commit SHA | `TBD` (= freeze commit SHA) |
-| Release URL | `TBD` |
-| Release status | `TBD` |
-| Release `publishedAt` | `TBD` |
-| Freeze-doc-push Actions run ID | `TBD` |
-| Backfill-push Actions run ID (if any) | `TBD` |
-| Old-tags-pin re-verification (post-tag) | TBD (compare `git ls-remote --tags origin` before vs after) |
+| Release URL | `https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v5.0-real-second-exhibition-deployment` |
+| Release status | `published` |
+| Release `publishedAt` | `2026-07-12T00:29:43Z` |
+| Freeze-doc-push Actions run ID | `29173737372` (success, 24 s, headSha=`ac0f19e2c03b09738ae49b4a15c629a1f2177068`) |
+| Backfill-push Actions run ID (if any) | `TBD — filled after this backfill push` |
+| Old-tags-pin re-verification (post-tag) | all 12 pre-existing tags (`v2.0-public-portfolio-case` through `v4.8-real-second-exhibition-repository-hardening`) still pinned to original commit SHAs; the new v5.0 tag is added alongside. |
 
 ## Re-verification after freeze doc push (and after backfill push)
 
