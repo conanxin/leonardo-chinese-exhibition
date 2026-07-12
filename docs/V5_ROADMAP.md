@@ -316,7 +316,26 @@ Only after receiving this exact string will commit + push of the two new docs an
 
 **Goal.** Final QA, public source / rights recheck, release notes, annotated tag, GitHub Release.
 
+**Tasks.**
 
+- Draft `docs/RELEASE_NOTES_v5_0_REAL_SECOND_EXHIBITION_DEPLOYMENT.md`.
+- Draft `release-assets/v5.0-real-second-exhibition-deployment-manifest.md`.
+- Draft `reports/leonardo_chinese_exhibition_v5_4_public_stable_freeze_report.md`.
+- Run all gates one final time.
+- Create annotated tag `v5.0-real-second-exhibition-deployment`.
+- Push the tag to origin.
+- Create the GitHub Release.
+- (Optional) backfill the freeze report with the tag object SHA, tag target SHA, Release URL, `createdAt`, and GitHub Actions run ID.
+
+**Result (this round).**
+
+- Public deployment verified -- live root `GET /` HTTP 200, byte-count **92,976** (unchanged from v5.3); v2.9 exact-marker (`v2.9-real-source-rights-audit`) = 1; v2.9 loose-marker = 4; second-exhibition `GET /second-exhibition/` HTTP 200, byte-count **25,635**.
+- Production-state reconciliation verified -- `cmp -s site/index.html live-root` IDENTICAL; staged vs live for second-exhibition `index.html` / `style.css` / `script.js` IDENTICAL; six image SHA-256 byte-identical across source / staged / live.
+- Live browser QA 5 / 5 PASS -- using local Playwright + Chromium headless shell `148.0.7778.96` against the live URL `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/`. Viewports 1440x1000, 1280x900, 768x1024, 390x844, 320x700 all PASS for status wording, deep-block sections = 4, artifact cards = 6, glossary items = 12, source notes = 6, credit lines = 6, six images loaded, horizontal overflow = 0, console / page / failed / external errors = 0.
+- Root and second-exhibition artifact identity PASS -- staging builder + staging gate exit 0; 25 main-site + 9 second-exhibition files (34 total); 0 forbidden leakage.
+- Public inventory and forbidden-path boundary verified -- 25 main-site + 9 second-exhibition public files; 18 / 18 forbidden public paths (root and second-exhibition) return HTTP 404.
+- Annotated tag and GitHub Release created -- `v5.0-real-second-exhibition-deployment` (annotated, points at the freeze doc commit); GitHub Release published with notes from `docs/RELEASE_NOTES_v5_0_REAL_SECOND_EXHIBITION_DEPLOYMENT.md`. Backfill commit (child of freeze) fills the freeze report with the tag object SHA / tag target SHA / Release URL / `publishedAt` / Actions run ID.
+- Existing tags + Releases unchanged -- 12 pre-existing tags (`v2.0-public-portfolio-case` through `v4.8-real-second-exhibition-repository-hardening`) remain pinned to their original commits; no pre-existing GitHub Release was modified.
 
 **Do NOT do in v5.4.**
 

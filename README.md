@@ -572,6 +572,23 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Workflow changes:** `.github/workflows/pages.yml` now runs staging builder + staging gate before `upload-pages-artifact`, with `path: ${{ runner.temp }}/leonardo-pages-artifact` and matching `--audit "${{ runner.temp }}/leonardo-pages-artifact-audit"`
 - **Tags / Releases:** unchanged
 
+## v5.0 Real Second Exhibition Deployment — Stable Freeze
+
+- **Status:** freeze doc commit ready (`bfce140` was the final pre-freeze QA commit). Tag `v5.0-real-second-exhibition-deployment` (annotated) + GitHub Release will be created on the freeze commit.
+- **Public URLs:**
+  - Root: https://conanxin.github.io/leonardo-chinese-exhibition/ — HTTP 200, byte **92,976**, v2.9 exact marker `v2.9-real-source-rights-audit` = 1 (loose `v2.9` = 4).
+  - Second exhibition: https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/ — HTTP 200, byte **25,635**, status text on page: `production-deployed-v5.3` x 5 + `published-in-v5.3` x 8 + `imported-not-deployed` x 8 (preserved historical import record only) + `repository-only-not-deployed` x 0.
+- **Tag:** `v5.0-real-second-exhibition-deployment` (annotated; target = freeze doc commit).
+- **Public files:** 25 main-site + 9 second-exhibition = **34** total; **6** public raster images (BHL × 2, Smithsonian NMNH, Met, Rijksmuseum × 2).
+- **Browser QA:** 5 / 5 viewports PASS (1440×1000, 1280×900, 768×1024, 390×844, 320×700); 0 external / 0 failed / 0 console / 0 page errors; 0 horizontal overflow; C-01 lightbox + ESC close + focus return + accessible name `图片查看器`; C-06 click blocked; guided toggle `aria-pressed` switches; no-JS + reduced-motion both PASS.
+- **Checksums:** live 6 / 6 SHA-256 byte-identical to `second-exhibition/assets/asset-checksums.sha256`; root + second-exhibition HTML / CSS / JS live ≡ staged ≡ source.
+- **Release notes:** `docs/RELEASE_NOTES_v5_0_REAL_SECOND_EXHIBITION_DEPLOYMENT.md`.
+- **Manifest:** `release-assets/v5.0-real-second-exhibition-deployment-manifest.md`.
+- **Stable-freeze report:** `reports/leonardo_chinese_exhibition_v5_4_public_stable_freeze_report.md`.
+- **Existing tags:** unchanged (12 pre-existing tags from v2.0 → v4.8).
+- **Existing Releases:** unchanged (none created prior to this round; this round creates one new Release for v5.0).
+- **No-touch:** `site/`, `second-exhibition/site/`, `second-exhibition/data/`, `second-exhibition/assets/`, source / rights evidence, `.github/workflows/`, `scripts/`, `_template/`, `_pilots/`, `posts/`, `case-study/`, pre-existing `release-assets/*`.
+
 ## v5.3c Live Production Browser QA — Executed
 
 - **Status:** executed on `2026-07-11T23:29:11.044Z → 2026-07-11T23:30:07.186Z`; awaiting `DEPLOY v5.3c` authorization to commit + push the two new docs and the README/ROADMAP update.
