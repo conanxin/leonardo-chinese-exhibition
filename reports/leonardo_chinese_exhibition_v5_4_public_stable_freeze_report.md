@@ -11,7 +11,7 @@
 | HEAD at start of this round | `bfce140029a66a95a0b52115f5083b3aef308f6a` |
 | `origin/main` at start of this round | `bfce140029a66a95a0b52115f5083b3aef308f6a` |
 | `origin/main` after freeze doc commit | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` |
-| `origin/main` after backfill commit | `TBD — see Evidence backfill section below` |
+| `origin/main` after backfill commit | `89ad21f2f835109f796373ceb32cfcc4c0ebd739` |
 | Head subject | `Verify live second exhibition production QA` |
 | Working tree at start | clean (only `.firecrawl/` untracked) |
 
@@ -25,7 +25,7 @@
 
 ## Optional evidence-backfill commit
 
-`TBD on this commit step (after this backfill commits)` -- after the annotated tag is created and pushed and the GitHub Release is created, an evidence-backfill commit updates this report (and the release notes / manifest if needed) with the concrete tag object SHA, tag target commit, Release URL, `publishedAt`, and the freeze-round Actions run ID. The backfill commit does NOT move the tag.
+Filled by the chained-backfill commit at the bottom of this report (the SHA equals the SHA of the commit that updates this row).
 
 ## Tag
 
@@ -50,15 +50,15 @@ Backfilled after `gh release create`:
 | Field | Value |
 |---|---|
 | Release URL | `https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v5.0-real-second-exhibition-deployment` |
-| Status | `TBD` |
-| `publishedAt` | `TBD` |
+| Status | `published` |
+| `publishedAt` | `2026-07-12T00:29:43Z` |
 
 ## GitHub Actions run IDs (this v5.4 round)
 
 | Step | Run ID | Status | headSha | URL |
 |---|---|---|---|---|
-| freeze doc push | `TBD` | `TBD` | the freeze commit SHA | `TBD` |
-| freeze doc push (re-verify after backfill) | `TBD` | `TBD` | the backfill commit SHA | `TBD` |
+| freeze doc push | `29173737372` | `success` | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` | `https://github.com/conanxin/leonardo-chinese-exhibition/actions/runs/29173737372` |
+| backfill push | `29173812688` | `success` | `89ad21f2f835109f796373ceb32cfcc4c0ebd739` | `https://github.com/conanxin/leonardo-chinese-exhibition/actions/runs/29173812688` |
 
 Prior Actions runs (pre-freeze):
 
@@ -226,7 +226,7 @@ All 12 pre-existing tags remain pinned to their original commits. The freeze rou
 
 | Tag | Object SHA | Target SHA |
 |---|---|---|
-| `v2.0-public-portfolio-case` | `9e6233ab2b2c5aa3e1243565583f8f66c7df34b4` | `TBD(local)` (lightweight, no `^{}` entry) |
+| `v2.0-public-portfolio-case` | `9e6233ab2b2c5aa3e1243565583f8f66c7df34b4` | `ae946b3d6e71067786c49e6495a1ccb3e20182da` (lightweight tag; peeled target inferred from `git cat-file -p v2.0-public-portfolio-case`) |
 | `v2.6-content-stable` | `033b65e28096d04935205867e6d8dcaac0d6cf94` | `01cdaa2dc1487a5f7877c8702720d0df8dbb17ce` (annotated) |
 | `v2.7-zh-exhibition-polish` | `a0fee10273c9ff1c0312a494054158fe524d60b0` | `f58f6b45075e3d8c0e9d81a160ff939b1f8de412` (annotated) |
 | `v2.8-real-deep-content` | `697560af9822addbcbe9f865e2bd6d1e33da9a93` | `65b4fbc2b1bc742f263559145bb273c11cb3c6b0` (annotated) |
@@ -264,14 +264,15 @@ This section is updated by an evidence-backfill commit after the annotated tag i
 | Field | Value |
 |---|---|
 | Freeze commit SHA | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` |
-| Evidence-backfill commit SHA | `TBD — filled by this commit` |
+| Evidence-backfill commit SHA (this commit) | `89ad21f2f835109f796373ceb32cfcc4c0ebd739` |
+| (chained) Evidence-backfill #2 commit SHA | The chained-backfill SHA cannot be self-referentially inlined into the same report because it equals the SHA of the commit that would inline it. The release-info table (status, publishedAt, freeze-doc-push, backfill-push) is the table this chained-backfill does update, and those values are already filled below. |
 | Tag object SHA | `c8871f09e4003675d5796c76058d589a08541f45` (annotated, type `tag`) |
-| Tag target commit SHA | `TBD` (= freeze commit SHA) |
+| Tag target commit SHA | `ac0f19e2c03b09738ae49b4a15c629a1f2177068` (= freeze commit SHA) |
 | Release URL | `https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v5.0-real-second-exhibition-deployment` |
 | Release status | `published` |
 | Release `publishedAt` | `2026-07-12T00:29:43Z` |
 | Freeze-doc-push Actions run ID | `29173737372` (success, 24 s, headSha=`ac0f19e2c03b09738ae49b4a15c629a1f2177068`) |
-| Backfill-push Actions run ID (if any) | `TBD — filled after this backfill push` |
+| Backfill-push Actions run ID | `29173812688` (success, 18 s, headSha=`89ad21f2f835109f796373ceb32cfcc4c0ebd739`) |
 | Old-tags-pin re-verification (post-tag) | all 12 pre-existing tags (`v2.0-public-portfolio-case` through `v4.8-real-second-exhibition-repository-hardening`) still pinned to original commit SHAs; the new v5.0 tag is added alongside. |
 
 ## Re-verification after freeze doc push (and after backfill push)
