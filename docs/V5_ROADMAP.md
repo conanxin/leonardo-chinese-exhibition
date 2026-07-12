@@ -362,6 +362,7 @@ Only after receiving this exact string will commit + push of the two new docs an
 | v5.3 | Controlled deployment | Yes (first public deploy) | No | No |
 | v5.4 | Public stable freeze | Yes | Yes | Yes |
 | v5.5 | Public deployment maintenance | Redeploys (no content change) | No | No |
+| v5.5a | Production hash baseline reconciliation | No | No | No |
 | post-v5.5 | Future content updates / continued maintenance | Yes | per round | per round |
 
 ---
@@ -421,3 +422,61 @@ content or Pages workflow.
 
 **Next.** v5.6 second-exhibition content iteration or continued
 maintenance, depending on the next content round.
+
+---
+
+## v5.5a — Production Hash Baseline Reconciliation
+
+**Goal.** Read-only reconciliation of the root site SHA-256 baseline
+that diverged across the v5.0 → v5.5 trail. Establish one canonical
+root SHA, document the source of the conflicting hash, and add the
+reconciliation procedure to the v5.5 baseline doc — without touching
+any production content or the staging builder.
+
+**Tasks.**
+
+- Generate five files with explicit binary-safe tools (`cp`,
+  `git show`, `python3 scripts/second_exhibition_staging_build.py`,
+  `curl -H 'Accept-Encoding: identity'`).
+- Record `wc -c` and `sha256sum` for every file.
+- Run `cmp -s` on all ten unordered pairs.
+- Identify the canonical root SHA only when all five sources agree on
+  bytes and on SHA-256 and all ten `cmp -s` pairs exit 0.
+- Audit recursive grep of both candidate hashes across
+  `README.md docs reports release-assets scripts`.
+- Produce
+  `docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md` with the
+  five-source table, the attribution diagnosis, and the procedure.
+- Append a minimal correction note + canonical-command block to
+  `docs/PRODUCTION_HEALTH_BASELINE_v5.5.md`.
+- Produce
+  `reports/leonardo_chinese_exhibition_v5_5a_production_hash_baseline_reconciliation_report.md`.
+
+**Do NOT do in v5.5a.**
+
+- Do not modify any file under `site/`, `second-exhibition/site/`,
+  `second-exhibition/data/`, `second-exhibition/assets/`,
+  `second-exhibition/docs/`, or `.github/workflows/`.
+- Do not modify the staging builder
+  (`scripts/second_exhibition_staging_build.py`), the staging gate,
+  the production health-check script, or any other in-repo script.
+- Do not edit the existing release manifest line that contains the
+  misattributed hash (the historical error is preserved unmodified
+  for the audit trail).
+- Do not create or move a tag or Release.
+- Do not deploy new content.
+- Do not modify the freeze tag or its GitHub Release.
+
+**Exit criteria for v5.5a.**
+
+- Five-source binary comparison PASS; canonical SHA equals
+  `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`.
+- All twelve protected paths (per "Modification scope" above) have
+  empty `git diff` against `9bd8107`.
+- Stable tag still annotated on freeze commit `ac0f19e2…`; Release
+  v5.0 unchanged.
+- Live root still 92,976 B / SHA `e2be1077…` after the v5.5a push
+  (Pages workflow rebuilds without content change).
+- Healthcheck re-run after the v5.5a push still PASS.
+
+**Next.** v5.6-second-exhibition-content-iteration-prep.

@@ -663,6 +663,28 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   `second-exhibition/assets/asset-checksums.sha256`.
 
 
+## v5.5a Production Hash Baseline Reconciliation
+
+- **Canonical root byte**: 92,976 B
+- **Canonical root SHA256**: `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
+  (current source ≡ current HEAD ≡ stable tag target ≡ staging ≡ live)
+- **Five-source identity**: PASS (all ten `cmp -s` pairs exit 0;
+  all five byte counts = 92,976; all five SHA-256 = `e2be1077…`)
+- **Correction note**: [`docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md`](docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md)
+- A single misattributed hash (`f31ddcba…`) recorded in
+  `release-assets/v5.0-real-second-exhibition-deployment-manifest.md`
+  line 61 is the SHA-256 of `second-exhibition/site/index.html`,
+  **not** `site/index.html`; it is preserved unmodified and the
+  authoritative baseline lives in the reconciliation doc.
+- **No production changes**; the live root, second-exhibition, six
+  images, status wording, and forbidden-path boundary are all
+  byte-identical to the v5.5 freeze.
+- **Stable tag / Release unchanged**:
+  `v5.0-real-second-exhibition-deployment` (annotated,
+  target `ac0f19e2c03b09738ae49b4a15c629a1f2177068`); the v5.0
+  GitHub Release is preserved unmodified.
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

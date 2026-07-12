@@ -96,6 +96,43 @@ Notes:
   `./assets/images/` → `../assets/images/` so that paths resolve correctly
   under the `/second-exhibition/` URL prefix.
 
+### Canonical computation command
+
+To reproduce the root values above, run:
+
+```bash
+ROOT_URL="https://conanxin.github.io/leonardo-chinese-exhibition/"
+curl -L --fail --silent --show-error \
+  -H 'Accept-Encoding: identity' \
+  --connect-timeout 20 --max-time 120 \
+  "$ROOT_URL" \
+  -o /tmp/root.html
+sha256sum /tmp/root.html          # → e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc
+wc -c /tmp/root.html              # → 92976
+grep -o 'v2.9-real-source-rights-audit' /tmp/root.html | wc -l   # → 1
+grep -o 'v2.9' /tmp/root.html | wc -l                            # → 4 (informational)
+cmp -s site/index.html /tmp/root.html; echo $?    # → 0 (byte-identical to source)
+```
+
+The five-source binary comparison is documented in
+[`docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md`](PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md).
+**The hash `e2be1077…` is the canonical root SHA-256.** A different
+hash (`f31ddcba…`) was misattributed to `site/index.html` in the v5.0
+release manifest; that attribution is the only `f31ddcba…` occurrence
+in the repo and is preserved unmodified for history. The
+reconciliation document explains the source of the misattribution and
+recommends the procedure above as the canonical future baseline.
+
+### Erratum (v5.5a)
+
+A separate hash `f31ddcba5168c8f8fba81498cfd5e259de73452da69eb28a1db4913dffd16fda`
+appeared in `release-assets/v5.0-real-second-exhibition-deployment-manifest.md`
+line 61 as "Source `site/index.html` SHA-256". That value is the SHA
+of `second-exhibition/site/index.html`, **not** `site/index.html`.
+The canonical root SHA is `e2be1077…` above; see the reconciliation
+document for the full explanation and procedure. **No production
+content has drifted.**
+
 Gates at freeze:
 
 | Gate | Result |
