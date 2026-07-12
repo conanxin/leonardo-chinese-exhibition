@@ -884,3 +884,84 @@ user-specific paths, no `/home/conanxin/...` hardcoding).
 ### Next
 
 - v5.6-real-stable-freeze
+
+## v5.6d — Live Browser QA Reproducibility (round 2)
+
+This is the second pass of v5.6d. The first pass (commit `96bef6a`)
+promoted v5.6c's `/tmp` temporary-runner fixes (HTTPS pre-flight,
+origin-aware request tracking) into the official runner. That first
+pass was sufficient for hot-cache runs but **non-deterministic** on
+the public URL's cold cache: scroll-to-bottom + 800 ms tail wait + 3 s
+per-image timeout sometimes left 1 of 6 lazy `webp` images still
+loading when the page sample was taken, producing a 5/6 PASS report
+that exits 1.
+
+### Real bug found this round
+
+`runViewport()` cold-cache miss on the public URL: 1440×1000
+viewport reported `images loaded = 5` in run 1, then PASSED (6/6) in
+run 2 (hot cache). Brief §4 C requires that the 6 images must
+actually load, so this had to be fixed.
+
+### Fix (minimal, additive, bounded)
+
+`scripts/second_exhibition_browser_qa.mjs`:
+
+- Tail wait after scroll-to-bottom: 800 ms → 1500 ms
+- Per-image load timeout: 3000 ms → 5000 ms
+
+Both are bounded. No unbounded waits, no try/catch around real
+failures, no `FAIL → WARN` downgrade.
+
+### Verification
+
+3 consecutive public runs (post-fix):
+
+- 3/3 PASS, 5/5 viewports, `imgsLoaded = [6, 6, 6, 6, 6]`
+- 0 console / page / failed / external errors
+- 0 overflow
+- All 10 interactions PASS
+
+3 consecutive local exact-base-path runs (post-fix):
+
+- 3/3 PASS, 5/5 viewports, `imgsLoaded = [6, 6, 6, 6, 6]`
+- 0 errors, all interactions PASS
+
+### Staging dry-run (this round)
+
+- staging_build PASS (25 root + 9 second = 34 files, 6 path rewrites)
+- staging_gate PASS (source 662bee… → staged 00894e8…, schema 2.0)
+- deployment_dry_run PASS:
+  - allowlist probes 14/14
+  - forbidden probes 16/16
+  - roundtrip 34 byte-identical
+  - root staged SHA `e2be1077…`, second staged SHA `00894e8d…`
+  - tar 5,804,964 bytes
+
+### No drift
+
+- Public artifact (root 92,976 B / second 31,452 B) byte-identical
+  to v5.6c.
+- 6/6 image checksums unchanged.
+- `site/`, `second-exhibition/`, `.github/workflows/`, `_template/`,
+  `_pilots/`, `posts/`, `case-study/`, `release-assets/`, all other
+  `scripts/*.py` — **unchanged**.
+- Stable v5.0 tag → `ac0f19e2c03b…` — **unchanged**.
+- Stable Release — **unchanged**.
+
+### What the official runner is now
+
+- Single source of truth for both local and public QA.
+- Module resolution stays env-driven (`PLAYWRIGHT_NODE_PATH` +
+  `require("playwright")` + `require("playwright-core")`); no
+  hardcoded user home or absolute install path.
+- HTTPS pre-flight (since `96bef6a`).
+- Origin-aware request tracking (since `96bef6a`).
+- Lazy-image scroll + 1500 ms tail wait + 5000 ms per-image cap
+  (this round).
+- Default URL `http://127.0.0.1:8770/site/` preserved (v4.8 compat).
+- Exit codes 0/1/2 preserved (v4.8).
+
+### Next
+
+- v5.6-real-stable-freeze

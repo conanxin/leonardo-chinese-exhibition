@@ -1309,3 +1309,26 @@ v1.6 distribution pack 6 个传播材料 + 36 标题保留。
 - Public artifact (root + second) byte-identical to v5.6c.
 - Stable v5.0 tag / Release unchanged.
 - Next: v5.6 real stable freeze
+
+## v5.6d Reproducible Live Browser QA (round 2)
+
+- Official runner `scripts/second_exhibition_browser_qa.mjs` is the
+  **single source of truth** for both local exact-base-path and
+  public 5-viewport QA.
+- v5.6d round 1 (commit `96bef6a`) promoted v5.6c's temporary-runner
+  fixes (HTTPS, origin-aware request tracking) into the official
+  runner. Round 1 was hot-cache PASS but **non-deterministic** on
+  cold cache — `images loaded = 5` on the public URL's first hit.
+- v5.6d round 2 (this commit) bumps the lazy-image tail wait from
+  800 ms → 1500 ms and the per-image load cap from 3 s → 5 s. Both
+  are bounded. No unbounded waits, no silent try/catch.
+- Post-fix verification:
+  - 3 consecutive public runs: 3/3 PASS, 5/5 viewports,
+    `imgsLoaded = [6, 6, 6, 6, 6]`, 0 errors
+  - 3 consecutive local exact-base-path runs: 3/3 PASS,
+    5/5 viewports, 0 errors
+- Staging dry-run PASS: allowlist 14/14, forbidden 16/16, roundtrip
+  34/34 byte-identical, schema 2.0.
+- Public artifact (root 92,976 B, second 31,452 B) — **unchanged**.
+- Stable v5.0 tag / Release — **unchanged**.
+- Next: v5.6 real stable freeze

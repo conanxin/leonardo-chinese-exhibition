@@ -187,6 +187,12 @@ async function runViewport(page, viewport) {
   await page.waitForLoadState("networkidle");
 
   // Force all lazy-loaded images into view by scrolling to bottom.
+  // Step through the document in small increments so the IntersectionObserver
+  // (used by `loading="lazy"` images) has time to fire fetch + decode for
+  // each image as it enters the viewport. The 1500 ms tail wait gives the
+  // browser time to complete the cold-cache image fetches that started
+  // during the scroll — without it, a cold cache can leave 1 of the 6
+  // artifact images still not "complete" at the moment we sample.
   await page.evaluate(async () => {
     await new Promise((resolve) => {
       let total = 0;
@@ -202,7 +208,8 @@ async function runViewport(page, viewport) {
       }, 50);
     });
   });
-  await new Promise((r) => setTimeout(r, 800));
+  // Wait for in-flight lazy fetches triggered by the scroll to settle.
+  await new Promise((r) => setTimeout(r, 1500));
 
   const metrics = await page.evaluate(() => {
     const sections = document.querySelectorAll(".exhibition-section");
@@ -230,7 +237,10 @@ async function runViewport(page, viewport) {
         };
         img.addEventListener("load", () => finish(img.naturalWidth > 0), { once: true });
         img.addEventListener("error", () => finish(false), { once: true });
-        setTimeout(() => finish(img.naturalWidth > 0), 3000);
+        // 5000 ms hard cap on per-image wait. Pairs with the 1500 ms scroll
+        // tail above; a slow cold-cache 404 fetch should still be reported
+        // as not-loaded rather than hanging the whole viewport.
+        setTimeout(() => finish(img.naturalWidth > 0), 5000);
       })
     )).then((loaded) => ({
       title,
