@@ -116,6 +116,10 @@ cmp -s site/index.html /tmp/root.html; echo $?    # → 0 (byte-identical to sou
 
 The five-source binary comparison is documented in
 [`docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md`](PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md).
+
+The staging audit schema that produced and consumed the deprecated key
+is now formally defined in
+[`docs/STAGING_AUDIT_SCHEMA_v5.5b.md`](STAGING_AUDIT_SCHEMA_v5.5b.md).
 **The hash `e2be1077…` is the canonical root SHA-256.** A different
 hash (`f31ddcba…`) was misattributed to `site/index.html` in the v5.0
 release manifest; that attribution is the only `f31ddcba…` occurrence

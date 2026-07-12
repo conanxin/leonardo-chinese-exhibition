@@ -30,6 +30,14 @@ from pathlib import Path
 ROOT_DEFAULT_OUTPUT = "/tmp/leonardo-pages-artifact"
 ROOT_DEFAULT_AUDIT  = "/tmp/leonardo-pages-artifact-audit"
 
+# Audit schema version. Bump when the audit summary's keys or their
+# semantics change. v2 replaces the ambiguous key `source_index_html_sha256`
+# (which actually stored the second-exhibition source SHA) with explicit
+# nested `root_site` and `second_exhibition` blocks. The deprecated key
+# is preserved (with `_scope` annotation) for forward compatibility of
+# any out-of-repo caller.
+AUDIT_SCHEMA_VERSION = "2.0"
+
 SOURCE_SITE_DIR         = "site"
 SOURCE_SE_DIR           = "second-exhibition"
 SOURCE_SE_SITE_SUBDIR   = "second-exhibition/site"
@@ -203,7 +211,7 @@ def main():
     # ---- D. Path rewrite (artifact-only) ----
     info("[D] Path rewriting second-exhibition/index.html (artifact-only)...")
     staged_index = dst_se / "index.html"
-    src_index    = src_se_site / "index.html"
+    src_se_index = src_se_site / "index.html"
     src_text     = staged_index.read_text(encoding="utf-8")
 
     rewrite_count = src_text.count(OLD_PREFIX)
@@ -221,9 +229,15 @@ def main():
     staged_index.write_text(new_text, encoding="utf-8")
     info(f"[D] OK: rewrote {rewrite_count} path references (source untouched)")
 
-    # Verify tracked source index.html SHA is unchanged
-    src_sha_after = sha256_file(src_index)
-    info(f"[D] source index.html SHA256 (must be unchanged): {src_sha_after}")
+    # Verify tracked second-exhibition source index.html SHA is unchanged
+    src_se_sha_after = sha256_file(src_se_index)
+    info(f"[D] second-exhibition source index.html SHA256 (must be unchanged): {src_se_sha_after}")
+
+    # Capture the root site index.html source SHA explicitly (the staging
+    # builder copies site/index.html byte-identical, so source == staged).
+    src_root_index = src_site / "index.html"
+    src_root_sha = sha256_file(src_root_index)
+    src_root_bytes = src_root_index.stat().st_size
 
     # ---- E. Build summary ----
     info("[E] Writing audit summary...")
@@ -254,8 +268,20 @@ def main():
         encoding="utf-8",
     )
 
+    # Staged second-exhibition index.html SHA + bytes (the only file that
+    # the builder rewrites, so it is the only source-vs-staged distinction).
+    staged_se_index_entry = next((h for h in se_hashes
+                                  if h["path"] == "second-exhibition/index.html"),
+                                 None)
+    if staged_se_index_entry is None:
+        fail("staged second-exhibition/index.html missing from staged_hashes")
+    assert staged_se_index_entry is not None  # for type checkers; fail() raises above
+    staged_se_index_sha = staged_se_index_entry["sha256"]
+    staged_se_index_bytes = staged_se_index_entry["bytes"]
+    src_se_index_bytes = src_se_index.stat().st_size
+
     summary = {
-        "schema_version": 1,
+        "audit_schema_version": AUDIT_SCHEMA_VERSION,
         "source_commit": subprocess_head(repo),
         "output_path": str(out),
         "audit_path": str(aud),
@@ -264,7 +290,39 @@ def main():
         "path_rewrite_count": rewrite_count,
         "build_time": datetime.datetime.utcnow().isoformat() + "Z",
         "deployment_status": "staging-only-not-deployed",
-        "source_index_html_sha256": src_sha_after,
+
+        # ---- Schema v2: explicit per-source / per-staged identity blocks ----
+        "root_site": {
+            "source_path": "site/index.html",
+            "source_bytes": src_root_bytes,
+            "source_sha256": src_root_sha,
+            "staged_path": "index.html",
+            "staged_bytes": next((r[2] for r in root_site_files if r[0] == "index.html"),
+                                 src_root_bytes),
+            "staged_sha256": next((r[1] for r in root_site_files if r[0] == "index.html"),
+                                  src_root_sha),
+            "source_equals_staged": True,
+        },
+        "second_exhibition": {
+            "source_path": "second-exhibition/site/index.html",
+            "source_bytes": src_se_index_bytes,
+            "source_sha256": src_se_sha_after,
+            "staged_path": "second-exhibition/index.html",
+            "staged_bytes": staged_se_index_bytes,
+            "staged_sha256": staged_se_index_sha,
+            "path_rewrite_count": rewrite_count,
+            "source_equals_staged": False,
+        },
+
+        # ---- Schema v1 keys (DEPRECATED, retained for backward compatibility) ----
+        # `source_index_html_sha256` historically stored the SHA of
+        # `second-exhibition/site/index.html` (the rewritten source). It is
+        # preserved here with explicit `_scope` annotation so any out-of-repo
+        # consumer is not silently broken. New tooling should read the nested
+        # `second_exhibition.source_sha256` instead.
+        "source_index_html_sha256": src_se_sha_after,
+        "source_index_html_sha256_scope": "second-exhibition/site/index.html",
+
         "root_site_sha256": [r[1] for r in root_site_files],
         "second_exhibition_files": [h["path"] for h in staged_hashes
                                     if h["path"].startswith("second-exhibition/")],

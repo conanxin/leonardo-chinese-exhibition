@@ -685,6 +685,39 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   GitHub Release is preserved unmodified.
 
 
+## v5.5b Staging Audit Schema Reconciliation
+
+- **Schema version**: `audit_schema_version: "2.0"` in
+  `second_exhibition_staging_build.py` → `build-summary.json`.
+- **Explicit identity blocks** (no path ambiguity):
+  [`docs/STAGING_AUDIT_SCHEMA_v5.5b.md`](docs/STAGING_AUDIT_SCHEMA_v5.5b.md)
+  documents the canonical schema, including the
+  `root_site.source_equals_staged = true` and
+  `second_exhibition.source_equals_staged = false` invariants.
+- **Deprecated key retained with explicit scope annotation**:
+  `source_index_html_sha256` is still emitted only so any
+  out-of-repo v1 consumer does not break, with companion
+  `source_index_html_sha256_scope = "second-exhibition/site/index.html"`.
+- **Regression test**:
+  [`scripts/test_second_exhibition_staging_audit.py`](scripts/test_second_exhibition_staging_audit.py)
+  runs against a fresh `/tmp` artifact and asserts 28 invariants
+  (schema version, root vs second-exhibition SHA inequality,
+  `path_rewrite_count = 6`, staged-side path rewrites, gate exit 0).
+- **Gate and dry-run updated** to read the v2 schema
+  (`second_exhibition_staging_gate.py` section G and
+  `second_exhibition_deployment_dry_run.py` section B′).
+- **No production content changes**; root 92,976 B / SHA
+  `e2be1077…`, second-exhibition 25,635 B / SHA `7c05f39d…`, six
+  image SHA-256 byte-identical, status counts 5/8/8/0, forbidden
+  boundary 17/17 → 404.
+- **Stable tag / Release unchanged** as in v5.5a.
+- **Backwards link**:
+  [`docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md`](docs/PRODUCTION_HASH_BASELINE_RECONCILIATION_v5.5a.md)
+  and
+  [`docs/PRODUCTION_HEALTH_BASELINE_v5.5.md`](docs/PRODUCTION_HEALTH_BASELINE_v5.5.md)
+  both forward-point to the v5.5b schema document.
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

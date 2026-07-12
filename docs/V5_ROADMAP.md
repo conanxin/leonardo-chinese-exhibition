@@ -363,6 +363,7 @@ Only after receiving this exact string will commit + push of the two new docs an
 | v5.4 | Public stable freeze | Yes | Yes | Yes |
 | v5.5 | Public deployment maintenance | Redeploys (no content change) | No | No |
 | v5.5a | Production hash baseline reconciliation | No | No | No |
+| v5.5b | Staging audit schema reconciliation | No (tooling/docs only) | No | No |
 | post-v5.5 | Future content updates / continued maintenance | Yes | per round | per round |
 
 ---
@@ -478,5 +479,73 @@ any production content or the staging builder.
 - Live root still 92,976 B / SHA `e2be1077…` after the v5.5a push
   (Pages workflow rebuilds without content change).
 - Healthcheck re-run after the v5.5a push still PASS.
+
+**Next.** v5.6-second-exhibition-content-iteration-prep.
+
+---
+
+## v5.5b — Staging Audit Schema Reconciliation
+
+**Goal.** Replace the ambiguous audit key `source_index_html_sha256`
+in the staging builder's `build-summary.json` schema with explicit
+per-source / per-staged identity blocks, add a regression test that
+prevents the root site SHA and the second-exhibition source SHA
+from being conflated again, and document the schema as the canonical
+reference going forward.
+
+**Tasks.**
+
+- Bump the audit schema to `audit_schema_version: "2.0"`.
+- Add explicit `root_site` block
+  (`source_path`, `source_bytes`, `source_sha256`,
+  `staged_path`, `staged_bytes`, `staged_sha256`,
+  `source_equals_staged`).
+- Add explicit `second_exhibition` block with `path_rewrite_count`,
+  and `source_equals_staged = false` (rewrites change staged bytes).
+- Retain the deprecated `source_index_html_sha256` only with an
+  explicit `_scope` annotation
+  (`source_index_html_sha256_scope = "second-exhibition/site/index.html"`).
+- Update `scripts/second_exhibition_staging_gate.py` to read the new
+  schema, enforce `root_site.source_equals_staged = true`, and
+  enforce `second_exhibition.source_equals_staged = false`
+  (with `path_rewrite_count = 6`).
+- Add a `B'. Schema v2 identity from audit` section to
+  `scripts/second_exhibition_deployment_dry_run.py` that
+  cross-checks the audit summary against the live repo files.
+- Add a regression test
+  `scripts/test_second_exhibition_staging_audit.py` (stdlib only,
+  runs in `/tmp`, 28 assertions, exit 0 on PASS).
+- Create `docs/STAGING_AUDIT_SCHEMA_v5.5b.md` as the canonical
+  reference for the schema.
+- Append forward-reference / link the schema doc from the v5.5a
+  reconciliation and v5.5 baseline documents.
+- Do not modify production content, assets, manifest, checksums,
+  workflow, stable tag, or Release.
+
+**Do NOT do in v5.5b.**
+
+- Do not edit any file under `site/`, `second-exhibition/site/`,
+  `second-exhibition/data/`, `second-exhibition/assets/`,
+  `second-exhibition/docs/`, or `.github/workflows/`.
+- Do not modify the six images or any check-gate output bytes.
+- Do not create or move a tag or Release.
+- Do not modify the v5.0 freeze tag or its GitHub Release.
+- Do not rewrite the v5.0 release manifest line 61 (historical
+  error preserved unchanged).
+
+**Exit criteria for v5.5b.**
+
+- `scripts/second_exhibition_staging_build.py` produces a
+  `build-summary.json` whose `audit_schema_version` is `"2.0"`.
+- `scripts/second_exhibition_staging_gate.py` exits 0 against a
+  fresh artifact, and emits the new schema v2 PASS lines.
+- `scripts/test_second_exhibition_staging_audit.py` exits 0.
+- All eight pre-existing scripts (template, build, repository QA,
+  asset gate, browser QA, dry-run, dry-run browser, preflight)
+  remain unchanged at `git diff --stat` level.
+- Live surface byte-identical to the v5.5 freeze after the v5.5b
+  push (rebuilt by the unchanged Pages workflow).
+- Stable tag still annotated on freeze commit `ac0f19e2…`; Release
+  v5.0 unchanged.
 
 **Next.** v5.6-second-exhibition-content-iteration-prep.

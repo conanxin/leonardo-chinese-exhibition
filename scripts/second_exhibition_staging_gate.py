@@ -456,10 +456,82 @@ def main():
         group_fail(f"second_exhibition_public_file_count = {summary_se_count}, actual {len(se_files)}")
     group_pass("build-summary.json internal counts cross-check OK")
 
-    # Cross-check: source index SHA in summary must equal current source SHA
-    if summary.get("source_index_html_sha256") != src_sha_after:
-        group_fail(f"source_index_html_sha256 in summary does not match current source")
-    group_pass("source_index_html_sha256 in summary matches current source")
+    # Schema v2: explicit per-source / per-staged identity blocks.
+    schema_version = summary.get("audit_schema_version")
+    if schema_version != "2.0":
+        group_fail(f"audit_schema_version in summary = {schema_version!r}, expected '2.0'")
+    else:
+        group_pass("audit_schema_version in summary = 2.0")
+
+    root_block = summary.get("root_site") or {}
+    se_block = summary.get("second_exhibition") or {}
+
+    # ---- Root site identity ----
+    expected_root_sha = sha256_file(src_site / "index.html")
+    expected_root_bytes = (src_site / "index.html").stat().st_size
+    if root_block.get("source_sha256") != expected_root_sha:
+        group_fail(f"root_site.source_sha256 in summary = {root_block.get('source_sha256')}, expected {expected_root_sha}")
+    if root_block.get("staged_sha256") != expected_root_sha:
+        group_fail(f"root_site.staged_sha256 in summary = {root_block.get('staged_sha256')}, expected {expected_root_sha}")
+    if root_block.get("source_bytes") != expected_root_bytes:
+        group_fail(f"root_site.source_bytes in summary = {root_block.get('source_bytes')}, expected {expected_root_bytes}")
+    if not root_block.get("source_equals_staged"):
+        group_fail("root_site.source_equals_staged is false (expected true for byte-identical copy)")
+    else:
+        group_pass(
+            f"root_site identity OK: source={expected_root_sha[:12]}… staged={expected_root_sha[:12]}… "
+            f"source_equals_staged=True"
+        )
+
+    # ---- Second-exhibition identity (MUST differ by 6 path rewrites) ----
+    src_se_sha = sha256_file(src_se_index)
+    src_se_bytes = src_se_index.stat().st_size
+    if se_block.get("source_sha256") != src_se_sha:
+        group_fail(f"second_exhibition.source_sha256 in summary = {se_block.get('source_sha256')}, expected {src_se_sha}")
+    if se_block.get("staged_sha256") in (None, ""):
+        group_fail("second_exhibition.staged_sha256 missing from summary")
+    if se_block.get("staged_sha256") == src_se_sha:
+        group_fail(
+            f"second_exhibition.staged_sha256 equals source_sha256 ({src_se_sha}); "
+            "the 6 path rewrites must produce a different staged index"
+        )
+    if se_block.get("source_bytes") != src_se_bytes:
+        group_fail(f"second_exhibition.source_bytes in summary = {se_block.get('source_bytes')}, expected {src_se_bytes}")
+    if se_block.get("path_rewrite_count") != 6:
+        group_fail(f"second_exhibition.path_rewrite_count = {se_block.get('path_rewrite_count')}, expected 6")
+    if se_block.get("source_equals_staged"):
+        group_fail("second_exhibition.source_equals_staged is true (expected false; rewrites must change staged bytes)")
+    else:
+        group_pass(
+            f"second_exhibition identity OK: source={src_se_sha[:12]}… bytes={src_se_bytes} "
+            f"staged={(se_block.get('staged_sha256') or '')[:12]}… "
+            f"source_equals_staged=False path_rewrite_count=6"
+        )
+
+    # ---- Deprecated key forward-compat: warn-but-don't-fail if present ----
+    deprecated_key = summary.get("source_index_html_sha256")
+    deprecated_scope = summary.get("source_index_html_sha256_scope")
+    if deprecated_key is not None:
+        if deprecated_key == src_se_sha:
+            group_pass(
+                f"DEPRECATED source_index_html_sha256 still equals second-exhibition source ({deprecated_key[:12]}…); "
+                f"scope annotation: {deprecated_scope!r}"
+            )
+        else:
+            group_fail(
+                f"DEPRECATED source_index_html_sha256 = {deprecated_key}; expected {src_se_sha} "
+                "or remove the deprecated key"
+            )
+        if deprecated_scope != "second-exhibition/site/index.html":
+            group_fail(
+                f"DEPRECATED source_index_html_sha256_scope = {deprecated_scope!r}; "
+                "expected 'second-exhibition/site/index.html'"
+            )
+        else:
+            group_pass(
+                "DEPRECATED source_index_html_sha256_scope correctly labelled "
+                "'second-exhibition/site/index.html'"
+            )
 
     # Audit must NOT be inside artifact
     if is_within(aud, art):

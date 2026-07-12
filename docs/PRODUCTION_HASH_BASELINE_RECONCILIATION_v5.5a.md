@@ -205,3 +205,16 @@ To keep future rounds' root SHA clean:
    stores `second-exhibition/site/index.html`'s SHA there. Use
    `root_site_sha256[]` or `staged_hashes[]` (filtered by
    `path == "index.html"`) instead.
+
+## Forward reference: v5.5b schema
+
+The ambiguity described above is now formally addressed in
+[`docs/STAGING_AUDIT_SCHEMA_v5.5b.md`](STAGING_AUDIT_SCHEMA_v5.5b.md).
+v5.5b replaces the ambiguous key with explicit nested
+`root_site.source_sha256` / `second_exhibition.source_sha256` blocks
+in the audit summary, retains the deprecated key only with an
+explicit `_scope` annotation, and ships a regression test
+(`scripts/test_second_exhibition_staging_audit.py`) that prevents
+the two SHAs from being conflated again. The correction in this
+document remains the historical explanation; the v5.5b doc is the
+canonical schema reference going forward.

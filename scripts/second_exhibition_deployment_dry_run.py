@@ -435,6 +435,132 @@ def main():
         fail(f"roundtrip root index byte mismatch: {rnd_root.stat().st_size}", report)
     ok(f"roundtrip root index byte = {rnd_root.stat().st_size}")
 
+    # ---- B'. Schema v2 identity from audit ----
+    # v5.5b: cross-check the staging builder's audit summary against the
+    # repository's actual files, using the explicit per-source / per-staged
+    # schema v2 blocks (`root_site`, `second_exhibition`). The deprecated
+    # `source_index_html_sha256` key is still recorded for forward
+    # compatibility, but only with its explicit `_scope` annotation —
+    # it must NEVER be conflated with `site/index.html`.
+    section("B'. Schema v2 identity from audit")
+
+    summary_path = aud / "build-summary.json"
+    if not summary_path.is_file():
+        fail(f"build-summary.json missing in audit dir: {aud}", report)
+    try:
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"build-summary.json unreadable: {e}", report)
+        summary = {}
+    schema_version = summary.get("audit_schema_version")
+    if schema_version != "2.0":
+        fail(f"audit_schema_version = {schema_version!r}, expected '2.0'", report)
+    else:
+        ok("audit_schema_version = 2.0")
+
+    root_block = summary.get("root_site") or {}
+    se_block = summary.get("second_exhibition") or {}
+
+    # ---- Root site identity (must be byte-identical source ≡ staged) ----
+    src_root_index = repo_p / "site" / "index.html"
+    src_root_sha_direct = sha256_file(src_root_index)
+    src_root_bytes_direct = src_root_index.stat().st_size
+    staged_root_index = art / "index.html"
+    staged_root_sha_direct = sha256_file(staged_root_index)
+    if (
+        root_block.get("source_sha256") != src_root_sha_direct
+        or root_block.get("staged_sha256") != staged_root_sha_direct
+        or root_block.get("source_bytes") != src_root_bytes_direct
+    ):
+        fail(
+            "root_site block in audit does not match live source/staged files: "
+            f"src={root_block.get('source_sha256')} vs {src_root_sha_direct}; "
+            f"staged={root_block.get('staged_sha256')} vs {staged_root_sha_direct}; "
+            f"bytes={root_block.get('source_bytes')} vs {src_root_bytes_direct}",
+            report,
+        )
+    if root_block.get("source_equals_staged") is not True:
+        fail("root_site.source_equals_staged is not true (byte-identical copy required)", report)
+    else:
+        ok(
+            f"root_site identity: src/staged bytes={src_root_bytes_direct} "
+            f"sha={src_root_sha_direct[:12]}… source_equals_staged=True"
+        )
+
+    # ---- Second-exhibition identity (source ≠ staged by design) ----
+    src_se_path = repo_p / "second-exhibition" / "site" / "index.html"
+    staged_se_path = art / "second-exhibition" / "index.html"
+    src_se_sha_direct = sha256_file(src_se_path)
+    staged_se_sha_direct = sha256_file(staged_se_path)
+    if se_block.get("source_sha256") != src_se_sha_direct:
+        fail(
+            "second_exhibition.source_sha256 in audit does not match live source file: "
+            f"{se_block.get('source_sha256')} vs {src_se_sha_direct}",
+            report,
+        )
+    if se_block.get("staged_sha256") != staged_se_sha_direct:
+        fail(
+            "second_exhibition.staged_sha256 in audit does not match staged artifact: "
+            f"{se_block.get('staged_sha256')} vs {staged_se_sha_direct}",
+            report,
+        )
+    if se_block.get("path_rewrite_count") != 6:
+        fail(
+            f"second_exhibition.path_rewrite_count = {se_block.get('path_rewrite_count')!r}, expected 6",
+            report,
+        )
+    if se_block.get("source_equals_staged") is not False:
+        fail(
+            "second_exhibition.source_equals_staged is not false "
+            "(the 6 public-image path rewrites must change the staged SHA)",
+            report,
+        )
+    else:
+        ok(
+            f"second_exhibition identity: src sha={src_se_sha_direct[:12]}… "
+            f"staged sha={staged_se_sha_direct[:12]}… "
+            f"path_rewrite_count=6 source_equals_staged=False (expected, due to rewrites)"
+        )
+
+    # ---- Deprecated key check ----
+    deprecated_key = summary.get("source_index_html_sha256")
+    deprecated_scope = summary.get("source_index_html_sha256_scope")
+    if deprecated_key is not None:
+        if deprecated_key == src_se_sha_direct:
+            ok(
+                "deprecated source_index_html_sha256 still equals second-exhibition source "
+                f"(scope={deprecated_scope!r})"
+            )
+        else:
+            fail(
+                f"deprecated source_index_html_sha256 = {deprecated_key}; "
+                f"expected {src_se_sha_direct} (or remove the deprecated key)",
+                report,
+            )
+        if deprecated_scope != "second-exhibition/site/index.html":
+            fail(
+                f"deprecated source_index_html_sha256_scope = {deprecated_scope!r}; "
+                "expected 'second-exhibition/site/index.html'",
+                report,
+            )
+
+    report["results"]["schema_v2_identity"] = {
+        "audit_schema_version": schema_version,
+        "root_site": {
+            "source_sha256": root_block.get("source_sha256"),
+            "staged_sha256": root_block.get("staged_sha256"),
+            "source_equals_staged": root_block.get("source_equals_staged"),
+        },
+        "second_exhibition": {
+            "source_sha256": se_block.get("source_sha256"),
+            "staged_sha256": se_block.get("staged_sha256"),
+            "path_rewrite_count": se_block.get("path_rewrite_count"),
+            "source_equals_staged": se_block.get("source_equals_staged"),
+        },
+        "deprecated_key_present": deprecated_key is not None,
+        "deprecated_key_scope_ok": deprecated_scope == "second-exhibition/site/index.html",
+    }
+
     # ---- C. Rollback rehearsal (v5.3-aware) ----
     section("C. Rollback rehearsal")
     # v5.3 controlled deployment changed the workflow from `path: site` to a 5-step chain:
