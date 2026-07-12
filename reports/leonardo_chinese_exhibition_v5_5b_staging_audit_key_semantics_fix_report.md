@@ -20,7 +20,8 @@ unchanged.
 - baseline origin/main: `92f14e95190bf247b902822d08db9450acdf5025`
 - pre-round working-tree HEAD: `7462dc42bd3d9e1fb26b8714e54a8bf2ebc1da24`
   (intermediate v5.5b reconciliation round, in-scope carry-over)
-- post-round HEAD: `<filled in after commit>`
+- post-round HEAD: `e2eba50f6d6483bcc6f9d5f373e744c2271430ad`
+  (Clarify staging audit root and exhibition hashes)
 
 ## Original ambiguous field
 
