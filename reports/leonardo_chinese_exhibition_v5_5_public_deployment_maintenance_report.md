@@ -5,9 +5,13 @@ production health check, a frozen production baseline, an operations
 runbook, and an incident-response / rollback reference.
 
 - **STATUS**: PASS
-- **Baseline HEAD / origin**: `2ff17094904af23757643be4424f17f7f6a35770`
+- **Baseline HEAD / origin**: `2ff17094904af23757643be4424f17f7f6a35770` (pre-push)
+- **V5.5 commit (post-push HEAD / origin)**: `355a049703056a0834c69c6b283e1f28a4df306c`
+- **V5.5 commit message**: `Add second exhibition production maintenance checks`
+- **V5.5 Actions run**: `29174730791` (success, 22 s)
 - **Stable tag object**: `c8871f09e4003675d5796c76058d589a08541f45`
 - **Stable tag target (freeze commit)**: `ac0f19e2c03b09738ae49b4a15c629a1f2177068`
+- **Tag pinned to freeze target**: confirmed (`git rev-parse v5.0-real-second-exhibition-deployment^{}` → `ac0f19e2c03b09738ae49b4a15c629a1f2177068`)
 - **Release URL**: https://github.com/conanxin/leonardo-chinese-exhibition/releases/tag/v5.0-real-second-exhibition-deployment
 - **Release publishedAt**: `2026-07-12T00:29:43Z`
 
@@ -208,16 +212,42 @@ Verified before staging any changes:
 
 ## Production after push
 
-Verified after the v5.5 commit is pushed (see "Push verification" below
-once that section is filled) — the same identity must hold byte-for-byte.
+Verified after the v5.5 commit `355a049703056a0834c69c6b283e1f28a4df306c`
+pushed and Actions run `29174730791` completed (status: success, 22 s,
+01:05:13 → 01:05:35 UTC):
+
+- HEAD = `355a049703056a0834c69c6b283e1f28a4df306c`
+- Origin/main = `355a049703056a0834c69c6b283e1f28a4df306c`
+- Live root byte: **92,976** (Δ = 0)
+- Live root SHA-256: `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
+  (matches pre-push, matches `site/index.html` byte-identical via `cmp -s`)
+- Live second-exhibition byte: **25,635** (Δ = 0)
+- Live second-exhibition SHA-256: `7c05f39d4d9a49d0ba09d8202ff7ee41e42d67445660510815fb2887cc16324c`
+  (matches pre-push)
+- Status counts: `production-deployed-v5.3` = 5, `published-in-v5.3` = 8,
+  `imported-not-deployed` = 8, `repository-only-not-deployed` = 0 (Δ = 0)
+- Six image SHA-256: byte-identical to `asset-checksums.sha256` (Δ = 0)
+- Forbidden paths: 17 / 17 → HTTP 404 (Δ = 0)
+- Production healthcheck re-run:
+  `python3 scripts/second_exhibition_production_healthcheck.py --json-output /tmp/v55-after-health.json`
+  → PASS (exit 0), counts: `PASS=68, FAIL=0, WARN=0, INFO=5, ENV-ERR=0, TOTAL=73`
+- Browser QA re-run over public URL:
+  `node /tmp/qa/v5_3c_browser_qa.mjs`
+  → 5 / 5 viewports PASS, console / page / failed / external = 0
 
 ## GitHub Actions
 
-The Pages workflow will rebuild the staging artifact and redeploy on
-push, even though this commit changes only `scripts/`, `docs/`, and
-`README.md`. Workflow unchanged.
+V5.5 push Actions run:
 
-Run ID for the v5.5 push: **PUSH_RUN_ID** (filled after push in this round).
+| Run ID | headSha | Status | Conclusion | Started | Finished | Duration |
+|---|---|---|---|---|---|---|
+| `29174730791` | `355a049703056a0834c69c6b283e1f28a4df306c` | completed | success | 2026-07-12T01:05:13Z | 2026-07-12T01:05:35Z | 22 s |
+
+The Pages workflow rebuilt the staging artifact and redeployed via
+the v5.3 wiring (unchanged). Because the v5.5 commit changes only
+`scripts/`, `docs/`, `reports/`, `README.md`, and `docs/V5_ROADMAP.md`
+— none of which feed into the staging artifact — the live surface is
+byte-identical to the pre-push state.
 
 ## Tags / Releases
 
