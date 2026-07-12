@@ -125,51 +125,66 @@ def main(argv: List[str] | None = None) -> int:
         return 1
 
     # ---- 3. Schema v2 structural checks ----
-    res.check("audit_schema_version == 2.0",
-              summary.get("audit_schema_version") == "2.0",
-              f"got {summary.get('audit_schema_version')!r}")
+    # Canonical key is `schema_version` (brief §3). The deprecated alias
+    # `audit_schema_version` is also accepted for forward compat.
+    schema_version = summary.get("schema_version") or summary.get("audit_schema_version")
+    res.check("schema_version == 2.0 (or deprecated alias)",
+              schema_version == "2.0",
+              f"got {schema_version!r}")
     res.check("summary has root_site block", isinstance(summary.get("root_site"), dict))
     res.check("summary has second_exhibition block", isinstance(summary.get("second_exhibition"), dict))
 
     root = summary.get("root_site") or {}
     se = summary.get("second_exhibition") or {}
 
-    res.check("root_site.source_path == site/index.html",
-              root.get("source_path") == "site/index.html",
-              f"got {root.get('source_path')!r}")
-    res.check("second_exhibition.source_path == second-exhibition/site/index.html",
-              se.get("source_path") == "second-exhibition/site/index.html",
-              f"got {se.get('source_path')!r}")
-    res.check("second_exhibition.staged_path == second-exhibition/index.html",
-              se.get("staged_path") == "second-exhibition/index.html",
-              f"got {se.get('staged_path')!r}")
+    # Canonical v2 names use `*_index_*` infix
+    res.check("root_site.source_index_path == site/index.html",
+              root.get("source_index_path") == "site/index.html",
+              f"got {root.get('source_index_path')!r}")
+    res.check("root_site.staged_index_path == index.html",
+              root.get("staged_index_path") == "index.html",
+              f"got {root.get('staged_index_path')!r}")
+    res.check("second_exhibition.source_index_path == second-exhibition/site/index.html",
+              se.get("source_index_path") == "second-exhibition/site/index.html",
+              f"got {se.get('source_index_path')!r}")
+    res.check("second_exhibition.staged_index_path == second-exhibition/index.html",
+              se.get("staged_index_path") == "second-exhibition/index.html",
+              f"got {se.get('staged_index_path')!r}")
+
+    # Old (un-renamed) bare keys MUST be absent — fail-loud policy
+    res.check("bare source_index_html_sha256 must be absent",
+              summary.get("source_index_html_sha256") is None,
+              f"still present: {summary.get('source_index_html_sha256')!r}")
+    res.check("bare source_index_html_sha256_scope must be absent",
+              summary.get("source_index_html_sha256_scope") is None,
+              f"still present: {summary.get('source_index_html_sha256_scope')!r}")
 
     # ---- 4. SHA values match the actual files (direct sha256sum) ----
     src_root_path = repo_root / "site" / "index.html"
     src_root_sha = sha256_file(src_root_path)
-    res.check("root_site.source_sha256 matches sha256sum site/index.html",
-              root.get("source_sha256") == src_root_sha,
-              f"audit={root.get('source_sha256')} direct={src_root_sha}")
+    res.check("root_site.source_index_sha256 matches sha256sum site/index.html",
+              root.get("source_index_sha256") == src_root_sha,
+              f"audit={root.get('source_index_sha256')} direct={src_root_sha}")
 
     staged_root_path = art_dir / "index.html"
     staged_root_sha = sha256_file(staged_root_path)
-    res.check("root_site.staged_sha256 matches sha256sum staged root index.html",
-              root.get("staged_sha256") == staged_root_sha,
-              f"audit={root.get('staged_sha256')} direct={staged_root_sha}")
+    res.check("root_site.staged_index_sha256 matches sha256sum staged root index.html",
+              root.get("staged_index_sha256") == staged_root_sha,
+              f"audit={root.get('staged_index_sha256')} direct={staged_root_sha}")
 
     # Source-side second-exhibition SHA from local second-exhibition/site/
     src_se_path = repo_root / "second-exhibition" / "site" / "index.html"
     src_se_sha = sha256_file(src_se_path)
-    res.check("second_exhibition.source_sha256 matches sha256sum second-exhibition/site/index.html",
-              se.get("source_sha256") == src_se_sha,
-              f"audit={se.get('source_sha256')} direct={src_se_sha}")
+    res.check("second_exhibition.source_index_sha256 matches sha256sum second-exhibition/site/index.html",
+              se.get("source_index_sha256") == src_se_sha,
+              f"audit={se.get('source_index_sha256')} direct={src_se_sha}")
 
     # Staged-side second-exhibition SHA from the freshly-built artifact
     staged_se_path = art_dir / "second-exhibition" / "index.html"
     staged_se_sha = sha256_file(staged_se_path)
-    res.check("second_exhibition.staged_sha256 matches sha256sum staged second-exhibition/index.html",
-              se.get("staged_sha256") == staged_se_sha,
-              f"audit={se.get('staged_sha256')} direct={staged_se_sha}")
+    res.check("second_exhibition.staged_index_sha256 matches sha256sum staged second-exhibition/index.html",
+              se.get("staged_index_sha256") == staged_se_sha,
+              f"audit={se.get('staged_index_sha256')} direct={staged_se_sha}")
 
     # ---- 5. Equality flags ----
     res.check("root_site.source_equals_staged == True",
@@ -181,34 +196,30 @@ def main(argv: List[str] | None = None) -> int:
     res.check("second_exhibition.path_rewrite_count == 6",
               se.get("path_rewrite_count") == 6,
               f"got {se.get('path_rewrite_count')!r}")
-    res.check("second_exhibition.source_sha256 != staged_sha256",
-              se.get("source_sha256") != se.get("staged_sha256"),
-              f"unexpected equality: src={se.get('source_sha256')} staged={se.get('staged_sha256')}")
+    res.check("second_exhibition.source_index_sha256 != staged_index_sha256",
+              se.get("source_index_sha256") != se.get("staged_index_sha256"),
+              f"unexpected equality: src={se.get('source_index_sha256')} staged={se.get('staged_index_sha256')}")
 
     # ---- 6. Root/second-exhibition SHA confusion guard ----
-    res.check("root_site.source_sha256 != second_exhibition.source_sha256",
-              root.get("source_sha256") != se.get("source_sha256"),
-              f"audit conflated: root_src={root.get('source_sha256')} second_src={se.get('source_sha256')}")
-    res.check("root_site.source_sha256 != second_exhibition.staged_sha256",
-              root.get("source_sha256") != se.get("staged_sha256"),
-              f"audit conflated: root_src={root.get('source_sha256')} second_staged={se.get('staged_sha256')}")
+    res.check("root_site.source_index_sha256 != second_exhibition.source_index_sha256",
+              root.get("source_index_sha256") != se.get("source_index_sha256"),
+              f"audit conflated: root_src={root.get('source_index_sha256')} second_src={se.get('source_index_sha256')}")
+    res.check("root_site.source_index_sha256 != second_exhibition.staged_index_sha256",
+              root.get("source_index_sha256") != se.get("staged_index_sha256"),
+              f"audit conflated: root_src={root.get('source_index_sha256')} second_staged={se.get('staged_index_sha256')}")
 
-    # ---- 7. Deprecated-key labelling (forward-compat check) ----
-    deprecated_key = summary.get("source_index_html_sha256")
-    deprecated_scope = summary.get("source_index_html_sha256_scope")
-    res.check("source_index_html_sha256_scope == second-exhibition/site/index.html",
-              deprecated_scope == "second-exhibition/site/index.html",
-              f"got {deprecated_scope!r}")
+    # ---- 7. Deprecated-key labelling (rename check) ----
+    legacy_key = summary.get("legacy_second_exhibition_source_index_html_sha256")
     res.check(
-        "deprecated source_index_html_sha256 equals second-exhibition.source_sha256",
-        deprecated_key == src_se_sha,
-        f"deprecated={deprecated_key} src_se_sha={src_se_sha}",
+        "deprecated legacy_second_exhibition_source_index_html_sha256 equals second-exhibition.source_index_sha256",
+        legacy_key == src_se_sha,
+        f"deprecated={legacy_key} src_se_sha={src_se_sha}",
     )
-    # The deprecated key MUST NOT equal the root SHA under any normal build.
+    # The legacy key MUST NOT equal the root SHA under any normal build.
     res.check(
-        "deprecated source_index_html_sha256 != canonical root SHA",
-        deprecated_key != CANONICAL_ROOT_SHA,
-        f"deprecated={deprecated_key} canonical_root={CANONICAL_ROOT_SHA}",
+        "deprecated legacy_*_sha256 != canonical root SHA",
+        legacy_key != CANONICAL_ROOT_SHA,
+        f"deprecated={legacy_key} canonical_root={CANONICAL_ROOT_SHA}",
     )
 
     # ---- 8. Staged index bytes & path-rewrite residue checks ----
@@ -247,10 +258,10 @@ def main(argv: List[str] | None = None) -> int:
     # ---- 10. Report ----
     print(f"Test directory: {test_dir}")
     print(f"Audit summary: {summary_path}")
-    print(f"Schema version: {summary.get('audit_schema_version')}")
-    print(f"Root source SHA: {root.get('source_sha256')}")
-    print(f"Second-exhibition source SHA: {se.get('source_sha256')}")
-    print(f"Second-exhibition staged SHA: {se.get('staged_sha256')}")
+    print(f"Schema version: {summary.get('schema_version')}")
+    print(f"Root source SHA: {root.get('source_index_sha256')}")
+    print(f"Second-exhibition source SHA: {se.get('source_index_sha256')}")
+    print(f"Second-exhibition staged SHA: {se.get('staged_index_sha256')}")
     print()
     print(f"Checks: pass={len(res.passes)} fail={len(res.fails)} total={len(res.passes) + len(res.fails)}")
     if res.fails:

@@ -718,6 +718,40 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
   both forward-point to the v5.5b schema document.
 
 
+## v5.5b Staging Audit Key Semantics Fix
+
+- **Root source SHA**:
+  `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc` (92,976 B)
+- **Second-exhibition source SHA**:
+  `f31ddcba5168c8f8fba81498cfd5e259de73452da69eb28a1db4913dffd16fda` (25,641 B)
+- **Second-exhibition staged SHA**:
+  `7c05f39d4d9a49d0ba09d8202ff7ee41e42d67445660510815fb2887cc16324c` (25,635 B,
+  differs from source by 6 image-path rewrites)
+- **Canonical schema**:
+  [`docs/STAGING_AUDIT_SCHEMA_v5.5b.md`](docs/STAGING_AUDIT_SCHEMA_v5.5b.md)
+  uses `schema_version: "2.0"` (canonical) and a per-block
+  `*_index_*` infix on every path / bytes / sha256 field.
+- **Deprecated v1 key renamed**:
+  `source_index_html_sha256` →
+  `legacy_second_exhibition_source_index_html_sha256`. The
+  companion `_scope` annotation key is removed; the scope is now
+  baked into the field name.
+- **Fail-loud policy**: bare `source_index_html_sha256` and bare
+  `source_index_html_sha256_scope` keys in any future audit
+  emission cause the staging gate to exit 1 with explicit
+  "stale audit" messages.
+- **Regression test 30/30 PASS**:
+  [`scripts/test_second_exhibition_staging_audit.py`](scripts/test_second_exhibition_staging_audit.py)
+  asserts the canonical field names + bare-v1-key absence +
+  renamed legacy-field presence + a negative-path fail-loud
+  against a synthetic stale v1 audit.
+- **Public artifact 34/34 byte-identical** to the v5.5a-baseline
+  build (verified via `sha256sum` + `diff -u`) — **0 public
+  drift**.
+- **Round report**:
+  [`reports/leonardo_chinese_exhibition_v5_5b_staging_audit_key_semantics_fix_report.md`](reports/leonardo_chinese_exhibition_v5_5b_staging_audit_key_semantics_fix_report.md)
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）

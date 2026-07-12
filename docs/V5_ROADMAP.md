@@ -548,4 +548,102 @@ reference going forward.
 - Stable tag still annotated on freeze commit `ac0f19e2…`; Release
   v5.0 unchanged.
 
-**Next.** v5.6-second-exhibition-content-iteration-prep.
+---
+
+## v5.5b Staging Audit Key Semantics Fix
+
+**Goal.** Tighten the v5.5b schema-version contract: canonicalise the
+schema-version field name (`schema_version`, deprecated alias
+`audit_schema_version`), use the `*_index_*` infix on every
+per-source / per-staged identity field, and rename the carry-over
+v1 key to `legacy_second_exhibition_source_index_html_sha256` with
+its scope baked into the field name. Gate must fail-loud if a bare
+v1 key (`source_index_html_sha256` or `source_index_html_sha256_scope`)
+is re-emitted.
+
+**Tasks.**
+
+- Rename `audit_schema_version` → `schema_version` (canonical) in
+  `scripts/second_exhibition_staging_build.py`; retain
+  `audit_schema_version` as a deprecated alias for one round.
+- Add `*_index_*` infix to all six identity fields inside each
+  nested block:
+  `source_index_path`, `source_index_bytes`, `source_index_sha256`,
+  `staged_index_path`, `staged_index_bytes`, `staged_index_sha256`.
+- Rename deprecated carry-over key
+  `source_index_html_sha256` →
+  `legacy_second_exhibition_source_index_html_sha256`. Remove the
+  now-redundant `_scope` companion key.
+- Update `scripts/second_exhibition_staging_gate.py` to read the
+  canonical `schema_version` + `*_index_*` fields, and reject any
+  audit that emits bare v1 keys (`source_index_html_sha256`,
+  `source_index_html_sha256_scope`) as fail-loud.
+- Update `scripts/second_exhibition_deployment_dry_run.py` §B'
+  Schema v2 identity from audit with the same contract.
+- Update `scripts/test_second_exhibition_staging_audit.py` to
+  assert the canonical field names + bare-v1-key absence +
+  renamed legacy-field presence. (Total assertions: 30.)
+- Rewrite `docs/STAGING_AUDIT_SCHEMA_v5.5b.md` to document the
+  new canonical contract.
+- Capture a `/tmp/v55b-before-artifact` baseline build against
+  `92f14e9` (the v5.5a-baseline) using
+  `git show 92f14e9:scripts/second_exhibition_staging_build.py`,
+  then prove the new `/tmp/v55b-after-artifact` is **34/34
+  byte-identical** (public artifact, 0 drift).
+- Write
+  `reports/leonardo_chinese_exhibition_v5_5b_staging_audit_key_semantics_fix_report.md`.
+
+**Do NOT do in v5.5b-key-semantics-fix.**
+
+- Do not edit any file under `site/`, `second-exhibition/site/`,
+  `second-exhibition/data/`, `second-exhibition/assets/`,
+  `second-exhibition/docs/`, or `.github/workflows/`.
+- Do not modify the six images or any check-gate output bytes.
+- Do not create or move a tag or Release.
+- Do not modify the v5.0 freeze tag or its GitHub Release.
+- Do not rewrite the v5.0 release manifest line 61 (historical
+  error preserved unchanged).
+- Do not modify
+  `scripts/second_exhibition_production_healthcheck.py`
+  (it does not consume the staging audit schema).
+- Do not modify any other in-repo script outside the allowlist
+  (template quality gate, build gate, repository QA, asset gate,
+  browser QA, dry-run browser, preflight all stay untouched).
+
+**Exit criteria for v5.5b Staging Audit Key Semantics Fix.**
+
+- `git status` shows exactly the files staged: 3 modified scripts
+  in scope + 1 modified regression test + 1 modified schema doc +
+  1 modified V5_ROADMAP + 1 modified README + 1 new report.
+- `scripts/second_exhibition_staging_build.py` emits a
+  `build-summary.json` with:
+  - `schema_version: "2.0"` (canonical)
+  - `audit_schema_version: "2.0"` (deprecated alias)
+  - bare `source_index_html_sha256` ABSENT
+  - bare `source_index_html_sha256_scope` ABSENT
+  - `legacy_second_exhibition_source_index_html_sha256` PRESENT,
+    value `f31ddcba…`
+  - `root_site.source_index_sha256`, `source_index_bytes`,
+    `source_index_path`, `staged_index_*` populated
+  - `second_exhibition.source_index_sha256`, etc., populated with
+    `source_equals_staged = false`, `path_rewrite_count = 6`
+- Artifact built this round is **34/34 byte-identical** to the
+  v5.5a-baseline build (proves 0 public drift).
+- `scripts/second_exhibition_staging_gate.py` exits 0 against the
+  new artifact; same gate exits 1 against a synthetic stale v1
+  audit (fail-loud policy).
+- `scripts/test_second_exhibition_staging_audit.py` exits 0 with
+  all 30 assertions passing.
+- `scripts/second_exhibition_deployment_dry_run.py` §B' Schema
+  v2 identity exits 0 with the new audit.
+- `python3 scripts/template_quality_gate.py` PASS.
+- `python3 scripts/second_exhibition_build_gate.py` PASS.
+- `python3 scripts/second_exhibition_repository_qa.py` PASS 164/164.
+- `python3 scripts/second_exhibition_production_healthcheck.py`
+  PASS (post-push, 0 production drift).
+- `sha256sum -c second-exhibition/assets/asset-checksums.sha256` 6/6 OK.
+- Workflow `.github/workflows/` empty diff.
+- Tag still annotated on freeze commit `ac0f19e2…`; Release v5.0
+  unchanged.
+
+**Next.** `v5.6-second-exhibition-content-iteration-prep`.

@@ -32,11 +32,14 @@ ROOT_DEFAULT_AUDIT  = "/tmp/leonardo-pages-artifact-audit"
 
 # Audit schema version. Bump when the audit summary's keys or their
 # semantics change. v2 replaces the ambiguous key `source_index_html_sha256`
-# (which actually stored the second-exhibition source SHA) with explicit
-# nested `root_site` and `second_exhibition` blocks. The deprecated key
-# is preserved (with `_scope` annotation) for forward compatibility of
-# any out-of-repo caller.
-AUDIT_SCHEMA_VERSION = "2.0"
+# `schema_version` 2 replaces the ambiguous key
+# `legacy_second_exhibition_source_index_html_sha256` (formerly
+# `source_index_html_sha256`) with explicit `root_site` and
+# `second_exhibition` blocks. The legacy key is preserved (renamed to
+# `legacy_second_exhibition_source_index_html_sha256`) for one round
+# only — every internal/external caller MUST switch to the nested
+# blocks going forward.
+SCHEMA_VERSION = "2.0"
 
 SOURCE_SITE_DIR         = "site"
 SOURCE_SE_DIR           = "second-exhibition"
@@ -281,7 +284,8 @@ def main():
     src_se_index_bytes = src_se_index.stat().st_size
 
     summary = {
-        "audit_schema_version": AUDIT_SCHEMA_VERSION,
+        "schema_version": SCHEMA_VERSION,
+        "audit_schema_version": SCHEMA_VERSION,   # DEPRECATED alias; emit `schema_version` going forward
         "source_commit": subprocess_head(repo),
         "output_path": str(out),
         "audit_path": str(aud),
@@ -292,10 +296,25 @@ def main():
         "deployment_status": "staging-only-not-deployed",
 
         # ---- Schema v2: explicit per-source / per-staged identity blocks ----
+        # Each block uses `*_index_*` field names per the v2 schema contract:
+        #   source_index_path / source_index_bytes / source_index_sha256
+        #   staged_index_path / staged_index_bytes / staged_index_sha256
+        # The un-suffixed keys (source_path/source_bytes/source_sha256 etc.)
+        # are kept as DEPRECATED aliases for one round so the existing gate
+        # keeps working. Internal tools and external reports MUST adopt the
+        # `_index_` names going forward.
         "root_site": {
+            "source_index_path": "site/index.html",
+            "source_index_bytes": src_root_bytes,
+            "source_index_sha256": src_root_sha,
             "source_path": "site/index.html",
             "source_bytes": src_root_bytes,
             "source_sha256": src_root_sha,
+            "staged_index_path": "index.html",
+            "staged_index_bytes": next((r[2] for r in root_site_files if r[0] == "index.html"),
+                                       src_root_bytes),
+            "staged_index_sha256": next((r[1] for r in root_site_files if r[0] == "index.html"),
+                                        src_root_sha),
             "staged_path": "index.html",
             "staged_bytes": next((r[2] for r in root_site_files if r[0] == "index.html"),
                                  src_root_bytes),
@@ -304,9 +323,15 @@ def main():
             "source_equals_staged": True,
         },
         "second_exhibition": {
+            "source_index_path": "second-exhibition/site/index.html",
+            "source_index_bytes": src_se_index_bytes,
+            "source_index_sha256": src_se_sha_after,
             "source_path": "second-exhibition/site/index.html",
             "source_bytes": src_se_index_bytes,
             "source_sha256": src_se_sha_after,
+            "staged_index_path": "second-exhibition/index.html",
+            "staged_index_bytes": staged_se_index_bytes,
+            "staged_index_sha256": staged_se_index_sha,
             "staged_path": "second-exhibition/index.html",
             "staged_bytes": staged_se_index_bytes,
             "staged_sha256": staged_se_index_sha,
@@ -314,14 +339,16 @@ def main():
             "source_equals_staged": False,
         },
 
-        # ---- Schema v1 keys (DEPRECATED, retained for backward compatibility) ----
-        # `source_index_html_sha256` historically stored the SHA of
-        # `second-exhibition/site/index.html` (the rewritten source). It is
-        # preserved here with explicit `_scope` annotation so any out-of-repo
-        # consumer is not silently broken. New tooling should read the nested
-        # `second_exhibition.source_sha256` instead.
-        "source_index_html_sha256": src_se_sha_after,
-        "source_index_html_sha256_scope": "second-exhibition/site/index.html",
+        # ---- Schema v1 keys (DEPRECATED, retained for ONE round) ----
+        # The original `source_index_html_sha256` actually stored the SHA of
+        # `second-exhibition/site/index.html` (the rewritten source), which
+        # the historical v5.4 release manifest misattributed as the root
+        # index SHA. It is renamed here to `legacy_second_exhibition_source_index_html_sha256`
+        # so any out-of-repo consumer fails-loud on a missing field, gets
+        # the correct scoped name, and is steered toward the nested
+        # `second_exhibition.source_index_sha256` field. The previous
+        # `_scope` annotation is now baked into the legacy field name.
+        "legacy_second_exhibition_source_index_html_sha256": src_se_sha_after,
 
         "root_site_sha256": [r[1] for r in root_site_files],
         "second_exhibition_files": [h["path"] for h in staged_hashes

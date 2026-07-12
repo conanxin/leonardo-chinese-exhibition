@@ -436,12 +436,14 @@ def main():
     ok(f"roundtrip root index byte = {rnd_root.stat().st_size}")
 
     # ---- B'. Schema v2 identity from audit ----
-    # v5.5b: cross-check the staging builder's audit summary against the
-    # repository's actual files, using the explicit per-source / per-staged
-    # schema v2 blocks (`root_site`, `second_exhibition`). The deprecated
-    # `source_index_html_sha256` key is still recorded for forward
-    # compatibility, but only with its explicit `_scope` annotation —
-    # it must NEVER be conflated with `site/index.html`.
+    # v5.5b-key-semantics-fix: cross-check the staging builder's audit
+    # summary against the repository's actual files, using the canonical
+    # `*_index_*` v2 schema fields (`root_site.source_index_sha256`,
+    # `second_exhibition.source_index_sha256`, etc.). The deprecated
+    # `legacy_second_exhibition_source_index_html_sha256` key is still
+    # recorded for one round of forward compatibility — but bare v1 keys
+    # (`source_index_html_sha256`, `source_index_html_sha256_scope`) must
+    # NOT be emitted and cause a fail-loud.
     section("B'. Schema v2 identity from audit")
 
     summary_path = aud / "build-summary.json"
@@ -452,11 +454,30 @@ def main():
     except (OSError, json.JSONDecodeError) as e:
         fail(f"build-summary.json unreadable: {e}", report)
         summary = {}
-    schema_version = summary.get("audit_schema_version")
+    # Canonical schema_version (brief §3 spec); deprecated alias `audit_schema_version` also accepted.
+    schema_version = summary.get("schema_version") or summary.get("audit_schema_version")
     if schema_version != "2.0":
-        fail(f"audit_schema_version = {schema_version!r}, expected '2.0'", report)
+        fail(
+            f"schema_version = {schema_version!r}, expected '2.0'. "
+            "v2 schema is required; missing field is fail-loud.",
+            report,
+        )
     else:
-        ok("audit_schema_version = 2.0")
+        ok("schema_version = 2.0")
+
+    # Bare v1 keys MUST be absent now — they signal a stale audit
+    if summary.get("source_index_html_sha256") is not None:
+        fail(
+            "bare v1 key `source_index_html_sha256` should have been renamed to "
+            "`legacy_second_exhibition_source_index_html_sha256`",
+            report,
+        )
+    if summary.get("source_index_html_sha256_scope") is not None:
+        fail(
+            "v1 key `source_index_html_sha256_scope` should have been removed "
+            "(scope is now baked into `legacy_second_exhibition_source_index_html_sha256`)",
+            report,
+        )
 
     root_block = summary.get("root_site") or {}
     se_block = summary.get("second_exhibition") or {}
@@ -468,15 +489,15 @@ def main():
     staged_root_index = art / "index.html"
     staged_root_sha_direct = sha256_file(staged_root_index)
     if (
-        root_block.get("source_sha256") != src_root_sha_direct
-        or root_block.get("staged_sha256") != staged_root_sha_direct
-        or root_block.get("source_bytes") != src_root_bytes_direct
+        root_block.get("source_index_sha256") != src_root_sha_direct
+        or root_block.get("staged_index_sha256") != staged_root_sha_direct
+        or root_block.get("source_index_bytes") != src_root_bytes_direct
     ):
         fail(
             "root_site block in audit does not match live source/staged files: "
-            f"src={root_block.get('source_sha256')} vs {src_root_sha_direct}; "
-            f"staged={root_block.get('staged_sha256')} vs {staged_root_sha_direct}; "
-            f"bytes={root_block.get('source_bytes')} vs {src_root_bytes_direct}",
+            f"src={root_block.get('source_index_sha256')} vs {src_root_sha_direct}; "
+            f"staged={root_block.get('staged_index_sha256')} vs {staged_root_sha_direct}; "
+            f"bytes={root_block.get('source_index_bytes')} vs {src_root_bytes_direct}",
             report,
         )
     if root_block.get("source_equals_staged") is not True:
@@ -492,16 +513,16 @@ def main():
     staged_se_path = art / "second-exhibition" / "index.html"
     src_se_sha_direct = sha256_file(src_se_path)
     staged_se_sha_direct = sha256_file(staged_se_path)
-    if se_block.get("source_sha256") != src_se_sha_direct:
+    if se_block.get("source_index_sha256") != src_se_sha_direct:
         fail(
-            "second_exhibition.source_sha256 in audit does not match live source file: "
-            f"{se_block.get('source_sha256')} vs {src_se_sha_direct}",
+            "second_exhibition.source_index_sha256 in audit does not match live source file: "
+            f"{se_block.get('source_index_sha256')} vs {src_se_sha_direct}",
             report,
         )
-    if se_block.get("staged_sha256") != staged_se_sha_direct:
+    if se_block.get("staged_index_sha256") != staged_se_sha_direct:
         fail(
-            "second_exhibition.staged_sha256 in audit does not match staged artifact: "
-            f"{se_block.get('staged_sha256')} vs {staged_se_sha_direct}",
+            "second_exhibition.staged_index_sha256 in audit does not match staged artifact: "
+            f"{se_block.get('staged_index_sha256')} vs {staged_se_sha_direct}",
             report,
         )
     if se_block.get("path_rewrite_count") != 6:
@@ -522,43 +543,37 @@ def main():
             f"path_rewrite_count=6 source_equals_staged=False (expected, due to rewrites)"
         )
 
-    # ---- Deprecated key check ----
-    deprecated_key = summary.get("source_index_html_sha256")
-    deprecated_scope = summary.get("source_index_html_sha256_scope")
-    if deprecated_key is not None:
-        if deprecated_key == src_se_sha_direct:
+    # ---- Deprecated legacy key forward-compat ----
+    # The renamed field `legacy_second_exhibition_source_index_html_sha256`
+    # carries scope in its name; the bare v1 keys are no longer accepted.
+    legacy_key = summary.get("legacy_second_exhibition_source_index_html_sha256")
+    if legacy_key is not None:
+        if legacy_key == src_se_sha_direct:
             ok(
-                "deprecated source_index_html_sha256 still equals second-exhibition source "
-                f"(scope={deprecated_scope!r})"
+                "deprecated legacy_second_exhibition_source_index_html_sha256 still equals "
+                "second-exhibition source (scope baked into field name)"
             )
         else:
             fail(
-                f"deprecated source_index_html_sha256 = {deprecated_key}; "
-                f"expected {src_se_sha_direct} (or remove the deprecated key)",
-                report,
-            )
-        if deprecated_scope != "second-exhibition/site/index.html":
-            fail(
-                f"deprecated source_index_html_sha256_scope = {deprecated_scope!r}; "
-                "expected 'second-exhibition/site/index.html'",
+                f"deprecated legacy_second_exhibition_source_index_html_sha256 = {legacy_key}; "
+                f"expected {src_se_sha_direct}",
                 report,
             )
 
     report["results"]["schema_v2_identity"] = {
-        "audit_schema_version": schema_version,
+        "schema_version": schema_version,
         "root_site": {
-            "source_sha256": root_block.get("source_sha256"),
-            "staged_sha256": root_block.get("staged_sha256"),
+            "source_index_sha256": root_block.get("source_index_sha256"),
+            "staged_index_sha256": root_block.get("staged_index_sha256"),
             "source_equals_staged": root_block.get("source_equals_staged"),
         },
         "second_exhibition": {
-            "source_sha256": se_block.get("source_sha256"),
-            "staged_sha256": se_block.get("staged_sha256"),
+            "source_index_sha256": se_block.get("source_index_sha256"),
+            "staged_index_sha256": se_block.get("staged_index_sha256"),
             "path_rewrite_count": se_block.get("path_rewrite_count"),
             "source_equals_staged": se_block.get("source_equals_staged"),
         },
-        "deprecated_key_present": deprecated_key is not None,
-        "deprecated_key_scope_ok": deprecated_scope == "second-exhibition/site/index.html",
+        "legacy_key_present": legacy_key is not None,
     }
 
     # ---- C. Rollback rehearsal (v5.3-aware) ----
