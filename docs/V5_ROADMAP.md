@@ -361,4 +361,63 @@ Only after receiving this exact string will commit + push of the two new docs an
 | v5.2 | Deployment dry run | No (workflow review only) | No | No |
 | v5.3 | Controlled deployment | Yes (first public deploy) | No | No |
 | v5.4 | Public stable freeze | Yes | Yes | Yes |
-| post-v5.4 | Public QA, future updates | Yes | per round | per round |
+| v5.5 | Public deployment maintenance | Redeploys (no content change) | No | No |
+| post-v5.5 | Future content updates / continued maintenance | Yes | per round | per round |
+
+---
+
+## v5.5 — Public Deployment Maintenance
+
+**Goal.** Stabilise the v5.0 deployed surface with a repeatable manual
+health-check, a frozen baseline, an operations runbook, and an
+incident-response / rollback reference — without changing the live
+content or Pages workflow.
+
+**Tasks.**
+
+- Add `scripts/second_exhibition_production_healthcheck.py`
+  (Python stdlib only, optional JSON output, distinct exit codes 0/1/2).
+- Freeze the production identity in
+  `docs/PRODUCTION_HEALTH_BASELINE_v5.5.md` (URLs, byte sizes,
+  SHA-256 values, status phrase counts, image checksums).
+- Add `docs/PUBLIC_DEPLOYMENT_MAINTENANCE_RUNBOOK_v5.5.md` (daily check,
+  full verification flow, allowed vs blocked maintenance actions).
+- Add `docs/INCIDENT_RESPONSE_AND_ROLLBACK_v5.5.md` (severity levels,
+  immediate checks, rollback principles, deploy-wiring revert chain,
+  freeze-commit revert, post-rollback verification, evidence capture).
+- Document the historical semantics of
+  `production-deployed-v5.3` / `published-in-v5.3` /
+  `imported-not-deployed` / `repository-only-not-deployed` so future
+  rounds do not strip them mechanically.
+- Run the new health check end-to-end against the live surface, exit 0.
+- Run the public browser QA over the live URL, 5 / 5 viewports PASS.
+- Push the documentation-only / script-only commit, wait for Actions
+  success, re-verify the live surface is byte-identical.
+
+**Do NOT do in v5.5.**
+
+- Do not edit any file under `site/`, `second-exhibition/site/`,
+  `second-exhibition/data/`, `second-exhibition/assets/`,
+  `second-exhibition/docs/`, `second-exhibition/site/README.md`, or
+  `.github/workflows/`.
+- Do not modify the six public images or the asset manifest / checksums
+  file.
+- Do not create a new tag or Release.
+- Do not modify the freeze tag (`v5.0-real-second-exhibition-deployment`)
+  or its GitHub Release.
+- Do not add a cron job or scheduled workflow — this round is a manual
+  operator tool only.
+
+**Exit criteria for v5.5.**
+
+- `python3 scripts/second_exhibition_production_healthcheck.py` exits 0
+  against `https://conanxin.github.io/leonardo-chinese-exhibition/`
+  and `…/second-exhibition/`.
+- The seven new / updated files are the only diff in this round.
+- Stable tag still annotated on freeze commit `ac0f19e2…`.
+- Live URL still 92,976 B; second-exhibition URL still 25,635 B.
+- Six image SHA-256 still byte-identical to `asset-checksums.sha256`.
+- Existing tags and Releases unchanged.
+
+**Next.** v5.6 second-exhibition content iteration or continued
+maintenance, depending on the next content round.

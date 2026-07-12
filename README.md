@@ -640,6 +640,29 @@ v2.9 Real Source & Rights Audit 在 [audit commit `dbcc563`](https://github.com/
 - **Required authorization:** `DEPLOY v5.3b`
 
 
+## v5.5 Public Deployment Maintenance
+
+- **Stable release**: `v5.0-real-second-exhibition-deployment`
+  (annotated tag, target `ac0f19e2c03b09738ae49b4a15c629a1f2177068`).
+- **Existing Leonardo exhibition URL**: https://conanxin.github.io/leonardo-chinese-exhibition/
+- **Second exhibition URL**: https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/
+- **Production health check** (manual operator tool, runs at any moment):
+  ```bash
+  python3 scripts/second_exhibition_production_healthcheck.py
+  ```
+  Optional JSON output: `--json-output /tmp/health.json`.
+- **Stable baseline (frozen)**: [`docs/PRODUCTION_HEALTH_BASELINE_v5.5.md`](docs/PRODUCTION_HEALTH_BASELINE_v5.5.md)
+- **Maintenance runbook**: [`docs/PUBLIC_DEPLOYMENT_MAINTENANCE_RUNBOOK_v5.5.md`](docs/PUBLIC_DEPLOYMENT_MAINTENANCE_RUNBOOK_v5.5.md)
+- **Incident response and rollback**: [`docs/INCIDENT_RESPONSE_AND_ROLLBACK_v5.5.md`](docs/INCIDENT_RESPONSE_AND_ROLLBACK_v5.5.md)
+- **No production content changes** in this round; live surface is
+  byte-identical to v5.0 (root 92,976 B, second-exhibition 25,635 B).
+- **Workflow unchanged**; Pages deploy chain v5.3 wiring is authoritative.
+- **No new tag / Release**; freeze tag `v5.0-real-second-exhibition-deployment`
+  and its GitHub Release are unchanged.
+- **Six image checksums unchanged**; all six SHA-256 byte-identical to
+  `second-exhibition/assets/asset-checksums.sha256`.
+
+
 ## 当前版本
 
 - **Active stable tag**: `v2.6-content-stable`（v2.6 内容稳定版，修正历史误报后的真实版本线）
