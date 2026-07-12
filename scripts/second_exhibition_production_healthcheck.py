@@ -6,8 +6,9 @@ Manual, repeatable production health check for the second exhibition.
 Goals
 -----
 - Use Python standard library only (no pip dependencies).
-- Verify the deployed production surface against the *current* (v5.0
-  freeze-time) baseline without modifying the repository.
+- Verify the deployed production surface against the *current* (v5.6c,
+  commit 6b7ee06, `second-exhibition-v0.2`) baseline without modifying
+  the repository.
 - Be tolerant of environment failure: never report a network timeout as a
   hard 404. Exit codes:
     0 -> PASS
@@ -63,25 +64,37 @@ ROOT_EXACT_MARKER_COUNT = 1
 ROOT_LOOSE_MARKER = "v2.9"
 ROOT_LOOSE_MARKER_COUNT = 4  # informational only
 
-SECOND_EXPECTED_BYTES = 25635
-# Captured at v5.0 freeze: live second-exhibition index SHA
-# (live == staging-artifact/second-exhibition/index.html;
-# NOT byte-identical to local second-exhibition/site/index.html — the
-# staging builder rewrites ./assets/images/ → ../assets/images/).
+# v5.6c production default baseline.
+# Current production second-exhibition is v0.2 (deployed in commit
+# 6b7ee06). These constants are the live production checks; do not
+# interpret them as v5.0-freeze baselines.
+SECOND_EXPECTED_BYTES = 31452
 SECOND_EXPECTED_SHA256 = (
-    "7c05f39d4d9a49d0ba09d8202ff7ee41e42d67445660510815fb2887cc16324c"
+    "00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2"
 )
 SECOND_TITLE_FRAGMENT = "植物图谱与视觉分类"
 
-# v5.6b second-exhibition v0.2 candidate baseline (worker-only).
-# Captured at v5.6b build time against /tmp/v56b-artifact staging
-# (NOT live production). Activate ONLY for local candidate v0.2
-# dry-run/health-check via `--candidate-v0.2`.
-SECOND_V02_CANDIDATE_BYTES = 31452  # staged candidate at v5.6b build
+# Marker expectations on live production.
+SECOND_EXACT_MARKER = "second-exhibition-v0.2"
+SECOND_EXACT_MARKER_COUNT = 3  # body data-marker + badge + footer muted; verified live + in source
+SECOND_STALE_MARKER = "second-exhibition-v0.1"
+SECOND_STALE_MARKER_COUNT = 0  # regression guard: stale v0.1 must be absent
+
+# Legacy v0.1 baseline kept for explicit historical-fixture checks
+# ONLY. Do NOT point --legacy-v0.1 at the current live URL; the
+# production surface is v0.2.
+SECOND_LEGACY_V01_BYTES = 25635
+SECOND_LEGACY_V01_SHA256 = (
+    "7c05f39d4d9a49d0ba09d8202ff7ee41e42d67445660510815fb2887cc16324c"
+)
+
+# Deprecated alias: kept for one round of compatibility, but no
+# longer changes the baseline. Output includes a deprecation notice.
+SECOND_V02_CANDIDATE_BYTES = 31452  # promoted to default in v5.6c
 SECOND_V02_CANDIDATE_SHA256 = (
     "00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2"
 )
-SECOND_V02_SOURCE_BYTES = 31458  # source candidate
+SECOND_V02_SOURCE_BYTES = 31458  # source identity retained for cross-check
 SECOND_V02_SOURCE_SHA256 = (
     "662bee42799a5e92fb7407a37d2fe57d02bfd123a344cbeada0cb51b99c5030e"
 )
@@ -388,8 +401,15 @@ def check_second(
     second_url: str,
     timeout: float,
     retries: int,
-    candidate_v02: bool = False,
+    legacy_v01: bool = False,
 ) -> Tuple[bool, Dict[str, int], Dict[str, float]]:
+    """Check second-exhibition against the current production baseline
+    (v5.6c: v0.2). The --candidate-v0.2 flag is kept as a deprecated
+    alias and is routed through this same code path with a notice.
+
+    --legacy-v0.1 is supported ONLY for explicit historical-fixture
+    checks against the v5.0-freeze v0.1 baseline.
+    """
     all_ok = True
     sizes: Dict[str, int] = {}
     latencies: Dict[str, float] = {}
@@ -402,16 +422,27 @@ def check_second(
     text = body.decode("utf-8", errors="replace")
     sizes["second"] = len(body)
 
-    if candidate_v02:
-        expected_bytes = SECOND_V02_CANDIDATE_BYTES
-        expected_sha = SECOND_V02_CANDIDATE_SHA256
-        byte_label = f"{SECOND_V02_CANDIDATE_BYTES} (v0.2 candidate staged)"
-        sha_label = "SHA256 matches v0.2 candidate staged baseline (worker-only)"
+    if legacy_v01:
+        expected_bytes = SECOND_LEGACY_V01_BYTES
+        expected_sha = SECOND_LEGACY_V01_SHA256
+        byte_label = f"{SECOND_LEGACY_V01_BYTES} (legacy v0.1 fixture only)"
+        sha_label = "SHA256 matches legacy v0.1 fixture baseline (NOT current production)"
+        expected_marker = "second-exhibition-v0.1"
+        expected_marker_count = 3
+        stale_marker = "second-exhibition-v0.2"
+        stale_marker_count = 0
     else:
+        # Default (current production v0.2). NOTE: --candidate-v0.2 is a
+        # deprecated alias that ends up here too; see main() for the
+        # deprecation notice.
         expected_bytes = SECOND_EXPECTED_BYTES
         expected_sha = SECOND_EXPECTED_SHA256
-        byte_label = f"{SECOND_EXPECTED_BYTES}"
-        sha_label = "SHA256 matches freeze baseline (live == staging artifact)"
+        byte_label = f"{SECOND_EXPECTED_BYTES} (production v0.2)"
+        sha_label = "SHA256 matches v0.2 production baseline (commit 6b7ee06)"
+        expected_marker = SECOND_EXACT_MARKER
+        expected_marker_count = SECOND_EXACT_MARKER_COUNT
+        stale_marker = SECOND_STALE_MARKER
+        stale_marker_count = SECOND_STALE_MARKER_COUNT
 
     if not expect(
         rep,
@@ -447,6 +478,27 @@ def check_second(
         f"<title> contains '{SECOND_TITLE_FRAGMENT}'",
         SECOND_TITLE_FRAGMENT in text,
         "title fragment not found",
+    ):
+        all_ok = False
+
+    # Marker checks: production version marker + stale regression guard.
+    marker_count = text.count(expected_marker)
+    if not expect(
+        rep,
+        "B. Second-exhibition identity",
+        f"marker '{expected_marker}' count = {expected_marker_count}",
+        marker_count == expected_marker_count,
+        f"actual={marker_count}",
+    ):
+        all_ok = False
+
+    stale_count = text.count(stale_marker)
+    if not expect(
+        rep,
+        "B. Second-exhibition identity",
+        f"stale marker '{stale_marker}' count = {stale_marker_count}",
+        stale_count == stale_marker_count,
+        f"actual={stale_count}",
     ):
         all_ok = False
 
@@ -782,9 +834,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     p.add_argument(
         "--candidate-v0.2", action="store_true", dest="candidate_v02",
-        help="Compare second-exhibition bytes/SHA against v5.6b v0.2 candidate "
-             "baseline (worker-only); must point --second-url at the candidate "
-             "host (NOT live production). Does NOT affect root baseline.",
+        help="DEPRECATED alias — v0.2 is now the default production "
+             "baseline (commit 6b7ee06). This flag is a no-op kept for "
+             "one round of compatibility and prints a deprecation notice.",
+    )
+    p.add_argument(
+        "--legacy-v0.1", action="store_true", dest="legacy_v01",
+        help="Check against the v5.0-freeze v0.1 baseline. Use ONLY for "
+             "explicit historical-fixture checks against a local v0.1 "
+             "fixture — DO NOT point --second-url at the current live "
+             "URL when using this flag.",
     )
     args = p.parse_args(argv)
 
@@ -792,12 +851,23 @@ def main(argv: Optional[List[str]] = None) -> int:
     if not os.path.isdir(repo_root):
         print(f"WARN: repo-root {repo_root} not a directory; some checks will WARN", file=sys.stderr)
 
+    # Deprecation notice: --candidate-v0.2 is a one-round alias for the
+    # default behavior since commit 6b7ee06 promoted v0.2 to the
+    # production baseline.
+    if args.candidate_v02:
+        print(
+            "DEPRECATION NOTICE: --candidate-v0.2 is a no-op alias since "
+            "v5.6c. v0.2 is now the default production baseline (commit "
+            "6b7ee06). Running default v0.2 baseline.",
+            file=sys.stderr,
+        )
+
     rep = Reporter()
 
     ok_a, sizes_a, lat_a = check_root(rep, args.root_url, repo_root, args.timeout, args.retries)
     ok_b, sizes_b, lat_b = check_second(
         rep, args.root_url, args.second_url, args.timeout, args.retries,
-        candidate_v02=args.candidate_v02,
+        legacy_v01=args.legacy_v01,
     )
     ok_c = check_public_files(rep, args.root_url, args.timeout, args.retries)
     ok_d = check_images(rep, args.root_url, repo_root, args.timeout, args.retries)

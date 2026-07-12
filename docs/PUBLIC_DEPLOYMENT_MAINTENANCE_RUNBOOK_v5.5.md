@@ -39,11 +39,22 @@ JSON keys:
 - `groups`: ordered map of check-group → array of per-check results
 - `final_ok`: boolean
 
+> **Status update — 2026-07-12 (v5.6c)**: default mode of the healthcheck
+> now validates `second-exhibition-v0.2` (commit `6b7ee06`) directly. The
+> `--candidate-v0.2` flag is a **deprecated alias** kept for one migration
+> round (emits stderr `DEPRECATION NOTICE` and runs the default v0.2
+> baseline). `--legacy-v0.1` is supported ONLY for explicit historical-fixture
+> checks — do not point it at the current live URL. Each content iteration
+> must perform a post-deploy verification round that promotes the default
+> baseline.
+
 A passing run should report:
 
 - 1 root exact marker (`v2.9-real-source-rights-audit`)
 - SHA-256 of live root = `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
-- SHA-256 of live second-exhibition index = `7c05f39d4d9a49d0ba09d8202ff7ee41e42d67445660510815fb2887cc16324c`
+- SHA-256 of live second-exhibition index = `00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2` (**v0.2**, since v5.6c; was `7c05f39d…` under v0.1)
+- `second-exhibition-v0.2` marker count = 3 (body data-marker + badge + footer-marker)
+- `second-exhibition-v0.1` (stale) marker count = 0 (regression guard)
 - 5 `production-deployed-v5.3`, 8 `published-in-v5.3`,
   8 `imported-not-deployed` (all in historical context), 0 `repository-only-not-deployed`
 - 6 / 6 image SHA-256 matches

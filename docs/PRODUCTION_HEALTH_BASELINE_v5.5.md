@@ -5,6 +5,13 @@ verified after the v5.0-stable-freeze cycle. It is the canonical reference
 for the health-check script `scripts/second_exhibition_production_healthcheck.py`
 and for any future regression investigation.
 
+> **Status update — 2026-07-12 (v5.6c)**: the **current** production baseline
+> has been promoted from v0.1 to **v0.2** (commit `6b7ee06`). v0.1 is now a
+> **historical baseline** only and is preserved in this document for audit
+> trail. See `## Current production baseline — second-exhibition-v0.2` below
+> for the active numbers. Default healthcheck no longer requires any
+> candidate flag.
+
 ## Release identity
 
 | Field | Value |
@@ -192,3 +199,60 @@ The freeze commit intentionally **preserves** the historical import record
 on the live page to keep provenance visible to readers. Future content
 iterations must keep treating these phrases as part of the historical
 record rather than as live status.
+
+---
+
+## Current production baseline — second-exhibition-v0.2
+
+Effective since commit `6b7ee068b1cd50ae4c9c9613b1106ba65c4b0071`
+(v5.6b deployment, promoted to default in v5.6c post-deploy round).
+
+### Root
+
+- URL: `https://conanxin.github.io/leonardo-chinese-exhibition/`
+- HTTP: `200`
+- Byte size: `92,976`
+- SHA-256: `e2be1077fa7e601d50e300f7c98ddc19f802b1c38260c5e18e4763c2a1963afc`
+- Exact marker `v2.9-real-source-rights-audit`: **1**
+
+### Second exhibition
+
+- URL: `https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/`
+- HTTP: `200`
+- Version marker: `second-exhibition-v0.2` (count = 3: body data-marker + badge + footer-marker)
+- Stale v0.1 marker count: **0** (regression guard)
+- Byte size: `31,452`
+- SHA-256: `00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2`
+- Sections: **4**
+- Artifact cards: **6**
+- Glossary entries: **14**
+- Images: **6 / 6** (checksums verified)
+
+### Status counts (live HTML, v0.2)
+
+| Phrase | Live count |
+|---|---|
+| `production-deployed-v5.3` | 5 |
+| `published-in-v5.3` | 8 |
+| `imported-not-deployed` | 8 (historical import record only) |
+| `repository-only-not-deployed` | 0 |
+
+### Default healthcheck mode
+
+- `python3 scripts/second_exhibition_production_healthcheck.py` validates v0.2 directly.
+- 70 PASS / 0 FAIL / 0 WARNINGS.
+- No `--candidate-v0.2` flag needed; the flag is a deprecated alias kept for one
+  migration round (emits stderr `DEPRECATION NOTICE`).
+- `--legacy-v0.1` is supported ONLY for explicit historical-fixture checks.
+  Do not point it at the current live URL.
+
+### Notes
+
+- v0.1 (byte 25,635 / SHA `7c05f39d…`) is now a **historical baseline** —
+  preserved above for audit trail. It is no longer the default production
+  monitoring baseline.
+- Stable v5.0 tag `v5.0-real-second-exhibition-deployment` → `ac0f19e2c03b…`
+  remains the **initial-deployment anchor**; it does not move with content
+  iterations.
+- Each future content version must perform a post-deploy verification round
+  that promotes the default baseline and re-runs the public browser QA.

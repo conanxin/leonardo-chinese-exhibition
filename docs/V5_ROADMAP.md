@@ -808,3 +808,30 @@ v0.1 (`ac0f19e2…`). With the token, the commit(s) produced from this
 working tree go through the Pages workflow, post-push reality
 verification confirms `0 production drift` on every identity
 checkbox, and `v0.2` becomes the live surface.
+
+## v5.6c — Post-deploy Verification & Baseline Promotion
+
+Round after v5.6b deployment (commit `6b7ee06`).
+
+- `second-exhibition-v0.2` publicly verified on https://conanxin.github.io/leonardo-chinese-exhibition/second-exhibition/
+- Default production healthcheck promoted from v0.1 → v0.2:
+  - `SECOND_EXPECTED_BYTES = 31452`
+  - `SECOND_EXPECTED_SHA256 = 00894e8dfa0fa1e40ed3df803afa0036a2a070bee8f42cdfb636cd31d68b3aa2`
+  - `SECOND_EXACT_MARKER = "second-exhibition-v0.2"` (count = 3)
+  - `SECOND_STALE_MARKER = "second-exhibition-v0.1"` (count = 0; regression guard)
+- `--candidate-v0.2` retained as a deprecated alias (one migration round), emits stderr `DEPRECATION NOTICE`
+- `--legacy-v0.1` retained only for explicit historical-fixture checks
+- Default healthcheck: 70 PASS / 0 FAIL on live production
+- Public 5-viewport browser QA: 5/5 PASS (1440×1000, 1280×900, 768×1024, 390×844, 320×700)
+  - 0 console errors, 0 page errors, 0 failed requests, 0 external requests
+  - 0 overflow across all 5 viewports
+  - All 8 interactions PASS (guided toggle, lightbox, dialog name, ESC, focus return, C-06 exclusion, section nav)
+  - no-JS: 6 cards / 14 glossary / 6 source notes / 6 credit lines / body text / repo status — PASS
+  - reduced-motion: lightbox + ESC — PASS
+- Image checksums: 6/6 unchanged
+- No page / data / asset / workflow changes (docs + 1 script only)
+- Stable v5.0 tag `v5.0-real-second-exhibition-deployment` remains initial-deployment anchor (unchanged)
+
+### Next
+
+- v5.6-real-stable-freeze
